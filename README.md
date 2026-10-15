@@ -169,12 +169,13 @@ specify (functional ‖ quality) → plan → implement (invokes TDD)
 | [`site/`](site/) | Website generator |
 | [`tests/`](tests/) | Tests of every check and of the generator |
 | [`experiments/`](experiments/) | Research evaluation of DEFT (see below) |
+| [`specs/`](specs/) | Specifications, plans and tasks from which DEFT was built (see [Use of generative AI](#use-of-generative-ai)) |
 
 ## Research evaluation
 
 [`experiments/`](experiments/) contains the scripts and results of the formative
-evaluation of DEFT (expressiveness and checkability) reported in the accompanying
-paper. Run `python experiments/run_all.py`; [experiments/README.md](experiments/README.md)
+evaluation of DEFT reported in the accompanying paper: functional correctness,
+functional completeness and maintainability. Run `python experiments/run_all.py`; [experiments/README.md](experiments/README.md)
 describes each experiment.
 
 ## Contributing
@@ -226,13 +227,20 @@ the result and say so in the pull request, as we do in this repository (see belo
 
 ## Use of generative AI
 
-The DEFT metamodel, its constraints and the research design are the authors' work.
-We used an LLM-based coding agent, following a spec-driven process in which we wrote the
-specifications and reviewed and iterated on every result, to produce the YAML models
-of the example library in [`models/`](models/), including the adaptation of the
-third-party skills, as well as other supporting material of this repository. The
-example skills illustrate DEFT; how good they are as skills is not what DEFT claims or
-evaluates.
+We designed the DEFT metamodel, its constraints and the research. We then built DEFT
+with an LLM-based coding agent, using spec-driven development with
+[Spec Kit](https://github.com/github/spec-kit). For each feature, we wrote what it had to
+do, and the agent turned it into a specification, a plan and tasks, which we reviewed and
+edited. The agent then implemented the tasks. We followed its work, and checked and
+edited everything it produced before accepting it.
+
+You can audit the process. [`specs/`](specs/) holds the specification, plan and tasks of
+each of the ten features, in the order we built them, and
+[`.specify/memory/constitution.md`](.specify/memory/constitution.md) holds the rules that
+every feature had to follow.
+
+The example skills illustrate DEFT. DEFT does not claim or evaluate how good they are as
+skills.
 
 ## Licence
 
