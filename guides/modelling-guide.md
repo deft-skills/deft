@@ -48,7 +48,7 @@ types:
 
 Put a property where its multiplicity holds for every descendant. A subtype may
 redeclare an inherited property only to tighten its multiplicity (for example
-`criteria [1..*]` to `[2..*]`); loosening it violates S4. The difference between a
+`criteria [1..*]` to `[2..*]`); loosening it violates T4. The difference between a
 mandatory fit criterion and an optional metric is what lets the checker reject
 an ISO/IEC 25010 requirement upstream of a load test.
 

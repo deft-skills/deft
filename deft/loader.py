@@ -46,7 +46,7 @@ def _require(d: dict, key: str, where: str):
 def _parse_type(d: dict, where: str) -> ArtifactType:
     parent = d.get("parent")
     if isinstance(parent, list):
-        raise ModelError(f"{where}: a type has at most one parent (S1)")
+        raise ModelError(f"{where}: a type has at most one parent (T1)")
     props = []
     for p in d.get("properties", []):
         lo, up = _mult(p)
@@ -134,7 +134,7 @@ def _parse_body(d: dict, where: str, root: str = "") -> dict:
 def _parse_skill_common(d: dict, where: str, root: str = "") -> dict:
     parent = d.get("parent")
     if isinstance(parent, list):
-        raise ModelError(f"{where}: a skill has at most one parent (S1)")
+        raise ModelError(f"{where}: a skill has at most one parent (T1)")
     params = []
     for p in d.get("parameters", []):
         lo, up = _mult(p)

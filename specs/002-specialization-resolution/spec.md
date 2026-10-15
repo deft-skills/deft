@@ -3,6 +3,7 @@
 **Feature Branch**: `002-specialization-resolution`
 **Created**: 2026-10-07
 **Status**: Implemented
+**Note (2026-10-16)**: After all features were implemented, constraints S1–S4 were renamed T1–T4 to match the paper. This and the other specifications keep the original names.
 **Input**: "A concrete skill must resolve to the text an agent receives: take the root's sections and apply every descendant's refinements in order, recording who changed what. Reject hierarchies that cannot resolve soundly, following the template method pattern."
 
 ## User Scenarios & Testing *(mandatory)*

@@ -4,13 +4,13 @@ WF   well-formedness: every reference resolves (types, parents, nodes, ports);
      a skill specializes a skill of its own kind (atomic or composite);
      bundled resources live in the folder of their kind; imported origins and
      sections read from upstream files go together
-S1   both hierarchies are acyclic and single-parent
-S2   a concrete skill implements every abstract section it inherits
-S3   a refinement targets a section inherited from an ancestor, with the
+T1   both hierarchies are acyclic and single-parent
+T2   a concrete skill implements every abstract section it inherits
+T3   a refinement targets a section inherited from an ancestor, with the
      right effective kind (implements->abstract, overrides/extends->default);
      final sections, declared or sealed, admit no refinement and inherited
      sections are not redeclared
-S4   a parameter redeclared by a descendant keeps its direction and narrows
+T4   a parameter redeclared by a descendant keeps its direction and narrows
      the inherited type; a property redeclared by a subtype narrows the
      inherited multiplicity
 C1   every binding is concrete and specializes its role
@@ -94,14 +94,14 @@ def check_well_formed(lib: Library) -> list[Violation]:
     return v
 
 
-def check_s1(lib: Library) -> list[Violation]:
+def check_t1(lib: Library) -> list[Violation]:
     v = []
     for t in lib.types:
         if _has_cycle(t, lib.types):
-            v.append(Violation("S1", f"type {t}", "type hierarchy is cyclic"))
+            v.append(Violation("T1", f"type {t}", "type hierarchy is cyclic"))
     for s in lib.skills:
         if _has_cycle(s, lib.skills):
-            v.append(Violation("S1", f"skill {s}", "skill hierarchy is cyclic"))
+            v.append(Violation("T1", f"skill {s}", "skill hierarchy is cyclic"))
     return v
 
 
@@ -109,7 +109,7 @@ def _acyclic(lib: Library, name: str) -> bool:
     return not _has_cycle(name, lib.skills)
 
 
-def check_s2(lib: Library) -> list[Violation]:
+def check_t2(lib: Library) -> list[Violation]:
     v = []
     for s in lib.skills.values():
         if s.abstract or not _acyclic(lib, s.name):
@@ -117,13 +117,13 @@ def check_s2(lib: Library) -> list[Violation]:
         r = resolve(lib, s.name)
         for sec in r.sections:
             if not sec.filled:
-                v.append(Violation("S2", f"skill {s.name}",
+                v.append(Violation("T2", f"skill {s.name}",
                                    f"concrete skill leaves abstract section '{sec.name}' "
                                    f"(declared by {sec.sources[0].skill}) unimplemented"))
     return v
 
 
-def check_s3(lib: Library) -> list[Violation]:
+def check_t3(lib: Library) -> list[Violation]:
     v = []
     for s in lib.skills.values():
         if not isinstance(s, AtomicSkill) or not _acyclic(lib, s.name):
@@ -133,28 +133,28 @@ def check_s3(lib: Library) -> list[Violation]:
             inherited = {sec.name: sec for sec in resolve(lib, s.parent).sections}
         for sec in s.sections:
             if sec.name in inherited:
-                v.append(Violation("S3", f"skill {s.name}",
+                v.append(Violation("T3", f"skill {s.name}",
                                    f"redeclares section '{sec.name}' inherited from {inherited[sec.name].sources[0].skill}"))
         for ref in s.refinements:
             sec = inherited.get(ref.target)
             if sec is None:
-                v.append(Violation("S3", f"skill {s.name}",
+                v.append(Violation("T3", f"skill {s.name}",
                                    f"{ref.kind.value} targets '{ref.target}', which no ancestor declares"))
                 continue
             if sec.kind == SectionKind.FINAL:
                 by = f"sealed by {sec.sealed_by}" if sec.sealed_by else f"declared by {sec.sources[0].skill}"
-                v.append(Violation("S3", f"skill {s.name}",
+                v.append(Violation("T3", f"skill {s.name}",
                                    f"{ref.kind.value} targets final section '{ref.target}' ({by})"))
             elif ref.kind == RefinementKind.IMPLEMENTS and sec.kind != SectionKind.ABSTRACT:
-                v.append(Violation("S3", f"skill {s.name}",
+                v.append(Violation("T3", f"skill {s.name}",
                                    f"implements targets {sec.kind.value} section '{ref.target}' (expected abstract)"))
             elif ref.kind in (RefinementKind.OVERRIDES, RefinementKind.EXTENDS) and sec.kind != SectionKind.DEFAULT:
-                v.append(Violation("S3", f"skill {s.name}",
+                v.append(Violation("T3", f"skill {s.name}",
                                    f"{ref.kind.value} targets {sec.kind.value} section '{ref.target}' (expected default)"))
     return v
 
 
-def check_s4(lib: Library) -> list[Violation]:
+def check_t4(lib: Library) -> list[Violation]:
     v = []
     for s in lib.skills.values():
         if not s.parent or not _acyclic(lib, s.name):
@@ -164,10 +164,10 @@ def check_s4(lib: Library) -> list[Violation]:
             if inherited is None:
                 continue
             if p.direction != inherited.direction:
-                v.append(Violation("S4", f"skill {s.name}",
+                v.append(Violation("T4", f"skill {s.name}",
                                    f"parameter '{p.name}' changes direction ({inherited.direction.value} -> {p.direction.value})"))
             elif p.type in lib.types and inherited.type in lib.types and not lib.conforms_type(p.type, inherited.type):
-                v.append(Violation("S4", f"skill {s.name}",
+                v.append(Violation("T4", f"skill {s.name}",
                                    f"parameter '{p.name}': {p.type} does not specialize inherited {inherited.type}"))
     for t in lib.types.values():
         if not t.parent or _has_cycle(t.name, lib.types):
@@ -177,7 +177,7 @@ def check_s4(lib: Library) -> list[Violation]:
             if inherited is None:
                 continue
             if not _within(p.lower, p.upper, inherited.lower, inherited.upper):
-                v.append(Violation("S4", f"type {t.name}",
+                v.append(Violation("T4", f"type {t.name}",
                                    f"property '{p.name}' {_fmt_mult(p)} widens inherited {_fmt_mult(inherited)}"))
     return v
 
@@ -340,7 +340,7 @@ def check_composite(lib: Library, comp: CompositeSkill) -> list[Violation]:
 
 
 def check_library(lib: Library) -> list[Violation]:
-    v = check_well_formed(lib) + check_s1(lib) + check_s2(lib) + check_s3(lib) + check_s4(lib)
+    v = check_well_formed(lib) + check_t1(lib) + check_t2(lib) + check_t3(lib) + check_t4(lib)
     for s in lib.skills.values():
         if isinstance(s, CompositeSkill):
             v += check_composite(lib, s)

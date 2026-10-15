@@ -87,7 +87,7 @@ def test_placeholders():
 def test_s1_cycle_and_multiple_parents():
     s = base_skills()
     s["skills"][0]["parent"] = "stories"
-    assert "S1" in codes(lib_of(TYPES, s))
+    assert "T1" in codes(lib_of(TYPES, s))
     s = base_skills()
     s["skills"][1]["parent"] = ["spec", "test"]
     with pytest.raises(ModelError):
@@ -97,7 +97,7 @@ def test_s1_cycle_and_multiple_parents():
 def test_s2_missing_implementation():
     s = base_skills()
     s["skills"][1]["refinements"] = s["skills"][1]["refinements"][1:]
-    assert codes(lib_of(TYPES, s)) == ["S2"]
+    assert codes(lib_of(TYPES, s)) == ["T2"]
 
 
 @pytest.mark.parametrize("ref", [
@@ -109,22 +109,22 @@ def test_s2_missing_implementation():
 def test_s3_bad_refinements(ref):
     s = base_skills()
     s["skills"][1]["refinements"].append(ref)
-    assert "S3" in codes(lib_of(TYPES, s))
+    assert "T3" in codes(lib_of(TYPES, s))
 
 
 def test_s3_redeclaration():
     s = base_skills()
     s["skills"][1]["sections"] = [{"name": "f", "kind": "final", "content": "again"}]
-    assert "S3" in codes(lib_of(TYPES, s))
+    assert "T3" in codes(lib_of(TYPES, s))
 
 
 def test_s4_widening_and_direction():
     s = base_skills()
     s["skills"][1]["parameters"][0]["type"] = "Code"
-    assert "S4" in codes(lib_of(TYPES, s))
+    assert "T4" in codes(lib_of(TYPES, s))
     s = base_skills()
     s["skills"][1]["parameters"][0]["direction"] = "in"
-    assert "S4" in codes(lib_of(TYPES, s))
+    assert "T4" in codes(lib_of(TYPES, s))
 
 
 def _typed(child_lower, child_upper):
@@ -143,7 +143,7 @@ def test_s4_property_narrowing_is_allowed():
 
 @pytest.mark.parametrize("lower,upper", [(0, "*"), (0, 1)])
 def test_s4_property_widening(lower, upper):
-    assert codes(lib_of(_typed(lower, upper))) == ["S4"]
+    assert codes(lib_of(_typed(lower, upper))) == ["T4"]
 
 
 def test_generated_artifact_fields_use_nearest_declaration(tmp_path):
@@ -262,7 +262,7 @@ def test_refined_sections_become_default():
     assert codes(lib_of(TYPES, base_skills(), _grandchild(
         {"kind": "overrides", "target": "a", "content": "A2"}))) == []
     # but no longer implemented again
-    assert "S3" in codes(lib_of(TYPES, base_skills(), _grandchild(
+    assert "T3" in codes(lib_of(TYPES, base_skills(), _grandchild(
         {"kind": "implements", "target": "a", "content": "A2"})))
 
 
@@ -272,7 +272,7 @@ def test_sealed_sections_admit_no_refinement():
     lib = lib_of(TYPES, s)
     assert resolve(lib, "stories").section("a").kind.value == "final"
     assert codes(lib) == []
-    assert "S3" in codes(lib_of(TYPES, s, _grandchild(
+    assert "T3" in codes(lib_of(TYPES, s, _grandchild(
         {"kind": "overrides", "target": "a", "content": "A2"})))
 
 

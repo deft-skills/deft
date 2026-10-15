@@ -219,10 +219,10 @@ DEFT checks a library before any agent uses it:
 
 | | Specialization | | Composition |
 |---|---|---|---|
-| S1 | Hierarchies are acyclic, single parent | C1 | Bindings are concrete and specialize their role |
-| S2 | Concrete skills implement every abstract section | C2 | Data edges are type-safe on the bound skills |
-| S3 | Refinements target an inherited section of the right kind; final sections admit none | C3 | Mandatory inputs are fed |
-| S4 | Redeclarations narrow types and tighten multiplicities | C4 | No cycles except bounded repairs |
+| T1 | Hierarchies are acyclic, single parent | C1 | Bindings are concrete and specialize their role |
+| T2 | Concrete skills implement every abstract section | C2 | Data edges are type-safe on the bound skills |
+| T3 | Refinements target an inherited section of the right kind; final sections admit none | C3 | Mandatory inputs are fed |
+| T4 | Redeclarations narrow types and tighten multiplicities | C4 | No cycles except bounded repairs |
 | | | C5 | Guarantees entail preconditions (reviewed, not decided) |
 
 See [Validating models](constraints.md) for the full rules and messages.

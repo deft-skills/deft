@@ -2,7 +2,7 @@
   "baseline_violations": [],
   "operators": [
     {
-      "constraint": "S1",
+      "constraint": "T1",
       "operator": "skill-cycle",
       "mutants": 12,
       "killed": 12,
@@ -10,7 +10,7 @@
       "exclusive": 12
     },
     {
-      "constraint": "S1",
+      "constraint": "T1",
       "operator": "type-cycle",
       "mutants": 7,
       "killed": 7,
@@ -18,7 +18,7 @@
       "exclusive": 7
     },
     {
-      "constraint": "S2",
+      "constraint": "T2",
       "operator": "drop-implementation",
       "mutants": 10,
       "killed": 10,
@@ -26,7 +26,7 @@
       "exclusive": 10
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "refine-final-section",
       "mutants": 32,
       "killed": 32,
@@ -34,7 +34,7 @@
       "exclusive": 32
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "refine-sealed-section",
       "mutants": 2,
       "killed": 2,
@@ -42,7 +42,7 @@
       "exclusive": 2
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "swap-refinement-kind",
       "mutants": 15,
       "killed": 15,
@@ -50,7 +50,7 @@
       "exclusive": 15
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "redeclare-inherited-section",
       "mutants": 56,
       "killed": 56,
@@ -58,7 +58,7 @@
       "exclusive": 56
     },
     {
-      "constraint": "S4",
+      "constraint": "T4",
       "operator": "widen-parameter-type",
       "mutants": 8,
       "killed": 8,
@@ -66,7 +66,7 @@
       "exclusive": 3
     },
     {
-      "constraint": "S4",
+      "constraint": "T4",
       "operator": "flip-parameter-direction",
       "mutants": 8,
       "killed": 8,
@@ -74,7 +74,7 @@
       "exclusive": 3
     },
     {
-      "constraint": "S4",
+      "constraint": "T4",
       "operator": "widen-property-multiplicity",
       "mutants": 25,
       "killed": 25,
@@ -171,25 +171,25 @@
     }
   ],
   "by_constraint": {
-    "S1": {
+    "T1": {
       "mutants": 19,
       "killed": 19,
       "intended": 19,
       "exclusive": 19
     },
-    "S2": {
+    "T2": {
       "mutants": 10,
       "killed": 10,
       "intended": 10,
       "exclusive": 10
     },
-    "S3": {
+    "T3": {
       "mutants": 105,
       "killed": 105,
       "intended": 105,
       "exclusive": 105
     },
-    "S4": {
+    "T4": {
       "mutants": 41,
       "killed": 41,
       "intended": 41,
@@ -234,1416 +234,1416 @@
   },
   "mutants": [
     {
-      "constraint": "S1",
+      "constraint": "T1",
       "operator": "skill-cycle",
       "location": "execute-plan.parent=execute-plan-inline",
       "reported": [
-        "S1"
+        "T1"
       ]
     },
     {
-      "constraint": "S1",
+      "constraint": "T1",
       "operator": "skill-cycle",
       "location": "execute-plan.parent=execute-plan-subagents",
       "reported": [
-        "S1"
+        "T1"
       ]
     },
     {
-      "constraint": "S1",
+      "constraint": "T1",
       "operator": "skill-cycle",
       "location": "specify-requirements.parent=specify-functional",
       "reported": [
-        "S1"
+        "T1"
       ]
     },
     {
-      "constraint": "S1",
+      "constraint": "T1",
       "operator": "skill-cycle",
       "location": "specify-requirements.parent=specify-quality",
       "reported": [
-        "S1"
+        "T1"
       ]
     },
     {
-      "constraint": "S1",
+      "constraint": "T1",
       "operator": "skill-cycle",
       "location": "specify-requirements.parent=user-stories",
       "reported": [
-        "S1"
+        "T1"
       ]
     },
     {
-      "constraint": "S1",
+      "constraint": "T1",
       "operator": "skill-cycle",
       "location": "specify-requirements.parent=ears",
       "reported": [
-        "S1"
+        "T1"
       ]
     },
     {
-      "constraint": "S1",
+      "constraint": "T1",
       "operator": "skill-cycle",
       "location": "specify-requirements.parent=volere",
       "reported": [
-        "S1"
+        "T1"
       ]
     },
     {
-      "constraint": "S1",
+      "constraint": "T1",
       "operator": "skill-cycle",
       "location": "specify-requirements.parent=iso25010",
       "reported": [
-        "S1"
+        "T1"
       ]
     },
     {
-      "constraint": "S1",
+      "constraint": "T1",
       "operator": "skill-cycle",
       "location": "generate-tests.parent=acceptance-tests",
       "reported": [
-        "S1"
+        "T1"
       ]
     },
     {
-      "constraint": "S1",
+      "constraint": "T1",
       "operator": "skill-cycle",
       "location": "generate-tests.parent=acceptance-gherkin",
       "reported": [
-        "S1"
+        "T1"
       ]
     },
     {
-      "constraint": "S1",
+      "constraint": "T1",
       "operator": "skill-cycle",
       "location": "generate-tests.parent=acceptance-playwright",
       "reported": [
-        "S1"
+        "T1"
       ]
     },
     {
-      "constraint": "S1",
+      "constraint": "T1",
       "operator": "skill-cycle",
       "location": "generate-tests.parent=performance-tests",
       "reported": [
-        "S1"
+        "T1"
       ]
     },
     {
-      "constraint": "S1",
+      "constraint": "T1",
       "operator": "type-cycle",
       "location": "Requirement.parent=FunctionalRequirement",
       "reported": [
-        "S1"
+        "T1"
       ]
     },
     {
-      "constraint": "S1",
+      "constraint": "T1",
       "operator": "type-cycle",
       "location": "Requirement.parent=UserStory",
       "reported": [
-        "S1"
+        "T1"
       ]
     },
     {
-      "constraint": "S1",
+      "constraint": "T1",
       "operator": "type-cycle",
       "location": "Requirement.parent=EARSRequirement",
       "reported": [
-        "S1"
+        "T1"
       ]
     },
     {
-      "constraint": "S1",
+      "constraint": "T1",
       "operator": "type-cycle",
       "location": "Requirement.parent=QualityRequirement",
       "reported": [
-        "S1"
+        "T1"
       ]
     },
     {
-      "constraint": "S1",
+      "constraint": "T1",
       "operator": "type-cycle",
       "location": "Requirement.parent=MeasurableQualityRequirement",
       "reported": [
-        "S1"
+        "T1"
       ]
     },
     {
-      "constraint": "S1",
+      "constraint": "T1",
       "operator": "type-cycle",
       "location": "Requirement.parent=VolereRequirement",
       "reported": [
-        "S1"
+        "T1"
       ]
     },
     {
-      "constraint": "S1",
+      "constraint": "T1",
       "operator": "type-cycle",
       "location": "Requirement.parent=ISO25010Requirement",
       "reported": [
-        "S1"
+        "T1"
       ]
     },
     {
-      "constraint": "S2",
+      "constraint": "T2",
       "operator": "drop-implementation",
       "location": "execute-plan-inline-implements:loop",
       "reported": [
-        "S2"
+        "T2"
       ]
     },
     {
-      "constraint": "S2",
+      "constraint": "T2",
       "operator": "drop-implementation",
       "location": "execute-plan-subagents-implements:loop",
       "reported": [
-        "S2"
+        "T2"
       ]
     },
     {
-      "constraint": "S2",
+      "constraint": "T2",
       "operator": "drop-implementation",
       "location": "user-stories-implements:structure",
       "reported": [
-        "S2"
+        "T2"
       ]
     },
     {
-      "constraint": "S2",
+      "constraint": "T2",
       "operator": "drop-implementation",
       "location": "ears-implements:structure",
       "reported": [
-        "S2"
+        "T2"
       ]
     },
     {
-      "constraint": "S2",
+      "constraint": "T2",
       "operator": "drop-implementation",
       "location": "volere-implements:structure",
       "reported": [
-        "S2"
+        "T2"
       ]
     },
     {
-      "constraint": "S2",
+      "constraint": "T2",
       "operator": "drop-implementation",
       "location": "iso25010-implements:structure",
       "reported": [
-        "S2"
+        "T2"
       ]
     },
     {
-      "constraint": "S2",
+      "constraint": "T2",
       "operator": "drop-implementation",
       "location": "acceptance-gherkin-implements:write",
       "reported": [
-        "S2"
+        "T2"
       ]
     },
     {
-      "constraint": "S2",
+      "constraint": "T2",
       "operator": "drop-implementation",
       "location": "acceptance-playwright-implements:write",
       "reported": [
-        "S2"
+        "T2"
       ]
     },
     {
-      "constraint": "S2",
+      "constraint": "T2",
       "operator": "drop-implementation",
       "location": "performance-tests-implements:oracle",
       "reported": [
-        "S2"
+        "T2"
       ]
     },
     {
-      "constraint": "S2",
+      "constraint": "T2",
       "operator": "drop-implementation",
       "location": "performance-tests-implements:write",
       "reported": [
-        "S2"
+        "T2"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "refine-final-section",
       "location": "execute-plan-inline overrides principles",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "refine-final-section",
       "location": "execute-plan-inline overrides setup",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "refine-final-section",
       "location": "execute-plan-inline overrides contract",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "refine-final-section",
       "location": "execute-plan-subagents overrides principles",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "refine-final-section",
       "location": "execute-plan-subagents overrides setup",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "refine-final-section",
       "location": "execute-plan-subagents overrides contract",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "refine-final-section",
       "location": "specify-functional overrides elicit",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "refine-final-section",
       "location": "specify-functional overrides clarify",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "refine-final-section",
       "location": "specify-functional overrides record",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "refine-final-section",
       "location": "specify-quality overrides elicit",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "refine-final-section",
       "location": "specify-quality overrides clarify",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "refine-final-section",
       "location": "specify-quality overrides record",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "refine-final-section",
       "location": "user-stories overrides elicit",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "refine-final-section",
       "location": "user-stories overrides clarify",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "refine-final-section",
       "location": "user-stories overrides record",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "refine-final-section",
       "location": "ears overrides elicit",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "refine-final-section",
       "location": "ears overrides clarify",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "refine-final-section",
       "location": "ears overrides record",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "refine-final-section",
       "location": "volere overrides elicit",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "refine-final-section",
       "location": "volere overrides clarify",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "refine-final-section",
       "location": "volere overrides record",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "refine-final-section",
       "location": "iso25010 overrides elicit",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "refine-final-section",
       "location": "iso25010 overrides clarify",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "refine-final-section",
       "location": "iso25010 overrides record",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "refine-final-section",
       "location": "acceptance-tests overrides trace",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "refine-final-section",
       "location": "acceptance-tests overrides run",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "refine-final-section",
       "location": "acceptance-gherkin overrides trace",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "refine-final-section",
       "location": "acceptance-gherkin overrides run",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "refine-final-section",
       "location": "acceptance-playwright overrides trace",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "refine-final-section",
       "location": "acceptance-playwright overrides run",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "refine-final-section",
       "location": "performance-tests overrides trace",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "refine-final-section",
       "location": "performance-tests overrides run",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "refine-sealed-section",
       "location": "acceptance-tests seals oracle, acceptance-gherkin overrides it",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "refine-sealed-section",
       "location": "acceptance-tests seals oracle, acceptance-playwright overrides it",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "swap-refinement-kind",
       "location": "execute-plan-inline:loop implements->overrides",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "swap-refinement-kind",
       "location": "execute-plan-subagents:loop implements->overrides",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "swap-refinement-kind",
       "location": "execute-plan-subagents:final-review extends->implements",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "swap-refinement-kind",
       "location": "user-stories:structure implements->overrides",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "swap-refinement-kind",
       "location": "user-stories:validate extends->implements",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "swap-refinement-kind",
       "location": "ears:structure implements->overrides",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "swap-refinement-kind",
       "location": "ears:validate overrides->implements",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "swap-refinement-kind",
       "location": "volere:structure implements->overrides",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "swap-refinement-kind",
       "location": "volere:validate extends->implements",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "swap-refinement-kind",
       "location": "iso25010:structure implements->overrides",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "swap-refinement-kind",
       "location": "acceptance-tests:oracle implements->overrides",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "swap-refinement-kind",
       "location": "acceptance-gherkin:write implements->overrides",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "swap-refinement-kind",
       "location": "acceptance-playwright:write implements->overrides",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "swap-refinement-kind",
       "location": "performance-tests:oracle implements->overrides",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "swap-refinement-kind",
       "location": "performance-tests:write implements->overrides",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "redeclare-inherited-section",
       "location": "execute-plan-inline redeclares principles",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "redeclare-inherited-section",
       "location": "execute-plan-inline redeclares setup",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "redeclare-inherited-section",
       "location": "execute-plan-inline redeclares loop",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "redeclare-inherited-section",
       "location": "execute-plan-inline redeclares contract",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "redeclare-inherited-section",
       "location": "execute-plan-inline redeclares final-review",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "redeclare-inherited-section",
       "location": "execute-plan-subagents redeclares principles",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "redeclare-inherited-section",
       "location": "execute-plan-subagents redeclares setup",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "redeclare-inherited-section",
       "location": "execute-plan-subagents redeclares loop",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "redeclare-inherited-section",
       "location": "execute-plan-subagents redeclares contract",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "redeclare-inherited-section",
       "location": "execute-plan-subagents redeclares final-review",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "redeclare-inherited-section",
       "location": "specify-functional redeclares elicit",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "redeclare-inherited-section",
       "location": "specify-functional redeclares clarify",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "redeclare-inherited-section",
       "location": "specify-functional redeclares structure",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "redeclare-inherited-section",
       "location": "specify-functional redeclares validate",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "redeclare-inherited-section",
       "location": "specify-functional redeclares record",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "redeclare-inherited-section",
       "location": "specify-quality redeclares elicit",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "redeclare-inherited-section",
       "location": "specify-quality redeclares clarify",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "redeclare-inherited-section",
       "location": "specify-quality redeclares structure",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "redeclare-inherited-section",
       "location": "specify-quality redeclares validate",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "redeclare-inherited-section",
       "location": "specify-quality redeclares record",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "redeclare-inherited-section",
       "location": "user-stories redeclares elicit",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "redeclare-inherited-section",
       "location": "user-stories redeclares clarify",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "redeclare-inherited-section",
       "location": "user-stories redeclares structure",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "redeclare-inherited-section",
       "location": "user-stories redeclares validate",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "redeclare-inherited-section",
       "location": "user-stories redeclares record",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "redeclare-inherited-section",
       "location": "ears redeclares elicit",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "redeclare-inherited-section",
       "location": "ears redeclares clarify",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "redeclare-inherited-section",
       "location": "ears redeclares structure",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "redeclare-inherited-section",
       "location": "ears redeclares validate",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "redeclare-inherited-section",
       "location": "ears redeclares record",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "redeclare-inherited-section",
       "location": "volere redeclares elicit",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "redeclare-inherited-section",
       "location": "volere redeclares clarify",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "redeclare-inherited-section",
       "location": "volere redeclares structure",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "redeclare-inherited-section",
       "location": "volere redeclares validate",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "redeclare-inherited-section",
       "location": "volere redeclares record",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "redeclare-inherited-section",
       "location": "iso25010 redeclares elicit",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "redeclare-inherited-section",
       "location": "iso25010 redeclares clarify",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "redeclare-inherited-section",
       "location": "iso25010 redeclares structure",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "redeclare-inherited-section",
       "location": "iso25010 redeclares validate",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "redeclare-inherited-section",
       "location": "iso25010 redeclares record",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "redeclare-inherited-section",
       "location": "acceptance-tests redeclares oracle",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "redeclare-inherited-section",
       "location": "acceptance-tests redeclares write",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "redeclare-inherited-section",
       "location": "acceptance-tests redeclares trace",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "redeclare-inherited-section",
       "location": "acceptance-tests redeclares run",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "redeclare-inherited-section",
       "location": "acceptance-gherkin redeclares oracle",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "redeclare-inherited-section",
       "location": "acceptance-gherkin redeclares write",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "redeclare-inherited-section",
       "location": "acceptance-gherkin redeclares trace",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "redeclare-inherited-section",
       "location": "acceptance-gherkin redeclares run",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "redeclare-inherited-section",
       "location": "acceptance-playwright redeclares oracle",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "redeclare-inherited-section",
       "location": "acceptance-playwright redeclares write",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "redeclare-inherited-section",
       "location": "acceptance-playwright redeclares trace",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "redeclare-inherited-section",
       "location": "acceptance-playwright redeclares run",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "redeclare-inherited-section",
       "location": "performance-tests redeclares oracle",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "redeclare-inherited-section",
       "location": "performance-tests redeclares write",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "redeclare-inherited-section",
       "location": "performance-tests redeclares trace",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S3",
+      "constraint": "T3",
       "operator": "redeclare-inherited-section",
       "location": "performance-tests redeclares run",
       "reported": [
-        "S3"
+        "T3"
       ]
     },
     {
-      "constraint": "S4",
+      "constraint": "T4",
       "operator": "widen-parameter-type",
       "location": "specify-functional.requirements:FunctionalRequirement->Diagnosis",
       "reported": [
-        "S4"
+        "T4"
       ]
     },
     {
-      "constraint": "S4",
+      "constraint": "T4",
       "operator": "widen-parameter-type",
       "location": "specify-quality.requirements:QualityRequirement->Diagnosis",
       "reported": [
-        "S4"
+        "T4"
       ]
     },
     {
-      "constraint": "S4",
+      "constraint": "T4",
       "operator": "widen-parameter-type",
       "location": "user-stories.requirements:UserStory->Diagnosis",
       "reported": [
         "C2",
-        "S4"
+        "T4"
       ]
     },
     {
-      "constraint": "S4",
+      "constraint": "T4",
       "operator": "widen-parameter-type",
       "location": "ears.requirements:EARSRequirement->Diagnosis",
       "reported": [
-        "S4"
+        "T4"
       ]
     },
     {
-      "constraint": "S4",
+      "constraint": "T4",
       "operator": "widen-parameter-type",
       "location": "volere.requirements:VolereRequirement->Diagnosis",
       "reported": [
         "C2",
-        "S4"
+        "T4"
       ]
     },
     {
-      "constraint": "S4",
+      "constraint": "T4",
       "operator": "widen-parameter-type",
       "location": "iso25010.requirements:ISO25010Requirement->Diagnosis",
       "reported": [
         "C2",
-        "S4"
+        "T4"
       ]
     },
     {
-      "constraint": "S4",
+      "constraint": "T4",
       "operator": "widen-parameter-type",
       "location": "acceptance-tests.requirements:UserStory->Diagnosis",
       "reported": [
         "C2",
-        "S4"
+        "T4"
       ]
     },
     {
-      "constraint": "S4",
+      "constraint": "T4",
       "operator": "widen-parameter-type",
       "location": "performance-tests.requirements:MeasurableQualityRequirement->Diagnosis",
       "reported": [
         "C2",
-        "S4"
+        "T4"
       ]
     },
     {
-      "constraint": "S4",
+      "constraint": "T4",
       "operator": "flip-parameter-direction",
       "location": "specify-functional.requirements direction",
       "reported": [
-        "S4"
+        "T4"
       ]
     },
     {
-      "constraint": "S4",
+      "constraint": "T4",
       "operator": "flip-parameter-direction",
       "location": "specify-quality.requirements direction",
       "reported": [
-        "S4"
+        "T4"
       ]
     },
     {
-      "constraint": "S4",
+      "constraint": "T4",
       "operator": "flip-parameter-direction",
       "location": "user-stories.requirements direction",
       "reported": [
         "C3",
-        "S4",
+        "T4",
         "WF"
       ]
     },
     {
-      "constraint": "S4",
+      "constraint": "T4",
       "operator": "flip-parameter-direction",
       "location": "ears.requirements direction",
       "reported": [
-        "S4"
+        "T4"
       ]
     },
     {
-      "constraint": "S4",
+      "constraint": "T4",
       "operator": "flip-parameter-direction",
       "location": "volere.requirements direction",
       "reported": [
         "C3",
-        "S4",
+        "T4",
         "WF"
       ]
     },
     {
-      "constraint": "S4",
+      "constraint": "T4",
       "operator": "flip-parameter-direction",
       "location": "iso25010.requirements direction",
       "reported": [
         "C3",
-        "S4",
+        "T4",
         "WF"
       ]
     },
     {
-      "constraint": "S4",
+      "constraint": "T4",
       "operator": "flip-parameter-direction",
       "location": "acceptance-tests.requirements direction",
       "reported": [
-        "S4",
+        "T4",
         "WF"
       ]
     },
     {
-      "constraint": "S4",
+      "constraint": "T4",
       "operator": "flip-parameter-direction",
       "location": "performance-tests.requirements direction",
       "reported": [
-        "S4",
+        "T4",
         "WF"
       ]
     },
     {
-      "constraint": "S4",
+      "constraint": "T4",
       "operator": "widen-property-multiplicity",
       "location": "FunctionalRequirement.id [0..1]",
       "reported": [
-        "S4"
+        "T4"
       ]
     },
     {
-      "constraint": "S4",
+      "constraint": "T4",
       "operator": "widen-property-multiplicity",
       "location": "FunctionalRequirement.text [0..1]",
       "reported": [
-        "S4"
+        "T4"
       ]
     },
     {
-      "constraint": "S4",
+      "constraint": "T4",
       "operator": "widen-property-multiplicity",
       "location": "FunctionalRequirement.source [0..1]",
       "reported": [
-        "S4"
+        "T4"
       ]
     },
     {
-      "constraint": "S4",
+      "constraint": "T4",
       "operator": "widen-property-multiplicity",
       "location": "UserStory.id [0..1]",
       "reported": [
-        "S4"
+        "T4"
       ]
     },
     {
-      "constraint": "S4",
+      "constraint": "T4",
       "operator": "widen-property-multiplicity",
       "location": "UserStory.text [0..1]",
       "reported": [
-        "S4"
+        "T4"
       ]
     },
     {
-      "constraint": "S4",
+      "constraint": "T4",
       "operator": "widen-property-multiplicity",
       "location": "UserStory.source [0..1]",
       "reported": [
-        "S4"
+        "T4"
       ]
     },
     {
-      "constraint": "S4",
+      "constraint": "T4",
       "operator": "widen-property-multiplicity",
       "location": "EARSRequirement.id [0..1]",
       "reported": [
-        "S4"
+        "T4"
       ]
     },
     {
-      "constraint": "S4",
+      "constraint": "T4",
       "operator": "widen-property-multiplicity",
       "location": "EARSRequirement.text [0..1]",
       "reported": [
-        "S4"
+        "T4"
       ]
     },
     {
-      "constraint": "S4",
+      "constraint": "T4",
       "operator": "widen-property-multiplicity",
       "location": "EARSRequirement.source [0..1]",
       "reported": [
-        "S4"
+        "T4"
       ]
     },
     {
-      "constraint": "S4",
+      "constraint": "T4",
       "operator": "widen-property-multiplicity",
       "location": "QualityRequirement.id [0..1]",
       "reported": [
-        "S4"
+        "T4"
       ]
     },
     {
-      "constraint": "S4",
+      "constraint": "T4",
       "operator": "widen-property-multiplicity",
       "location": "QualityRequirement.text [0..1]",
       "reported": [
-        "S4"
+        "T4"
       ]
     },
     {
-      "constraint": "S4",
+      "constraint": "T4",
       "operator": "widen-property-multiplicity",
       "location": "QualityRequirement.source [0..1]",
       "reported": [
-        "S4"
+        "T4"
       ]
     },
     {
-      "constraint": "S4",
+      "constraint": "T4",
       "operator": "widen-property-multiplicity",
       "location": "MeasurableQualityRequirement.id [0..1]",
       "reported": [
-        "S4"
+        "T4"
       ]
     },
     {
-      "constraint": "S4",
+      "constraint": "T4",
       "operator": "widen-property-multiplicity",
       "location": "MeasurableQualityRequirement.text [0..1]",
       "reported": [
-        "S4"
+        "T4"
       ]
     },
     {
-      "constraint": "S4",
+      "constraint": "T4",
       "operator": "widen-property-multiplicity",
       "location": "MeasurableQualityRequirement.source [0..1]",
       "reported": [
-        "S4"
+        "T4"
       ]
     },
     {
-      "constraint": "S4",
+      "constraint": "T4",
       "operator": "widen-property-multiplicity",
       "location": "MeasurableQualityRequirement.characteristic [0..1]",
       "reported": [
-        "S4"
+        "T4"
       ]
     },
     {
-      "constraint": "S4",
+      "constraint": "T4",
       "operator": "widen-property-multiplicity",
       "location": "VolereRequirement.id [0..1]",
       "reported": [
-        "S4"
+        "T4"
       ]
     },
     {
-      "constraint": "S4",
+      "constraint": "T4",
       "operator": "widen-property-multiplicity",
       "location": "VolereRequirement.text [0..1]",
       "reported": [
-        "S4"
+        "T4"
       ]
     },
     {
-      "constraint": "S4",
+      "constraint": "T4",
       "operator": "widen-property-multiplicity",
       "location": "VolereRequirement.source [0..1]",
       "reported": [
-        "S4"
+        "T4"
       ]
     },
     {
-      "constraint": "S4",
+      "constraint": "T4",
       "operator": "widen-property-multiplicity",
       "location": "VolereRequirement.characteristic [0..1]",
       "reported": [
-        "S4"
+        "T4"
       ]
     },
     {
-      "constraint": "S4",
+      "constraint": "T4",
       "operator": "widen-property-multiplicity",
       "location": "VolereRequirement.fitCriterion [0..1]",
       "reported": [
-        "S4"
+        "T4"
       ]
     },
     {
-      "constraint": "S4",
+      "constraint": "T4",
       "operator": "widen-property-multiplicity",
       "location": "ISO25010Requirement.id [0..1]",
       "reported": [
-        "S4"
+        "T4"
       ]
     },
     {
-      "constraint": "S4",
+      "constraint": "T4",
       "operator": "widen-property-multiplicity",
       "location": "ISO25010Requirement.text [0..1]",
       "reported": [
-        "S4"
+        "T4"
       ]
     },
     {
-      "constraint": "S4",
+      "constraint": "T4",
       "operator": "widen-property-multiplicity",
       "location": "ISO25010Requirement.source [0..1]",
       "reported": [
-        "S4"
+        "T4"
       ]
     },
     {
-      "constraint": "S4",
+      "constraint": "T4",
       "operator": "widen-property-multiplicity",
       "location": "ISO25010Requirement.characteristic [0..1]",
       "reported": [
-        "S4"
+        "T4"
       ]
     },
     {
@@ -1652,7 +1652,7 @@
       "location": "deliver-feature-iso.parent=systematic-debugging",
       "reported": [
         "C3",
-        "S4",
+        "T4",
         "WF"
       ]
     },
@@ -1670,7 +1670,7 @@
       "operator": "cross-kind-parent",
       "location": "deliver-feature-iso.parent=execute-plan",
       "reported": [
-        "S2",
+        "T2",
         "WF"
       ]
     },
@@ -1697,7 +1697,7 @@
       "location": "deliver-feature-iso.parent=specify-requirements",
       "reported": [
         "C3",
-        "S2",
+        "T2",
         "WF"
       ]
     },
@@ -1707,8 +1707,8 @@
       "location": "deliver-feature-iso.parent=generate-tests",
       "reported": [
         "C3",
-        "S2",
-        "S4",
+        "T2",
+        "T4",
         "WF"
       ]
     },
@@ -1718,7 +1718,7 @@
       "location": "systematic-debugging.parent=deliver-feature-iso",
       "reported": [
         "C3",
-        "S4",
+        "T4",
         "WF"
       ]
     },
@@ -1772,7 +1772,7 @@
       "location": "generate-tests.parent=deliver-feature-iso",
       "reported": [
         "C3",
-        "S4",
+        "T4",
         "WF"
       ]
     },
@@ -1782,7 +1782,7 @@
       "location": "deliver-feature.parent=systematic-debugging",
       "reported": [
         "C3",
-        "S4",
+        "T4",
         "WF"
       ]
     },
@@ -1800,7 +1800,7 @@
       "operator": "cross-kind-parent",
       "location": "deliver-feature.parent=execute-plan",
       "reported": [
-        "S2",
+        "T2",
         "WF"
       ]
     },
@@ -1827,7 +1827,7 @@
       "location": "deliver-feature.parent=specify-requirements",
       "reported": [
         "C3",
-        "S2",
+        "T2",
         "WF"
       ]
     },
@@ -1837,8 +1837,8 @@
       "location": "deliver-feature.parent=generate-tests",
       "reported": [
         "C3",
-        "S2",
-        "S4",
+        "T2",
+        "T4",
         "WF"
       ]
     },
@@ -1848,7 +1848,7 @@
       "location": "systematic-debugging.parent=deliver-feature",
       "reported": [
         "C3",
-        "S4",
+        "T4",
         "WF"
       ]
     },
@@ -1902,7 +1902,7 @@
       "location": "generate-tests.parent=deliver-feature",
       "reported": [
         "C3",
-        "S4",
+        "T4",
         "WF"
       ]
     },

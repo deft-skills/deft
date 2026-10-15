@@ -43,7 +43,7 @@ conventions:
     convention: Combine several parents (mixins, multiple inheritance)
     source: hierarchical skills proposal
     evidence: n/a
-    deft: not supported (single inheritance, S1)
+    deft: not supported (single inheritance, T1)
     coverage: none
   - id: prose-dependency
     convention: Name another skill in the instructions ("use skill X")

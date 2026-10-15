@@ -108,7 +108,7 @@ def resolve(lib: Library, name: str) -> ResolvedSkill:
         for ref in getattr(sk, "refinements", []):
             tgt = next((s for s in sections if s.name == ref.target), None)
             if tgt is None:
-                continue  # reported by S3
+                continue  # reported by T3
             if ref.kind in (RefinementKind.IMPLEMENTS, RefinementKind.OVERRIDES):
                 tgt.content = ref.content
             elif ref.kind == RefinementKind.EXTENDS:
@@ -117,7 +117,7 @@ def resolve(lib: Library, name: str) -> ResolvedSkill:
             tgt.sources.append(Contribution(sname, ref.kind.value, ref.final))
         for sec in getattr(sk, "sections", []):
             if any(s.name == sec.name for s in sections):
-                continue  # redeclaration is reported by S3
+                continue  # redeclaration is reported by T3
             sections.append(ResolvedSection(sec.name, sec.kind, sec.title, sec.content,
                                             [Contribution(sname, "declares")], declared=sec.kind))
     meta = effective_metadata(lib, name)

@@ -40,7 +40,7 @@ def _workflows(lib):
 # ------------------------------------------------------------- operators
 # Each operator yields (location, mutate) where mutate(lib) edits a copy.
 
-def s1_skill_cycle(lib):
+def t1_skill_cycle(lib):
     """Make a root skill the child of one of its descendants."""
     for s in _skills(lib):
         if s.parent is None:
@@ -49,7 +49,7 @@ def s1_skill_cycle(lib):
                     yield f"{s.name}.parent={d.name}", lambda L, s=s.name, d=d.name: setattr(L.skills[s], "parent", d)
 
 
-def s1_type_cycle(lib):
+def t1_type_cycle(lib):
     for t in lib.types.values():
         if t.parent is None:
             for d in lib.types.values():
@@ -57,7 +57,7 @@ def s1_type_cycle(lib):
                     yield f"{t.name}.parent={d.name}", lambda L, t=t.name, d=d.name: setattr(L.types[t], "parent", d)
 
 
-def s2_drop_implementation(lib):
+def t2_drop_implementation(lib):
     for s in _skills(lib):
         if s.abstract:
             continue
@@ -74,7 +74,7 @@ def _inherited(lib, name):
     return {sec.name: sec.kind for sec in resolve(lib, parent).sections}
 
 
-def s3_refine_final(lib):
+def t3_refine_final(lib):
     """Override an inherited final section."""
     for s in _skills(lib):
         for sec, kind in _inherited(lib, s.name).items():
@@ -83,7 +83,7 @@ def s3_refine_final(lib):
                     Refinement(RefinementKind.OVERRIDES, sec, "changed"))
 
 
-def s3_wrong_kind(lib):
+def t3_wrong_kind(lib):
     """Swap implements <-> overrides on an existing refinement."""
     for s in _skills(lib):
         for i, r in enumerate(s.refinements):
@@ -92,7 +92,7 @@ def s3_wrong_kind(lib):
                 lambda L, s=s.name, i=i, new=new: setattr(L.skills[s].refinements[i], "kind", new)
 
 
-def s3_redeclare(lib):
+def t3_redeclare(lib):
     """Redeclare an inherited section instead of refining it."""
     for s in _skills(lib):
         for sec in _inherited(lib, s.name):
@@ -106,7 +106,7 @@ def _seal_and_refine(L, s, i, child):
     L.skills[child].refinements.append(Refinement(RefinementKind.OVERRIDES, ref.target, "changed"))
 
 
-def s3_refine_sealed(lib):
+def t3_refine_sealed(lib):
     """Seal a refinement, then refine the same section again in a child."""
     for s in _skills(lib):
         for i, r in enumerate(s.refinements):
@@ -116,7 +116,7 @@ def s3_refine_sealed(lib):
                         lambda L, s=s.name, i=i, c=c.name: _seal_and_refine(L, s, i, c)
 
 
-def s4_widen(lib):
+def t4_widen(lib):
     """Redeclare a parameter with a type that does not specialize the inherited one."""
     for s in _skills(lib):
         if not s.parent:
@@ -132,7 +132,7 @@ def s4_widen(lib):
                     break
 
 
-def s4_direction(lib):
+def t4_direction(lib):
     for s in _skills(lib):
         if not s.parent:
             continue
@@ -143,7 +143,7 @@ def s4_direction(lib):
                     lambda L, s=s.name, i=i, new=new: setattr(L.skills[s].parameters[i], "direction", new)
 
 
-def s4_widen_property(lib):
+def t4_widen_property(lib):
     """Redeclare an inherited property in a subtype with a looser multiplicity."""
     for t in lib.types.values():
         if not t.parent:
@@ -288,16 +288,16 @@ def c4_reach_invoked(lib):
 
 
 OPERATORS = [
-    ("S1", "skill-cycle", s1_skill_cycle),
-    ("S1", "type-cycle", s1_type_cycle),
-    ("S2", "drop-implementation", s2_drop_implementation),
-    ("S3", "refine-final-section", s3_refine_final),
-    ("S3", "refine-sealed-section", s3_refine_sealed),
-    ("S3", "swap-refinement-kind", s3_wrong_kind),
-    ("S3", "redeclare-inherited-section", s3_redeclare),
-    ("S4", "widen-parameter-type", s4_widen),
-    ("S4", "flip-parameter-direction", s4_direction),
-    ("S4", "widen-property-multiplicity", s4_widen_property),
+    ("T1", "skill-cycle", t1_skill_cycle),
+    ("T1", "type-cycle", t1_type_cycle),
+    ("T2", "drop-implementation", t2_drop_implementation),
+    ("T3", "refine-final-section", t3_refine_final),
+    ("T3", "refine-sealed-section", t3_refine_sealed),
+    ("T3", "swap-refinement-kind", t3_wrong_kind),
+    ("T3", "redeclare-inherited-section", t3_redeclare),
+    ("T4", "widen-parameter-type", t4_widen),
+    ("T4", "flip-parameter-direction", t4_direction),
+    ("T4", "widen-property-multiplicity", t4_widen_property),
     ("WF", "cross-kind-parent", wf_cross_kind_parent),
     ("WF", "mismatch-resource-kind", wf_resource_kind),
     ("WF", "flip-origin-mode", wf_origin_mode),

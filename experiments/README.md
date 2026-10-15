@@ -28,15 +28,15 @@ resolved skills that agents read are the same with or without DEFT.
 
 | Constraint | Operator | Fault |
 |---|---|---|
-| S1 | skill-cycle, type-cycle | a root becomes the child of one of its descendants |
-| S2 | drop-implementation | a concrete skill loses an `implements` refinement |
-| S3 | refine-final-section | a descendant overrides an inherited final section |
-| S3 | refine-sealed-section | a refinement is sealed (`final: true`) and a child overrides the section again |
-| S3 | swap-refinement-kind | `implements` and `overrides` are swapped |
-| S3 | redeclare-inherited-section | a descendant redeclares an inherited section |
-| S4 | widen-parameter-type | a redeclared parameter gets a type outside the inherited one |
-| S4 | flip-parameter-direction | a redeclared parameter changes direction |
-| S4 | widen-property-multiplicity | a subtype redeclares an inherited property with a looser multiplicity |
+| T1 | skill-cycle, type-cycle | a root becomes the child of one of its descendants |
+| T2 | drop-implementation | a concrete skill loses an `implements` refinement |
+| T3 | refine-final-section | a descendant overrides an inherited final section |
+| T3 | refine-sealed-section | a refinement is sealed (`final: true`) and a child overrides the section again |
+| T3 | swap-refinement-kind | `implements` and `overrides` are swapped |
+| T3 | redeclare-inherited-section | a descendant redeclares an inherited section |
+| T4 | widen-parameter-type | a redeclared parameter gets a type outside the inherited one |
+| T4 | flip-parameter-direction | a redeclared parameter changes direction |
+| T4 | widen-property-multiplicity | a subtype redeclares an inherited property with a looser multiplicity |
 | WF | cross-kind-parent | a workflow specializes an atomic skill, or a root atomic skill a workflow |
 | WF | mismatch-resource-kind | a bundled resource is declared with a kind that does not match its folder |
 | WF | flip-origin-mode | an origin flips between `adapted` and `imported`, so it disagrees with the content |

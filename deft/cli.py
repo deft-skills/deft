@@ -88,7 +88,7 @@ def main(argv=None) -> int:
             stream.reconfigure(encoding="utf-8")
     p = argparse.ArgumentParser(prog="deft", description="DEFT skill library tools")
     sub = p.add_subparsers(dest="cmd", required=True)
-    c = sub.add_parser("check", help="check S and C constraints")
+    c = sub.add_parser("check", help="check T and C constraints")
     c.add_argument("library")
     c.add_argument("--json", action="store_true")
     c.set_defaults(fn=cmd_check)

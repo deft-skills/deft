@@ -10,9 +10,9 @@ context ArtifactType
     self->closure(t | t.parent)->asOrderedSet()
   def: conformsTo(t : ArtifactType) : Boolean =
     self = t or self.ancestors()->includes(t)
-  -- S1 (types): acyclic, single parent (single-valued reference)
+  -- T1 (types): acyclic, single parent (single-valued reference)
   inv S1_types: not self.ancestors()->includes(self)
-  -- S4 (types): a redeclared property narrows the inherited multiplicity (-1 = *)
+  -- T4 (types): a redeclared property narrows the inherited multiplicity (-1 = *)
   inv S4_properties: self.parent <> null implies self.properties->forAll(p |
     self.ancestors()->collect(a | a.properties)->select(q | q.name = p.name)->forAll(q |
       p.lower >= q.lower and (q.upper = -1 or (p.upper <> -1 and p.upper <= q.upper))))
@@ -32,15 +32,15 @@ context Skill
   def: conformsTo(s : Skill) : Boolean =
     self = s or self.ancestors()->includes(s)
 
-  -- S1 (skills): acyclic, single parent
+  -- T1 (skills): acyclic, single parent
   inv S1_skills: not self.ancestors()->includes(self)
 
   -- WF: a skill specializes a skill of its own kind (atomic or composite)
   inv WF_parent_kind: self.parent <> null implies
     self.parent.oclIsKindOf(CompositeSkill) = self.oclIsKindOf(CompositeSkill)
 
-  -- S4: a redeclared parameter keeps its direction and narrows its type
-  inv S4: self.parent <> null implies self.parameters->forAll(p |
+  -- T4: a redeclared parameter keeps its direction and narrows its type
+  inv T4: self.parent <> null implies self.parameters->forAll(p |
     self.ancestors()->collect(a | a.parameters)->select(q | q.name = p.name)->forAll(q |
       p.direction = q.direction and p.type.conformsTo(q.type)))
 
@@ -64,12 +64,12 @@ context AtomicSkill
     self.origin->exists(o | o.mode = OriginMode::imported) =
     (self.sections->exists(s | s.source <> null) or self.refinements->exists(r | r.source <> null))
 
-  -- S2: a concrete skill leaves no section abstract
-  inv S2: not self.isAbstract implies
+  -- T2: a concrete skill leaves no section abstract
+  inv T2: not self.isAbstract implies
     (self.inheritedSections()->union(self.sections->asSet()))
       ->forAll(s | self.kindOf(s) <> SectionKind::abstract)
 
-  -- S3: refinements target an inherited section of the right effective kind;
+  -- T3: refinements target an inherited section of the right effective kind;
   --     final sections, declared or sealed, admit none; inherited sections
   --     are not redeclared
   inv S3_target: self.refinements->forAll(r | self.inheritedSections()->includes(r.target))

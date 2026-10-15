@@ -5,7 +5,7 @@ command (or run `python -m deft`).
 
 | Command | Effect |
 |---|---|
-| `deft check LIB [--json]` | Run the well-formedness checks, S1–S4 and C1–C4. Exit code 1 if there are violations. |
+| `deft check LIB [--json]` | Run the well-formedness checks, T1–T4 and C1–C4. Exit code 1 if there are violations. |
 | `deft resolve LIB SKILL` | Print the resolved `SKILL.md` of one skill or workflow, without writing files. |
 | `deft generate LIB --out DIR [--no-provenance] [--force]` | Write one folder per concrete skill and executable workflow. Refuses to run on a library with violations unless `--force`. |
 | `deft obligations LIB [--workflow W]` | List the C5 contract obligations of the workflows for review. |
