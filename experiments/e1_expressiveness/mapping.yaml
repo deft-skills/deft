@@ -1,0 +1,89 @@
+# Structuring conventions for skill libraries and their DEFT representation.
+# source: where the convention is documented; evidence: where we observed it
+# in the pinned libraries under upstream/ (counts in results/e1_survey.json).
+# coverage: full | partial | none
+conventions:
+  - id: per-domain-references
+    convention: One SKILL.md that points to one reference file per domain or variant
+    source: official authoring guidance
+    evidence: n/a
+    deft: abstract skill with one specialization per variant
+    coverage: full
+  - id: fork-and-adapt
+    convention: Copy a skill and rewrite parts of its instructions
+    source: downstream adaptation study
+    evidence: execute-plan family rebuilt from two superpowers executors
+    deft: specialization with implements, overrides and extends refinements
+    coverage: full
+  - id: shared-base
+    convention: Shared base content repeated or included in several skills
+    source: hierarchical skills proposal
+    evidence: spec-kit Pre-Execution Checks cloned in every command
+    deft: final section of a common ancestor, with placeholders for the skill name and metadata
+    coverage: full
+  - id: override-append
+    convention: Replace or append to an inherited instruction
+    source: hierarchical skills proposal
+    evidence: n/a
+    deft: overrides and extends on default sections
+    coverage: full
+  - id: deny
+    convention: Remove an inherited instruction
+    source: hierarchical skills proposal
+    evidence: n/a
+    deft: override a default section with empty content; final sections cannot be removed by design
+    coverage: partial
+  - id: provenance
+    convention: Know which file contributed each instruction
+    source: hierarchical skills proposal
+    evidence: n/a
+    deft: sources recorded by resolve(s) and emitted in the generated SKILL.md
+    coverage: full
+  - id: mixins
+    convention: Combine several parents (mixins, multiple inheritance)
+    source: hierarchical skills proposal
+    evidence: n/a
+    deft: not supported (single inheritance, S1)
+    coverage: none
+  - id: prose-dependency
+    convention: Name another skill in the instructions ("use skill X")
+    source: skill supply-chain study
+    evidence: superpowers prose references between skills
+    deft: invokes and data edges; deft-requires metadata in generated workflows
+    coverage: full
+  - id: handoff-router
+    convention: A skill that hands over to the next skill of a pipeline
+    source: hierarchical skills proposal; spec-driven toolkits
+    evidence: spec-kit handoffs in command frontmatter
+    deft: composite skill with sequence and data edges
+    coverage: full
+  - id: run-time-alternative
+    convention: Choose between alternative skills while running
+    source: n/a
+    evidence: superpowers writing-plans hands over to one of two executors
+    deft: abstract role with a binding fixed before execution; a run-time choice needs a decision node and one node per alternative
+    coverage: partial
+  - id: embedded-graph
+    convention: Process graph drawn inside a skill (Graphviz DOT)
+    source: n/a
+    evidence: superpowers skills that embed DOT process graphs
+    deft: composite skill graph when nodes are skills; steps inside one skill stay in its sections
+    coverage: partial
+  - id: prose-contracts
+    convention: Entry checks and completion checklists in prose
+    source: spec-driven toolkits
+    evidence: spec-kit Pre-Execution Checks and Done When sections
+    deft: pre- and postconditions, inherited and checked along edges (C5, assisted)
+    coverage: full
+  - id: bundled-scripts
+    convention: Scripts and templates shipped with the skill
+    source: Agent Skills specification
+    evidence: spec-kit script declarations; webapp-testing helper script
+    deft: resources, inherited by descendants
+    coverage: full
+  - id: runtime-hooks
+    convention: Extension hooks resolved at run time from a project file
+    source: n/a
+    evidence: spec-kit hooks.before_* and hooks.after_* entries with conditions
+    deft: not modelled (run-time configuration outside the library)
+    coverage: none

@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>execute-plan-subagents · DEFT</title>
+<meta name="description" content="DEFT: a metamodel and toolset to specialize, compose, check and generate agent skills.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../static/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231a1a1a'/%3E%3Ctext x='16' y='22' font-family='monospace' font-size='15' text-anchor='middle' fill='white'%3Edf%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<header class="topbar">
+  <button class="iconbtn menubtn" id="menu" aria-label="Menu">☰</button>
+  <a class="brand" href="../index.html"><span class="brand-mark">df</span>DEFT</a>
+  <nav class="topnav"><a class="" href="../index.html">Overview</a><a class="" href="../guides/metamodel.html">Guides</a><a class="" href="../catalogue.html">Catalogue</a><a class="" href="../about.html">About</a></nav>
+  <span class="spacer"></span>
+  <a class="iconbtn" href="https://anonymous.4open.science/r/deft-F7FE/">Repository</a>
+  <button class="iconbtn" id="theme" aria-label="Toggle theme">◐</button>
+</header>
+<div class="layout">
+<nav class="sidebar"><h4>Get started</h4>
+<a class="" href="../index.html">Overview</a>
+<a class="" href="../quickstart.html">Quickstart</a>
+<h4>Guides</h4>
+<a class="" href="../guides/metamodel.html">The metamodel</a>
+<a class="" href="../guides/writing-models.html">Writing models</a>
+<a class="" href="../guides/validating-models.html">Validating models</a>
+<a class="" href="../guides/generating-skills.html">Generating skills</a>
+<a class="" href="../guides/using-skills.html">Using generated skills</a>
+<a class="" href="../guides/example.html">Example: deliver a feature</a>
+<a class="" href="../guides/cli.html">Command line</a>
+<h4>Catalogue</h4>
+<a class="" href="../catalogue.html">All skills</a>
+<a class="sub" href="../catalogue.html#requirements">Requirements</a>
+<a class="sub" href="../catalogue.html#planning">Planning</a>
+<a class="sub" href="../catalogue.html#implementation">Implementation</a>
+<a class="sub" href="../catalogue.html#verification">Verification</a>
+<a class="sub" href="../catalogue.html#support">Support</a>
+<a class="" href="../types.html">Artifact types</a>
+<h4>Workflows</h4>
+<a class="" href="../workflows/deliver-feature.html">deliver-feature</a>
+<a class="" href="../workflows/deliver-feature-iso.html">deliver-feature-iso</a>
+<h4>Project</h4>
+<a class="" href="../about.html">About DEFT</a></nav>
+<main><div class="content">
+
+<div class="eyebrow">Implementation</div>
+<h1>execute-plan-subagents</h1>
+<p class="lead">Use when the plan must be executed by a fresh implementer subagent per task, each followed by a task review.</p>
+<div class="badges"><span class="badge ">concrete</span><span class="badge ">adapted from obra/superpowers</span></div>
+<dl class="kv">
+<dt>Lineage</dt><dd><a href="../skills/execute-plan.html">execute-plan</a> › <strong>execute-plan-subagents</strong></dd>
+<dt>Specializations</dt><dd>none</dd>
+<dt>Used in</dt><dd><a href="../workflows/deliver-feature-iso.html">deliver-feature-iso</a></dd>
+</dl>
+<h2 id="signature">Signature</h2>
+<table><tr><th>Dir.</th><th>Parameter</th><th>Type</th><th>Declared by</th></tr><tr><td>in</td><td><code>plan</code></td><td><a href="../types.html#t-ImplementationPlan"><code>ImplementationPlan</code></a> [1]</td><td><a href="../skills/execute-plan.html">execute-plan</a></td></tr><tr><td>in</td><td><code>diagnosis</code></td><td><a href="../types.html#t-Diagnosis"><code>Diagnosis</code></a> [0..1]</td><td><a href="../skills/execute-plan.html">execute-plan</a></td></tr><tr><td>out</td><td><code>code</code></td><td><a href="../types.html#t-SourceCode"><code>SourceCode</code></a> [1]</td><td><a href="../skills/execute-plan.html">execute-plan</a></td></tr></table>
+<h3>Preconditions</h3><ul><li>The plan has at least one task and every task names its test.</li></ul><h3>Postconditions</h3><ul><li>Every task is committed on a dedicated feature branch.</li><li>The full test suite passes, including the tests that existed before.</li><li>Every deviation from the plan is recorded as a ruling.</li></ul>
+<h2 id="instructions">Instructions</h2>
+<div data-tabs><div class="tabs"><button class="tab active" data-panel="p-sections">Resolved sections</button><button class="tab" data-panel="p-generated">Generated SKILL.md</button><button class="tab" data-panel="p-model">Model</button></div></div><div class="tabpanel active" id="p-sections"><div class="section-block"><div class="section-head"><span class="badge final">final</span>
+<strong>Principles</strong><span class="prov">declared by <a href="../skills/execute-plan.html">execute-plan</a></span></div><div class="section-body"><script type="application/json" id="md-sec-principles">"The requirements are the binding authority and the plan is their argument.\nExecute the plan exactly and without pausing between tasks. Decide\nconflicts, ambiguities and plan defects yourself and record each decision\nin the ledger as `Ruling: <decision> - <why> - <cost if wrong>`.\n\nStop and ask only for: an irreversible or destructive operation; a\nsecurity-sensitive action; a side effect outside the workspace (merge,\npush to a shared branch, publish); or a plan so broken that every path\nforward is a guess."</script><div class="md" data-md="md-sec-principles"><pre>The requirements are the binding authority and the plan is their argument.
+Execute the plan exactly and without pausing between tasks. Decide
+conflicts, ambiguities and plan defects yourself and record each decision
+in the ledger as `Ruling: &lt;decision&gt; - &lt;why&gt; - &lt;cost if wrong&gt;`.
+
+Stop and ask only for: an irreversible or destructive operation; a
+security-sensitive action; a side effect outside the workspace (merge,
+push to a shared branch, publish); or a plan so broken that every path
+forward is a guess.</pre></div></div></div><div class="section-block"><div class="section-head"><span class="badge final">final</span>
+<strong>Set up the workspace</strong><span class="prov">declared by <a href="../skills/execute-plan.html">execute-plan</a></span></div><div class="section-body"><script type="application/json" id="md-sec-setup">"Work on a dedicated branch or worktree, never on the main branch without\nconsent. Create a ledger file `progress.md` in the workspace whose first\nline names the plan. If the ledger exists, read it and resume after the\nlast completed task. Read the plan once and create one todo per task.\nIf you received a diagnosis, read it first: the repair concerns only the\ntasks it names."</script><div class="md" data-md="md-sec-setup"><pre>Work on a dedicated branch or worktree, never on the main branch without
+consent. Create a ledger file `progress.md` in the workspace whose first
+line names the plan. If the ledger exists, read it and resume after the
+last completed task. Read the plan once and create one todo per task.
+If you received a diagnosis, read it first: the repair concerns only the
+tasks it names.</pre></div></div></div><div class="section-block"><div class="section-head"><span class="badge default">default</span>
+<strong>Run the task loop</strong><span class="prov">declared abstract by <a href="../skills/execute-plan.html">execute-plan</a>, implemented by <a href="../skills/execute-plan-subagents.html">execute-plan-subagents</a></span></div><div class="section-body"><script type="application/json" id="md-sec-loop">"For each task, in order (never two implementers in parallel):\n\n1. Record BASE. Extract the task to a brief file and dispatch a fresh\n   implementer with: where the task fits, the brief path (\"read this\n   first; use its values verbatim\"), interfaces decided by earlier tasks,\n   your resolution of ambiguities, and a report-file path.\n2. Handle the report: DONE goes to review; DONE_WITH_CONCERNS is read\n   before review; NEEDS_CONTEXT is answered and re-dispatched; BLOCKED is\n   fixed by more context, a more capable model, a smaller task, or a\n   ruling on the plan.\n3. Dispatch a task reviewer with the brief, the report and the diff from\n   BASE. Require both verdicts: compliance with the requirements and code\n   quality.\n4. Fix loop: send open critical or important findings back to the\n   implementer, at most five rounds, each followed by a scoped re-review.\n   At the limit, rule on each open finding and record it.\n5. Apply the completion contract."</script><div class="md" data-md="md-sec-loop"><pre>For each task, in order (never two implementers in parallel):
+
+1. Record BASE. Extract the task to a brief file and dispatch a fresh
+   implementer with: where the task fits, the brief path (&quot;read this
+   first; use its values verbatim&quot;), interfaces decided by earlier tasks,
+   your resolution of ambiguities, and a report-file path.
+2. Handle the report: DONE goes to review; DONE_WITH_CONCERNS is read
+   before review; NEEDS_CONTEXT is answered and re-dispatched; BLOCKED is
+   fixed by more context, a more capable model, a smaller task, or a
+   ruling on the plan.
+3. Dispatch a task reviewer with the brief, the report and the diff from
+   BASE. Require both verdicts: compliance with the requirements and code
+   quality.
+4. Fix loop: send open critical or important findings back to the
+   implementer, at most five rounds, each followed by a scoped re-review.
+   At the limit, rule on each open finding and record it.
+5. Apply the completion contract.</pre></div></div></div><div class="section-block"><div class="section-head"><span class="badge final">final</span>
+<strong>Completion contract</strong><span class="prov">declared by <a href="../skills/execute-plan.html">execute-plan</a></span></div><div class="section-body"><script type="application/json" id="md-sec-contract">"A task is complete only when, with evidence from this session:\n\n- every test the task names exists, ran, and you read its output;\n- the final run of the task's tests passed;\n- every expected output in the plan was compared with the real output;\n- every deviation has a ruling in the ledger.\n\nThen append `Task <N>: complete (commits <base>..<head>, tests: <command> -> <result>)`\nto the ledger."</script><div class="md" data-md="md-sec-contract"><pre>A task is complete only when, with evidence from this session:
+
+- every test the task names exists, ran, and you read its output;
+- the final run of the task&#x27;s tests passed;
+- every expected output in the plan was compared with the real output;
+- every deviation has a ruling in the ledger.
+
+Then append `Task &lt;N&gt;: complete (commits &lt;base&gt;..&lt;head&gt;, tests: &lt;command&gt; -&gt; &lt;result&gt;)`
+to the ledger.</pre></div></div></div><div class="section-block"><div class="section-head"><span class="badge default">default</span>
+<strong>Final review</strong><span class="prov">declared by <a href="../skills/execute-plan.html">execute-plan</a>, extended by <a href="../skills/execute-plan-subagents.html">execute-plan-subagents</a></span></div><div class="section-body"><script type="application/json" id="md-sec-final-review">"When all tasks are complete, review the whole branch against the\nrequirements and the plan's review focus. Fix critical and important\nfindings in one pass, each with a test that failed first. Record minor\nfindings in the ledger as deferred. Report the rulings you made and the\ndeferred findings.\n\nDispatch the final reviewer on the most capable available model, with the\nplan, the requirements, the review focus and the ledger's rulings."</script><div class="md" data-md="md-sec-final-review"><pre>When all tasks are complete, review the whole branch against the
+requirements and the plan&#x27;s review focus. Fix critical and important
+findings in one pass, each with a test that failed first. Record minor
+findings in the ledger as deferred. Report the rulings you made and the
+deferred findings.
+
+Dispatch the final reviewer on the most capable available model, with the
+plan, the requirements, the review focus and the ledger&#x27;s rulings.</pre></div></div></div></div><div class="tabpanel" id="p-generated">
+<p><a class="iconbtn" href="../skills-dist/execute-plan-subagents/SKILL.md" download>Download SKILL.md</a>
+<button class="iconbtn" data-copy="raw-execute-plan-subagents">Copy</button></p>
+<pre><code>---
+name: execute-plan-subagents
+description: Use when the plan must be executed by a fresh implementer subagent per task, each followed by a task review.
+license: GPL-3.0-only (includes third-party material; see LICENSE-*.txt)
+metadata:
+  deft-version: 0.1.0
+  deft-lineage: execute-plan &gt; execute-plan-subagents
+  deft-inputs: &#x27;plan: ImplementationPlan [1]; diagnosis: Diagnosis [0..1]&#x27;
+  deft-outputs: &#x27;code: SourceCode [1]&#x27;
+  deft-origin: obra/superpowers@8ca22db skills/executing-plans/SKILL.md (MIT, adapted); obra/superpowers@8ca22db skills/subagent-driven-development/SKILL.md (MIT, adapted)
+---</code></pre><div class="section-body"><script type="application/json" id="md-gen">"# Execute the plan with subagents\n\n## Inputs and outputs\n\n- Input `plan`: ImplementationPlan (one)\n  Ordered, test-first tasks that implement a set of requirements.\n  - `fileStructure` (required)\n  - `tasks` (one or more): each task names files, interfaces, tests and the requirement ids it covers\n  - `reviewFocus` (any number)\n- Input `diagnosis`: Diagnosis (optional). Present when the workflow returns after a failure.\n  Root cause of a failure and the change that fixes it.\n  - `rootCause` (required)\n  - `evidence` (one or more)\n  - `fix` (required)\n- Output `code`: SourceCode (one)\n  The changed code base, as a branch or a set of commits.\n  - `branch` (required)\n  - `commits` (one or more)\n\n## Before you start\n\n- The plan has at least one task and every task names its test.\n\n## Principles\n\nThe requirements are the binding authority and the plan is their argument.\nExecute the plan exactly and without pausing between tasks. Decide\nconflicts, ambiguities and plan defects yourself and record each decision\nin the ledger as `Ruling: <decision> - <why> - <cost if wrong>`.\n\nStop and ask only for: an irreversible or destructive operation; a\nsecurity-sensitive action; a side effect outside the workspace (merge,\npush to a shared branch, publish); or a plan so broken that every path\nforward is a guess.\n\n## Set up the workspace\n\nWork on a dedicated branch or worktree, never on the main branch without\nconsent. Create a ledger file `progress.md` in the workspace whose first\nline names the plan. If the ledger exists, read it and resume after the\nlast completed task. Read the plan once and create one todo per task.\nIf you received a diagnosis, read it first: the repair concerns only the\ntasks it names.\n\n## Run the task loop\n\nFor each task, in order (never two implementers in parallel):\n\n1. Record BASE. Extract the task to a brief file and dispatch a fresh\n   implementer with: where the task fits, the brief path (\"read this\n   first; use its values verbatim\"), interfaces decided by earlier tasks,\n   your resolution of ambiguities, and a report-file path.\n2. Handle the report: DONE goes to review; DONE_WITH_CONCERNS is read\n   before review; NEEDS_CONTEXT is answered and re-dispatched; BLOCKED is\n   fixed by more context, a more capable model, a smaller task, or a\n   ruling on the plan.\n3. Dispatch a task reviewer with the brief, the report and the diff from\n   BASE. Require both verdicts: compliance with the requirements and code\n   quality.\n4. Fix loop: send open critical or important findings back to the\n   implementer, at most five rounds, each followed by a scoped re-review.\n   At the limit, rule on each open finding and record it.\n5. Apply the completion contract.\n\n## Completion contract\n\nA task is complete only when, with evidence from this session:\n\n- every test the task names exists, ran, and you read its output;\n- the final run of the task's tests passed;\n- every expected output in the plan was compared with the real output;\n- every deviation has a ruling in the ledger.\n\nThen append `Task <N>: complete (commits <base>..<head>, tests: <command> -> <result>)`\nto the ledger.\n\n## Final review\n\nWhen all tasks are complete, review the whole branch against the\nrequirements and the plan's review focus. Fix critical and important\nfindings in one pass, each with a test that failed first. Record minor\nfindings in the ledger as deferred. Report the rulings you made and the\ndeferred findings.\n\nDispatch the final reviewer on the most capable available model, with the\nplan, the requirements, the review focus and the ledger's rulings.\n\n## Done when\n\n- Every task is committed on a dedicated feature branch.\n- The full test suite passes, including the tests that existed before.\n- Every deviation from the plan is recorded as a ruling.\n"</script><div class="md" data-md="md-gen"><pre># Execute the plan with subagents
+
+## Inputs and outputs
+
+- Input `plan`: ImplementationPlan (one)
+  Ordered, test-first tasks that implement a set of requirements.
+  - `fileStructure` (required)
+  - `tasks` (one or more): each task names files, interfaces, tests and the requirement ids it covers
+  - `reviewFocus` (any number)
+- Input `diagnosis`: Diagnosis (optional). Present when the workflow returns after a failure.
+  Root cause of a failure and the change that fixes it.
+  - `rootCause` (required)
+  - `evidence` (one or more)
+  - `fix` (required)
+- Output `code`: SourceCode (one)
+  The changed code base, as a branch or a set of commits.
+  - `branch` (required)
+  - `commits` (one or more)
+
+## Before you start
+
+- The plan has at least one task and every task names its test.
+
+## Principles
+
+The requirements are the binding authority and the plan is their argument.
+Execute the plan exactly and without pausing between tasks. Decide
+conflicts, ambiguities and plan defects yourself and record each decision
+in the ledger as `Ruling: &lt;decision&gt; - &lt;why&gt; - &lt;cost if wrong&gt;`.
+
+Stop and ask only for: an irreversible or destructive operation; a
+security-sensitive action; a side effect outside the workspace (merge,
+push to a shared branch, publish); or a plan so broken that every path
+forward is a guess.
+
+## Set up the workspace
+
+Work on a dedicated branch or worktree, never on the main branch without
+consent. Create a ledger file `progress.md` in the workspace whose first
+line names the plan. If the ledger exists, read it and resume after the
+last completed task. Read the plan once and create one todo per task.
+If you received a diagnosis, read it first: the repair concerns only the
+tasks it names.
+
+## Run the task loop
+
+For each task, in order (never two implementers in parallel):
+
+1. Record BASE. Extract the task to a brief file and dispatch a fresh
+   implementer with: where the task fits, the brief path (&quot;read this
+   first; use its values verbatim&quot;), interfaces decided by earlier tasks,
+   your resolution of ambiguities, and a report-file path.
+2. Handle the report: DONE goes to review; DONE_WITH_CONCERNS is read
+   before review; NEEDS_CONTEXT is answered and re-dispatched; BLOCKED is
+   fixed by more context, a more capable model, a smaller task, or a
+   ruling on the plan.
+3. Dispatch a task reviewer with the brief, the report and the diff from
+   BASE. Require both verdicts: compliance with the requirements and code
+   quality.
+4. Fix loop: send open critical or important findings back to the
+   implementer, at most five rounds, each followed by a scoped re-review.
+   At the limit, rule on each open finding and record it.
+5. Apply the completion contract.
+
+## Completion contract
+
+A task is complete only when, with evidence from this session:
+
+- every test the task names exists, ran, and you read its output;
+- the final run of the task&#x27;s tests passed;
+- every expected output in the plan was compared with the real output;
+- every deviation has a ruling in the ledger.
+
+Then append `Task &lt;N&gt;: complete (commits &lt;base&gt;..&lt;head&gt;, tests: &lt;command&gt; -&gt; &lt;result&gt;)`
+to the ledger.
+
+## Final review
+
+When all tasks are complete, review the whole branch against the
+requirements and the plan&#x27;s review focus. Fix critical and important
+findings in one pass, each with a test that failed first. Record minor
+findings in the ledger as deferred. Report the rulings you made and the
+deferred findings.
+
+Dispatch the final reviewer on the most capable available model, with the
+plan, the requirements, the review focus and the ledger&#x27;s rulings.
+
+## Done when
+
+- Every task is committed on a dedicated feature branch.
+- The full test suite passes, including the tests that existed before.
+- Every deviation from the plan is recorded as a ruling.
+</pre></div></div>
+<pre id="raw-execute-plan-subagents" hidden>---
+name: execute-plan-subagents
+description: Use when the plan must be executed by a fresh implementer subagent per task, each followed by a task review.
+license: GPL-3.0-only (includes third-party material; see LICENSE-*.txt)
+metadata:
+  deft-version: 0.1.0
+  deft-lineage: execute-plan &gt; execute-plan-subagents
+  deft-inputs: &#x27;plan: ImplementationPlan [1]; diagnosis: Diagnosis [0..1]&#x27;
+  deft-outputs: &#x27;code: SourceCode [1]&#x27;
+  deft-origin: obra/superpowers@8ca22db skills/executing-plans/SKILL.md (MIT, adapted); obra/superpowers@8ca22db skills/subagent-driven-development/SKILL.md (MIT, adapted)
+---
+
+# Execute the plan with subagents
+
+## Inputs and outputs
+
+- Input `plan`: ImplementationPlan (one)
+  Ordered, test-first tasks that implement a set of requirements.
+  - `fileStructure` (required)
+  - `tasks` (one or more): each task names files, interfaces, tests and the requirement ids it covers
+  - `reviewFocus` (any number)
+- Input `diagnosis`: Diagnosis (optional). Present when the workflow returns after a failure.
+  Root cause of a failure and the change that fixes it.
+  - `rootCause` (required)
+  - `evidence` (one or more)
+  - `fix` (required)
+- Output `code`: SourceCode (one)
+  The changed code base, as a branch or a set of commits.
+  - `branch` (required)
+  - `commits` (one or more)
+
+## Before you start
+
+- The plan has at least one task and every task names its test.
+
+## Principles
+
+The requirements are the binding authority and the plan is their argument.
+Execute the plan exactly and without pausing between tasks. Decide
+conflicts, ambiguities and plan defects yourself and record each decision
+in the ledger as `Ruling: &lt;decision&gt; - &lt;why&gt; - &lt;cost if wrong&gt;`.
+
+Stop and ask only for: an irreversible or destructive operation; a
+security-sensitive action; a side effect outside the workspace (merge,
+push to a shared branch, publish); or a plan so broken that every path
+forward is a guess.
+
+## Set up the workspace
+
+Work on a dedicated branch or worktree, never on the main branch without
+consent. Create a ledger file `progress.md` in the workspace whose first
+line names the plan. If the ledger exists, read it and resume after the
+last completed task. Read the plan once and create one todo per task.
+If you received a diagnosis, read it first: the repair concerns only the
+tasks it names.
+
+## Run the task loop
+
+For each task, in order (never two implementers in parallel):
+
+1. Record BASE. Extract the task to a brief file and dispatch a fresh
+   implementer with: where the task fits, the brief path (&quot;read this
+   first; use its values verbatim&quot;), interfaces decided by earlier tasks,
+   your resolution of ambiguities, and a report-file path.
+2. Handle the report: DONE goes to review; DONE_WITH_CONCERNS is read
+   before review; NEEDS_CONTEXT is answered and re-dispatched; BLOCKED is
+   fixed by more context, a more capable model, a smaller task, or a
+   ruling on the plan.
+3. Dispatch a task reviewer with the brief, the report and the diff from
+   BASE. Require both verdicts: compliance with the requirements and code
+   quality.
+4. Fix loop: send open critical or important findings back to the
+   implementer, at most five rounds, each followed by a scoped re-review.
+   At the limit, rule on each open finding and record it.
+5. Apply the completion contract.
+
+## Completion contract
+
+A task is complete only when, with evidence from this session:
+
+- every test the task names exists, ran, and you read its output;
+- the final run of the task&#x27;s tests passed;
+- every expected output in the plan was compared with the real output;
+- every deviation has a ruling in the ledger.
+
+Then append `Task &lt;N&gt;: complete (commits &lt;base&gt;..&lt;head&gt;, tests: &lt;command&gt; -&gt; &lt;result&gt;)`
+to the ledger.
+
+## Final review
+
+When all tasks are complete, review the whole branch against the
+requirements and the plan&#x27;s review focus. Fix critical and important
+findings in one pass, each with a test that failed first. Record minor
+findings in the ledger as deferred. Report the rulings you made and the
+deferred findings.
+
+Dispatch the final reviewer on the most capable available model, with the
+plan, the requirements, the review focus and the ledger&#x27;s rulings.
+
+## Done when
+
+- Every task is committed on a dedicated feature branch.
+- The full test suite passes, including the tests that existed before.
+- Every deviation from the plan is recorded as a ruling.
+</pre></div><div class="tabpanel" id="p-model"><p>From <code>models/skills/implementation.yaml</code>.</p><pre><code>name: execute-plan-subagents
+parent: execute-plan
+description: Use when the plan must be executed by a fresh implementer subagent per task, each followed
+  by a task review.
+metadata:
+  title: Execute the plan with subagents
+refinements:
+- kind: implements
+  target: loop
+  content: &quot;For each task, in order (never two implementers in parallel):\n\n1. Record BASE. Extract the\
+    \ task to a brief file and dispatch a fresh\n   implementer with: where the task fits, the brief path\
+    \ (\&quot;read this\n   first; use its values verbatim\&quot;), interfaces decided by earlier tasks,\n   your\
+    \ resolution of ambiguities, and a report-file path.\n2. Handle the report: DONE goes to review; DONE_WITH_CONCERNS\
+    \ is read\n   before review; NEEDS_CONTEXT is answered and re-dispatched; BLOCKED is\n   fixed by\
+    \ more context, a more capable model, a smaller task, or a\n   ruling on the plan.\n3. Dispatch a\
+    \ task reviewer with the brief, the report and the diff from\n   BASE. Require both verdicts: compliance\
+    \ with the requirements and code\n   quality.\n4. Fix loop: send open critical or important findings\
+    \ back to the\n   implementer, at most five rounds, each followed by a scoped re-review.\n   At the\
+    \ limit, rule on each open finding and record it.\n5. Apply the completion contract.\n&quot;
+- kind: extends
+  target: final-review
+  content: &#x27;Dispatch the final reviewer on the most capable available model, with the
+
+    plan, the requirements, the review focus and the ledger&#x27;&#x27;s rulings.
+
+    &#x27;
+</code></pre></div>
+<h2 id="origin">Origin</h2><table><tr><th>Repository</th><th>Path</th><th>Commit</th><th>Licence</th><th>Mode</th><th>Declared by</th></tr><tr><td>obra/superpowers</td><td><code>skills/executing-plans/SKILL.md</code></td><td><code>8ca22db</code></td><td>MIT</td><td>adapted</td><td><a href="../skills/execute-plan.html">execute-plan</a></td></tr><tr><td>obra/superpowers</td><td><code>skills/subagent-driven-development/SKILL.md</code></td><td><code>8ca22db</code></td><td>MIT</td><td>adapted</td><td><a href="../skills/execute-plan.html">execute-plan</a></td></tr></table>
+
+<footer>DEFT 0.1.0 · GNU General Public License v3.0 · Reused third-party skills keep their original licences.</footer>
+</div></main>
+<aside class="toc"><h5>On this page</h5><nav id="toc-links"></nav></aside>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<script src="../static/app.js"></script>
+</body>
+</html>

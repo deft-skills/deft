@@ -1,0 +1,432 @@
+{
+  "deliver-feature": {
+    "variation_points": {
+      "functional": [
+        "ears",
+        "user-stories"
+      ],
+      "quality": [
+        "iso25010",
+        "volere"
+      ],
+      "implement": [
+        "execute-plan-inline",
+        "execute-plan-subagents"
+      ],
+      "acceptance": [
+        "acceptance-gherkin",
+        "acceptance-playwright"
+      ]
+    },
+    "configurations": 16,
+    "valid": 4,
+    "violations_by_code": {
+      "C2": 16
+    },
+    "details": [
+      {
+        "binding": {
+          "functional": "ears",
+          "quality": "iso25010",
+          "implement": "execute-plan-inline",
+          "acceptance": "acceptance-gherkin"
+        },
+        "valid": false,
+        "violations": [
+          "[C2] workflow deliver-feature: data edge functional.requirements -> acceptance.requirements: EARSRequirement (from ears) does not conform to UserStory (required by acceptance-gherkin)",
+          "[C2] workflow deliver-feature: data edge quality.requirements -> performance.requirements: ISO25010Requirement (from iso25010) does not conform to MeasurableQualityRequirement (required by performance-tests)"
+        ]
+      },
+      {
+        "binding": {
+          "functional": "ears",
+          "quality": "iso25010",
+          "implement": "execute-plan-inline",
+          "acceptance": "acceptance-playwright"
+        },
+        "valid": false,
+        "violations": [
+          "[C2] workflow deliver-feature: data edge functional.requirements -> acceptance.requirements: EARSRequirement (from ears) does not conform to UserStory (required by acceptance-playwright)",
+          "[C2] workflow deliver-feature: data edge quality.requirements -> performance.requirements: ISO25010Requirement (from iso25010) does not conform to MeasurableQualityRequirement (required by performance-tests)"
+        ]
+      },
+      {
+        "binding": {
+          "functional": "ears",
+          "quality": "iso25010",
+          "implement": "execute-plan-subagents",
+          "acceptance": "acceptance-gherkin"
+        },
+        "valid": false,
+        "violations": [
+          "[C2] workflow deliver-feature: data edge functional.requirements -> acceptance.requirements: EARSRequirement (from ears) does not conform to UserStory (required by acceptance-gherkin)",
+          "[C2] workflow deliver-feature: data edge quality.requirements -> performance.requirements: ISO25010Requirement (from iso25010) does not conform to MeasurableQualityRequirement (required by performance-tests)"
+        ]
+      },
+      {
+        "binding": {
+          "functional": "ears",
+          "quality": "iso25010",
+          "implement": "execute-plan-subagents",
+          "acceptance": "acceptance-playwright"
+        },
+        "valid": false,
+        "violations": [
+          "[C2] workflow deliver-feature: data edge functional.requirements -> acceptance.requirements: EARSRequirement (from ears) does not conform to UserStory (required by acceptance-playwright)",
+          "[C2] workflow deliver-feature: data edge quality.requirements -> performance.requirements: ISO25010Requirement (from iso25010) does not conform to MeasurableQualityRequirement (required by performance-tests)"
+        ]
+      },
+      {
+        "binding": {
+          "functional": "ears",
+          "quality": "volere",
+          "implement": "execute-plan-inline",
+          "acceptance": "acceptance-gherkin"
+        },
+        "valid": false,
+        "violations": [
+          "[C2] workflow deliver-feature: data edge functional.requirements -> acceptance.requirements: EARSRequirement (from ears) does not conform to UserStory (required by acceptance-gherkin)"
+        ]
+      },
+      {
+        "binding": {
+          "functional": "ears",
+          "quality": "volere",
+          "implement": "execute-plan-inline",
+          "acceptance": "acceptance-playwright"
+        },
+        "valid": false,
+        "violations": [
+          "[C2] workflow deliver-feature: data edge functional.requirements -> acceptance.requirements: EARSRequirement (from ears) does not conform to UserStory (required by acceptance-playwright)"
+        ]
+      },
+      {
+        "binding": {
+          "functional": "ears",
+          "quality": "volere",
+          "implement": "execute-plan-subagents",
+          "acceptance": "acceptance-gherkin"
+        },
+        "valid": false,
+        "violations": [
+          "[C2] workflow deliver-feature: data edge functional.requirements -> acceptance.requirements: EARSRequirement (from ears) does not conform to UserStory (required by acceptance-gherkin)"
+        ]
+      },
+      {
+        "binding": {
+          "functional": "ears",
+          "quality": "volere",
+          "implement": "execute-plan-subagents",
+          "acceptance": "acceptance-playwright"
+        },
+        "valid": false,
+        "violations": [
+          "[C2] workflow deliver-feature: data edge functional.requirements -> acceptance.requirements: EARSRequirement (from ears) does not conform to UserStory (required by acceptance-playwright)"
+        ]
+      },
+      {
+        "binding": {
+          "functional": "user-stories",
+          "quality": "iso25010",
+          "implement": "execute-plan-inline",
+          "acceptance": "acceptance-gherkin"
+        },
+        "valid": false,
+        "violations": [
+          "[C2] workflow deliver-feature: data edge quality.requirements -> performance.requirements: ISO25010Requirement (from iso25010) does not conform to MeasurableQualityRequirement (required by performance-tests)"
+        ]
+      },
+      {
+        "binding": {
+          "functional": "user-stories",
+          "quality": "iso25010",
+          "implement": "execute-plan-inline",
+          "acceptance": "acceptance-playwright"
+        },
+        "valid": false,
+        "violations": [
+          "[C2] workflow deliver-feature: data edge quality.requirements -> performance.requirements: ISO25010Requirement (from iso25010) does not conform to MeasurableQualityRequirement (required by performance-tests)"
+        ]
+      },
+      {
+        "binding": {
+          "functional": "user-stories",
+          "quality": "iso25010",
+          "implement": "execute-plan-subagents",
+          "acceptance": "acceptance-gherkin"
+        },
+        "valid": false,
+        "violations": [
+          "[C2] workflow deliver-feature: data edge quality.requirements -> performance.requirements: ISO25010Requirement (from iso25010) does not conform to MeasurableQualityRequirement (required by performance-tests)"
+        ]
+      },
+      {
+        "binding": {
+          "functional": "user-stories",
+          "quality": "iso25010",
+          "implement": "execute-plan-subagents",
+          "acceptance": "acceptance-playwright"
+        },
+        "valid": false,
+        "violations": [
+          "[C2] workflow deliver-feature: data edge quality.requirements -> performance.requirements: ISO25010Requirement (from iso25010) does not conform to MeasurableQualityRequirement (required by performance-tests)"
+        ]
+      },
+      {
+        "binding": {
+          "functional": "user-stories",
+          "quality": "volere",
+          "implement": "execute-plan-inline",
+          "acceptance": "acceptance-gherkin"
+        },
+        "valid": true,
+        "violations": []
+      },
+      {
+        "binding": {
+          "functional": "user-stories",
+          "quality": "volere",
+          "implement": "execute-plan-inline",
+          "acceptance": "acceptance-playwright"
+        },
+        "valid": true,
+        "violations": []
+      },
+      {
+        "binding": {
+          "functional": "user-stories",
+          "quality": "volere",
+          "implement": "execute-plan-subagents",
+          "acceptance": "acceptance-gherkin"
+        },
+        "valid": true,
+        "violations": []
+      },
+      {
+        "binding": {
+          "functional": "user-stories",
+          "quality": "volere",
+          "implement": "execute-plan-subagents",
+          "acceptance": "acceptance-playwright"
+        },
+        "valid": true,
+        "violations": []
+      }
+    ]
+  },
+  "deliver-feature-iso": {
+    "variation_points": {
+      "functional": [
+        "ears",
+        "user-stories"
+      ],
+      "quality": [
+        "iso25010",
+        "volere"
+      ],
+      "implement": [
+        "execute-plan-inline",
+        "execute-plan-subagents"
+      ],
+      "acceptance": [
+        "acceptance-gherkin",
+        "acceptance-playwright"
+      ]
+    },
+    "configurations": 16,
+    "valid": 4,
+    "violations_by_code": {
+      "C2": 16
+    },
+    "details": [
+      {
+        "binding": {
+          "functional": "ears",
+          "quality": "iso25010",
+          "implement": "execute-plan-inline",
+          "acceptance": "acceptance-gherkin"
+        },
+        "valid": false,
+        "violations": [
+          "[C2] workflow deliver-feature-iso: data edge functional.requirements -> acceptance.requirements: EARSRequirement (from ears) does not conform to UserStory (required by acceptance-gherkin)"
+        ]
+      },
+      {
+        "binding": {
+          "functional": "ears",
+          "quality": "iso25010",
+          "implement": "execute-plan-inline",
+          "acceptance": "acceptance-playwright"
+        },
+        "valid": false,
+        "violations": [
+          "[C2] workflow deliver-feature-iso: data edge functional.requirements -> acceptance.requirements: EARSRequirement (from ears) does not conform to UserStory (required by acceptance-playwright)"
+        ]
+      },
+      {
+        "binding": {
+          "functional": "ears",
+          "quality": "iso25010",
+          "implement": "execute-plan-subagents",
+          "acceptance": "acceptance-gherkin"
+        },
+        "valid": false,
+        "violations": [
+          "[C2] workflow deliver-feature-iso: data edge functional.requirements -> acceptance.requirements: EARSRequirement (from ears) does not conform to UserStory (required by acceptance-gherkin)"
+        ]
+      },
+      {
+        "binding": {
+          "functional": "ears",
+          "quality": "iso25010",
+          "implement": "execute-plan-subagents",
+          "acceptance": "acceptance-playwright"
+        },
+        "valid": false,
+        "violations": [
+          "[C2] workflow deliver-feature-iso: data edge functional.requirements -> acceptance.requirements: EARSRequirement (from ears) does not conform to UserStory (required by acceptance-playwright)"
+        ]
+      },
+      {
+        "binding": {
+          "functional": "ears",
+          "quality": "volere",
+          "implement": "execute-plan-inline",
+          "acceptance": "acceptance-gherkin"
+        },
+        "valid": false,
+        "violations": [
+          "[C2] workflow deliver-feature-iso: data edge functional.requirements -> acceptance.requirements: EARSRequirement (from ears) does not conform to UserStory (required by acceptance-gherkin)",
+          "[C2] workflow deliver-feature-iso: data edge quality.requirements -> quantify.requirements: VolereRequirement (from volere) does not conform to ISO25010Requirement (required by quantify-quality)"
+        ]
+      },
+      {
+        "binding": {
+          "functional": "ears",
+          "quality": "volere",
+          "implement": "execute-plan-inline",
+          "acceptance": "acceptance-playwright"
+        },
+        "valid": false,
+        "violations": [
+          "[C2] workflow deliver-feature-iso: data edge functional.requirements -> acceptance.requirements: EARSRequirement (from ears) does not conform to UserStory (required by acceptance-playwright)",
+          "[C2] workflow deliver-feature-iso: data edge quality.requirements -> quantify.requirements: VolereRequirement (from volere) does not conform to ISO25010Requirement (required by quantify-quality)"
+        ]
+      },
+      {
+        "binding": {
+          "functional": "ears",
+          "quality": "volere",
+          "implement": "execute-plan-subagents",
+          "acceptance": "acceptance-gherkin"
+        },
+        "valid": false,
+        "violations": [
+          "[C2] workflow deliver-feature-iso: data edge functional.requirements -> acceptance.requirements: EARSRequirement (from ears) does not conform to UserStory (required by acceptance-gherkin)",
+          "[C2] workflow deliver-feature-iso: data edge quality.requirements -> quantify.requirements: VolereRequirement (from volere) does not conform to ISO25010Requirement (required by quantify-quality)"
+        ]
+      },
+      {
+        "binding": {
+          "functional": "ears",
+          "quality": "volere",
+          "implement": "execute-plan-subagents",
+          "acceptance": "acceptance-playwright"
+        },
+        "valid": false,
+        "violations": [
+          "[C2] workflow deliver-feature-iso: data edge functional.requirements -> acceptance.requirements: EARSRequirement (from ears) does not conform to UserStory (required by acceptance-playwright)",
+          "[C2] workflow deliver-feature-iso: data edge quality.requirements -> quantify.requirements: VolereRequirement (from volere) does not conform to ISO25010Requirement (required by quantify-quality)"
+        ]
+      },
+      {
+        "binding": {
+          "functional": "user-stories",
+          "quality": "iso25010",
+          "implement": "execute-plan-inline",
+          "acceptance": "acceptance-gherkin"
+        },
+        "valid": true,
+        "violations": []
+      },
+      {
+        "binding": {
+          "functional": "user-stories",
+          "quality": "iso25010",
+          "implement": "execute-plan-inline",
+          "acceptance": "acceptance-playwright"
+        },
+        "valid": true,
+        "violations": []
+      },
+      {
+        "binding": {
+          "functional": "user-stories",
+          "quality": "iso25010",
+          "implement": "execute-plan-subagents",
+          "acceptance": "acceptance-gherkin"
+        },
+        "valid": true,
+        "violations": []
+      },
+      {
+        "binding": {
+          "functional": "user-stories",
+          "quality": "iso25010",
+          "implement": "execute-plan-subagents",
+          "acceptance": "acceptance-playwright"
+        },
+        "valid": true,
+        "violations": []
+      },
+      {
+        "binding": {
+          "functional": "user-stories",
+          "quality": "volere",
+          "implement": "execute-plan-inline",
+          "acceptance": "acceptance-gherkin"
+        },
+        "valid": false,
+        "violations": [
+          "[C2] workflow deliver-feature-iso: data edge quality.requirements -> quantify.requirements: VolereRequirement (from volere) does not conform to ISO25010Requirement (required by quantify-quality)"
+        ]
+      },
+      {
+        "binding": {
+          "functional": "user-stories",
+          "quality": "volere",
+          "implement": "execute-plan-inline",
+          "acceptance": "acceptance-playwright"
+        },
+        "valid": false,
+        "violations": [
+          "[C2] workflow deliver-feature-iso: data edge quality.requirements -> quantify.requirements: VolereRequirement (from volere) does not conform to ISO25010Requirement (required by quantify-quality)"
+        ]
+      },
+      {
+        "binding": {
+          "functional": "user-stories",
+          "quality": "volere",
+          "implement": "execute-plan-subagents",
+          "acceptance": "acceptance-gherkin"
+        },
+        "valid": false,
+        "violations": [
+          "[C2] workflow deliver-feature-iso: data edge quality.requirements -> quantify.requirements: VolereRequirement (from volere) does not conform to ISO25010Requirement (required by quantify-quality)"
+        ]
+      },
+      {
+        "binding": {
+          "functional": "user-stories",
+          "quality": "volere",
+          "implement": "execute-plan-subagents",
+          "acceptance": "acceptance-playwright"
+        },
+        "valid": false,
+        "violations": [
+          "[C2] workflow deliver-feature-iso: data edge quality.requirements -> quantify.requirements: VolereRequirement (from volere) does not conform to ISO25010Requirement (required by quantify-quality)"
+        ]
+      }
+    ]
+  }
+}

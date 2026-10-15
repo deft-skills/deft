@@ -1,0 +1,188 @@
+@startuml
+!theme plain
+hide circle
+hide empty members
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+skinparam defaultFontName Helvetica
+skinparam defaultFontSize 13
+skinparam ArrowFontSize 11
+skinparam class {
+  BackgroundColor white
+  BorderColor #333333
+  HeaderBackgroundColor #EEEEEE
+}
+skinparam package {
+  BorderColor #999999
+  FontStyle plain
+}
+
+top to bottom direction
+package "implementation" {
+  abstract class "execute-plan" {
+    in plan : ImplementationPlan [1]
+    in diagnosis : Diagnosis [0..1]
+    out code : SourceCode [1]
+    --
+    F:principles  F:setup  A:loop  F:contract  D:final-review
+  }
+  class "execute-plan-inline" {
+    --
+    i:loop
+  }
+  class "execute-plan-subagents" {
+    --
+    i:loop  e:final-review
+  }
+  class "test-driven-development" {
+    in task : ImplementationPlan [1]
+    out code : SourceCode [1]
+    --
+    F:procedure
+  }
+}
+package "planning" {
+  class "plan-feature" {
+    in requirements : Requirement [1..*]
+    out plan : ImplementationPlan [1]
+    --
+    F:context  F:design  F:tasks  D:review
+  }
+}
+package "requirements" {
+  abstract class "specify-requirements" {
+    in request : FeatureRequest [1]
+    out requirements : Requirement [1..*]
+    --
+    F:elicit  F:clarify  A:structure  D:validate  F:record
+  }
+  abstract class "specify-functional" {
+    out requirements : FunctionalRequirement [1..*]
+  }
+  abstract class "specify-quality" {
+    out requirements : QualityRequirement [1..*]
+  }
+  class "user-stories" {
+    out requirements : UserStory [1..*]
+    --
+    i:structure  e:validate
+  }
+  class "ears" {
+    out requirements : EARSRequirement [1..*]
+    --
+    i:structure  o:validate
+  }
+  class "volere" {
+    out requirements : VolereRequirement [1..*]
+    --
+    i:structure  e:validate
+  }
+  class "iso25010" {
+    out requirements : ISO25010Requirement [1..*]
+    --
+    i:structure
+  }
+}
+package "support" {
+  class "systematic-debugging" {
+    in reports : TestReport [1..*]
+    in code : SourceCode [1]
+    out diagnosis : Diagnosis [1]
+    --
+    F:procedure
+  }
+  class "quantify-quality" {
+    in requirements : ISO25010Requirement [1..*]
+    out measurable : VolereRequirement [1..*]
+    --
+    F:quantify
+  }
+}
+package "verification" {
+  abstract class "generate-tests" {
+    in requirements : Requirement [1..*]
+    in code : SourceCode [1]
+    out suite : TestSuite [1]
+    out report : TestReport [1]
+    --
+    A:oracle  A:write  F:trace  F:run
+  }
+  abstract class "acceptance-tests" {
+    in requirements : UserStory [1..*]
+    --
+    i:oracle
+  }
+  class "acceptance-gherkin" {
+    --
+    i:write
+  }
+  class "acceptance-playwright" {
+    --
+    i:write
+  }
+  class "performance-tests" {
+    in requirements : MeasurableQualityRequirement [1..*]
+    --
+    i:oracle  i:write
+  }
+}
+package "artifact types" {
+  class FeatureRequest {
+    system [0..1]
+  }
+  abstract class Requirement {
+  }
+  abstract class FunctionalRequirement {
+  }
+  class UserStory {
+    acceptanceCriteria [1..*]
+  }
+  class EARSRequirement {
+  }
+  abstract class QualityRequirement {
+  }
+  abstract class MeasurableQualityRequirement {
+  }
+  class VolereRequirement {
+  }
+  class ISO25010Requirement {
+    metric [0..1]
+  }
+  class ImplementationPlan {
+    tasks [1..*]
+    reviewFocus [0..*]
+  }
+  class SourceCode {
+    commits [1..*]
+  }
+  class TestSuite {
+    tests [1..*]
+    covers [1..*]
+  }
+  class TestReport {
+    failures [0..*]
+  }
+  class Diagnosis {
+    evidence [1..*]
+  }
+}
+"execute-plan" <|-- "execute-plan-inline"
+"execute-plan" <|-- "execute-plan-subagents"
+"specify-requirements" <|-- "specify-functional"
+"specify-requirements" <|-- "specify-quality"
+"specify-functional" <|-- "user-stories"
+"specify-functional" <|-- "ears"
+"specify-quality" <|-- "volere"
+"specify-quality" <|-- "iso25010"
+"generate-tests" <|-- "acceptance-tests"
+"acceptance-tests" <|-- "acceptance-gherkin"
+"acceptance-tests" <|-- "acceptance-playwright"
+"generate-tests" <|-- "performance-tests"
+Requirement <|-- FunctionalRequirement
+FunctionalRequirement <|-- UserStory
+FunctionalRequirement <|-- EARSRequirement
+Requirement <|-- QualityRequirement
+QualityRequirement <|-- MeasurableQualityRequirement
+MeasurableQualityRequirement <|-- VolereRequirement
+QualityRequirement <|-- ISO25010Requirement
+@enduml

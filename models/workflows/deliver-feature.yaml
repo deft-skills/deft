@@ -1,0 +1,60 @@
+# Running example: deliver a feature request in an existing system.
+# Specify (functional || quality) -> plan -> implement (invokes TDD)
+# -> verify (acceptance || performance) -> verdict -> [fail] debug -repair-> implement
+family: workflows
+skills:
+  - name: deliver-feature
+    composite: true
+    description: >-
+      Use when a feature request for an existing system must be specified,
+      planned, implemented test-first and verified against its functional and
+      quality requirements.
+    metadata: {title: Deliver a feature}
+    parameters:
+      - {name: request, direction: in, type: FeatureRequest}
+      - {name: code, direction: out, type: SourceCode}
+      - {name: reports, direction: out, type: TestReport, lower: 1, upper: "*"}
+    pre:
+      - The feature request names the existing system and its stack.
+      - An environment that matches production in configuration is available.
+    post:
+      - Every requirement is covered by at least one passing test.
+      - The code is committed on a feature branch.
+    nodes:
+      - {name: functional, role: specify-functional, bind: user-stories}
+      - {name: quality, role: specify-quality, bind: volere}
+      - {name: plan, role: plan-feature}
+      - {name: implement, role: execute-plan, bind: execute-plan-inline}
+      - {name: tdd, role: test-driven-development}
+      - {name: acceptance, role: acceptance-tests, bind: acceptance-gherkin}
+      - {name: performance, role: performance-tests}
+      - {name: verdict, kind: decision}
+      - {name: debug, role: systematic-debugging}
+      - {name: done, kind: final}
+    data:
+      - {from: self.request, to: functional.request}
+      - {from: self.request, to: quality.request}
+      - {from: functional.requirements, to: plan.requirements}
+      - {from: quality.requirements, to: plan.requirements}
+      - {from: plan.plan, to: implement.plan}
+      - {from: functional.requirements, to: acceptance.requirements}
+      - {from: implement.code, to: acceptance.code}
+      - {from: quality.requirements, to: performance.requirements}
+      - {from: implement.code, to: performance.code}
+      - {from: acceptance.report, to: debug.reports}
+      - {from: performance.report, to: debug.reports}
+      - {from: implement.code, to: debug.code}
+      - {from: implement.code, to: self.code}
+      - {from: acceptance.report, to: self.reports}
+      - {from: performance.report, to: self.reports}
+    control:
+      - {kind: invokes, from: implement, to: tdd}
+      - {kind: sequence, from: acceptance, to: verdict}
+      - {kind: sequence, from: performance, to: verdict}
+      - {kind: sequence, from: verdict, to: done, guard: every report has verdict pass}
+      - {kind: sequence, from: verdict, to: debug, guard: some report has verdict fail}
+      - kind: repair
+        from: debug
+        to: implement
+        bound: 3
+        carries: {from: debug.diagnosis, to: implement.diagnosis}

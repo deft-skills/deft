@@ -1,0 +1,56 @@
+{
+  "commands": 10,
+  "upstream_nonblank_lines": 1817,
+  "deft_authored_lines": 1410,
+  "reduction": 0.224,
+  "tokenizer": "o200k_base",
+  "upstream_tokens": 29600,
+  "deft_authored_tokens": 23572,
+  "token_reduction": 0.204,
+  "violations": [],
+  "round_trip_identical": 10,
+  "round_trip_diffs": {},
+  "hierarchy": {
+    "speckit-command": null,
+    "speckit-with-mandatory-post-execution-hooks": "speckit-command",
+    "speckit-with-post-execution-checks": "speckit-command",
+    "analyze": "speckit-command",
+    "checklist": "speckit-with-post-execution-checks",
+    "clarify": "speckit-with-mandatory-post-execution-hooks",
+    "constitution": "speckit-with-post-execution-checks",
+    "converge": "speckit-command",
+    "implement": "speckit-with-mandatory-post-execution-hooks",
+    "plan": "speckit-with-mandatory-post-execution-hooks",
+    "specify": "speckit-with-mandatory-post-execution-hooks",
+    "tasks": "speckit-with-mandatory-post-execution-hooks",
+    "taskstoissues": "speckit-with-post-execution-checks"
+  },
+  "factored_sections": {
+    "User Input": {
+      "copies": 10,
+      "template_lines": 4,
+      "slots": 0,
+      "drifted_copies": []
+    },
+    "Pre-Execution Checks": {
+      "copies": 10,
+      "template_lines": 28,
+      "slots": 3,
+      "drifted_copies": [
+        "converge"
+      ]
+    },
+    "Post-Execution Checks": {
+      "copies": 3,
+      "template_lines": 27,
+      "slots": 2,
+      "drifted_copies": []
+    },
+    "Mandatory Post-Execution Hooks": {
+      "copies": 5,
+      "template_lines": 27,
+      "slots": 2,
+      "drifted_copies": []
+    }
+  }
+}

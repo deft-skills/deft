@@ -1,0 +1,10 @@
+# DEFT library for the running example: implementing a feature request.
+name: deft-feature-delivery
+# Licence of the generated skills, unless a skill declares its own.
+license: GPL-3.0-only
+# Licence texts of third-party libraries whose material skills adapt or import.
+# The generator copies them next to every SKILL.md that derives from them.
+licenses:
+  github/spec-kit: ../upstream/spec-kit/LICENSE
+  obra/superpowers: ../upstream/superpowers/LICENSE
+  anthropics/skills: ../upstream/anthropics-skills/skills/webapp-testing/LICENSE.txt

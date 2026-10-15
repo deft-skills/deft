@@ -1,0 +1,55 @@
+@startuml
+!theme plain
+hide circle
+hide empty members
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+skinparam defaultFontName Helvetica
+skinparam defaultFontSize 13
+skinparam ArrowFontSize 11
+skinparam class {
+  BackgroundColor white
+  BorderColor #333333
+  HeaderBackgroundColor #EEEEEE
+}
+skinparam package {
+  BorderColor #999999
+  FontStyle plain
+}
+
+left to right direction
+skinparam rectangle {
+  BackgroundColor white
+  BorderColor #333333
+  RoundCorner 12
+}
+circle " " as wf_in
+rectangle "<i>specify-functional</i>\n<b>user-stories</b>" as functional
+rectangle "<i>specify-quality</i>\n<b>volere</b>" as quality
+rectangle "plan-feature" as plan
+rectangle "<i>execute-plan</i>\n<b>execute-plan-inline</b>" as implement
+rectangle "test-driven-development" as tdd
+rectangle "<i>acceptance-tests</i>\n<b>acceptance-gherkin</b>" as acceptance
+rectangle "performance-tests" as performance
+hexagon "verdict" as verdict
+rectangle "systematic-debugging" as debug
+circle "end" as done
+wf_in --> functional : FeatureRequest
+wf_in --> quality : FeatureRequest
+functional --> plan : Requirement
+quality --> plan : Requirement
+plan --> implement : ImplementationPlan
+functional --> acceptance : UserStory
+implement --> acceptance : SourceCode
+quality --> performance : MeasurableQualityRequirement
+implement --> performance : SourceCode
+acceptance --> debug : TestReport
+performance --> debug : TestReport
+implement --> debug : SourceCode
+implement ..> tdd : invokes
+acceptance ..> verdict
+performance ..> verdict
+verdict ..> done : [every report has verdict pass]
+verdict ..> debug : [some report has verdict fail]
+debug ..> implement : repair ≤3
+@enduml

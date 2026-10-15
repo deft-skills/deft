@@ -1,0 +1,51 @@
+# Debugging and adapters.
+family: support
+skills:
+  - name: systematic-debugging
+    description: >-
+      Use when encountering any bug, test failure, or unexpected behavior,
+      before proposing fixes.
+    metadata: {title: Systematic debugging}
+    origin:
+      - {repo: obra/superpowers, path: skills/systematic-debugging/SKILL.md, commit: 8ca22dba9a94f28898bbce59f2537ff4d87c747d, license: MIT, mode: imported}
+    parameters:
+      - {name: reports, direction: in, type: TestReport, lower: 1, upper: "*"}
+      - {name: code, direction: in, type: SourceCode}
+      - {name: diagnosis, direction: out, type: Diagnosis}
+    pre:
+      - At least one report has verdict fail.
+    post:
+      - The diagnosis names a root cause supported by evidence, not a symptom.
+    sections:
+      - name: procedure
+        kind: final
+        title: Procedure
+        source: ../upstream/superpowers/skills/systematic-debugging/SKILL.md
+        demote: true
+
+  - name: quantify-quality
+    description: >-
+      Use when quality requirements without an objective metric must be made
+      measurable before they can be tested.
+    metadata: {title: Quantify quality requirements}
+    parameters:
+      - {name: requirements, direction: in, type: ISO25010Requirement, lower: 1, upper: "*"}
+      - {name: measurable, direction: out, type: VolereRequirement, lower: 1, upper: "*"}
+    post:
+      - Every output requirement has a fit criterion with a metric, a threshold and a scale.
+      - Every output requirement keeps the id and source of its input requirement.
+    sections:
+      - name: quantify
+        kind: final
+        title: Quantify each requirement
+        content: |
+          For each input requirement:
+
+          1. Keep its id, source and characteristic.
+          2. Choose a metric from the ISO/IEC 25023 measures of its
+             sub-characteristic (for example mean response time or throughput for
+             time behaviour). If the requirement already states a metric, keep it.
+          3. Ask the stakeholder for the threshold and the load conditions, or
+             propose them from comparable systems and mark them as assumptions.
+          4. Write the result as a Volere snow card whose fit criterion states the
+             metric, the threshold and the conditions.

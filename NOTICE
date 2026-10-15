@@ -1,0 +1,27 @@
+DEFT: a metamodel for agent skills
+Copyright (C) 2026 The DEFT authors
+
+This program is free software: you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free Software
+Foundation, version 3. See LICENSE.
+
+Third-party material
+--------------------
+
+This repository includes, unmodified, files from the following projects under
+upstream/. Each directory keeps the original licence file. Skills generated
+under skills/ that adapt or import this material carry a copy of the
+corresponding licence (LICENSE-<project>.txt) next to their SKILL.md, and name
+the origin in their frontmatter (metadata.deft-origin).
+
+- github/spec-kit, commit b9e08bf3e1a9d82b2a7358e278a6224d54d8783b
+  Copyright GitHub, Inc. MIT License. upstream/spec-kit/LICENSE
+
+- obra/superpowers, commit 8ca22dba9a94f28898bbce59f2537ff4d87c747d
+  Copyright (c) 2025 Jesse Vincent. MIT License. upstream/superpowers/LICENSE
+
+- anthropics/skills (skills/webapp-testing), commit 683bc88e56f3e09ba94f7055977f3d3aa499f202
+  Apache License 2.0. upstream/anthropics-skills/skills/webapp-testing/LICENSE.txt
+
+Both the MIT License and the Apache License 2.0 are compatible with
+distribution under the GNU General Public License version 3.

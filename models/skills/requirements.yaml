@@ -1,0 +1,206 @@
+# Requirements specification family.
+# The root adapts the elicitation, clarification and validation procedure of
+# spec-kit's specify and clarify commands; notations are specializations.
+family: requirements
+skills:
+  - name: specify-requirements
+    abstract: true
+    description: >-
+      Use when a feature request must become a set of uniquely identified,
+      testable requirements before planning or implementation starts.
+    metadata: {title: Specify requirements}
+    origin:
+      - {repo: github/spec-kit, path: templates/commands/specify.md, commit: b9e08bf3e1a9d82b2a7358e278a6224d54d8783b, license: MIT}
+      - {repo: github/spec-kit, path: templates/commands/clarify.md, commit: b9e08bf3e1a9d82b2a7358e278a6224d54d8783b, license: MIT}
+    parameters:
+      - {name: request, direction: in, type: FeatureRequest}
+      - {name: requirements, direction: out, type: Requirement, lower: 1, upper: "*"}
+    pre:
+      - The feature request is not empty.
+    post:
+      - Every requirement has a unique id and names its source.
+      - Every requirement is testable and unambiguous.
+      - No open clarification markers remain.
+    sections:
+      - name: elicit
+        kind: final
+        title: Identify sources and stakeholders
+        content: |
+          1. Read the feature request and, if it exists, the project constitution or
+             equivalent principles document.
+          2. List the stakeholders the request affects (users, operators, external
+             systems) and the sources you rely on for each statement.
+          3. Extract the key concepts: actors, actions, data and constraints.
+          4. Write down the assumptions you make where the request is silent. Use
+             reasonable industry defaults; do not ask about them.
+      - name: clarify
+        kind: final
+        title: Resolve ambiguities
+        content: |
+          Mark an aspect `[NEEDS CLARIFICATION: <question>]` only when the choice
+          changes scope or user experience, has several reasonable interpretations,
+          and has no reasonable default. Keep at most three markers, ordered by
+          impact: scope, then security and privacy, then user experience, then
+          technical details.
+
+          For each marker, ask one question with two to four options and their
+          implications, wait for the answers, and replace the marker with the
+          decision. Record each decision under "Clarifications" with the date.
+      - name: structure
+        kind: abstract
+        title: Structure each requirement
+      - name: validate
+        kind: default
+        title: Validate the requirements
+        content: |
+          Check every requirement against this list and fix it until all items
+          pass (at most three iterations; then record what is still open):
+
+          - It states what is needed and why, not how to build it.
+          - It is atomic: one need per requirement.
+          - It is testable: a test can pass or fail against it.
+          - It is unambiguous: no vague terms such as "fast", "easy" or "robust".
+          - It does not conflict with or duplicate another requirement.
+      - name: record
+        kind: final
+        title: Record the specification
+        content: |
+          Write the requirements to `specs/<feature>/requirements.md`, one block per
+          requirement, with its id, source and the fields of its notation. Add the
+          assumptions and the clarifications at the end. Report the file path and
+          the number of requirements per notation.
+
+  - name: specify-functional
+    parent: specify-requirements
+    abstract: true
+    description: >-
+      Use when the behaviour a feature must provide has to be specified as
+      functional requirements.
+    metadata: {title: Specify functional requirements}
+    parameters:
+      - {name: requirements, direction: out, type: FunctionalRequirement, lower: 1, upper: "*"}
+    post:
+      - Every functional requirement describes observable behaviour of the system.
+
+  - name: specify-quality
+    parent: specify-requirements
+    abstract: true
+    description: >-
+      Use when the qualities a feature must have (performance, security,
+      usability and similar) have to be specified as quality requirements.
+    metadata: {title: Specify quality requirements}
+    parameters:
+      - {name: requirements, direction: out, type: QualityRequirement, lower: 1, upper: "*"}
+    post:
+      - Every quality requirement names one ISO/IEC 25010 characteristic.
+
+  - name: user-stories
+    parent: specify-functional
+    description: >-
+      Use when functional requirements must be written as user stories with
+      Given/When/Then acceptance criteria.
+    metadata: {title: Specify user stories}
+    parameters:
+      - {name: requirements, direction: out, type: UserStory, lower: 1, upper: "*"}
+    post:
+      - Every user story has at least one acceptance criterion in Given/When/Then form.
+    refinements:
+      - kind: implements
+        target: structure
+        content: |
+          Write each requirement as a user story:
+
+          `As a <role>, I want <goal>, so that <benefit>.`
+
+          Follow the Quality User Story criteria: the story is well-formed (role and
+          goal present), atomic, minimal (no notes or design in the story), problem
+          oriented, and unambiguous. Give the story an id `US-<n>`.
+
+          Add one or more acceptance criteria per story, each in the form
+          `Given <context>, when <event>, then <outcome>`. Each criterion checks one
+          outcome and uses concrete values (for example "15 minutes", not "soon").
+      - kind: extends
+        target: validate
+        content: |
+          Also check that the stories are independent, negotiable, valuable,
+          estimable, small and testable (INVEST), and that every acceptance
+          criterion can be turned into an automated scenario without new decisions.
+
+  - name: ears
+    parent: specify-functional
+    description: >-
+      Use when functional requirements must follow the EARS (Easy Approach to
+      Requirements Syntax) patterns.
+    metadata: {title: Specify EARS requirements}
+    parameters:
+      - {name: requirements, direction: out, type: EARSRequirement, lower: 1, upper: "*"}
+    refinements:
+      - kind: implements
+        target: structure
+        content: |
+          Write each requirement with exactly one EARS pattern and record which:
+
+          - Ubiquitous: `The <system> shall <response>.`
+          - Event-driven: `When <trigger>, the <system> shall <response>.`
+          - State-driven: `While <state>, the <system> shall <response>.`
+          - Unwanted behaviour: `If <condition>, then the <system> shall <response>.`
+          - Optional feature: `Where <feature is included>, the <system> shall <response>.`
+
+          Give each requirement an id `FR-<n>`.
+      - kind: overrides
+        target: validate
+        content: |
+          Check every requirement against this list and fix it until all items
+          pass (at most three iterations):
+
+          - It matches its declared EARS pattern exactly, with one `shall`.
+          - The trigger, state or condition is observable.
+          - The response is a single, testable behaviour of the named system.
+          - No two requirements have the same trigger and contradictory responses.
+
+  - name: volere
+    parent: specify-quality
+    description: >-
+      Use when quality requirements must be written as Volere snow cards with a
+      measurable fit criterion.
+    metadata: {title: Specify Volere requirements}
+    parameters:
+      - {name: requirements, direction: out, type: VolereRequirement, lower: 1, upper: "*"}
+    post:
+      - Every Volere requirement has a fit criterion with a metric, a threshold and a scale.
+    refinements:
+      - kind: implements
+        target: structure
+        content: |
+          Write each quality requirement as a Volere snow card with these fields:
+          id `QR-<n>`, requirement type (for example 12 Performance), description,
+          rationale, source, and fit criterion.
+
+          The fit criterion makes the requirement measurable: name the metric, the
+          threshold and the conditions of measurement (for example "95th percentile
+          response time below 500 ms with 200 concurrent users").
+      - kind: extends
+        target: validate
+        content: |
+          Also check that every fit criterion can be measured by a test without
+          further decisions, and that the rationale explains why the threshold
+          matters to a stakeholder.
+
+  - name: iso25010
+    parent: specify-quality
+    description: >-
+      Use when quality requirements must be classified by ISO/IEC 25010
+      characteristics and sub-characteristics.
+    metadata: {title: Specify ISO/IEC 25010 requirements}
+    parameters:
+      - {name: requirements, direction: out, type: ISO25010Requirement, lower: 1, upper: "*"}
+    refinements:
+      - kind: implements
+        target: structure
+        content: |
+          Classify each quality requirement by one ISO/IEC 25010:2023 product quality
+          characteristic (functional suitability, performance efficiency,
+          compatibility, interaction capability, reliability, security,
+          maintainability, flexibility or safety) and one of its sub-characteristics.
+          Give each requirement an id `QR-<n>`. Add a metric when the stakeholder
+          states one; otherwise leave it empty.

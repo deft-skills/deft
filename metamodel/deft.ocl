@@ -1,0 +1,118 @@
+-- DEFT constraints as OCL invariants over deft.ecore.
+-- The executable checks in deft/check.py implement the same rules.
+import 'deft.ecore'
+
+package deft
+
+context ArtifactType
+  -- x ⊑ y: x equals y or specializes it
+  def: ancestors() : OrderedSet(ArtifactType) =
+    self->closure(t | t.parent)->asOrderedSet()
+  def: conformsTo(t : ArtifactType) : Boolean =
+    self = t or self.ancestors()->includes(t)
+  -- S1 (types): acyclic, single parent (single-valued reference)
+  inv S1_types: not self.ancestors()->includes(self)
+  -- S4 (types): a redeclared property narrows the inherited multiplicity (-1 = *)
+  inv S4_properties: self.parent <> null implies self.properties->forAll(p |
+    self.ancestors()->collect(a | a.properties)->select(q | q.name = p.name)->forAll(q |
+      p.lower >= q.lower and (q.upper = -1 or (p.upper <> -1 and p.upper <= q.upper))))
+
+context Resource
+  def: startsWith(prefix : String) : Boolean =
+    self.path.size() >= prefix.size() and self.path.substring(1, prefix.size()) = prefix
+  -- WF: a bundled resource lives in the folder of its kind
+  inv WF_folder:
+    (self.kind = ResourceKind::script implies self.startsWith('scripts/')) and
+    (self.kind = ResourceKind::reference implies self.startsWith('references/')) and
+    (self.kind = ResourceKind::asset implies self.startsWith('assets/'))
+
+context Skill
+  def: ancestors() : OrderedSet(Skill) =
+    self->closure(s | s.parent)->asOrderedSet()
+  def: conformsTo(s : Skill) : Boolean =
+    self = s or self.ancestors()->includes(s)
+
+  -- S1 (skills): acyclic, single parent
+  inv S1_skills: not self.ancestors()->includes(self)
+
+  -- WF: a skill specializes a skill of its own kind (atomic or composite)
+  inv WF_parent_kind: self.parent <> null implies
+    self.parent.oclIsKindOf(CompositeSkill) = self.oclIsKindOf(CompositeSkill)
+
+  -- S4: a redeclared parameter keeps its direction and narrows its type
+  inv S4: self.parent <> null implies self.parameters->forAll(p |
+    self.ancestors()->collect(a | a.parameters)->select(q | q.name = p.name)->forAll(q |
+      p.direction = q.direction and p.type.conformsTo(q.type)))
+
+context AtomicSkill
+  def: lineage() : OrderedSet(AtomicSkill) =
+    self.ancestors()->selectByKind(AtomicSkill)->including(self)->asOrderedSet()
+  def: inheritedSections() : Set(Section) =
+    self.ancestors()->selectByKind(AtomicSkill)->collect(a | a.sections)->asSet()
+  -- Effective kind of a section in this skill: the declared kind until a
+  -- refinement in the lineage changes it; then default, or final if sealed.
+  def: kindOf(s : Section) : SectionKind =
+    let rs : Set(Refinement) = self.lineage()->collect(a | a.refinements)->select(r | r.target = s)->asSet() in
+    if rs->isEmpty() then s.kind
+    else if rs->exists(r | r.isFinal) then SectionKind::final else SectionKind::default endif endif
+  -- Kind of a section as this skill inherits it (resolved in its parent).
+  def: inheritedKind(s : Section) : SectionKind =
+    if self.parent = null then s.kind else self.parent.oclAsType(AtomicSkill).kindOf(s) endif
+
+  -- WF: an imported origin and content read from upstream files go together
+  inv WF_origin:
+    self.origin->exists(o | o.mode = OriginMode::imported) =
+    (self.sections->exists(s | s.source <> null) or self.refinements->exists(r | r.source <> null))
+
+  -- S2: a concrete skill leaves no section abstract
+  inv S2: not self.isAbstract implies
+    (self.inheritedSections()->union(self.sections->asSet()))
+      ->forAll(s | self.kindOf(s) <> SectionKind::abstract)
+
+  -- S3: refinements target an inherited section of the right effective kind;
+  --     final sections, declared or sealed, admit none; inherited sections
+  --     are not redeclared
+  inv S3_target: self.refinements->forAll(r | self.inheritedSections()->includes(r.target))
+  inv S3_kind: self.refinements->forAll(r |
+    let k : SectionKind = self.inheritedKind(r.target) in
+    (r.kind = RefinementKind::implements implies k = SectionKind::abstract) and
+    (r.kind <> RefinementKind::implements implies k = SectionKind::default))
+  inv S3_redeclare: self.sections->forAll(s |
+    self.inheritedSections()->forAll(i | i.name <> s.name))
+
+context SkillNode
+  def: effective() : Skill = if self.bind <> null then self.bind else self.role endif
+  -- C1: every binding is concrete and specializes its role
+  inv C1: self.bind <> null implies (not self.bind.isAbstract and self.bind.conformsTo(self.role))
+
+context DataEdge
+  -- C2: type safety (and multiplicity) on the effective skills
+  inv C2_type: self.source.parameter.type.conformsTo(self.target.parameter.type)
+  inv C2_mult: self.target.parameter.upper <> -1 implies
+    (self.source.parameter.upper <> -1 and self.source.parameter.upper <= self.target.parameter.upper)
+
+context CompositeSkill
+  -- WF: a composite skill reads no upstream content of its own
+  inv WF_origin: not self.origin->exists(o | o.mode = OriginMode::imported)
+
+  -- C3: every mandatory input (in or inout) of a skill node receives a data edge
+  --     (invoked nodes may take it from the invoking skill's parameters)
+  inv C3: self.nodes->selectByKind(SkillNode)->forAll(n |
+    n.effective().parameters->select(p | p.direction <> Direction::out and p.lower > 0)->forAll(p |
+      self.data->exists(e | e.target.node = n and e.target.parameter.name = p.name) or
+      self.control->exists(c | c.kind = ControlEdgeKind::invokes and c.target = n and
+        c.source.oclAsType(SkillNode).effective().parameters->exists(q | q.type.conformsTo(p.type)))))
+
+  -- C4: bounded repair loops; the rest of the graph is acyclic
+  inv C4_bound: self.control->select(c | c.kind = ControlEdgeKind::repair)
+    ->forAll(c | c.bound <> null and c.bound >= 1)
+  inv C4_invoked: self.control->select(c | c.kind = ControlEdgeKind::invokes)->forAll(c |
+    self.control->forAll(d | d.target = c.target implies d.kind = ControlEdgeKind::invokes))
+  -- Acyclicity over data, sequence and invokes edges is checked by
+  -- deft/check.py (depth-first search); it needs a transitive closure over
+  -- node pairs that OCL tools express differently.
+
+-- C5 (assisted): for every node n, the postconditions of its predecessors and
+-- the guards of the edges that reach it jointly entail pre(n). Conditions are
+-- natural language; deft obligations lists them for review.
+endpackage

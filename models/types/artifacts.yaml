@@ -1,0 +1,97 @@
+# Artifact types exchanged by the skills of the running example.
+types:
+  - name: FeatureRequest
+    description: A change request stated by a stakeholder in natural language.
+    properties:
+      - {name: text}
+      - {name: system, lower: 0, description: existing system and stack}
+
+  # ---------------------------------------------------------------- requirements
+  - name: Requirement
+    abstract: true
+    description: A single, uniquely identified requirement.
+    properties:
+      - {name: id}
+      - {name: text}
+      - {name: source, description: stakeholder or document the requirement comes from}
+
+  - name: FunctionalRequirement
+    parent: Requirement
+    abstract: true
+
+  - name: UserStory
+    parent: FunctionalRequirement
+    description: Connextra user story with Given/When/Then acceptance criteria.
+    properties:
+      - {name: role}
+      - {name: goal}
+      - {name: benefit}
+      - {name: acceptanceCriteria, lower: 1, upper: "*"}
+
+  - name: EARSRequirement
+    parent: FunctionalRequirement
+    description: Requirement written with one of the five EARS patterns.
+    properties:
+      - {name: pattern, values: [ubiquitous, event-driven, state-driven, unwanted-behaviour, optional-feature]}
+
+  - name: QualityRequirement
+    parent: Requirement
+    abstract: true
+    properties:
+      - {name: characteristic, description: ISO/IEC 25010 product quality characteristic}
+
+  - name: MeasurableQualityRequirement
+    parent: QualityRequirement
+    abstract: true
+    description: Quality requirement with an objective fit criterion.
+    properties:
+      - {name: fitCriterion, description: "measurable condition (metric, threshold and scale) that a test can check"}
+
+  - name: VolereRequirement
+    parent: MeasurableQualityRequirement
+    description: Volere snow card for a non-functional requirement.
+    properties:
+      - {name: rationale}
+      - {name: type, description: Volere requirement type number and name}
+
+  - name: ISO25010Requirement
+    parent: QualityRequirement
+    description: Quality requirement classified by ISO/IEC 25010, with an optional metric.
+    properties:
+      - {name: subCharacteristic}
+      - {name: metric, lower: 0}
+
+  # ---------------------------------------------------------------- design and code
+  - name: ImplementationPlan
+    description: Ordered, test-first tasks that implement a set of requirements.
+    properties:
+      - {name: fileStructure}
+      - {name: tasks, lower: 1, upper: "*", description: "each task names files, interfaces, tests and the requirement ids it covers"}
+      - {name: reviewFocus, lower: 0, upper: "*"}
+
+  - name: SourceCode
+    description: The changed code base, as a branch or a set of commits.
+    properties:
+      - {name: branch}
+      - {name: commits, lower: 1, upper: "*"}
+
+  # ---------------------------------------------------------------- verification
+  - name: TestSuite
+    description: Executable tests, each traced to the requirement ids it checks.
+    properties:
+      - {name: tests, lower: 1, upper: "*"}
+      - {name: covers, lower: 1, upper: "*", description: requirement ids}
+
+  - name: TestReport
+    description: Result of running a test suite against the code.
+    properties:
+      - {name: verdict, values: [pass, fail]}
+      - {name: failures, lower: 0, upper: "*"}
+      - {name: command, description: command that reproduces the run}
+
+  - name: Diagnosis
+    description: Root cause of a failure and the change that fixes it.
+    properties:
+      - {name: rootCause}
+      - {name: evidence, lower: 1, upper: "*"}
+      - {name: fix}

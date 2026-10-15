@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "deft"
+version = "0.1.0"
+description = "DEFT: a metamodel for agent skills (specialization and composition)"
+readme = "README.md"
+license = "GPL-3.0-only"
+requires-python = ">=3.11"
+dependencies = ["PyYAML>=6.0"]
+
+[project.optional-dependencies]
+test = ["pytest>=8", "skills-ref>=0.1.1", "tiktoken>=0.7"]
+
+[project.scripts]
+deft = "deft.cli:main"
+
+[tool.setuptools]
+packages = ["deft"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

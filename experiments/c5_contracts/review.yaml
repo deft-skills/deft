@@ -1,0 +1,46 @@
+# Manual review of the C5 obligations of deliver-feature (results/c5_obligations.md).
+# verdict: entailed | not-entailed. The first review round ran on the initial
+# models; the three gaps it found were fixed in the models, and the second
+# round re-reviewed the obligations after the fixes.
+workflow: deliver-feature
+rounds:
+  - round: 1
+    obligations: 8
+    entailed: 5
+    gaps:
+      - target: acceptance
+        precondition: The code builds and its existing tests pass.
+        reason: execute-plan guaranteed only that each task's own tests pass, not the pre-existing suite.
+        fix: execute-plan postcondition "The full test suite passes, including the tests that existed before."
+      - target: performance
+        precondition: A deployment of the system that matches production in configuration is available.
+        reason: no step and no workflow assumption provides the environment.
+        fix: workflow precondition "An environment that matches production in configuration is available."
+      - target: self
+        precondition: The code is committed on a feature branch.
+        reason: the branch was required in a section of execute-plan but not guaranteed by its postconditions.
+        fix: execute-plan postcondition "Every task is committed on the dedicated branch."
+  - round: 2
+    obligations: 8
+    entailed: 8
+    gaps: []
+  # Round 3: a second reviewer (human/answers/) and three LLM judges (judge.py)
+  # reviewed the 16 items of rounds 1 and 2 (results/c5_items.json) blind. Their
+  # disagreements with the reference led to two more fixes in the models; the
+  # items keep the conditions as they were reviewed (items.py, REVIEWED).
+  - round: 3
+    reviewers: [human R1, anthropic, openai, google]
+    findings:
+      - target: implement
+        precondition: The plan has at least one task and every task names its test.
+        reason: >-
+          all four reviewers found it not ensured. The reference relied on the
+          multiplicity of the plan's input (at least one requirement, each covered
+          by a task), which the conditions did not state.
+        fix: plan-feature postcondition "The plan has at least one task."
+      - target: self
+        precondition: The code is committed on a feature branch.
+        reason: >-
+          the second reviewer found it not ensured: execute-plan guaranteed a
+          "dedicated branch", not a feature branch.
+        fix: execute-plan postcondition "Every task is committed on a dedicated feature branch."

@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Validating models · DEFT</title>
+<meta name="description" content="DEFT: a metamodel and toolset to specialize, compose, check and generate agent skills.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../static/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231a1a1a'/%3E%3Ctext x='16' y='22' font-family='monospace' font-size='15' text-anchor='middle' fill='white'%3Edf%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<header class="topbar">
+  <button class="iconbtn menubtn" id="menu" aria-label="Menu">☰</button>
+  <a class="brand" href="../index.html"><span class="brand-mark">df</span>DEFT</a>
+  <nav class="topnav"><a class="" href="../index.html">Overview</a><a class="active" href="../guides/metamodel.html">Guides</a><a class="" href="../catalogue.html">Catalogue</a><a class="" href="../about.html">About</a></nav>
+  <span class="spacer"></span>
+  <a class="iconbtn" href="https://anonymous.4open.science/r/deft-F7FE/">Repository</a>
+  <button class="iconbtn" id="theme" aria-label="Toggle theme">◐</button>
+</header>
+<div class="layout">
+<nav class="sidebar"><h4>Get started</h4>
+<a class="" href="../index.html">Overview</a>
+<a class="" href="../quickstart.html">Quickstart</a>
+<h4>Guides</h4>
+<a class="" href="../guides/metamodel.html">The metamodel</a>
+<a class="" href="../guides/writing-models.html">Writing models</a>
+<a class=" active" href="../guides/validating-models.html">Validating models</a>
+<a class="" href="../guides/generating-skills.html">Generating skills</a>
+<a class="" href="../guides/using-skills.html">Using generated skills</a>
+<a class="" href="../guides/example.html">Example: deliver a feature</a>
+<a class="" href="../guides/cli.html">Command line</a>
+<h4>Catalogue</h4>
+<a class="" href="../catalogue.html">All skills</a>
+<a class="sub" href="../catalogue.html#requirements">Requirements</a>
+<a class="sub" href="../catalogue.html#planning">Planning</a>
+<a class="sub" href="../catalogue.html#implementation">Implementation</a>
+<a class="sub" href="../catalogue.html#verification">Verification</a>
+<a class="sub" href="../catalogue.html#support">Support</a>
+<a class="" href="../types.html">Artifact types</a>
+<h4>Workflows</h4>
+<a class="" href="../workflows/deliver-feature.html">deliver-feature</a>
+<a class="" href="../workflows/deliver-feature-iso.html">deliver-feature-iso</a>
+<h4>Project</h4>
+<a class="" href="../about.html">About DEFT</a></nav>
+<main><div class="content">
+<div class="eyebrow">Guides</div>
+<div class="guide"><script type="application/json" id="md-guide">"# Validating models\n\n`deft check` reports violations with a code. S constraints apply to\nhierarchies, C constraints to workflows. The OCL version is in\n`metamodel/deft.ocl`; the implementation is `deft/check.py`.\n\n| Code | Rule | Typical message |\n|---|---|---|\n| WF | Every reference resolves: parent, type, role, binding, node, parameter; a skill specializes a skill of its own kind (atomic or composite); edges leave outputs and enter inputs (an `inout` parameter is both); decisions have two or more guarded exits; a bundled resource lives in the folder of its kind (`scripts/`, `references/`, `assets/`); an `imported` origin and sections read from upstream files (`source:`) go together. | `node 'x' refers to unknown skill 'y'`; `script resource 'references/run.py' must live under scripts/` |\n| S1 | Both hierarchies are acyclic; a skill or type has at most one parent. | `skill hierarchy is cyclic` |\n| S2 | A concrete skill implements every abstract section it inherits. | `concrete skill leaves abstract section 'structure' ... unimplemented` |\n| S3 | A refinement targets a section inherited from an ancestor, with the kind it has in the parent: `implements` an abstract section, `overrides`/`extends` a default one. Final sections, declared final or sealed by a refinement with `final: true`, admit no refinement; inherited sections are not redeclared. | `overrides targets final section 'elicit' (declared by specify-requirements)` |\n| S4 | A redeclared parameter keeps its direction and narrows the inherited type; a property redeclared by a subtype narrows the inherited multiplicity. | `parameter 'requirements': Diagnosis does not specialize inherited Requirement`; `property 'fitCriterion' [0..1] widens inherited [1..1]` |\n| C1 | A binding is concrete and specializes its role. | `node 'quality' is bound to abstract skill 'specify-quality'` |\n| C2 | A data edge (or repair payload) is type-safe on the effective skills: `type(source) \u2291 type(target)`, and a many-valued source does not feed a single-valued input. | `EARSRequirement (from ears) does not conform to UserStory (required by acceptance-gherkin)` |\n| C3 | Every mandatory input (`in` or `inout`) of a node receives a data edge (an invoked node may take it from its caller); every mandatory output of the workflow is produced. | `mandatory input plan.requirements (Requirement) receives no data edge` |\n| C4 | Without repair edges the graph is acyclic; repair edges have a bound of at least 1; an invoked node has one caller and no other incoming control edge. | `the graph without repair edges is cyclic` |\n| C5 | For every node, the postconditions of its predecessors and the guards that reach it, under the workflow's preconditions, entail its preconditions. | listed by `deft obligations`, not decided |\n\n## Why input narrowing is allowed\n\nS4 lets a descendant narrow an *input* type. Behavioural subtyping forbids\nthis, because a narrower input means a stronger precondition, and the\ndescendant is then no longer substitutable for its parent. Skill families need\nit: an acceptance-test skill accepts only user stories, a load-test skill only\nmeasurable quality requirements. DEFT therefore accepts the narrowing in the\nhierarchy and moves the substitutability check to the place where it can be\ndecided: the binding of a node in a workflow (C1) and the edges around it (C2),\nwhich are recomputed with the bound skills' types.\n\n## C5 in practice\n\nC5 is natural language. `deft obligations` lists, per node, the guarantees it\ncan rely on and the preconditions they must entail:\n\n```text\n## deliver-feature: plan, debug -> implement\nguarantees:\n  - The plan has at least one task.\n  - Every requirement id is covered by at least one task.\n  - Every task names its files, its interfaces and the test that proves it.\n  - The diagnosis names a root cause supported by evidence, not a symptom.\nmust entail:\n  - The plan has at least one task and every task names its test.\n```\n\nReview each obligation. When a precondition is not entailed, either a step is\nmissing, a postcondition is too weak, or the precondition is an assumption of the\nwhole workflow (declare it as a precondition of the composite skill). An optional\nLLM judge for this review is provided in `experiments/c5_contracts/judge.py`.\n"</script><div class="md" data-md="md-guide"><pre># Validating models
+
+`deft check` reports violations with a code. S constraints apply to
+hierarchies, C constraints to workflows. The OCL version is in
+`metamodel/deft.ocl`; the implementation is `deft/check.py`.
+
+| Code | Rule | Typical message |
+|---|---|---|
+| WF | Every reference resolves: parent, type, role, binding, node, parameter; a skill specializes a skill of its own kind (atomic or composite); edges leave outputs and enter inputs (an `inout` parameter is both); decisions have two or more guarded exits; a bundled resource lives in the folder of its kind (`scripts/`, `references/`, `assets/`); an `imported` origin and sections read from upstream files (`source:`) go together. | `node &#x27;x&#x27; refers to unknown skill &#x27;y&#x27;`; `script resource &#x27;references/run.py&#x27; must live under scripts/` |
+| S1 | Both hierarchies are acyclic; a skill or type has at most one parent. | `skill hierarchy is cyclic` |
+| S2 | A concrete skill implements every abstract section it inherits. | `concrete skill leaves abstract section &#x27;structure&#x27; ... unimplemented` |
+| S3 | A refinement targets a section inherited from an ancestor, with the kind it has in the parent: `implements` an abstract section, `overrides`/`extends` a default one. Final sections, declared final or sealed by a refinement with `final: true`, admit no refinement; inherited sections are not redeclared. | `overrides targets final section &#x27;elicit&#x27; (declared by specify-requirements)` |
+| S4 | A redeclared parameter keeps its direction and narrows the inherited type; a property redeclared by a subtype narrows the inherited multiplicity. | `parameter &#x27;requirements&#x27;: Diagnosis does not specialize inherited Requirement`; `property &#x27;fitCriterion&#x27; [0..1] widens inherited [1..1]` |
+| C1 | A binding is concrete and specializes its role. | `node &#x27;quality&#x27; is bound to abstract skill &#x27;specify-quality&#x27;` |
+| C2 | A data edge (or repair payload) is type-safe on the effective skills: `type(source) ⊑ type(target)`, and a many-valued source does not feed a single-valued input. | `EARSRequirement (from ears) does not conform to UserStory (required by acceptance-gherkin)` |
+| C3 | Every mandatory input (`in` or `inout`) of a node receives a data edge (an invoked node may take it from its caller); every mandatory output of the workflow is produced. | `mandatory input plan.requirements (Requirement) receives no data edge` |
+| C4 | Without repair edges the graph is acyclic; repair edges have a bound of at least 1; an invoked node has one caller and no other incoming control edge. | `the graph without repair edges is cyclic` |
+| C5 | For every node, the postconditions of its predecessors and the guards that reach it, under the workflow&#x27;s preconditions, entail its preconditions. | listed by `deft obligations`, not decided |
+
+## Why input narrowing is allowed
+
+S4 lets a descendant narrow an *input* type. Behavioural subtyping forbids
+this, because a narrower input means a stronger precondition, and the
+descendant is then no longer substitutable for its parent. Skill families need
+it: an acceptance-test skill accepts only user stories, a load-test skill only
+measurable quality requirements. DEFT therefore accepts the narrowing in the
+hierarchy and moves the substitutability check to the place where it can be
+decided: the binding of a node in a workflow (C1) and the edges around it (C2),
+which are recomputed with the bound skills&#x27; types.
+
+## C5 in practice
+
+C5 is natural language. `deft obligations` lists, per node, the guarantees it
+can rely on and the preconditions they must entail:
+
+```text
+## deliver-feature: plan, debug -&gt; implement
+guarantees:
+  - The plan has at least one task.
+  - Every requirement id is covered by at least one task.
+  - Every task names its files, its interfaces and the test that proves it.
+  - The diagnosis names a root cause supported by evidence, not a symptom.
+must entail:
+  - The plan has at least one task and every task names its test.
+```
+
+Review each obligation. When a precondition is not entailed, either a step is
+missing, a postcondition is too weak, or the precondition is an assumption of the
+whole workflow (declare it as a precondition of the composite skill). An optional
+LLM judge for this review is provided in `experiments/c5_contracts/judge.py`.
+</pre></div></div>
+<p style="margin-top:24px"><a class="iconbtn" href="https://anonymous.4open.science/r/deft-F7FE/guides/constraints.md">View source of this page</a></p>
+<div class="cards"><a class="card" href="../guides/writing-models.html"><p>Previous</p><h3>Writing models</h3></a><a class="card" href="../guides/generating-skills.html"><p>Next</p><h3>Generating skills</h3></a></div>
+<footer>DEFT 0.1.0 · GNU General Public License v3.0 · Reused third-party skills keep their original licences.</footer>
+</div></main>
+<aside class="toc"><h5>On this page</h5><nav id="toc-links"></nav></aside>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<script src="../static/app.js"></script>
+</body>
+</html>

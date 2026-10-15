@@ -1,0 +1,151 @@
+# Implementation: superpowers ships two plan executors that repeat the same
+# principles in prose (rulings, stop conditions, ledger, completion contract).
+# Here they become one abstract skill with a fixed core and two
+# specializations that implement the task loop. TDD is imported as-is.
+family: implementation
+skills:
+  - name: execute-plan
+    abstract: true
+    description: >-
+      Use when an implementation plan exists and its tasks must be implemented
+      and committed one by one.
+    metadata: {title: Execute the plan}
+    origin:
+      - {repo: obra/superpowers, path: skills/executing-plans/SKILL.md, commit: 8ca22dba9a94f28898bbce59f2537ff4d87c747d, license: MIT}
+      - {repo: obra/superpowers, path: skills/subagent-driven-development/SKILL.md, commit: 8ca22dba9a94f28898bbce59f2537ff4d87c747d, license: MIT}
+    parameters:
+      - {name: plan, direction: in, type: ImplementationPlan}
+      - {name: diagnosis, direction: in, type: Diagnosis, lower: 0, description: present when the workflow returns after a failure}
+      - {name: code, direction: out, type: SourceCode}
+    pre:
+      - The plan has at least one task and every task names its test.
+    post:
+      - Every task is committed on a dedicated feature branch.
+      - The full test suite passes, including the tests that existed before.
+      - Every deviation from the plan is recorded as a ruling.
+    sections:
+      - name: principles
+        kind: final
+        title: Principles
+        content: |
+          The requirements are the binding authority and the plan is their argument.
+          Execute the plan exactly and without pausing between tasks. Decide
+          conflicts, ambiguities and plan defects yourself and record each decision
+          in the ledger as `Ruling: <decision> - <why> - <cost if wrong>`.
+
+          Stop and ask only for: an irreversible or destructive operation; a
+          security-sensitive action; a side effect outside the workspace (merge,
+          push to a shared branch, publish); or a plan so broken that every path
+          forward is a guess.
+      - name: setup
+        kind: final
+        title: Set up the workspace
+        content: |
+          Work on a dedicated branch or worktree, never on the main branch without
+          consent. Create a ledger file `progress.md` in the workspace whose first
+          line names the plan. If the ledger exists, read it and resume after the
+          last completed task. Read the plan once and create one todo per task.
+          If you received a diagnosis, read it first: the repair concerns only the
+          tasks it names.
+      - name: loop
+        kind: abstract
+        title: Run the task loop
+      - name: contract
+        kind: final
+        title: Completion contract
+        content: |
+          A task is complete only when, with evidence from this session:
+
+          - every test the task names exists, ran, and you read its output;
+          - the final run of the task's tests passed;
+          - every expected output in the plan was compared with the real output;
+          - every deviation has a ruling in the ledger.
+
+          Then append `Task <N>: complete (commits <base>..<head>, tests: <command> -> <result>)`
+          to the ledger.
+      - name: final-review
+        kind: default
+        title: Final review
+        content: |
+          When all tasks are complete, review the whole branch against the
+          requirements and the plan's review focus. Fix critical and important
+          findings in one pass, each with a test that failed first. Record minor
+          findings in the ledger as deferred. Report the rulings you made and the
+          deferred findings.
+
+  - name: execute-plan-inline
+    parent: execute-plan
+    description: >-
+      Use when the plan must be executed task by task in the current session,
+      or when no subagent tool is available.
+    metadata: {title: Execute the plan inline}
+    refinements:
+      - kind: implements
+        target: loop
+        content: |
+          For each task, in order:
+
+          1. Read the task and mark its todo in progress. Record BASE, the commit the
+             task starts from.
+          2. Work the steps in order under test-driven development: write the test,
+             run it and watch it fail, write the minimal code, watch it pass.
+          3. Compare every command's output with the expected output in the plan.
+             If the code is wrong, debug it systematically; never patch the symptom.
+             If the plan is wrong, rule on the smallest change that satisfies the
+             requirements and record the ruling.
+          4. Commit as the plan says, then apply the completion contract.
+
+          Redirect long test output to a file and read its tail, so that it does not
+          fill your context.
+
+  - name: execute-plan-subagents
+    parent: execute-plan
+    description: >-
+      Use when the plan must be executed by a fresh implementer subagent per
+      task, each followed by a task review.
+    metadata: {title: Execute the plan with subagents}
+    refinements:
+      - kind: implements
+        target: loop
+        content: |
+          For each task, in order (never two implementers in parallel):
+
+          1. Record BASE. Extract the task to a brief file and dispatch a fresh
+             implementer with: where the task fits, the brief path ("read this
+             first; use its values verbatim"), interfaces decided by earlier tasks,
+             your resolution of ambiguities, and a report-file path.
+          2. Handle the report: DONE goes to review; DONE_WITH_CONCERNS is read
+             before review; NEEDS_CONTEXT is answered and re-dispatched; BLOCKED is
+             fixed by more context, a more capable model, a smaller task, or a
+             ruling on the plan.
+          3. Dispatch a task reviewer with the brief, the report and the diff from
+             BASE. Require both verdicts: compliance with the requirements and code
+             quality.
+          4. Fix loop: send open critical or important findings back to the
+             implementer, at most five rounds, each followed by a scoped re-review.
+             At the limit, rule on each open finding and record it.
+          5. Apply the completion contract.
+      - kind: extends
+        target: final-review
+        content: |
+          Dispatch the final reviewer on the most capable available model, with the
+          plan, the requirements, the review focus and the ledger's rulings.
+
+  - name: test-driven-development
+    description: >-
+      Use when implementing any feature or bugfix, before writing implementation
+      code.
+    metadata: {title: Test-driven development}
+    origin:
+      - {repo: obra/superpowers, path: skills/test-driven-development/SKILL.md, commit: 8ca22dba9a94f28898bbce59f2537ff4d87c747d, license: MIT, mode: imported}
+    parameters:
+      - {name: task, direction: in, type: ImplementationPlan, description: the plan whose current task is implemented}
+      - {name: code, direction: out, type: SourceCode}
+    post:
+      - Every new behaviour has a test that was seen to fail before the code existed.
+    sections:
+      - name: procedure
+        kind: final
+        title: Procedure
+        source: ../upstream/superpowers/skills/test-driven-development/SKILL.md
+        demote: true

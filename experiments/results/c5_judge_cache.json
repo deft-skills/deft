@@ -1,0 +1,749 @@
+{
+  "c9a2e660fe8439866514a3718b73199445572c9a290d070eb67482c4e96e5b30": {
+    "provider": "anthropic",
+    "model": "claude-opus-5-5",
+    "raw": "{\"verdict\": \"not-entailed\", \"uncovered\": [\"The plan has at least one task and every task names its test.\"]}\n\nThe \"every task names its test\" half is covered, since every task names its files, interfaces and test. The \"at least one task\" half is not. The guarantee only says every requirement id is covered by at least one task, and nothing guarantees that any requirement id exists. With zero requirement ids, a plan with no tasks would satisfy every guarantee.",
+    "verdict": "not-entailed",
+    "uncovered": [
+      "The plan has at least one task and every task names its test."
+    ]
+  },
+  "578d83d9895af1d2862b17224fb44e0554d319135e78cd732e61c47558326b6a": {
+    "provider": "anthropic",
+    "model": "claude-opus-5-5",
+    "raw": "{\"verdict\": \"entailed\", \"uncovered\": []}",
+    "verdict": "entailed",
+    "uncovered": []
+  },
+  "8a3e9f7b8f66e44a8f3f5a14c1b4061fe781bb3fe2ae0404050917ec54e0d4e1": {
+    "provider": "anthropic",
+    "model": "claude-opus-5-5",
+    "raw": "The second requirement is not ensured. The first follows from the guarantees, reading the tests that cover requirements as part of the tasks' tests.\n\n- **Covered by passing tests: ensured.** Every input requirement is covered by at least one test. Every task's tests pass, and every report's verdict is pass. Together these mean each requirement has a passing test.\n- **Committed on a feature branch: not ensured.** The guarantees say every task is committed, but nothing says the commits are on a feature branch.\n\n```json\n{\"verdict\": \"not-entailed\", \"uncovered\": [\"The code is committed on a feature branch.\"]}\n```",
+    "verdict": "not-entailed",
+    "uncovered": [
+      "The code is committed on a feature branch."
+    ]
+  },
+  "db0956c3ca3d9a8f00fb756fed790e5e034b7f3694447eef8833f0a3b6f6c506": {
+    "provider": "anthropic",
+    "model": "claude-opus-5-5",
+    "raw": "{\"verdict\": \"entailed\", \"uncovered\": []}",
+    "verdict": "entailed",
+    "uncovered": []
+  },
+  "f30ba8cb9573c507c0615ce76cc26418765a092a85f358b549b09f4c25c89d8b": {
+    "provider": "anthropic",
+    "model": "claude-opus-5-5",
+    "raw": "{\"verdict\": \"entailed\", \"uncovered\": []}",
+    "verdict": "entailed",
+    "uncovered": []
+  },
+  "8a12ae537d6dc3a8ddf69616a8cffc1a438fe7df2dadd736ef8ec3ef9453d780": {
+    "provider": "anthropic",
+    "model": "claude-opus-5-5",
+    "raw": "{\"verdict\": \"not-entailed\", \"uncovered\": [\"The plan has at least one task and every task names its test.\"]}",
+    "verdict": "not-entailed",
+    "uncovered": [
+      "The plan has at least one task and every task names its test."
+    ]
+  },
+  "ae5d3cbd271b6c655c6369d490b3a3ccf203cbe1955defe19df68ba6b91311c9": {
+    "provider": "anthropic",
+    "model": "claude-opus-5-5",
+    "raw": "{\"verdict\": \"not-entailed\", \"uncovered\": [\"The code builds and its existing tests pass.\"]}",
+    "verdict": "not-entailed",
+    "uncovered": [
+      "The code builds and its existing tests pass."
+    ]
+  },
+  "b137a948acd9fa6fad70fab92bc4de0c1c828e081d5d070e65f9b011e7e75580": {
+    "provider": "anthropic",
+    "model": "claude-opus-5-5",
+    "raw": "{\"verdict\": \"not-entailed\", \"uncovered\": [\"The code builds and its existing tests pass.\", \"A deployment of the system that matches production in configuration is available.\"]}",
+    "verdict": "not-entailed",
+    "uncovered": [
+      "The code builds and its existing tests pass.",
+      "A deployment of the system that matches production in configuration is available."
+    ]
+  },
+  "7bf3b326aa5bf0c57a82d6296bf4426be858d4e66b3abb395072f4dd6f286a6d": {
+    "provider": "anthropic",
+    "model": "claude-opus-5-5",
+    "raw": "{\"verdict\": \"entailed\", \"uncovered\": []}",
+    "verdict": "entailed",
+    "uncovered": []
+  },
+  "512960b0d5d7f6ead0939a6471cde1337729d681c13cd80505e65de74d370c68": {
+    "provider": "anthropic",
+    "model": "claude-opus-5-5",
+    "raw": "{\"verdict\": \"entailed\", \"uncovered\": []}",
+    "verdict": "entailed",
+    "uncovered": []
+  },
+  "a0c0d6e13c7abb65f2a3825e651ee3b33a43470b5b46954d5b9bbb3339a0d88d": {
+    "provider": "anthropic",
+    "model": "claude-opus-5-5",
+    "raw": "{\"verdict\": \"entailed\", \"uncovered\": []}",
+    "verdict": "entailed",
+    "uncovered": []
+  },
+  "1a946f3cdfc2728765940319383f7158eede08e29186f3ac091c2f22925265b0": {
+    "provider": "anthropic",
+    "model": "claude-opus-5-5",
+    "raw": "{\"verdict\": \"entailed\", \"uncovered\": []}",
+    "verdict": "entailed",
+    "uncovered": []
+  },
+  "c64f0acb4ff9c019e0236ef629134ee0f570e9d6a58f29f98130b78846a0a7ed": {
+    "provider": "anthropic",
+    "model": "claude-opus-5-5",
+    "raw": "{\"verdict\": \"entailed\", \"uncovered\": []}",
+    "verdict": "entailed",
+    "uncovered": []
+  },
+  "f328b04cbf2dfe18aef6bfbb5b1181009a217fc8565f608b31e1858929e621fd": {
+    "provider": "anthropic",
+    "model": "claude-opus-5-5",
+    "raw": "{\"verdict\": \"entailed\", \"uncovered\": []}",
+    "verdict": "entailed",
+    "uncovered": []
+  },
+  "0ae678a0e158f421e3b2fb257815af4d7cfb6df0333c39fe65da316f8aea4ffc": {
+    "provider": "anthropic",
+    "model": "claude-opus-5-5",
+    "raw": "{\"verdict\": \"entailed\", \"uncovered\": []}",
+    "verdict": "entailed",
+    "uncovered": []
+  },
+  "eb2c40f0c7b06b946baa13d47364b8a8ac8c610a55a9ebb73b1c5d2af8664ac1": {
+    "provider": "anthropic",
+    "model": "claude-opus-5-5",
+    "raw": "{\"verdict\": \"entailed\", \"uncovered\": []}",
+    "verdict": "entailed",
+    "uncovered": []
+  },
+  "d5df093c785781c395e8be0e16171cfae8a3dee1abca37b41056bb24493d277f": {
+    "provider": "openai",
+    "model": "gpt-6-astra",
+    "raw": "{\"verdict\":\"not-entailed\",\"uncovered\":[\"The plan has at least one task and every task names its test.\"]}",
+    "verdict": "not-entailed",
+    "uncovered": [
+      "The plan has at least one task and every task names its test."
+    ]
+  },
+  "66962f9c1c964715dc7fb780daee1da2ef05ac2f753ffbd60a4fb0fcf5cbffb7": {
+    "provider": "openai",
+    "model": "gpt-6-astra",
+    "raw": "{\"verdict\":\"entailed\",\"uncovered\":[]}",
+    "verdict": "entailed",
+    "uncovered": []
+  },
+  "c0e7cea22a5777ee7851da0f09f53663218ab31636473edfff6d44d3b22429b1": {
+    "provider": "openai",
+    "model": "gpt-6-astra",
+    "raw": "{\"verdict\":\"not-entailed\",\"uncovered\":[\"The code is committed on a feature branch.\"]}",
+    "verdict": "not-entailed",
+    "uncovered": [
+      "The code is committed on a feature branch."
+    ]
+  },
+  "25c2b27f848231339daec428c0361954b151f793b41adeb74cb749b4b1ba392e": {
+    "provider": "openai",
+    "model": "gpt-6-astra",
+    "raw": "{\"verdict\":\"entailed\",\"uncovered\":[]}",
+    "verdict": "entailed",
+    "uncovered": []
+  },
+  "16400dfa6e11d29c824cf3797aa459048c0eb6a196134326bbeb343549c3b055": {
+    "provider": "openai",
+    "model": "gpt-6-astra",
+    "raw": "{\"verdict\":\"not-entailed\",\"uncovered\":[\"The code builds and its existing tests pass.\"]}",
+    "verdict": "not-entailed",
+    "uncovered": [
+      "The code builds and its existing tests pass."
+    ]
+  },
+  "007048a97133dc2ad7e84332f1afd89f240d27671212875a72d9cf9c3ec1d003": {
+    "provider": "openai",
+    "model": "gpt-6-astra",
+    "raw": "{\"verdict\":\"not-entailed\",\"uncovered\":[\"The plan has at least one task and every task names its test.\"]}",
+    "verdict": "not-entailed",
+    "uncovered": [
+      "The plan has at least one task and every task names its test."
+    ]
+  },
+  "652c1b27f4c5141c786c479c2b73924b69484846792322c4ba4c3bd08349ae44": {
+    "provider": "openai",
+    "model": "gpt-6-astra",
+    "raw": "{\"verdict\":\"not-entailed\",\"uncovered\":[\"The code builds and its existing tests pass.\"]}",
+    "verdict": "not-entailed",
+    "uncovered": [
+      "The code builds and its existing tests pass."
+    ]
+  },
+  "08e54f04bda19397cb4749e598642210fad0318c05a9acb9418ffe00867de56a": {
+    "provider": "openai",
+    "model": "gpt-6-astra",
+    "raw": "{\"verdict\":\"not-entailed\",\"uncovered\":[\"The code builds and its existing tests pass.\",\"A deployment of the system that matches production in configuration is available.\"]}",
+    "verdict": "not-entailed",
+    "uncovered": [
+      "The code builds and its existing tests pass.",
+      "A deployment of the system that matches production in configuration is available."
+    ]
+  },
+  "53789e1480814c4a72df85548bdd3605c7b7f671d9081681a01a7d489488c6d4": {
+    "provider": "openai",
+    "model": "gpt-6-astra",
+    "raw": "{\"verdict\":\"not-entailed\",\"uncovered\":[\"The code builds and its existing tests pass.\"]}",
+    "verdict": "not-entailed",
+    "uncovered": [
+      "The code builds and its existing tests pass."
+    ]
+  },
+  "4e0e261a29e4aa778a189256c768f1412071efac36d5ff67e26b75310139ea84": {
+    "provider": "openai",
+    "model": "gpt-6-astra",
+    "raw": "{\"verdict\":\"entailed\",\"uncovered\":[]}",
+    "verdict": "entailed",
+    "uncovered": []
+  },
+  "79f5c1067e6f6fe629dedc8d596681ea87ea4b8c3caf840716fc60c94a77dd6d": {
+    "provider": "openai",
+    "model": "gpt-6-astra",
+    "raw": "{\"verdict\":\"entailed\",\"uncovered\":[]}",
+    "verdict": "entailed",
+    "uncovered": []
+  },
+  "2eedad968c9ec2a6665ac10ba00742887e41a76ebc1a9c296cd396529c5bb446": {
+    "provider": "openai",
+    "model": "gpt-6-astra",
+    "raw": "{\"verdict\":\"entailed\",\"uncovered\":[]}",
+    "verdict": "entailed",
+    "uncovered": []
+  },
+  "31894867d38d6d3d9ca51996c0e891c3e48f2ac3aae387e6d9ed1cd63df6b2b5": {
+    "provider": "openai",
+    "model": "gpt-6-astra",
+    "raw": "{\"verdict\":\"entailed\",\"uncovered\":[]}",
+    "verdict": "entailed",
+    "uncovered": []
+  },
+  "2e2fae33a786f1bf38eff6f15e1abd3dba6377bddffbc84b72cbb58abafdbfa4": {
+    "provider": "openai",
+    "model": "gpt-6-astra",
+    "raw": "{\"verdict\":\"entailed\",\"uncovered\":[]}",
+    "verdict": "entailed",
+    "uncovered": []
+  },
+  "67885f1970a4c74bd502e5fa87194436337f2d5037297a454facd859e5ff8d29": {
+    "provider": "openai",
+    "model": "gpt-6-astra",
+    "raw": "{\"verdict\":\"entailed\",\"uncovered\":[]}",
+    "verdict": "entailed",
+    "uncovered": []
+  },
+  "bb8f3396ad367af40c74703eeb15f48ed894b33e27e5c00fba8d8b3989f542a4": {
+    "provider": "openai",
+    "model": "gpt-6-astra",
+    "raw": "{\"verdict\":\"entailed\",\"uncovered\":[]}",
+    "verdict": "entailed",
+    "uncovered": []
+  },
+  "e195d61d36ca28dd47b5244d1e5d973969db0e777f91a8df1331d197bfff7877": {
+    "provider": "google",
+    "model": "gemini-3.1-pro-preview",
+    "raw": "{\n  \"verdict\": \"not-entailed\",\n  \"uncovered\": [\n    \"The plan has at least one task and every task names its test.\"\n  ]\n}",
+    "verdict": "not-entailed",
+    "uncovered": [
+      "The plan has at least one task and every task names its test."
+    ]
+  },
+  "c18fbda46e319ee053f86be1648940f26ca46006d7893ec158c4b1aa38980bba": {
+    "provider": "google",
+    "model": "gemini-3.1-pro-preview",
+    "raw": "{\n  \"verdict\": \"entailed\",\n  \"uncovered\": []\n}",
+    "verdict": "entailed",
+    "uncovered": []
+  },
+  "b2ec60e84e444437d8edaa6670957aa2ab4d12506e16c5db09ab115fd280cb54": {
+    "provider": "google",
+    "model": "gemini-3.1-pro-preview",
+    "raw": "{\n  \"verdict\": \"not-entailed\",\n  \"uncovered\": [\n    \"Every requirement is covered by at least one passing test.\",\n    \"The code is committed on a feature branch.\"\n  ]\n}",
+    "verdict": "not-entailed",
+    "uncovered": [
+      "Every requirement is covered by at least one passing test.",
+      "The code is committed on a feature branch."
+    ]
+  },
+  "290d60e41a48ccc2a8883f6ec7df4b8471623939d35bf93985f473519bca2553": {
+    "provider": "google",
+    "model": "gemini-3.1-pro-preview",
+    "raw": "{\n  \"verdict\": \"entailed\",\n  \"uncovered\": []\n}",
+    "verdict": "entailed",
+    "uncovered": []
+  },
+  "d77242ce421c6372b2724800bf5f2e5b79084a89143ac86361645f16a1f67555": {
+    "provider": "google",
+    "model": "gemini-3.1-pro-preview",
+    "raw": "{\n  \"verdict\": \"entailed\",\n  \"uncovered\": []\n}",
+    "verdict": "entailed",
+    "uncovered": []
+  },
+  "53c20bb0d24c7923f9cefe00093d84f4fb42f93c6854c6d015e9013dc76e4978": {
+    "provider": "google",
+    "model": "gemini-3.1-pro-preview",
+    "raw": "{\n  \"verdict\": \"not-entailed\",\n  \"uncovered\": [\n    \"The plan has at least one task and every task names its test.\"\n  ]\n}",
+    "verdict": "not-entailed",
+    "uncovered": [
+      "The plan has at least one task and every task names its test."
+    ]
+  },
+  "fa6ea2a879650a6174eb9ec26ea687073e52921f5eab2b51d8cb59890d86a79d": {
+    "provider": "google",
+    "model": "gemini-3.1-pro-preview",
+    "raw": "{\n  \"verdict\": \"not-entailed\",\n  \"uncovered\": [\n    \"The code builds and its existing tests pass.\"\n  ]\n}",
+    "verdict": "not-entailed",
+    "uncovered": [
+      "The code builds and its existing tests pass."
+    ]
+  },
+  "02aa35f503d1c8d48510665d49e27f84029bac85cecb87b2aab3a30cd2545f46": {
+    "provider": "google",
+    "model": "gemini-3.1-pro-preview",
+    "raw": "{\n  \"verdict\": \"not-entailed\",\n  \"uncovered\": [\n    \"The code builds and its existing tests pass.\",\n    \"A deployment of the system that matches production in configuration is available.\"\n  ]\n}",
+    "verdict": "not-entailed",
+    "uncovered": [
+      "The code builds and its existing tests pass.",
+      "A deployment of the system that matches production in configuration is available."
+    ]
+  },
+  "6818a1505a0eab6453c951798ee7d29c847f1420793d23b9e8813c11b5b5a067": {
+    "provider": "google",
+    "model": "gemini-3.1-pro-preview",
+    "raw": "{\n  \"verdict\": \"entailed\",\n  \"uncovered\": []\n}",
+    "verdict": "entailed",
+    "uncovered": []
+  },
+  "1c6168f5adc9cb05c9ad71cff7174c49081cb1bc3f15f6f0cb5452451197f93b": {
+    "provider": "google",
+    "model": "gemini-3.1-pro-preview",
+    "raw": "{\n  \"verdict\": \"entailed\",\n  \"uncovered\": []\n}",
+    "verdict": "entailed",
+    "uncovered": []
+  },
+  "36e1e8395183543076db6e9af054a35644978a668f18ade917c04bf6b5411f32": {
+    "provider": "google",
+    "model": "gemini-3.1-pro-preview",
+    "raw": "{\n  \"verdict\": \"entailed\",\n  \"uncovered\": []\n}",
+    "verdict": "entailed",
+    "uncovered": []
+  },
+  "4f74b5b955bad5b62ae42661f1444d90e41b3d7a0b72cc8d7add5712143d1be0": {
+    "provider": "google",
+    "model": "gemini-3.1-pro-preview",
+    "raw": "{\n  \"verdict\": \"entailed\",\n  \"uncovered\": []\n}",
+    "verdict": "entailed",
+    "uncovered": []
+  },
+  "b23287484fd040ce7ef80e3d9867fc649dbe5fbbbac6fbb023602d604407871a": {
+    "provider": "google",
+    "model": "gemini-3.1-pro-preview",
+    "raw": "{\n  \"verdict\": \"entailed\",\n  \"uncovered\": []\n}",
+    "verdict": "entailed",
+    "uncovered": []
+  },
+  "b20e697c32e3a1f0283fa821d1b1f7702a9085f1d0102207a2e50457891fbeee": {
+    "provider": "google",
+    "model": "gemini-3.1-pro-preview",
+    "raw": "{\n  \"verdict\": \"entailed\",\n  \"uncovered\": []\n}",
+    "verdict": "entailed",
+    "uncovered": []
+  },
+  "656d32324030aede05d483e1e7b3783cd17f19e497ededc58e200c104c24ebbf": {
+    "provider": "google",
+    "model": "gemini-3.1-pro-preview",
+    "raw": "{\n  \"verdict\": \"entailed\",\n  \"uncovered\": []\n}",
+    "verdict": "entailed",
+    "uncovered": []
+  },
+  "26f4e87375e0cd953c1336794e52360c1c837254d02a05eea3a34cf5d35aecb2": {
+    "provider": "google",
+    "model": "gemini-3.1-pro-preview",
+    "raw": "{\n  \"verdict\": \"entailed\",\n  \"uncovered\": []\n}",
+    "verdict": "entailed",
+    "uncovered": []
+  },
+  "b1a7d9c2ad47f485c8c4bda5969c3e1affe31b9b474630358249bcca758852ec": {
+    "provider": "anthropic",
+    "model": "claude-opus-5-5",
+    "raw": "{\"verdict\": \"entailed\", \"uncovered\": []}",
+    "verdict": "entailed",
+    "uncovered": []
+  },
+  "434ef8abd68b7f06707b7efbb3f2f37d1aabbe49e565068f82c8064632ed60db": {
+    "provider": "anthropic",
+    "model": "claude-opus-5-5",
+    "raw": "{\"verdict\": \"entailed\", \"uncovered\": []}",
+    "verdict": "entailed",
+    "uncovered": []
+  },
+  "479e1e8cc3a9b9b2ed736bec75afd8c473d23ffcd259343dff8a3be1c58fe89d": {
+    "provider": "anthropic",
+    "model": "claude-opus-5-5",
+    "raw": "{\"verdict\": \"entailed\", \"uncovered\": []}",
+    "verdict": "entailed",
+    "uncovered": []
+  },
+  "08bdc54fba7f90cd2b29d0d8c99c49f5a70bd03c3348101ddc078f4c001b7d72": {
+    "provider": "anthropic",
+    "model": "claude-opus-5-5",
+    "raw": "```json\n{\"verdict\": \"not-entailed\", \"uncovered\": [\"The plan has at least one task and every task names its test.\"]}\n```",
+    "verdict": "not-entailed",
+    "uncovered": [
+      "The plan has at least one task and every task names its test."
+    ]
+  },
+  "11dfbd208b3f728522e488fc0bb279611da0e4bf7854713e7be78be8257c8a68": {
+    "provider": "anthropic",
+    "model": "claude-opus-5-5",
+    "raw": "{\"verdict\": \"entailed\", \"uncovered\": []}",
+    "verdict": "entailed",
+    "uncovered": []
+  },
+  "cc93bc85d2a9cb2febc6478060dcf13a0606d0e9ca0785c0f1af04c476ecc33f": {
+    "provider": "anthropic",
+    "model": "claude-opus-5-5",
+    "raw": "{\"verdict\":\"not-entailed\",\"uncovered\":[\"The code builds and its existing tests pass.\",\"A deployment of the system that matches production in configuration is available.\"]}",
+    "verdict": "not-entailed",
+    "uncovered": [
+      "The code builds and its existing tests pass.",
+      "A deployment of the system that matches production in configuration is available."
+    ]
+  },
+  "377ded3a218c96a93aaa6a914e7849cb9c3d8c1c960763c0f0a76af87803e475": {
+    "provider": "anthropic",
+    "model": "claude-opus-5-5",
+    "raw": "{\"verdict\": \"entailed\", \"uncovered\": []}",
+    "verdict": "entailed",
+    "uncovered": []
+  },
+  "39fdf1874505ffb28c2c0871f47259404ed241208d601cd7dfd86e595d6e6050": {
+    "provider": "anthropic",
+    "model": "claude-opus-5-5",
+    "raw": "{\"verdict\": \"entailed\", \"uncovered\": []}",
+    "verdict": "entailed",
+    "uncovered": []
+  },
+  "f85bc95d112f7a229fa09b613be6cf914628b89e829b08525c77b3fbbfbf93c6": {
+    "provider": "anthropic",
+    "model": "claude-opus-5-5",
+    "raw": "{\"verdict\": \"entailed\", \"uncovered\": []}",
+    "verdict": "entailed",
+    "uncovered": []
+  },
+  "4a8b5b7299b1b8617415c4f2ef73ffcfde3e9791d23162bcdf7ce038f00dd28c": {
+    "provider": "anthropic",
+    "model": "claude-opus-5-5",
+    "raw": "{\"verdict\": \"entailed\", \"uncovered\": []}",
+    "verdict": "entailed",
+    "uncovered": []
+  },
+  "e261ba1f9dee4eff20635bed9363c4668f116b5ff7500669b8bd746ca4adc85b": {
+    "provider": "anthropic",
+    "model": "claude-opus-5-5",
+    "raw": "Step 3 needs every requirement to have a unique id and to be testable. Steps 1 and 2 each guarantee, for their own requirements, that every requirement has a unique id and is testable. Taken together, these cover all requirements that step 3 plans from.\n\nOne possible gap is whether ids are unique across the two sets, not just within each set. Read with common sense, \"every requirement has a unique id\" covers this, so the requirement is ensured.\n\n```json\n{\"verdict\": \"entailed\", \"uncovered\": []}\n```",
+    "verdict": "entailed",
+    "uncovered": []
+  },
+  "feb0813f9db5236e2415bd24555780b48d36f4e3ef2e87d4e7174b8b17f10e98": {
+    "provider": "anthropic",
+    "model": "claude-opus-5-5",
+    "raw": "{\"verdict\": \"not-entailed\", \"uncovered\": [\"The plan has at least one task and every task names its test.\"]}",
+    "verdict": "not-entailed",
+    "uncovered": [
+      "The plan has at least one task and every task names its test."
+    ]
+  },
+  "58e638e835c142477486c2b0aad796a1655cf430136f39101dbe6d628959320a": {
+    "provider": "anthropic",
+    "model": "claude-opus-5-5",
+    "raw": "{\"verdict\": \"not-entailed\", \"uncovered\": [\"The code builds and its existing tests pass.\"]}",
+    "verdict": "not-entailed",
+    "uncovered": [
+      "The code builds and its existing tests pass."
+    ]
+  },
+  "c6a6d150fb66f5f8a49240550b5ddb87415160cb81cd6451475381a39aa292cd": {
+    "provider": "anthropic",
+    "model": "claude-opus-5-5",
+    "raw": "{\"verdict\": \"entailed\", \"uncovered\": []}",
+    "verdict": "entailed",
+    "uncovered": []
+  },
+  "85721ab8a03905352f7d49563d777670d2b481318bd154b72e8d912cd4f0e183": {
+    "provider": "anthropic",
+    "model": "claude-opus-5-5",
+    "raw": "{\"verdict\": \"entailed\", \"uncovered\": []}",
+    "verdict": "entailed",
+    "uncovered": []
+  },
+  "2726b94e86eaa196916e12ca0d45cdf0cc34ab13efe8511d0790c1bd08746b3b": {
+    "provider": "anthropic",
+    "model": "claude-opus-5-5",
+    "raw": "{\"verdict\": \"not-entailed\", \"uncovered\": [\"The code is committed on a feature branch.\"]}",
+    "verdict": "not-entailed",
+    "uncovered": [
+      "The code is committed on a feature branch."
+    ]
+  },
+  "282b828f33e2fc856fc9b4ad9b880a8fce69f38953108447fb0ca61b3c27432f": {
+    "provider": "openai",
+    "model": "gpt-6-astra",
+    "raw": "{\"verdict\":\"entailed\",\"uncovered\":[]}",
+    "verdict": "entailed",
+    "uncovered": []
+  },
+  "71fe2160decb91f159b65324a0cb6a2ff456383db2cee9eefdb6573e5f42e713": {
+    "provider": "openai",
+    "model": "gpt-6-astra",
+    "raw": "{\"verdict\":\"entailed\",\"uncovered\":[]}",
+    "verdict": "entailed",
+    "uncovered": []
+  },
+  "0703ee206165e9f200ecfe93c2c2e601f188f1bf6936a9720824b5b3ac36cb05": {
+    "provider": "openai",
+    "model": "gpt-6-astra",
+    "raw": "{\"verdict\":\"entailed\",\"uncovered\":[]}",
+    "verdict": "entailed",
+    "uncovered": []
+  },
+  "2050fedbccd07f996db2968360268383998646dff669622acbc0da554f8511bb": {
+    "provider": "openai",
+    "model": "gpt-6-astra",
+    "raw": "{\"verdict\":\"not-entailed\",\"uncovered\":[\"The plan has at least one task and every task names its test.\"]}",
+    "verdict": "not-entailed",
+    "uncovered": [
+      "The plan has at least one task and every task names its test."
+    ]
+  },
+  "4a4bad7077973f76bf1392794aa84359d82fa1e0795fe1cea939183a8979367e": {
+    "provider": "openai",
+    "model": "gpt-6-astra",
+    "raw": "{\"verdict\":\"not-entailed\",\"uncovered\":[\"The code builds and its existing tests pass.\"]}",
+    "verdict": "not-entailed",
+    "uncovered": [
+      "The code builds and its existing tests pass."
+    ]
+  },
+  "69a9cb4515365df31c71bc0443721bb37a7caa174c4584d69021bcecc64b2252": {
+    "provider": "openai",
+    "model": "gpt-6-astra",
+    "raw": "{\"verdict\":\"not-entailed\",\"uncovered\":[\"The code builds and its existing tests pass.\",\"A deployment of the system that matches production in configuration is available.\"]}",
+    "verdict": "not-entailed",
+    "uncovered": [
+      "The code builds and its existing tests pass.",
+      "A deployment of the system that matches production in configuration is available."
+    ]
+  },
+  "9b79bf1d7dce38c951517b81b7be271562be8f1db89ba89dc08083c6248a13c6": {
+    "provider": "openai",
+    "model": "gpt-6-astra",
+    "raw": "{\"verdict\":\"entailed\",\"uncovered\":[]}",
+    "verdict": "entailed",
+    "uncovered": []
+  },
+  "7c2c41f0a5d83ca3e551f7840d1cc307b4a7b65b052d82cd3c7ae742c3f72e18": {
+    "provider": "openai",
+    "model": "gpt-6-astra",
+    "raw": "{\"verdict\":\"entailed\",\"uncovered\":[]}",
+    "verdict": "entailed",
+    "uncovered": []
+  },
+  "01bb289235d3ea27186ff5897e4a76dd4d5b75eded1aa6863532b476112ffd08": {
+    "provider": "openai",
+    "model": "gpt-6-astra",
+    "raw": "{\"verdict\":\"entailed\",\"uncovered\":[]}",
+    "verdict": "entailed",
+    "uncovered": []
+  },
+  "0b649690b838aa89fdcfedbe5397adf3587e3f0247162015d8c756668c892794": {
+    "provider": "openai",
+    "model": "gpt-6-astra",
+    "raw": "{\"verdict\":\"entailed\",\"uncovered\":[]}",
+    "verdict": "entailed",
+    "uncovered": []
+  },
+  "55f1d986feef16ec1009a109c90b955a6be2ff83da03dfbb20d787195088df4b": {
+    "provider": "openai",
+    "model": "gpt-6-astra",
+    "raw": "{\"verdict\":\"entailed\",\"uncovered\":[]}",
+    "verdict": "entailed",
+    "uncovered": []
+  },
+  "f67cff287731722d54f840c15bca038c90b3d396d42771ab6469003bc29bd4d9": {
+    "provider": "openai",
+    "model": "gpt-6-astra",
+    "raw": "{\"verdict\":\"not-entailed\",\"uncovered\":[\"The plan has at least one task and every task names its test.\"]}",
+    "verdict": "not-entailed",
+    "uncovered": [
+      "The plan has at least one task and every task names its test."
+    ]
+  },
+  "5ad09685b0225a13417e0eb26a95d1c23ca960e00acb025f0c1fd89880c1210d": {
+    "provider": "openai",
+    "model": "gpt-6-astra",
+    "raw": "{\"verdict\":\"not-entailed\",\"uncovered\":[\"The code builds and its existing tests pass.\"]}",
+    "verdict": "not-entailed",
+    "uncovered": [
+      "The code builds and its existing tests pass."
+    ]
+  },
+  "057c2fa3cc34b615ed1f2d564d6a5f37eb5a9bbff3c136f2558bd00cf8d8a458": {
+    "provider": "openai",
+    "model": "gpt-6-astra",
+    "raw": "{\"verdict\":\"not-entailed\",\"uncovered\":[\"The code builds and its existing tests pass.\"]}",
+    "verdict": "not-entailed",
+    "uncovered": [
+      "The code builds and its existing tests pass."
+    ]
+  },
+  "fdb08acf9eceae235d24478d1917a74d48fe22e617e4a09fab53ead334955abb": {
+    "provider": "openai",
+    "model": "gpt-6-astra",
+    "raw": "{\"verdict\":\"entailed\",\"uncovered\":[]}",
+    "verdict": "entailed",
+    "uncovered": []
+  },
+  "7e08da0ad0c1e32918e947b965de52d21b5262e10669a1b5f8c4e4983f3cdfc3": {
+    "provider": "openai",
+    "model": "gpt-6-astra",
+    "raw": "{\"verdict\":\"not-entailed\",\"uncovered\":[\"The code is committed on a feature branch.\"]}",
+    "verdict": "not-entailed",
+    "uncovered": [
+      "The code is committed on a feature branch."
+    ]
+  },
+  "bbcb0b1c69be22e562a64296070496b59ca133627ea4a0045b0904f89ae63343": {
+    "provider": "google",
+    "model": "gemini-3.1-pro-preview",
+    "raw": "{\n  \"verdict\": \"entailed\",\n  \"uncovered\": []\n}",
+    "verdict": "entailed",
+    "uncovered": []
+  },
+  "e7db46fe9b08ef3275bcfd19f2ee39eb2d494536b01e3f0c27da2093194f4ac2": {
+    "provider": "google",
+    "model": "gemini-3.1-pro-preview",
+    "raw": "{\n  \"verdict\": \"entailed\",\n  \"uncovered\": []\n}",
+    "verdict": "entailed",
+    "uncovered": []
+  },
+  "0192ea943372e24eb3ba8f3fcc5d9973f6fc757f080384f0c808800acd8b9573": {
+    "provider": "google",
+    "model": "gemini-3.1-pro-preview",
+    "raw": "{\n  \"verdict\": \"entailed\",\n  \"uncovered\": []\n}",
+    "verdict": "entailed",
+    "uncovered": []
+  },
+  "67567d84d6d7991ec9433daa8dc0ddc1b60bb642eee2fddc0c7dbab28adbe649": {
+    "provider": "google",
+    "model": "gemini-3.1-pro-preview",
+    "raw": "{\n  \"verdict\": \"not-entailed\",\n  \"uncovered\": [\n    \"The plan has at least one task and every task names its test.\"\n  ]\n}",
+    "verdict": "not-entailed",
+    "uncovered": [
+      "The plan has at least one task and every task names its test."
+    ]
+  },
+  "cee232af6eb201ad1eeb42fbcafe56d05ebf1a58f2d72e9ede5388100d4e1ccf": {
+    "provider": "google",
+    "model": "gemini-3.1-pro-preview",
+    "raw": "{\n  \"verdict\": \"entailed\",\n  \"uncovered\": []\n}",
+    "verdict": "entailed",
+    "uncovered": []
+  },
+  "49dcf6da8c31802dafe54e8de52749b2adbe7d25afdab6498f03caed7497a2e4": {
+    "provider": "google",
+    "model": "gemini-3.1-pro-preview",
+    "raw": "{\n  \"verdict\": \"not-entailed\",\n  \"uncovered\": [\n    \"The code builds and its existing tests pass.\",\n    \"A deployment of the system that matches production in configuration is available.\"\n  ]\n}",
+    "verdict": "not-entailed",
+    "uncovered": [
+      "The code builds and its existing tests pass.",
+      "A deployment of the system that matches production in configuration is available."
+    ]
+  },
+  "f55e89713396e898cb5387dcdee45f96333d8f8bdacf1cd40a624adbe2948258": {
+    "provider": "google",
+    "model": "gemini-3.1-pro-preview",
+    "raw": "{\n  \"verdict\": \"entailed\",\n  \"uncovered\": []\n}",
+    "verdict": "entailed",
+    "uncovered": []
+  },
+  "9518126c9354f493d387762152f959485b5f0421f2a5492b6bba58270a867749": {
+    "provider": "google",
+    "model": "gemini-3.1-pro-preview",
+    "raw": "{\n  \"verdict\": \"entailed\",\n  \"uncovered\": []\n}",
+    "verdict": "entailed",
+    "uncovered": []
+  },
+  "4888f8abdf220418a096f9bb58679a4817b6a522d589d78b674bb16430cb7cca": {
+    "provider": "google",
+    "model": "gemini-3.1-pro-preview",
+    "raw": "{\n  \"verdict\": \"entailed\",\n  \"uncovered\": []\n}",
+    "verdict": "entailed",
+    "uncovered": []
+  },
+  "38a62629cc3f05b8afa3c6557c68c00028351a49692cec7232fe324e8c3000c4": {
+    "provider": "google",
+    "model": "gemini-3.1-pro-preview",
+    "raw": "{\n  \"verdict\": \"entailed\",\n  \"uncovered\": []\n}",
+    "verdict": "entailed",
+    "uncovered": []
+  },
+  "632adda59d0a0a6d283feb1391dc2c76feaac7cb058f7b5be4141a7705fee057": {
+    "provider": "google",
+    "model": "gemini-3.1-pro-preview",
+    "raw": "{\n  \"verdict\": \"entailed\",\n  \"uncovered\": []\n}",
+    "verdict": "entailed",
+    "uncovered": []
+  },
+  "d16e75c11e8025a6c307b5d1a6e1135fd6798a0c7ab9733a20c97005097efd7b": {
+    "provider": "google",
+    "model": "gemini-3.1-pro-preview",
+    "raw": "{\n  \"verdict\": \"not-entailed\",\n  \"uncovered\": [\n    \"The plan has at least one task and every task names its test.\"\n  ]\n}",
+    "verdict": "not-entailed",
+    "uncovered": [
+      "The plan has at least one task and every task names its test."
+    ]
+  },
+  "548834b1ce59a10930cc712573545dc20107b2e008e56516863a7fd1a6530fd9": {
+    "provider": "google",
+    "model": "gemini-3.1-pro-preview",
+    "raw": "{\n  \"verdict\": \"not-entailed\",\n  \"uncovered\": [\n    \"The code builds and its existing tests pass.\"\n  ]\n}",
+    "verdict": "not-entailed",
+    "uncovered": [
+      "The code builds and its existing tests pass."
+    ]
+  },
+  "db1b80f0aad4dbbf3bdcf5a19e59dfc7ad7ec0cf7cfd934d6611587cb1b32776": {
+    "provider": "google",
+    "model": "gemini-3.1-pro-preview",
+    "raw": "{\n  \"verdict\": \"entailed\",\n  \"uncovered\": []\n}",
+    "verdict": "entailed",
+    "uncovered": []
+  },
+  "27ebc5d1fd77334d20c0628d0777e711d855d752246218f75dcf4f309538f1c8": {
+    "provider": "google",
+    "model": "gemini-3.1-pro-preview",
+    "raw": "{\n  \"verdict\": \"entailed\",\n  \"uncovered\": []\n}",
+    "verdict": "entailed",
+    "uncovered": []
+  },
+  "f12a529cea3ec6bc6c1b8c7de298b54aa9511e72506f181dbae83ea528481dec": {
+    "provider": "google",
+    "model": "gemini-3.1-pro-preview",
+    "raw": "{\n  \"verdict\": \"not-entailed\",\n  \"uncovered\": [\n    \"The code is committed on a feature branch.\"\n  ]\n}",
+    "verdict": "not-entailed",
+    "uncovered": [
+      "The code is committed on a feature branch."
+    ]
+  }
+}

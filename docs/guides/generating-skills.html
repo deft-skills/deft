@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Generating skills · DEFT</title>
+<meta name="description" content="DEFT: a metamodel and toolset to specialize, compose, check and generate agent skills.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../static/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231a1a1a'/%3E%3Ctext x='16' y='22' font-family='monospace' font-size='15' text-anchor='middle' fill='white'%3Edf%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<header class="topbar">
+  <button class="iconbtn menubtn" id="menu" aria-label="Menu">☰</button>
+  <a class="brand" href="../index.html"><span class="brand-mark">df</span>DEFT</a>
+  <nav class="topnav"><a class="" href="../index.html">Overview</a><a class="active" href="../guides/metamodel.html">Guides</a><a class="" href="../catalogue.html">Catalogue</a><a class="" href="../about.html">About</a></nav>
+  <span class="spacer"></span>
+  <a class="iconbtn" href="https://anonymous.4open.science/r/deft-F7FE/">Repository</a>
+  <button class="iconbtn" id="theme" aria-label="Toggle theme">◐</button>
+</header>
+<div class="layout">
+<nav class="sidebar"><h4>Get started</h4>
+<a class="" href="../index.html">Overview</a>
+<a class="" href="../quickstart.html">Quickstart</a>
+<h4>Guides</h4>
+<a class="" href="../guides/metamodel.html">The metamodel</a>
+<a class="" href="../guides/writing-models.html">Writing models</a>
+<a class="" href="../guides/validating-models.html">Validating models</a>
+<a class=" active" href="../guides/generating-skills.html">Generating skills</a>
+<a class="" href="../guides/using-skills.html">Using generated skills</a>
+<a class="" href="../guides/example.html">Example: deliver a feature</a>
+<a class="" href="../guides/cli.html">Command line</a>
+<h4>Catalogue</h4>
+<a class="" href="../catalogue.html">All skills</a>
+<a class="sub" href="../catalogue.html#requirements">Requirements</a>
+<a class="sub" href="../catalogue.html#planning">Planning</a>
+<a class="sub" href="../catalogue.html#implementation">Implementation</a>
+<a class="sub" href="../catalogue.html#verification">Verification</a>
+<a class="sub" href="../catalogue.html#support">Support</a>
+<a class="" href="../types.html">Artifact types</a>
+<h4>Workflows</h4>
+<a class="" href="../workflows/deliver-feature.html">deliver-feature</a>
+<a class="" href="../workflows/deliver-feature-iso.html">deliver-feature-iso</a>
+<h4>Project</h4>
+<a class="" href="../about.html">About DEFT</a></nav>
+<main><div class="content">
+<div class="eyebrow">Guides</div>
+<div class="guide"><script type="application/json" id="md-guide">"# Generating skills\n\n`deft generate LIB --out DIR` writes one folder per concrete skill and per\nexecutable workflow (every node bound to a concrete skill). Abstract skills are\nnot generated. Generation refuses to run on a library with violations unless\n`--force` is given.\n\n## Skills\n\nThe resolved skill is computed from the root of its lineage down: the root's\nsections are taken in order, each descendant applies its refinements and adds\nits new sections, and every change is recorded. The `SKILL.md` contains:\n\n- frontmatter with the specification's fields (`name`, `description`,\n  `license`, and `compatibility` and `allowed-tools` when the lineage declares\n  them) and, under `metadata`: `deft-version`, `deft-lineage`, `deft-inputs`,\n  `deft-outputs`, `deft-updates` (the `inout` parameters) and `deft-origin`;\n- a title from `metadata.title`, or the name;\n- **Inputs and outputs**: every parameter with its type, multiplicity and the\n  properties of its artifact type (inherited properties first); `inout`\n  parameters are listed as updated in place;\n- **Before you start**: the inherited and own preconditions;\n- the resolved sections, each followed by an HTML comment with its effective\n  kind and provenance, such as `<!-- deft: default section 'structure'; declared\n  abstract by specify-requirements, implemented by volere -->` (omit with\n  `--no-provenance`);\n- **Done when**: the inherited and own postconditions.\n\nResources bundled by the skill or by an ancestor are copied (the nearest\ndeclaration wins). Licence files of the repositories named in the lineage's\n`origin` are copied as `LICENSE-<project>.txt`, and the `license` field says so.\n\n## Workflows\n\nA workflow's `SKILL.md` lists its steps in an order compatible with all data,\nsequence and invokes edges. Each step names the skill to load, where each input\ncomes from, and what it produces. Invoked skills are listed inside their caller.\nDecisions list their guarded exits, and the repair loop states its bound and\nwhat to do when the bound is reached. `metadata.deft-requires` lists every skill\nthe workflow needs, and `references/workflow.mmd` holds the graph in Mermaid.\n\n## Validation\n\nEvery generated folder passes the reference validator of the specification\n(`skills-ref`), which the tests and `experiments/e3_generation/measure.py` run.\n"</script><div class="md" data-md="md-guide"><pre># Generating skills
+
+`deft generate LIB --out DIR` writes one folder per concrete skill and per
+executable workflow (every node bound to a concrete skill). Abstract skills are
+not generated. Generation refuses to run on a library with violations unless
+`--force` is given.
+
+## Skills
+
+The resolved skill is computed from the root of its lineage down: the root&#x27;s
+sections are taken in order, each descendant applies its refinements and adds
+its new sections, and every change is recorded. The `SKILL.md` contains:
+
+- frontmatter with the specification&#x27;s fields (`name`, `description`,
+  `license`, and `compatibility` and `allowed-tools` when the lineage declares
+  them) and, under `metadata`: `deft-version`, `deft-lineage`, `deft-inputs`,
+  `deft-outputs`, `deft-updates` (the `inout` parameters) and `deft-origin`;
+- a title from `metadata.title`, or the name;
+- **Inputs and outputs**: every parameter with its type, multiplicity and the
+  properties of its artifact type (inherited properties first); `inout`
+  parameters are listed as updated in place;
+- **Before you start**: the inherited and own preconditions;
+- the resolved sections, each followed by an HTML comment with its effective
+  kind and provenance, such as `&lt;!-- deft: default section &#x27;structure&#x27;; declared
+  abstract by specify-requirements, implemented by volere --&gt;` (omit with
+  `--no-provenance`);
+- **Done when**: the inherited and own postconditions.
+
+Resources bundled by the skill or by an ancestor are copied (the nearest
+declaration wins). Licence files of the repositories named in the lineage&#x27;s
+`origin` are copied as `LICENSE-&lt;project&gt;.txt`, and the `license` field says so.
+
+## Workflows
+
+A workflow&#x27;s `SKILL.md` lists its steps in an order compatible with all data,
+sequence and invokes edges. Each step names the skill to load, where each input
+comes from, and what it produces. Invoked skills are listed inside their caller.
+Decisions list their guarded exits, and the repair loop states its bound and
+what to do when the bound is reached. `metadata.deft-requires` lists every skill
+the workflow needs, and `references/workflow.mmd` holds the graph in Mermaid.
+
+## Validation
+
+Every generated folder passes the reference validator of the specification
+(`skills-ref`), which the tests and `experiments/e3_generation/measure.py` run.
+</pre></div></div>
+<p style="margin-top:24px"><a class="iconbtn" href="https://anonymous.4open.science/r/deft-F7FE/guides/generation.md">View source of this page</a></p>
+<div class="cards"><a class="card" href="../guides/validating-models.html"><p>Previous</p><h3>Validating models</h3></a><a class="card" href="../guides/using-skills.html"><p>Next</p><h3>Using generated skills</h3></a></div>
+<footer>DEFT 0.1.0 · GNU General Public License v3.0 · Reused third-party skills keep their original licences.</footer>
+</div></main>
+<aside class="toc"><h5>On this page</h5><nav id="toc-links"></nav></aside>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<script src="../static/app.js"></script>
+</body>
+</html>

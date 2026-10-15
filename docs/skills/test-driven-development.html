@@ -1,0 +1,1134 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>test-driven-development · DEFT</title>
+<meta name="description" content="DEFT: a metamodel and toolset to specialize, compose, check and generate agent skills.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../static/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231a1a1a'/%3E%3Ctext x='16' y='22' font-family='monospace' font-size='15' text-anchor='middle' fill='white'%3Edf%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<header class="topbar">
+  <button class="iconbtn menubtn" id="menu" aria-label="Menu">☰</button>
+  <a class="brand" href="../index.html"><span class="brand-mark">df</span>DEFT</a>
+  <nav class="topnav"><a class="" href="../index.html">Overview</a><a class="" href="../guides/metamodel.html">Guides</a><a class="" href="../catalogue.html">Catalogue</a><a class="" href="../about.html">About</a></nav>
+  <span class="spacer"></span>
+  <a class="iconbtn" href="https://anonymous.4open.science/r/deft-F7FE/">Repository</a>
+  <button class="iconbtn" id="theme" aria-label="Toggle theme">◐</button>
+</header>
+<div class="layout">
+<nav class="sidebar"><h4>Get started</h4>
+<a class="" href="../index.html">Overview</a>
+<a class="" href="../quickstart.html">Quickstart</a>
+<h4>Guides</h4>
+<a class="" href="../guides/metamodel.html">The metamodel</a>
+<a class="" href="../guides/writing-models.html">Writing models</a>
+<a class="" href="../guides/validating-models.html">Validating models</a>
+<a class="" href="../guides/generating-skills.html">Generating skills</a>
+<a class="" href="../guides/using-skills.html">Using generated skills</a>
+<a class="" href="../guides/example.html">Example: deliver a feature</a>
+<a class="" href="../guides/cli.html">Command line</a>
+<h4>Catalogue</h4>
+<a class="" href="../catalogue.html">All skills</a>
+<a class="sub" href="../catalogue.html#requirements">Requirements</a>
+<a class="sub" href="../catalogue.html#planning">Planning</a>
+<a class="sub" href="../catalogue.html#implementation">Implementation</a>
+<a class="sub" href="../catalogue.html#verification">Verification</a>
+<a class="sub" href="../catalogue.html#support">Support</a>
+<a class="" href="../types.html">Artifact types</a>
+<h4>Workflows</h4>
+<a class="" href="../workflows/deliver-feature.html">deliver-feature</a>
+<a class="" href="../workflows/deliver-feature-iso.html">deliver-feature-iso</a>
+<h4>Project</h4>
+<a class="" href="../about.html">About DEFT</a></nav>
+<main><div class="content">
+
+<div class="eyebrow">Implementation</div>
+<h1>test-driven-development</h1>
+<p class="lead">Use when implementing any feature or bugfix, before writing implementation code.</p>
+<div class="badges"><span class="badge ">concrete</span><span class="badge ">imported from obra/superpowers</span></div>
+<dl class="kv">
+<dt>Lineage</dt><dd><strong>test-driven-development</strong></dd>
+<dt>Specializations</dt><dd>none</dd>
+<dt>Used in</dt><dd><a href="../workflows/deliver-feature.html">deliver-feature</a>, <a href="../workflows/deliver-feature-iso.html">deliver-feature-iso</a></dd>
+</dl>
+<h2 id="signature">Signature</h2>
+<table><tr><th>Dir.</th><th>Parameter</th><th>Type</th><th>Declared by</th></tr><tr><td>in</td><td><code>task</code></td><td><a href="../types.html#t-ImplementationPlan"><code>ImplementationPlan</code></a> [1]</td><td>here</td></tr><tr><td>out</td><td><code>code</code></td><td><a href="../types.html#t-SourceCode"><code>SourceCode</code></a> [1]</td><td>here</td></tr></table>
+<h3>Preconditions</h3><p>None.</p><h3>Postconditions</h3><ul><li>Every new behaviour has a test that was seen to fail before the code existed.</li></ul>
+<h2 id="instructions">Instructions</h2>
+<div data-tabs><div class="tabs"><button class="tab active" data-panel="p-sections">Resolved sections</button><button class="tab" data-panel="p-generated">Generated SKILL.md</button><button class="tab" data-panel="p-model">Model</button></div></div><div class="tabpanel active" id="p-sections"><div class="section-block"><div class="section-head"><span class="badge final">final</span>
+<strong>Procedure</strong><span class="prov">declared by <a href="../skills/test-driven-development.html">test-driven-development</a></span></div><div class="section-body"><script type="application/json" id="md-sec-procedure">"### Overview\n\nWrite the test first. Watch it fail. Write minimal code to pass.\n\n**Core principle:** If you didn't watch the test fail, you don't know if it tests the right thing.\n\n**Violating the letter of the rules is violating the spirit of the rules.**\n\n### When to Use\n\n**Always:**\n- New features\n- Bug fixes\n- Refactoring\n- Behavior changes\n\n**Exceptions (ask your human partner):**\n- Throwaway prototypes\n- Generated code\n- Configuration files\n\nThinking \"skip TDD just this once\"? Stop. That's rationalization.\n\n### The Iron Law\n\n```\nNO PRODUCTION CODE WITHOUT A FAILING TEST FIRST\n```\n\nWrite code before the test? Delete it. Start over.\n\n**No exceptions:**\n- Don't keep it as \"reference\"\n- Don't \"adapt\" it while writing tests\n- Don't look at it\n- Delete means delete\n\nImplement fresh from tests. Period.\n\n### Red-Green-Refactor\n\n```dot\ndigraph tdd_cycle {\n    rankdir=LR;\n    red [label=\"RED\\nWrite failing test\", shape=box, style=filled, fillcolor=\"#ffcccc\"];\n    verify_red [label=\"Verify fails\\ncorrectly\", shape=diamond];\n    green [label=\"GREEN\\nMinimal code\", shape=box, style=filled, fillcolor=\"#ccffcc\"];\n    verify_green [label=\"Verify passes\\nAll green\", shape=diamond];\n    refactor [label=\"REFACTOR\\nClean up\", shape=box, style=filled, fillcolor=\"#ccccff\"];\n    next [label=\"Next\", shape=ellipse];\n\n    red -> verify_red;\n    verify_red -> green [label=\"yes\"];\n    verify_red -> red [label=\"wrong\\nfailure\"];\n    green -> verify_green;\n    verify_green -> refactor [label=\"yes\"];\n    verify_green -> green [label=\"no\"];\n    refactor -> verify_green [label=\"stay\\ngreen\"];\n    verify_green -> next;\n    next -> red;\n}\n```\n\n#### RED - Write Failing Test\n\nWrite one minimal test showing what should happen.\n\n<Good>\n```typescript\ntest('retries failed operations 3 times', async () => {\n  let attempts = 0;\n  const operation = () => {\n    attempts++;\n    if (attempts < 3) throw new Error('fail');\n    return 'success';\n  };\n\n  const result = await retryOperation(operation);\n\n  expect(result).toBe('success');\n  expect(attempts).toBe(3);\n});\n```\nClear name, tests real behavior, one thing\n<\/Good>\n\n<Bad>\n```typescript\ntest('retry works', async () => {\n  const mock = jest.fn()\n    .mockRejectedValueOnce(new Error())\n    .mockRejectedValueOnce(new Error())\n    .mockResolvedValueOnce('success');\n  await retryOperation(mock);\n  expect(mock).toHaveBeenCalledTimes(3);\n});\n```\nVague name, tests mock not code\n<\/Bad>\n\n**Requirements:**\n- One behavior\n- Clear name\n- Real code (no mocks unless unavoidable)\n\n#### Verify RED - Watch It Fail\n\n**MANDATORY. Never skip.**\n\n```bash\nnpm test path/to/test.test.ts\n```\n\nConfirm:\n- Test fails (not errors)\n- Failure message is expected\n- Fails because feature missing (not typos)\n\n**Test passes?** You're testing existing behavior. Fix test.\n\n**Test errors?** Fix error, re-run until it fails correctly.\n\n#### GREEN - Minimal Code\n\nWrite simplest code to pass the test.\n\n<Good>\n```typescript\nasync function retryOperation<T>(fn: () => Promise<T>): Promise<T> {\n  for (let i = 0; i < 3; i++) {\n    try {\n      return await fn();\n    } catch (e) {\n      if (i === 2) throw e;\n    }\n  }\n  throw new Error('unreachable');\n}\n```\nJust enough to pass\n<\/Good>\n\n<Bad>\n```typescript\nasync function retryOperation<T>(\n  fn: () => Promise<T>,\n  options?: {\n    maxRetries?: number;\n    backoff?: 'linear' | 'exponential';\n    onRetry?: (attempt: number) => void;\n  }\n): Promise<T> {\n  // YAGNI\n}\n```\nOver-engineered\n<\/Bad>\n\nDon't add features, refactor other code, or \"improve\" beyond the test.\n\n#### Verify GREEN - Watch It Pass\n\n**MANDATORY.**\n\n```bash\nnpm test path/to/test.test.ts\n```\n\nConfirm:\n- Test passes\n- Other tests still pass\n- Output pristine (no errors, warnings)\n\n**Test fails?** Fix code, not test.\n\n**Other tests fail?** Fix now.\n\n**\"Other tests\" means the project's suite, not just your file.** A\ngreen run of the test you wrote is not a green suite. Before you call\nthe change done, run the project's test command (bare `pytest`,\n`npm test`, `cargo test` \u2014 whatever the repo uses) even when your task\nnamed only one test file. A scope statement in your task bounds the\ndeliverable, not your verification. Any failure that run shows \u2014\nincluding one you didn't cause \u2014 goes in your report by name; a red\ntest you watched scroll past and didn't mention is a report falsified\nby omission.\n\n#### REFACTOR - Clean Up\n\nAfter green only:\n- Remove duplication\n- Improve names\n- Extract helpers\n\nKeep tests green. Don't add behavior.\n\n#### Repeat\n\nNext failing test for next feature.\n\n### Good Tests\n\n| Quality | Good | Bad |\n|---------|------|-----|\n| **Minimal** | One thing. \"and\" in name? Split it. | `test('validates email and domain and whitespace')` |\n| **Clear** | Name describes behavior | `test('test1')` |\n| **Shows intent** | Demonstrates desired API | Obscures what code should do |\n\nWhen writing or changing any test, read [writing-good-tests.md](writing-good-tests.md) for the rules that keep tests honest:\n- Name the production change that would make the test fail \u2014 before writing it\n- Assert on real behavior, never on mock behavior\n- Keep test-only code in test utilities, out of production classes\n- Understand a dependency's side effects before mocking it\n\n### Common Rationalizations\n\n| Excuse | Reality |\n|--------|---------|\n| \"Too simple to test\" | Simple code breaks. Test takes 30 seconds. |\n| \"I'll test after\" | Tests written after pass immediately \u2014 which proves nothing. They may test the wrong thing, test the implementation instead of the behavior, or miss the edge case you forgot. You never watched it fail, so you never proved it can catch the bug. Test-first forces that failure. |\n| \"Tests after achieve same goals (spirit not ritual)\" | Tests-after answer \"what does this do?\"; tests-first answer \"what should this do?\" Tests written after are biased by the code you already wrote \u2014 you verify the cases you remembered, not the ones you'd have discovered. Coverage without proof the tests work. |\n| \"Already manually tested\" | Manual testing is ad-hoc: no record of what you covered, no way to re-run it when the code changes, easy to forget cases under pressure. \"Worked when I tried it\" \u2260 comprehensive. Automated tests run the same way every time. |\n| \"Deleting X hours is wasteful\" | Sunk cost fallacy \u2014 that time is already spent either way. The real choice: rewrite with TDD (high confidence) vs. keep it and bolt tests on after (low confidence, likely bugs). Keeping code you can't trust is the waste. |\n| \"Keep as reference, write tests first\" | You'll adapt it. That's testing after. Delete means delete. |\n| \"Need to explore first\" | Fine. Throw away exploration, start with TDD. |\n| \"Test hard = design unclear\" | Listen to test. Hard to test = hard to use. |\n| \"TDD will slow me down\" | TDD IS the pragmatic path: catches bugs before commit, prevents regressions, lets you refactor without fear. \"Pragmatic\" shortcuts mean debugging in production \u2014 slower, not faster. |\n| \"Manual test faster\" | Manual doesn't prove edge cases. You'll re-test every change. |\n| \"Existing code has no tests\" | You're improving it. Add tests for existing code. |\n\n### Red Flags - STOP and Start Over\n\n- Code before test\n- Test after implementation\n- Test passes immediately\n- Can't explain why test failed\n- Tests added \"later\"\n- Rationalizing \"just this once\"\n- \"I already manually tested it\"\n- \"Tests after achieve the same purpose\"\n- \"It's about spirit not ritual\"\n- \"Keep as reference\" or \"adapt existing code\"\n- \"Already spent X hours, deleting is wasteful\"\n- \"TDD is dogmatic, I'm being pragmatic\"\n- \"This is different because...\"\n\n**All of these mean: Delete code. Start over with TDD.**\n\n### Example: Bug Fix\n\n**Bug:** Empty email accepted\n\n**RED**\n```typescript\ntest('rejects empty email', async () => {\n  const result = await submitForm({ email: '' });\n  expect(result.error).toBe('Email required');\n});\n```\n\n**Verify RED**\n```bash\n$ npm test\nFAIL: expected 'Email required', got undefined\n```\n\n**GREEN**\n```typescript\nfunction submitForm(data: FormData) {\n  if (!data.email?.trim()) {\n    return { error: 'Email required' };\n  }\n  // ...\n}\n```\n\n**Verify GREEN**\n```bash\n$ npm test\nPASS\n```\n\n**REFACTOR**\nExtract validation for multiple fields if needed.\n\n### Verification Checklist\n\nBefore marking work complete:\n\n- [ ] Every new function/method has a test\n- [ ] Watched each test fail before implementing\n- [ ] Each test failed for expected reason (feature missing, not typo)\n- [ ] Wrote minimal code to pass each test\n- [ ] All tests pass\n- [ ] Output pristine (no errors, warnings)\n- [ ] Tests use real code (mocks only if unavoidable)\n- [ ] Edge cases and errors covered\n\nCan't check all boxes? You skipped TDD. Start over.\n\n### When Stuck\n\n| Problem | Solution |\n|---------|----------|\n| Don't know how to test | Write wished-for API. Write assertion first. Ask your human partner. |\n| Test too complicated | Design too complicated. Simplify interface. |\n| Must mock everything | Code too coupled. Use dependency injection. |\n| Test setup huge | Extract helpers. Still complex? Simplify design. |\n\n### Debugging Integration\n\nBug found? Write failing test reproducing it. Follow TDD cycle. Test proves fix and prevents regression.\n\nNever fix bugs without a test.\n\n### Final Rule\n\n```\nProduction code \u2192 test exists and failed first\nOtherwise \u2192 not TDD\n```\n\nNo exceptions without your human partner's permission."</script><div class="md" data-md="md-sec-procedure"><pre>### Overview
+
+Write the test first. Watch it fail. Write minimal code to pass.
+
+**Core principle:** If you didn&#x27;t watch the test fail, you don&#x27;t know if it tests the right thing.
+
+**Violating the letter of the rules is violating the spirit of the rules.**
+
+### When to Use
+
+**Always:**
+- New features
+- Bug fixes
+- Refactoring
+- Behavior changes
+
+**Exceptions (ask your human partner):**
+- Throwaway prototypes
+- Generated code
+- Configuration files
+
+Thinking &quot;skip TDD just this once&quot;? Stop. That&#x27;s rationalization.
+
+### The Iron Law
+
+```
+NO PRODUCTION CODE WITHOUT A FAILING TEST FIRST
+```
+
+Write code before the test? Delete it. Start over.
+
+**No exceptions:**
+- Don&#x27;t keep it as &quot;reference&quot;
+- Don&#x27;t &quot;adapt&quot; it while writing tests
+- Don&#x27;t look at it
+- Delete means delete
+
+Implement fresh from tests. Period.
+
+### Red-Green-Refactor
+
+```dot
+digraph tdd_cycle {
+    rankdir=LR;
+    red [label=&quot;RED\nWrite failing test&quot;, shape=box, style=filled, fillcolor=&quot;#ffcccc&quot;];
+    verify_red [label=&quot;Verify fails\ncorrectly&quot;, shape=diamond];
+    green [label=&quot;GREEN\nMinimal code&quot;, shape=box, style=filled, fillcolor=&quot;#ccffcc&quot;];
+    verify_green [label=&quot;Verify passes\nAll green&quot;, shape=diamond];
+    refactor [label=&quot;REFACTOR\nClean up&quot;, shape=box, style=filled, fillcolor=&quot;#ccccff&quot;];
+    next [label=&quot;Next&quot;, shape=ellipse];
+
+    red -&gt; verify_red;
+    verify_red -&gt; green [label=&quot;yes&quot;];
+    verify_red -&gt; red [label=&quot;wrong\nfailure&quot;];
+    green -&gt; verify_green;
+    verify_green -&gt; refactor [label=&quot;yes&quot;];
+    verify_green -&gt; green [label=&quot;no&quot;];
+    refactor -&gt; verify_green [label=&quot;stay\ngreen&quot;];
+    verify_green -&gt; next;
+    next -&gt; red;
+}
+```
+
+#### RED - Write Failing Test
+
+Write one minimal test showing what should happen.
+
+&lt;Good&gt;
+```typescript
+test(&#x27;retries failed operations 3 times&#x27;, async () =&gt; {
+  let attempts = 0;
+  const operation = () =&gt; {
+    attempts++;
+    if (attempts &lt; 3) throw new Error(&#x27;fail&#x27;);
+    return &#x27;success&#x27;;
+  };
+
+  const result = await retryOperation(operation);
+
+  expect(result).toBe(&#x27;success&#x27;);
+  expect(attempts).toBe(3);
+});
+```
+Clear name, tests real behavior, one thing
+&lt;/Good&gt;
+
+&lt;Bad&gt;
+```typescript
+test(&#x27;retry works&#x27;, async () =&gt; {
+  const mock = jest.fn()
+    .mockRejectedValueOnce(new Error())
+    .mockRejectedValueOnce(new Error())
+    .mockResolvedValueOnce(&#x27;success&#x27;);
+  await retryOperation(mock);
+  expect(mock).toHaveBeenCalledTimes(3);
+});
+```
+Vague name, tests mock not code
+&lt;/Bad&gt;
+
+**Requirements:**
+- One behavior
+- Clear name
+- Real code (no mocks unless unavoidable)
+
+#### Verify RED - Watch It Fail
+
+**MANDATORY. Never skip.**
+
+```bash
+npm test path/to/test.test.ts
+```
+
+Confirm:
+- Test fails (not errors)
+- Failure message is expected
+- Fails because feature missing (not typos)
+
+**Test passes?** You&#x27;re testing existing behavior. Fix test.
+
+**Test errors?** Fix error, re-run until it fails correctly.
+
+#### GREEN - Minimal Code
+
+Write simplest code to pass the test.
+
+&lt;Good&gt;
+```typescript
+async function retryOperation&lt;T&gt;(fn: () =&gt; Promise&lt;T&gt;): Promise&lt;T&gt; {
+  for (let i = 0; i &lt; 3; i++) {
+    try {
+      return await fn();
+    } catch (e) {
+      if (i === 2) throw e;
+    }
+  }
+  throw new Error(&#x27;unreachable&#x27;);
+}
+```
+Just enough to pass
+&lt;/Good&gt;
+
+&lt;Bad&gt;
+```typescript
+async function retryOperation&lt;T&gt;(
+  fn: () =&gt; Promise&lt;T&gt;,
+  options?: {
+    maxRetries?: number;
+    backoff?: &#x27;linear&#x27; | &#x27;exponential&#x27;;
+    onRetry?: (attempt: number) =&gt; void;
+  }
+): Promise&lt;T&gt; {
+  // YAGNI
+}
+```
+Over-engineered
+&lt;/Bad&gt;
+
+Don&#x27;t add features, refactor other code, or &quot;improve&quot; beyond the test.
+
+#### Verify GREEN - Watch It Pass
+
+**MANDATORY.**
+
+```bash
+npm test path/to/test.test.ts
+```
+
+Confirm:
+- Test passes
+- Other tests still pass
+- Output pristine (no errors, warnings)
+
+**Test fails?** Fix code, not test.
+
+**Other tests fail?** Fix now.
+
+**&quot;Other tests&quot; means the project&#x27;s suite, not just your file.** A
+green run of the test you wrote is not a green suite. Before you call
+the change done, run the project&#x27;s test command (bare `pytest`,
+`npm test`, `cargo test` — whatever the repo uses) even when your task
+named only one test file. A scope statement in your task bounds the
+deliverable, not your verification. Any failure that run shows —
+including one you didn&#x27;t cause — goes in your report by name; a red
+test you watched scroll past and didn&#x27;t mention is a report falsified
+by omission.
+
+#### REFACTOR - Clean Up
+
+After green only:
+- Remove duplication
+- Improve names
+- Extract helpers
+
+Keep tests green. Don&#x27;t add behavior.
+
+#### Repeat
+
+Next failing test for next feature.
+
+### Good Tests
+
+| Quality | Good | Bad |
+|---------|------|-----|
+| **Minimal** | One thing. &quot;and&quot; in name? Split it. | `test(&#x27;validates email and domain and whitespace&#x27;)` |
+| **Clear** | Name describes behavior | `test(&#x27;test1&#x27;)` |
+| **Shows intent** | Demonstrates desired API | Obscures what code should do |
+
+When writing or changing any test, read [writing-good-tests.md](writing-good-tests.md) for the rules that keep tests honest:
+- Name the production change that would make the test fail — before writing it
+- Assert on real behavior, never on mock behavior
+- Keep test-only code in test utilities, out of production classes
+- Understand a dependency&#x27;s side effects before mocking it
+
+### Common Rationalizations
+
+| Excuse | Reality |
+|--------|---------|
+| &quot;Too simple to test&quot; | Simple code breaks. Test takes 30 seconds. |
+| &quot;I&#x27;ll test after&quot; | Tests written after pass immediately — which proves nothing. They may test the wrong thing, test the implementation instead of the behavior, or miss the edge case you forgot. You never watched it fail, so you never proved it can catch the bug. Test-first forces that failure. |
+| &quot;Tests after achieve same goals (spirit not ritual)&quot; | Tests-after answer &quot;what does this do?&quot;; tests-first answer &quot;what should this do?&quot; Tests written after are biased by the code you already wrote — you verify the cases you remembered, not the ones you&#x27;d have discovered. Coverage without proof the tests work. |
+| &quot;Already manually tested&quot; | Manual testing is ad-hoc: no record of what you covered, no way to re-run it when the code changes, easy to forget cases under pressure. &quot;Worked when I tried it&quot; ≠ comprehensive. Automated tests run the same way every time. |
+| &quot;Deleting X hours is wasteful&quot; | Sunk cost fallacy — that time is already spent either way. The real choice: rewrite with TDD (high confidence) vs. keep it and bolt tests on after (low confidence, likely bugs). Keeping code you can&#x27;t trust is the waste. |
+| &quot;Keep as reference, write tests first&quot; | You&#x27;ll adapt it. That&#x27;s testing after. Delete means delete. |
+| &quot;Need to explore first&quot; | Fine. Throw away exploration, start with TDD. |
+| &quot;Test hard = design unclear&quot; | Listen to test. Hard to test = hard to use. |
+| &quot;TDD will slow me down&quot; | TDD IS the pragmatic path: catches bugs before commit, prevents regressions, lets you refactor without fear. &quot;Pragmatic&quot; shortcuts mean debugging in production — slower, not faster. |
+| &quot;Manual test faster&quot; | Manual doesn&#x27;t prove edge cases. You&#x27;ll re-test every change. |
+| &quot;Existing code has no tests&quot; | You&#x27;re improving it. Add tests for existing code. |
+
+### Red Flags - STOP and Start Over
+
+- Code before test
+- Test after implementation
+- Test passes immediately
+- Can&#x27;t explain why test failed
+- Tests added &quot;later&quot;
+- Rationalizing &quot;just this once&quot;
+- &quot;I already manually tested it&quot;
+- &quot;Tests after achieve the same purpose&quot;
+- &quot;It&#x27;s about spirit not ritual&quot;
+- &quot;Keep as reference&quot; or &quot;adapt existing code&quot;
+- &quot;Already spent X hours, deleting is wasteful&quot;
+- &quot;TDD is dogmatic, I&#x27;m being pragmatic&quot;
+- &quot;This is different because...&quot;
+
+**All of these mean: Delete code. Start over with TDD.**
+
+### Example: Bug Fix
+
+**Bug:** Empty email accepted
+
+**RED**
+```typescript
+test(&#x27;rejects empty email&#x27;, async () =&gt; {
+  const result = await submitForm({ email: &#x27;&#x27; });
+  expect(result.error).toBe(&#x27;Email required&#x27;);
+});
+```
+
+**Verify RED**
+```bash
+$ npm test
+FAIL: expected &#x27;Email required&#x27;, got undefined
+```
+
+**GREEN**
+```typescript
+function submitForm(data: FormData) {
+  if (!data.email?.trim()) {
+    return { error: &#x27;Email required&#x27; };
+  }
+  // ...
+}
+```
+
+**Verify GREEN**
+```bash
+$ npm test
+PASS
+```
+
+**REFACTOR**
+Extract validation for multiple fields if needed.
+
+### Verification Checklist
+
+Before marking work complete:
+
+- [ ] Every new function/method has a test
+- [ ] Watched each test fail before implementing
+- [ ] Each test failed for expected reason (feature missing, not typo)
+- [ ] Wrote minimal code to pass each test
+- [ ] All tests pass
+- [ ] Output pristine (no errors, warnings)
+- [ ] Tests use real code (mocks only if unavoidable)
+- [ ] Edge cases and errors covered
+
+Can&#x27;t check all boxes? You skipped TDD. Start over.
+
+### When Stuck
+
+| Problem | Solution |
+|---------|----------|
+| Don&#x27;t know how to test | Write wished-for API. Write assertion first. Ask your human partner. |
+| Test too complicated | Design too complicated. Simplify interface. |
+| Must mock everything | Code too coupled. Use dependency injection. |
+| Test setup huge | Extract helpers. Still complex? Simplify design. |
+
+### Debugging Integration
+
+Bug found? Write failing test reproducing it. Follow TDD cycle. Test proves fix and prevents regression.
+
+Never fix bugs without a test.
+
+### Final Rule
+
+```
+Production code → test exists and failed first
+Otherwise → not TDD
+```
+
+No exceptions without your human partner&#x27;s permission.</pre></div></div></div></div><div class="tabpanel" id="p-generated">
+<p><a class="iconbtn" href="../skills-dist/test-driven-development/SKILL.md" download>Download SKILL.md</a>
+<button class="iconbtn" data-copy="raw-test-driven-development">Copy</button></p>
+<pre><code>---
+name: test-driven-development
+description: Use when implementing any feature or bugfix, before writing implementation code.
+license: GPL-3.0-only (includes third-party material; see LICENSE-*.txt)
+metadata:
+  deft-version: 0.1.0
+  deft-lineage: test-driven-development
+  deft-inputs: &#x27;task: ImplementationPlan [1]&#x27;
+  deft-outputs: &#x27;code: SourceCode [1]&#x27;
+  deft-origin: obra/superpowers@8ca22db skills/test-driven-development/SKILL.md (MIT, imported)
+---</code></pre><div class="section-body"><script type="application/json" id="md-gen">"# Test-driven development\n\n## Inputs and outputs\n\n- Input `task`: ImplementationPlan (one). The plan whose current task is implemented.\n  Ordered, test-first tasks that implement a set of requirements.\n  - `fileStructure` (required)\n  - `tasks` (one or more): each task names files, interfaces, tests and the requirement ids it covers\n  - `reviewFocus` (any number)\n- Output `code`: SourceCode (one)\n  The changed code base, as a branch or a set of commits.\n  - `branch` (required)\n  - `commits` (one or more)\n\n## Procedure\n\n### Overview\n\nWrite the test first. Watch it fail. Write minimal code to pass.\n\n**Core principle:** If you didn't watch the test fail, you don't know if it tests the right thing.\n\n**Violating the letter of the rules is violating the spirit of the rules.**\n\n### When to Use\n\n**Always:**\n- New features\n- Bug fixes\n- Refactoring\n- Behavior changes\n\n**Exceptions (ask your human partner):**\n- Throwaway prototypes\n- Generated code\n- Configuration files\n\nThinking \"skip TDD just this once\"? Stop. That's rationalization.\n\n### The Iron Law\n\n```\nNO PRODUCTION CODE WITHOUT A FAILING TEST FIRST\n```\n\nWrite code before the test? Delete it. Start over.\n\n**No exceptions:**\n- Don't keep it as \"reference\"\n- Don't \"adapt\" it while writing tests\n- Don't look at it\n- Delete means delete\n\nImplement fresh from tests. Period.\n\n### Red-Green-Refactor\n\n```dot\ndigraph tdd_cycle {\n    rankdir=LR;\n    red [label=\"RED\\nWrite failing test\", shape=box, style=filled, fillcolor=\"#ffcccc\"];\n    verify_red [label=\"Verify fails\\ncorrectly\", shape=diamond];\n    green [label=\"GREEN\\nMinimal code\", shape=box, style=filled, fillcolor=\"#ccffcc\"];\n    verify_green [label=\"Verify passes\\nAll green\", shape=diamond];\n    refactor [label=\"REFACTOR\\nClean up\", shape=box, style=filled, fillcolor=\"#ccccff\"];\n    next [label=\"Next\", shape=ellipse];\n\n    red -> verify_red;\n    verify_red -> green [label=\"yes\"];\n    verify_red -> red [label=\"wrong\\nfailure\"];\n    green -> verify_green;\n    verify_green -> refactor [label=\"yes\"];\n    verify_green -> green [label=\"no\"];\n    refactor -> verify_green [label=\"stay\\ngreen\"];\n    verify_green -> next;\n    next -> red;\n}\n```\n\n#### RED - Write Failing Test\n\nWrite one minimal test showing what should happen.\n\n<Good>\n```typescript\ntest('retries failed operations 3 times', async () => {\n  let attempts = 0;\n  const operation = () => {\n    attempts++;\n    if (attempts < 3) throw new Error('fail');\n    return 'success';\n  };\n\n  const result = await retryOperation(operation);\n\n  expect(result).toBe('success');\n  expect(attempts).toBe(3);\n});\n```\nClear name, tests real behavior, one thing\n<\/Good>\n\n<Bad>\n```typescript\ntest('retry works', async () => {\n  const mock = jest.fn()\n    .mockRejectedValueOnce(new Error())\n    .mockRejectedValueOnce(new Error())\n    .mockResolvedValueOnce('success');\n  await retryOperation(mock);\n  expect(mock).toHaveBeenCalledTimes(3);\n});\n```\nVague name, tests mock not code\n<\/Bad>\n\n**Requirements:**\n- One behavior\n- Clear name\n- Real code (no mocks unless unavoidable)\n\n#### Verify RED - Watch It Fail\n\n**MANDATORY. Never skip.**\n\n```bash\nnpm test path/to/test.test.ts\n```\n\nConfirm:\n- Test fails (not errors)\n- Failure message is expected\n- Fails because feature missing (not typos)\n\n**Test passes?** You're testing existing behavior. Fix test.\n\n**Test errors?** Fix error, re-run until it fails correctly.\n\n#### GREEN - Minimal Code\n\nWrite simplest code to pass the test.\n\n<Good>\n```typescript\nasync function retryOperation<T>(fn: () => Promise<T>): Promise<T> {\n  for (let i = 0; i < 3; i++) {\n    try {\n      return await fn();\n    } catch (e) {\n      if (i === 2) throw e;\n    }\n  }\n  throw new Error('unreachable');\n}\n```\nJust enough to pass\n<\/Good>\n\n<Bad>\n```typescript\nasync function retryOperation<T>(\n  fn: () => Promise<T>,\n  options?: {\n    maxRetries?: number;\n    backoff?: 'linear' | 'exponential';\n    onRetry?: (attempt: number) => void;\n  }\n): Promise<T> {\n  // YAGNI\n}\n```\nOver-engineered\n<\/Bad>\n\nDon't add features, refactor other code, or \"improve\" beyond the test.\n\n#### Verify GREEN - Watch It Pass\n\n**MANDATORY.**\n\n```bash\nnpm test path/to/test.test.ts\n```\n\nConfirm:\n- Test passes\n- Other tests still pass\n- Output pristine (no errors, warnings)\n\n**Test fails?** Fix code, not test.\n\n**Other tests fail?** Fix now.\n\n**\"Other tests\" means the project's suite, not just your file.** A\ngreen run of the test you wrote is not a green suite. Before you call\nthe change done, run the project's test command (bare `pytest`,\n`npm test`, `cargo test` \u2014 whatever the repo uses) even when your task\nnamed only one test file. A scope statement in your task bounds the\ndeliverable, not your verification. Any failure that run shows \u2014\nincluding one you didn't cause \u2014 goes in your report by name; a red\ntest you watched scroll past and didn't mention is a report falsified\nby omission.\n\n#### REFACTOR - Clean Up\n\nAfter green only:\n- Remove duplication\n- Improve names\n- Extract helpers\n\nKeep tests green. Don't add behavior.\n\n#### Repeat\n\nNext failing test for next feature.\n\n### Good Tests\n\n| Quality | Good | Bad |\n|---------|------|-----|\n| **Minimal** | One thing. \"and\" in name? Split it. | `test('validates email and domain and whitespace')` |\n| **Clear** | Name describes behavior | `test('test1')` |\n| **Shows intent** | Demonstrates desired API | Obscures what code should do |\n\nWhen writing or changing any test, read [writing-good-tests.md](writing-good-tests.md) for the rules that keep tests honest:\n- Name the production change that would make the test fail \u2014 before writing it\n- Assert on real behavior, never on mock behavior\n- Keep test-only code in test utilities, out of production classes\n- Understand a dependency's side effects before mocking it\n\n### Common Rationalizations\n\n| Excuse | Reality |\n|--------|---------|\n| \"Too simple to test\" | Simple code breaks. Test takes 30 seconds. |\n| \"I'll test after\" | Tests written after pass immediately \u2014 which proves nothing. They may test the wrong thing, test the implementation instead of the behavior, or miss the edge case you forgot. You never watched it fail, so you never proved it can catch the bug. Test-first forces that failure. |\n| \"Tests after achieve same goals (spirit not ritual)\" | Tests-after answer \"what does this do?\"; tests-first answer \"what should this do?\" Tests written after are biased by the code you already wrote \u2014 you verify the cases you remembered, not the ones you'd have discovered. Coverage without proof the tests work. |\n| \"Already manually tested\" | Manual testing is ad-hoc: no record of what you covered, no way to re-run it when the code changes, easy to forget cases under pressure. \"Worked when I tried it\" \u2260 comprehensive. Automated tests run the same way every time. |\n| \"Deleting X hours is wasteful\" | Sunk cost fallacy \u2014 that time is already spent either way. The real choice: rewrite with TDD (high confidence) vs. keep it and bolt tests on after (low confidence, likely bugs). Keeping code you can't trust is the waste. |\n| \"Keep as reference, write tests first\" | You'll adapt it. That's testing after. Delete means delete. |\n| \"Need to explore first\" | Fine. Throw away exploration, start with TDD. |\n| \"Test hard = design unclear\" | Listen to test. Hard to test = hard to use. |\n| \"TDD will slow me down\" | TDD IS the pragmatic path: catches bugs before commit, prevents regressions, lets you refactor without fear. \"Pragmatic\" shortcuts mean debugging in production \u2014 slower, not faster. |\n| \"Manual test faster\" | Manual doesn't prove edge cases. You'll re-test every change. |\n| \"Existing code has no tests\" | You're improving it. Add tests for existing code. |\n\n### Red Flags - STOP and Start Over\n\n- Code before test\n- Test after implementation\n- Test passes immediately\n- Can't explain why test failed\n- Tests added \"later\"\n- Rationalizing \"just this once\"\n- \"I already manually tested it\"\n- \"Tests after achieve the same purpose\"\n- \"It's about spirit not ritual\"\n- \"Keep as reference\" or \"adapt existing code\"\n- \"Already spent X hours, deleting is wasteful\"\n- \"TDD is dogmatic, I'm being pragmatic\"\n- \"This is different because...\"\n\n**All of these mean: Delete code. Start over with TDD.**\n\n### Example: Bug Fix\n\n**Bug:** Empty email accepted\n\n**RED**\n```typescript\ntest('rejects empty email', async () => {\n  const result = await submitForm({ email: '' });\n  expect(result.error).toBe('Email required');\n});\n```\n\n**Verify RED**\n```bash\n$ npm test\nFAIL: expected 'Email required', got undefined\n```\n\n**GREEN**\n```typescript\nfunction submitForm(data: FormData) {\n  if (!data.email?.trim()) {\n    return { error: 'Email required' };\n  }\n  // ...\n}\n```\n\n**Verify GREEN**\n```bash\n$ npm test\nPASS\n```\n\n**REFACTOR**\nExtract validation for multiple fields if needed.\n\n### Verification Checklist\n\nBefore marking work complete:\n\n- [ ] Every new function/method has a test\n- [ ] Watched each test fail before implementing\n- [ ] Each test failed for expected reason (feature missing, not typo)\n- [ ] Wrote minimal code to pass each test\n- [ ] All tests pass\n- [ ] Output pristine (no errors, warnings)\n- [ ] Tests use real code (mocks only if unavoidable)\n- [ ] Edge cases and errors covered\n\nCan't check all boxes? You skipped TDD. Start over.\n\n### When Stuck\n\n| Problem | Solution |\n|---------|----------|\n| Don't know how to test | Write wished-for API. Write assertion first. Ask your human partner. |\n| Test too complicated | Design too complicated. Simplify interface. |\n| Must mock everything | Code too coupled. Use dependency injection. |\n| Test setup huge | Extract helpers. Still complex? Simplify design. |\n\n### Debugging Integration\n\nBug found? Write failing test reproducing it. Follow TDD cycle. Test proves fix and prevents regression.\n\nNever fix bugs without a test.\n\n### Final Rule\n\n```\nProduction code \u2192 test exists and failed first\nOtherwise \u2192 not TDD\n```\n\nNo exceptions without your human partner's permission.\n\n## Done when\n\n- Every new behaviour has a test that was seen to fail before the code existed.\n"</script><div class="md" data-md="md-gen"><pre># Test-driven development
+
+## Inputs and outputs
+
+- Input `task`: ImplementationPlan (one). The plan whose current task is implemented.
+  Ordered, test-first tasks that implement a set of requirements.
+  - `fileStructure` (required)
+  - `tasks` (one or more): each task names files, interfaces, tests and the requirement ids it covers
+  - `reviewFocus` (any number)
+- Output `code`: SourceCode (one)
+  The changed code base, as a branch or a set of commits.
+  - `branch` (required)
+  - `commits` (one or more)
+
+## Procedure
+
+### Overview
+
+Write the test first. Watch it fail. Write minimal code to pass.
+
+**Core principle:** If you didn&#x27;t watch the test fail, you don&#x27;t know if it tests the right thing.
+
+**Violating the letter of the rules is violating the spirit of the rules.**
+
+### When to Use
+
+**Always:**
+- New features
+- Bug fixes
+- Refactoring
+- Behavior changes
+
+**Exceptions (ask your human partner):**
+- Throwaway prototypes
+- Generated code
+- Configuration files
+
+Thinking &quot;skip TDD just this once&quot;? Stop. That&#x27;s rationalization.
+
+### The Iron Law
+
+```
+NO PRODUCTION CODE WITHOUT A FAILING TEST FIRST
+```
+
+Write code before the test? Delete it. Start over.
+
+**No exceptions:**
+- Don&#x27;t keep it as &quot;reference&quot;
+- Don&#x27;t &quot;adapt&quot; it while writing tests
+- Don&#x27;t look at it
+- Delete means delete
+
+Implement fresh from tests. Period.
+
+### Red-Green-Refactor
+
+```dot
+digraph tdd_cycle {
+    rankdir=LR;
+    red [label=&quot;RED\nWrite failing test&quot;, shape=box, style=filled, fillcolor=&quot;#ffcccc&quot;];
+    verify_red [label=&quot;Verify fails\ncorrectly&quot;, shape=diamond];
+    green [label=&quot;GREEN\nMinimal code&quot;, shape=box, style=filled, fillcolor=&quot;#ccffcc&quot;];
+    verify_green [label=&quot;Verify passes\nAll green&quot;, shape=diamond];
+    refactor [label=&quot;REFACTOR\nClean up&quot;, shape=box, style=filled, fillcolor=&quot;#ccccff&quot;];
+    next [label=&quot;Next&quot;, shape=ellipse];
+
+    red -&gt; verify_red;
+    verify_red -&gt; green [label=&quot;yes&quot;];
+    verify_red -&gt; red [label=&quot;wrong\nfailure&quot;];
+    green -&gt; verify_green;
+    verify_green -&gt; refactor [label=&quot;yes&quot;];
+    verify_green -&gt; green [label=&quot;no&quot;];
+    refactor -&gt; verify_green [label=&quot;stay\ngreen&quot;];
+    verify_green -&gt; next;
+    next -&gt; red;
+}
+```
+
+#### RED - Write Failing Test
+
+Write one minimal test showing what should happen.
+
+&lt;Good&gt;
+```typescript
+test(&#x27;retries failed operations 3 times&#x27;, async () =&gt; {
+  let attempts = 0;
+  const operation = () =&gt; {
+    attempts++;
+    if (attempts &lt; 3) throw new Error(&#x27;fail&#x27;);
+    return &#x27;success&#x27;;
+  };
+
+  const result = await retryOperation(operation);
+
+  expect(result).toBe(&#x27;success&#x27;);
+  expect(attempts).toBe(3);
+});
+```
+Clear name, tests real behavior, one thing
+&lt;/Good&gt;
+
+&lt;Bad&gt;
+```typescript
+test(&#x27;retry works&#x27;, async () =&gt; {
+  const mock = jest.fn()
+    .mockRejectedValueOnce(new Error())
+    .mockRejectedValueOnce(new Error())
+    .mockResolvedValueOnce(&#x27;success&#x27;);
+  await retryOperation(mock);
+  expect(mock).toHaveBeenCalledTimes(3);
+});
+```
+Vague name, tests mock not code
+&lt;/Bad&gt;
+
+**Requirements:**
+- One behavior
+- Clear name
+- Real code (no mocks unless unavoidable)
+
+#### Verify RED - Watch It Fail
+
+**MANDATORY. Never skip.**
+
+```bash
+npm test path/to/test.test.ts
+```
+
+Confirm:
+- Test fails (not errors)
+- Failure message is expected
+- Fails because feature missing (not typos)
+
+**Test passes?** You&#x27;re testing existing behavior. Fix test.
+
+**Test errors?** Fix error, re-run until it fails correctly.
+
+#### GREEN - Minimal Code
+
+Write simplest code to pass the test.
+
+&lt;Good&gt;
+```typescript
+async function retryOperation&lt;T&gt;(fn: () =&gt; Promise&lt;T&gt;): Promise&lt;T&gt; {
+  for (let i = 0; i &lt; 3; i++) {
+    try {
+      return await fn();
+    } catch (e) {
+      if (i === 2) throw e;
+    }
+  }
+  throw new Error(&#x27;unreachable&#x27;);
+}
+```
+Just enough to pass
+&lt;/Good&gt;
+
+&lt;Bad&gt;
+```typescript
+async function retryOperation&lt;T&gt;(
+  fn: () =&gt; Promise&lt;T&gt;,
+  options?: {
+    maxRetries?: number;
+    backoff?: &#x27;linear&#x27; | &#x27;exponential&#x27;;
+    onRetry?: (attempt: number) =&gt; void;
+  }
+): Promise&lt;T&gt; {
+  // YAGNI
+}
+```
+Over-engineered
+&lt;/Bad&gt;
+
+Don&#x27;t add features, refactor other code, or &quot;improve&quot; beyond the test.
+
+#### Verify GREEN - Watch It Pass
+
+**MANDATORY.**
+
+```bash
+npm test path/to/test.test.ts
+```
+
+Confirm:
+- Test passes
+- Other tests still pass
+- Output pristine (no errors, warnings)
+
+**Test fails?** Fix code, not test.
+
+**Other tests fail?** Fix now.
+
+**&quot;Other tests&quot; means the project&#x27;s suite, not just your file.** A
+green run of the test you wrote is not a green suite. Before you call
+the change done, run the project&#x27;s test command (bare `pytest`,
+`npm test`, `cargo test` — whatever the repo uses) even when your task
+named only one test file. A scope statement in your task bounds the
+deliverable, not your verification. Any failure that run shows —
+including one you didn&#x27;t cause — goes in your report by name; a red
+test you watched scroll past and didn&#x27;t mention is a report falsified
+by omission.
+
+#### REFACTOR - Clean Up
+
+After green only:
+- Remove duplication
+- Improve names
+- Extract helpers
+
+Keep tests green. Don&#x27;t add behavior.
+
+#### Repeat
+
+Next failing test for next feature.
+
+### Good Tests
+
+| Quality | Good | Bad |
+|---------|------|-----|
+| **Minimal** | One thing. &quot;and&quot; in name? Split it. | `test(&#x27;validates email and domain and whitespace&#x27;)` |
+| **Clear** | Name describes behavior | `test(&#x27;test1&#x27;)` |
+| **Shows intent** | Demonstrates desired API | Obscures what code should do |
+
+When writing or changing any test, read [writing-good-tests.md](writing-good-tests.md) for the rules that keep tests honest:
+- Name the production change that would make the test fail — before writing it
+- Assert on real behavior, never on mock behavior
+- Keep test-only code in test utilities, out of production classes
+- Understand a dependency&#x27;s side effects before mocking it
+
+### Common Rationalizations
+
+| Excuse | Reality |
+|--------|---------|
+| &quot;Too simple to test&quot; | Simple code breaks. Test takes 30 seconds. |
+| &quot;I&#x27;ll test after&quot; | Tests written after pass immediately — which proves nothing. They may test the wrong thing, test the implementation instead of the behavior, or miss the edge case you forgot. You never watched it fail, so you never proved it can catch the bug. Test-first forces that failure. |
+| &quot;Tests after achieve same goals (spirit not ritual)&quot; | Tests-after answer &quot;what does this do?&quot;; tests-first answer &quot;what should this do?&quot; Tests written after are biased by the code you already wrote — you verify the cases you remembered, not the ones you&#x27;d have discovered. Coverage without proof the tests work. |
+| &quot;Already manually tested&quot; | Manual testing is ad-hoc: no record of what you covered, no way to re-run it when the code changes, easy to forget cases under pressure. &quot;Worked when I tried it&quot; ≠ comprehensive. Automated tests run the same way every time. |
+| &quot;Deleting X hours is wasteful&quot; | Sunk cost fallacy — that time is already spent either way. The real choice: rewrite with TDD (high confidence) vs. keep it and bolt tests on after (low confidence, likely bugs). Keeping code you can&#x27;t trust is the waste. |
+| &quot;Keep as reference, write tests first&quot; | You&#x27;ll adapt it. That&#x27;s testing after. Delete means delete. |
+| &quot;Need to explore first&quot; | Fine. Throw away exploration, start with TDD. |
+| &quot;Test hard = design unclear&quot; | Listen to test. Hard to test = hard to use. |
+| &quot;TDD will slow me down&quot; | TDD IS the pragmatic path: catches bugs before commit, prevents regressions, lets you refactor without fear. &quot;Pragmatic&quot; shortcuts mean debugging in production — slower, not faster. |
+| &quot;Manual test faster&quot; | Manual doesn&#x27;t prove edge cases. You&#x27;ll re-test every change. |
+| &quot;Existing code has no tests&quot; | You&#x27;re improving it. Add tests for existing code. |
+
+### Red Flags - STOP and Start Over
+
+- Code before test
+- Test after implementation
+- Test passes immediately
+- Can&#x27;t explain why test failed
+- Tests added &quot;later&quot;
+- Rationalizing &quot;just this once&quot;
+- &quot;I already manually tested it&quot;
+- &quot;Tests after achieve the same purpose&quot;
+- &quot;It&#x27;s about spirit not ritual&quot;
+- &quot;Keep as reference&quot; or &quot;adapt existing code&quot;
+- &quot;Already spent X hours, deleting is wasteful&quot;
+- &quot;TDD is dogmatic, I&#x27;m being pragmatic&quot;
+- &quot;This is different because...&quot;
+
+**All of these mean: Delete code. Start over with TDD.**
+
+### Example: Bug Fix
+
+**Bug:** Empty email accepted
+
+**RED**
+```typescript
+test(&#x27;rejects empty email&#x27;, async () =&gt; {
+  const result = await submitForm({ email: &#x27;&#x27; });
+  expect(result.error).toBe(&#x27;Email required&#x27;);
+});
+```
+
+**Verify RED**
+```bash
+$ npm test
+FAIL: expected &#x27;Email required&#x27;, got undefined
+```
+
+**GREEN**
+```typescript
+function submitForm(data: FormData) {
+  if (!data.email?.trim()) {
+    return { error: &#x27;Email required&#x27; };
+  }
+  // ...
+}
+```
+
+**Verify GREEN**
+```bash
+$ npm test
+PASS
+```
+
+**REFACTOR**
+Extract validation for multiple fields if needed.
+
+### Verification Checklist
+
+Before marking work complete:
+
+- [ ] Every new function/method has a test
+- [ ] Watched each test fail before implementing
+- [ ] Each test failed for expected reason (feature missing, not typo)
+- [ ] Wrote minimal code to pass each test
+- [ ] All tests pass
+- [ ] Output pristine (no errors, warnings)
+- [ ] Tests use real code (mocks only if unavoidable)
+- [ ] Edge cases and errors covered
+
+Can&#x27;t check all boxes? You skipped TDD. Start over.
+
+### When Stuck
+
+| Problem | Solution |
+|---------|----------|
+| Don&#x27;t know how to test | Write wished-for API. Write assertion first. Ask your human partner. |
+| Test too complicated | Design too complicated. Simplify interface. |
+| Must mock everything | Code too coupled. Use dependency injection. |
+| Test setup huge | Extract helpers. Still complex? Simplify design. |
+
+### Debugging Integration
+
+Bug found? Write failing test reproducing it. Follow TDD cycle. Test proves fix and prevents regression.
+
+Never fix bugs without a test.
+
+### Final Rule
+
+```
+Production code → test exists and failed first
+Otherwise → not TDD
+```
+
+No exceptions without your human partner&#x27;s permission.
+
+## Done when
+
+- Every new behaviour has a test that was seen to fail before the code existed.
+</pre></div></div>
+<pre id="raw-test-driven-development" hidden>---
+name: test-driven-development
+description: Use when implementing any feature or bugfix, before writing implementation code.
+license: GPL-3.0-only (includes third-party material; see LICENSE-*.txt)
+metadata:
+  deft-version: 0.1.0
+  deft-lineage: test-driven-development
+  deft-inputs: &#x27;task: ImplementationPlan [1]&#x27;
+  deft-outputs: &#x27;code: SourceCode [1]&#x27;
+  deft-origin: obra/superpowers@8ca22db skills/test-driven-development/SKILL.md (MIT, imported)
+---
+
+# Test-driven development
+
+## Inputs and outputs
+
+- Input `task`: ImplementationPlan (one). The plan whose current task is implemented.
+  Ordered, test-first tasks that implement a set of requirements.
+  - `fileStructure` (required)
+  - `tasks` (one or more): each task names files, interfaces, tests and the requirement ids it covers
+  - `reviewFocus` (any number)
+- Output `code`: SourceCode (one)
+  The changed code base, as a branch or a set of commits.
+  - `branch` (required)
+  - `commits` (one or more)
+
+## Procedure
+
+### Overview
+
+Write the test first. Watch it fail. Write minimal code to pass.
+
+**Core principle:** If you didn&#x27;t watch the test fail, you don&#x27;t know if it tests the right thing.
+
+**Violating the letter of the rules is violating the spirit of the rules.**
+
+### When to Use
+
+**Always:**
+- New features
+- Bug fixes
+- Refactoring
+- Behavior changes
+
+**Exceptions (ask your human partner):**
+- Throwaway prototypes
+- Generated code
+- Configuration files
+
+Thinking &quot;skip TDD just this once&quot;? Stop. That&#x27;s rationalization.
+
+### The Iron Law
+
+```
+NO PRODUCTION CODE WITHOUT A FAILING TEST FIRST
+```
+
+Write code before the test? Delete it. Start over.
+
+**No exceptions:**
+- Don&#x27;t keep it as &quot;reference&quot;
+- Don&#x27;t &quot;adapt&quot; it while writing tests
+- Don&#x27;t look at it
+- Delete means delete
+
+Implement fresh from tests. Period.
+
+### Red-Green-Refactor
+
+```dot
+digraph tdd_cycle {
+    rankdir=LR;
+    red [label=&quot;RED\nWrite failing test&quot;, shape=box, style=filled, fillcolor=&quot;#ffcccc&quot;];
+    verify_red [label=&quot;Verify fails\ncorrectly&quot;, shape=diamond];
+    green [label=&quot;GREEN\nMinimal code&quot;, shape=box, style=filled, fillcolor=&quot;#ccffcc&quot;];
+    verify_green [label=&quot;Verify passes\nAll green&quot;, shape=diamond];
+    refactor [label=&quot;REFACTOR\nClean up&quot;, shape=box, style=filled, fillcolor=&quot;#ccccff&quot;];
+    next [label=&quot;Next&quot;, shape=ellipse];
+
+    red -&gt; verify_red;
+    verify_red -&gt; green [label=&quot;yes&quot;];
+    verify_red -&gt; red [label=&quot;wrong\nfailure&quot;];
+    green -&gt; verify_green;
+    verify_green -&gt; refactor [label=&quot;yes&quot;];
+    verify_green -&gt; green [label=&quot;no&quot;];
+    refactor -&gt; verify_green [label=&quot;stay\ngreen&quot;];
+    verify_green -&gt; next;
+    next -&gt; red;
+}
+```
+
+#### RED - Write Failing Test
+
+Write one minimal test showing what should happen.
+
+&lt;Good&gt;
+```typescript
+test(&#x27;retries failed operations 3 times&#x27;, async () =&gt; {
+  let attempts = 0;
+  const operation = () =&gt; {
+    attempts++;
+    if (attempts &lt; 3) throw new Error(&#x27;fail&#x27;);
+    return &#x27;success&#x27;;
+  };
+
+  const result = await retryOperation(operation);
+
+  expect(result).toBe(&#x27;success&#x27;);
+  expect(attempts).toBe(3);
+});
+```
+Clear name, tests real behavior, one thing
+&lt;/Good&gt;
+
+&lt;Bad&gt;
+```typescript
+test(&#x27;retry works&#x27;, async () =&gt; {
+  const mock = jest.fn()
+    .mockRejectedValueOnce(new Error())
+    .mockRejectedValueOnce(new Error())
+    .mockResolvedValueOnce(&#x27;success&#x27;);
+  await retryOperation(mock);
+  expect(mock).toHaveBeenCalledTimes(3);
+});
+```
+Vague name, tests mock not code
+&lt;/Bad&gt;
+
+**Requirements:**
+- One behavior
+- Clear name
+- Real code (no mocks unless unavoidable)
+
+#### Verify RED - Watch It Fail
+
+**MANDATORY. Never skip.**
+
+```bash
+npm test path/to/test.test.ts
+```
+
+Confirm:
+- Test fails (not errors)
+- Failure message is expected
+- Fails because feature missing (not typos)
+
+**Test passes?** You&#x27;re testing existing behavior. Fix test.
+
+**Test errors?** Fix error, re-run until it fails correctly.
+
+#### GREEN - Minimal Code
+
+Write simplest code to pass the test.
+
+&lt;Good&gt;
+```typescript
+async function retryOperation&lt;T&gt;(fn: () =&gt; Promise&lt;T&gt;): Promise&lt;T&gt; {
+  for (let i = 0; i &lt; 3; i++) {
+    try {
+      return await fn();
+    } catch (e) {
+      if (i === 2) throw e;
+    }
+  }
+  throw new Error(&#x27;unreachable&#x27;);
+}
+```
+Just enough to pass
+&lt;/Good&gt;
+
+&lt;Bad&gt;
+```typescript
+async function retryOperation&lt;T&gt;(
+  fn: () =&gt; Promise&lt;T&gt;,
+  options?: {
+    maxRetries?: number;
+    backoff?: &#x27;linear&#x27; | &#x27;exponential&#x27;;
+    onRetry?: (attempt: number) =&gt; void;
+  }
+): Promise&lt;T&gt; {
+  // YAGNI
+}
+```
+Over-engineered
+&lt;/Bad&gt;
+
+Don&#x27;t add features, refactor other code, or &quot;improve&quot; beyond the test.
+
+#### Verify GREEN - Watch It Pass
+
+**MANDATORY.**
+
+```bash
+npm test path/to/test.test.ts
+```
+
+Confirm:
+- Test passes
+- Other tests still pass
+- Output pristine (no errors, warnings)
+
+**Test fails?** Fix code, not test.
+
+**Other tests fail?** Fix now.
+
+**&quot;Other tests&quot; means the project&#x27;s suite, not just your file.** A
+green run of the test you wrote is not a green suite. Before you call
+the change done, run the project&#x27;s test command (bare `pytest`,
+`npm test`, `cargo test` — whatever the repo uses) even when your task
+named only one test file. A scope statement in your task bounds the
+deliverable, not your verification. Any failure that run shows —
+including one you didn&#x27;t cause — goes in your report by name; a red
+test you watched scroll past and didn&#x27;t mention is a report falsified
+by omission.
+
+#### REFACTOR - Clean Up
+
+After green only:
+- Remove duplication
+- Improve names
+- Extract helpers
+
+Keep tests green. Don&#x27;t add behavior.
+
+#### Repeat
+
+Next failing test for next feature.
+
+### Good Tests
+
+| Quality | Good | Bad |
+|---------|------|-----|
+| **Minimal** | One thing. &quot;and&quot; in name? Split it. | `test(&#x27;validates email and domain and whitespace&#x27;)` |
+| **Clear** | Name describes behavior | `test(&#x27;test1&#x27;)` |
+| **Shows intent** | Demonstrates desired API | Obscures what code should do |
+
+When writing or changing any test, read [writing-good-tests.md](writing-good-tests.md) for the rules that keep tests honest:
+- Name the production change that would make the test fail — before writing it
+- Assert on real behavior, never on mock behavior
+- Keep test-only code in test utilities, out of production classes
+- Understand a dependency&#x27;s side effects before mocking it
+
+### Common Rationalizations
+
+| Excuse | Reality |
+|--------|---------|
+| &quot;Too simple to test&quot; | Simple code breaks. Test takes 30 seconds. |
+| &quot;I&#x27;ll test after&quot; | Tests written after pass immediately — which proves nothing. They may test the wrong thing, test the implementation instead of the behavior, or miss the edge case you forgot. You never watched it fail, so you never proved it can catch the bug. Test-first forces that failure. |
+| &quot;Tests after achieve same goals (spirit not ritual)&quot; | Tests-after answer &quot;what does this do?&quot;; tests-first answer &quot;what should this do?&quot; Tests written after are biased by the code you already wrote — you verify the cases you remembered, not the ones you&#x27;d have discovered. Coverage without proof the tests work. |
+| &quot;Already manually tested&quot; | Manual testing is ad-hoc: no record of what you covered, no way to re-run it when the code changes, easy to forget cases under pressure. &quot;Worked when I tried it&quot; ≠ comprehensive. Automated tests run the same way every time. |
+| &quot;Deleting X hours is wasteful&quot; | Sunk cost fallacy — that time is already spent either way. The real choice: rewrite with TDD (high confidence) vs. keep it and bolt tests on after (low confidence, likely bugs). Keeping code you can&#x27;t trust is the waste. |
+| &quot;Keep as reference, write tests first&quot; | You&#x27;ll adapt it. That&#x27;s testing after. Delete means delete. |
+| &quot;Need to explore first&quot; | Fine. Throw away exploration, start with TDD. |
+| &quot;Test hard = design unclear&quot; | Listen to test. Hard to test = hard to use. |
+| &quot;TDD will slow me down&quot; | TDD IS the pragmatic path: catches bugs before commit, prevents regressions, lets you refactor without fear. &quot;Pragmatic&quot; shortcuts mean debugging in production — slower, not faster. |
+| &quot;Manual test faster&quot; | Manual doesn&#x27;t prove edge cases. You&#x27;ll re-test every change. |
+| &quot;Existing code has no tests&quot; | You&#x27;re improving it. Add tests for existing code. |
+
+### Red Flags - STOP and Start Over
+
+- Code before test
+- Test after implementation
+- Test passes immediately
+- Can&#x27;t explain why test failed
+- Tests added &quot;later&quot;
+- Rationalizing &quot;just this once&quot;
+- &quot;I already manually tested it&quot;
+- &quot;Tests after achieve the same purpose&quot;
+- &quot;It&#x27;s about spirit not ritual&quot;
+- &quot;Keep as reference&quot; or &quot;adapt existing code&quot;
+- &quot;Already spent X hours, deleting is wasteful&quot;
+- &quot;TDD is dogmatic, I&#x27;m being pragmatic&quot;
+- &quot;This is different because...&quot;
+
+**All of these mean: Delete code. Start over with TDD.**
+
+### Example: Bug Fix
+
+**Bug:** Empty email accepted
+
+**RED**
+```typescript
+test(&#x27;rejects empty email&#x27;, async () =&gt; {
+  const result = await submitForm({ email: &#x27;&#x27; });
+  expect(result.error).toBe(&#x27;Email required&#x27;);
+});
+```
+
+**Verify RED**
+```bash
+$ npm test
+FAIL: expected &#x27;Email required&#x27;, got undefined
+```
+
+**GREEN**
+```typescript
+function submitForm(data: FormData) {
+  if (!data.email?.trim()) {
+    return { error: &#x27;Email required&#x27; };
+  }
+  // ...
+}
+```
+
+**Verify GREEN**
+```bash
+$ npm test
+PASS
+```
+
+**REFACTOR**
+Extract validation for multiple fields if needed.
+
+### Verification Checklist
+
+Before marking work complete:
+
+- [ ] Every new function/method has a test
+- [ ] Watched each test fail before implementing
+- [ ] Each test failed for expected reason (feature missing, not typo)
+- [ ] Wrote minimal code to pass each test
+- [ ] All tests pass
+- [ ] Output pristine (no errors, warnings)
+- [ ] Tests use real code (mocks only if unavoidable)
+- [ ] Edge cases and errors covered
+
+Can&#x27;t check all boxes? You skipped TDD. Start over.
+
+### When Stuck
+
+| Problem | Solution |
+|---------|----------|
+| Don&#x27;t know how to test | Write wished-for API. Write assertion first. Ask your human partner. |
+| Test too complicated | Design too complicated. Simplify interface. |
+| Must mock everything | Code too coupled. Use dependency injection. |
+| Test setup huge | Extract helpers. Still complex? Simplify design. |
+
+### Debugging Integration
+
+Bug found? Write failing test reproducing it. Follow TDD cycle. Test proves fix and prevents regression.
+
+Never fix bugs without a test.
+
+### Final Rule
+
+```
+Production code → test exists and failed first
+Otherwise → not TDD
+```
+
+No exceptions without your human partner&#x27;s permission.
+
+## Done when
+
+- Every new behaviour has a test that was seen to fail before the code existed.
+</pre></div><div class="tabpanel" id="p-model"><p>From <code>models/skills/implementation.yaml</code>.</p><pre><code>name: test-driven-development
+description: Use when implementing any feature or bugfix, before writing implementation code.
+metadata:
+  title: Test-driven development
+origin:
+- repo: obra/superpowers
+  path: skills/test-driven-development/SKILL.md
+  commit: 8ca22dba9a94f28898bbce59f2537ff4d87c747d
+  license: MIT
+  mode: imported
+parameters:
+- name: task
+  direction: in
+  type: ImplementationPlan
+  description: the plan whose current task is implemented
+- name: code
+  direction: out
+  type: SourceCode
+post:
+- Every new behaviour has a test that was seen to fail before the code existed.
+sections:
+- name: procedure
+  kind: final
+  title: Procedure
+  source: ../upstream/superpowers/skills/test-driven-development/SKILL.md
+  demote: true
+</code></pre></div>
+<h2 id="origin">Origin</h2><table><tr><th>Repository</th><th>Path</th><th>Commit</th><th>Licence</th><th>Mode</th><th>Declared by</th></tr><tr><td>obra/superpowers</td><td><code>skills/test-driven-development/SKILL.md</code></td><td><code>8ca22db</code></td><td>MIT</td><td>imported</td><td>here</td></tr></table>
+
+<footer>DEFT 0.1.0 · GNU General Public License v3.0 · Reused third-party skills keep their original licences.</footer>
+</div></main>
+<aside class="toc"><h5>On this page</h5><nav id="toc-links"></nav></aside>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<script src="../static/app.js"></script>
+</body>
+</html>

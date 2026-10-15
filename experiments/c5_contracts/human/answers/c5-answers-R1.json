@@ -1,0 +1,99 @@
+{
+  "rater": "R1",
+  "answers": {
+    "O01": {
+      "verdict": "entailed",
+      "uncovered": [],
+      "comment": ""
+    },
+    "O02": {
+      "verdict": "entailed",
+      "uncovered": [],
+      "comment": ""
+    },
+    "O03": {
+      "verdict": "entailed",
+      "uncovered": [],
+      "comment": ""
+    },
+    "O04": {
+      "verdict": "not-entailed",
+      "uncovered": [
+        "The plan has at least one task and every task names its test."
+      ],
+      "comment": "Every requirement id is covered by at least on task, but there is no guarantee that there is at least 1 req."
+    },
+    "O05": {
+      "verdict": "entailed",
+      "uncovered": [],
+      "comment": ""
+    },
+    "O06": {
+      "verdict": "not-entailed",
+      "uncovered": [
+        "The code builds and its existing tests pass.",
+        "A deployment of the system that matches production in configuration is available."
+      ],
+      "comment": "Regarding \"the code builds and its existing tests pass\" we only guarantee that the completed tasks pass: \"Every task is committed and its tests pass.\", but not \"The full test suite passes, including the tests that existed before.\""
+    },
+    "O07": {
+      "verdict": "entailed",
+      "uncovered": [],
+      "comment": ""
+    },
+    "O08": {
+      "verdict": "not-entailed",
+      "uncovered": [
+        "The code is committed on a feature branch."
+      ],
+      "comment": ""
+    },
+    "O09": {
+      "verdict": "entailed",
+      "uncovered": [],
+      "comment": ""
+    },
+    "O10": {
+      "verdict": "entailed",
+      "uncovered": [],
+      "comment": ""
+    },
+    "O11": {
+      "verdict": "entailed",
+      "uncovered": [],
+      "comment": ""
+    },
+    "O12": {
+      "verdict": "not-entailed",
+      "uncovered": [
+        "The plan has at least one task and every task names its test."
+      ],
+      "comment": "It is not ensured that we have at least one requirement."
+    },
+    "O13": {
+      "verdict": "not-entailed",
+      "uncovered": [
+        "The code builds and its existing tests pass."
+      ],
+      "comment": "Regarding \"the code builds and its existing tests pass\" we only guarantee that the completed tasks pass: \"Every task is committed and its tests pass.\", but not \"The full test suite passes, including the tests that existed before.\""
+    },
+    "O14": {
+      "verdict": "entailed",
+      "uncovered": [],
+      "comment": ""
+    },
+    "O15": {
+      "verdict": "entailed",
+      "uncovered": [],
+      "comment": ""
+    },
+    "O16": {
+      "verdict": "not-entailed",
+      "uncovered": [
+        "The code is committed on a feature branch."
+      ],
+      "comment": ""
+    }
+  },
+  "downloaded": "2026-10-09T09:33:06.581Z"
+}

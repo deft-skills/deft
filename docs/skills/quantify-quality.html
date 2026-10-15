@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>quantify-quality · DEFT</title>
+<meta name="description" content="DEFT: a metamodel and toolset to specialize, compose, check and generate agent skills.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../static/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231a1a1a'/%3E%3Ctext x='16' y='22' font-family='monospace' font-size='15' text-anchor='middle' fill='white'%3Edf%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<header class="topbar">
+  <button class="iconbtn menubtn" id="menu" aria-label="Menu">☰</button>
+  <a class="brand" href="../index.html"><span class="brand-mark">df</span>DEFT</a>
+  <nav class="topnav"><a class="" href="../index.html">Overview</a><a class="" href="../guides/metamodel.html">Guides</a><a class="" href="../catalogue.html">Catalogue</a><a class="" href="../about.html">About</a></nav>
+  <span class="spacer"></span>
+  <a class="iconbtn" href="https://anonymous.4open.science/r/deft-F7FE/">Repository</a>
+  <button class="iconbtn" id="theme" aria-label="Toggle theme">◐</button>
+</header>
+<div class="layout">
+<nav class="sidebar"><h4>Get started</h4>
+<a class="" href="../index.html">Overview</a>
+<a class="" href="../quickstart.html">Quickstart</a>
+<h4>Guides</h4>
+<a class="" href="../guides/metamodel.html">The metamodel</a>
+<a class="" href="../guides/writing-models.html">Writing models</a>
+<a class="" href="../guides/validating-models.html">Validating models</a>
+<a class="" href="../guides/generating-skills.html">Generating skills</a>
+<a class="" href="../guides/using-skills.html">Using generated skills</a>
+<a class="" href="../guides/example.html">Example: deliver a feature</a>
+<a class="" href="../guides/cli.html">Command line</a>
+<h4>Catalogue</h4>
+<a class="" href="../catalogue.html">All skills</a>
+<a class="sub" href="../catalogue.html#requirements">Requirements</a>
+<a class="sub" href="../catalogue.html#planning">Planning</a>
+<a class="sub" href="../catalogue.html#implementation">Implementation</a>
+<a class="sub" href="../catalogue.html#verification">Verification</a>
+<a class="sub" href="../catalogue.html#support">Support</a>
+<a class="" href="../types.html">Artifact types</a>
+<h4>Workflows</h4>
+<a class="" href="../workflows/deliver-feature.html">deliver-feature</a>
+<a class="" href="../workflows/deliver-feature-iso.html">deliver-feature-iso</a>
+<h4>Project</h4>
+<a class="" href="../about.html">About DEFT</a></nav>
+<main><div class="content">
+
+<div class="eyebrow">Support</div>
+<h1>quantify-quality</h1>
+<p class="lead">Use when quality requirements without an objective metric must be made measurable before they can be tested.</p>
+<div class="badges"><span class="badge ">concrete</span></div>
+<dl class="kv">
+<dt>Lineage</dt><dd><strong>quantify-quality</strong></dd>
+<dt>Specializations</dt><dd>none</dd>
+<dt>Used in</dt><dd><a href="../workflows/deliver-feature-iso.html">deliver-feature-iso</a></dd>
+</dl>
+<h2 id="signature">Signature</h2>
+<table><tr><th>Dir.</th><th>Parameter</th><th>Type</th><th>Declared by</th></tr><tr><td>in</td><td><code>requirements</code></td><td><a href="../types.html#t-ISO25010Requirement"><code>ISO25010Requirement</code></a> [1..*]</td><td>here</td></tr><tr><td>out</td><td><code>measurable</code></td><td><a href="../types.html#t-VolereRequirement"><code>VolereRequirement</code></a> [1..*]</td><td>here</td></tr></table>
+<h3>Preconditions</h3><p>None.</p><h3>Postconditions</h3><ul><li>Every output requirement has a fit criterion with a metric, a threshold and a scale.</li><li>Every output requirement keeps the id and source of its input requirement.</li></ul>
+<h2 id="instructions">Instructions</h2>
+<div data-tabs><div class="tabs"><button class="tab active" data-panel="p-sections">Resolved sections</button><button class="tab" data-panel="p-generated">Generated SKILL.md</button><button class="tab" data-panel="p-model">Model</button></div></div><div class="tabpanel active" id="p-sections"><div class="section-block"><div class="section-head"><span class="badge final">final</span>
+<strong>Quantify each requirement</strong><span class="prov">declared by <a href="../skills/quantify-quality.html">quantify-quality</a></span></div><div class="section-body"><script type="application/json" id="md-sec-quantify">"For each input requirement:\n\n1. Keep its id, source and characteristic.\n2. Choose a metric from the ISO/IEC 25023 measures of its\n   sub-characteristic (for example mean response time or throughput for\n   time behaviour). If the requirement already states a metric, keep it.\n3. Ask the stakeholder for the threshold and the load conditions, or\n   propose them from comparable systems and mark them as assumptions.\n4. Write the result as a Volere snow card whose fit criterion states the\n   metric, the threshold and the conditions."</script><div class="md" data-md="md-sec-quantify"><pre>For each input requirement:
+
+1. Keep its id, source and characteristic.
+2. Choose a metric from the ISO/IEC 25023 measures of its
+   sub-characteristic (for example mean response time or throughput for
+   time behaviour). If the requirement already states a metric, keep it.
+3. Ask the stakeholder for the threshold and the load conditions, or
+   propose them from comparable systems and mark them as assumptions.
+4. Write the result as a Volere snow card whose fit criterion states the
+   metric, the threshold and the conditions.</pre></div></div></div></div><div class="tabpanel" id="p-generated">
+<p><a class="iconbtn" href="../skills-dist/quantify-quality/SKILL.md" download>Download SKILL.md</a>
+<button class="iconbtn" data-copy="raw-quantify-quality">Copy</button></p>
+<pre><code>---
+name: quantify-quality
+description: Use when quality requirements without an objective metric must be made measurable before they can be tested.
+license: GPL-3.0-only
+metadata:
+  deft-version: 0.1.0
+  deft-lineage: quantify-quality
+  deft-inputs: &#x27;requirements: ISO25010Requirement [1..*]&#x27;
+  deft-outputs: &#x27;measurable: VolereRequirement [1..*]&#x27;
+---</code></pre><div class="section-body"><script type="application/json" id="md-gen">"# Quantify quality requirements\n\n## Inputs and outputs\n\n- Input `requirements`: ISO25010Requirement (one or more)\n  Quality requirement classified by ISO/IEC 25010, with an optional metric.\n  - `id` (required)\n  - `text` (required)\n  - `source` (required): stakeholder or document the requirement comes from\n  - `characteristic` (required): ISO/IEC 25010 product quality characteristic\n  - `subCharacteristic` (required)\n  - `metric` (optional)\n- Output `measurable`: VolereRequirement (one or more)\n  Volere snow card for a non-functional requirement.\n  - `id` (required)\n  - `text` (required)\n  - `source` (required): stakeholder or document the requirement comes from\n  - `characteristic` (required): ISO/IEC 25010 product quality characteristic\n  - `fitCriterion` (required): measurable condition (metric, threshold and scale) that a test can check\n  - `rationale` (required)\n  - `type` (required): Volere requirement type number and name\n\n## Quantify each requirement\n\nFor each input requirement:\n\n1. Keep its id, source and characteristic.\n2. Choose a metric from the ISO/IEC 25023 measures of its\n   sub-characteristic (for example mean response time or throughput for\n   time behaviour). If the requirement already states a metric, keep it.\n3. Ask the stakeholder for the threshold and the load conditions, or\n   propose them from comparable systems and mark them as assumptions.\n4. Write the result as a Volere snow card whose fit criterion states the\n   metric, the threshold and the conditions.\n\n## Done when\n\n- Every output requirement has a fit criterion with a metric, a threshold and a scale.\n- Every output requirement keeps the id and source of its input requirement.\n"</script><div class="md" data-md="md-gen"><pre># Quantify quality requirements
+
+## Inputs and outputs
+
+- Input `requirements`: ISO25010Requirement (one or more)
+  Quality requirement classified by ISO/IEC 25010, with an optional metric.
+  - `id` (required)
+  - `text` (required)
+  - `source` (required): stakeholder or document the requirement comes from
+  - `characteristic` (required): ISO/IEC 25010 product quality characteristic
+  - `subCharacteristic` (required)
+  - `metric` (optional)
+- Output `measurable`: VolereRequirement (one or more)
+  Volere snow card for a non-functional requirement.
+  - `id` (required)
+  - `text` (required)
+  - `source` (required): stakeholder or document the requirement comes from
+  - `characteristic` (required): ISO/IEC 25010 product quality characteristic
+  - `fitCriterion` (required): measurable condition (metric, threshold and scale) that a test can check
+  - `rationale` (required)
+  - `type` (required): Volere requirement type number and name
+
+## Quantify each requirement
+
+For each input requirement:
+
+1. Keep its id, source and characteristic.
+2. Choose a metric from the ISO/IEC 25023 measures of its
+   sub-characteristic (for example mean response time or throughput for
+   time behaviour). If the requirement already states a metric, keep it.
+3. Ask the stakeholder for the threshold and the load conditions, or
+   propose them from comparable systems and mark them as assumptions.
+4. Write the result as a Volere snow card whose fit criterion states the
+   metric, the threshold and the conditions.
+
+## Done when
+
+- Every output requirement has a fit criterion with a metric, a threshold and a scale.
+- Every output requirement keeps the id and source of its input requirement.
+</pre></div></div>
+<pre id="raw-quantify-quality" hidden>---
+name: quantify-quality
+description: Use when quality requirements without an objective metric must be made measurable before they can be tested.
+license: GPL-3.0-only
+metadata:
+  deft-version: 0.1.0
+  deft-lineage: quantify-quality
+  deft-inputs: &#x27;requirements: ISO25010Requirement [1..*]&#x27;
+  deft-outputs: &#x27;measurable: VolereRequirement [1..*]&#x27;
+---
+
+# Quantify quality requirements
+
+## Inputs and outputs
+
+- Input `requirements`: ISO25010Requirement (one or more)
+  Quality requirement classified by ISO/IEC 25010, with an optional metric.
+  - `id` (required)
+  - `text` (required)
+  - `source` (required): stakeholder or document the requirement comes from
+  - `characteristic` (required): ISO/IEC 25010 product quality characteristic
+  - `subCharacteristic` (required)
+  - `metric` (optional)
+- Output `measurable`: VolereRequirement (one or more)
+  Volere snow card for a non-functional requirement.
+  - `id` (required)
+  - `text` (required)
+  - `source` (required): stakeholder or document the requirement comes from
+  - `characteristic` (required): ISO/IEC 25010 product quality characteristic
+  - `fitCriterion` (required): measurable condition (metric, threshold and scale) that a test can check
+  - `rationale` (required)
+  - `type` (required): Volere requirement type number and name
+
+## Quantify each requirement
+
+For each input requirement:
+
+1. Keep its id, source and characteristic.
+2. Choose a metric from the ISO/IEC 25023 measures of its
+   sub-characteristic (for example mean response time or throughput for
+   time behaviour). If the requirement already states a metric, keep it.
+3. Ask the stakeholder for the threshold and the load conditions, or
+   propose them from comparable systems and mark them as assumptions.
+4. Write the result as a Volere snow card whose fit criterion states the
+   metric, the threshold and the conditions.
+
+## Done when
+
+- Every output requirement has a fit criterion with a metric, a threshold and a scale.
+- Every output requirement keeps the id and source of its input requirement.
+</pre></div><div class="tabpanel" id="p-model"><p>From <code>models/skills/debugging.yaml</code>.</p><pre><code>name: quantify-quality
+description: Use when quality requirements without an objective metric must be made measurable before
+  they can be tested.
+metadata:
+  title: Quantify quality requirements
+parameters:
+- name: requirements
+  direction: in
+  type: ISO25010Requirement
+  lower: 1
+  upper: &#x27;*&#x27;
+- name: measurable
+  direction: out
+  type: VolereRequirement
+  lower: 1
+  upper: &#x27;*&#x27;
+post:
+- Every output requirement has a fit criterion with a metric, a threshold and a scale.
+- Every output requirement keeps the id and source of its input requirement.
+sections:
+- name: quantify
+  kind: final
+  title: Quantify each requirement
+  content: &quot;For each input requirement:\n\n1. Keep its id, source and characteristic.\n2. Choose a metric\
+    \ from the ISO/IEC 25023 measures of its\n   sub-characteristic (for example mean response time or\
+    \ throughput for\n   time behaviour). If the requirement already states a metric, keep it.\n3. Ask\
+    \ the stakeholder for the threshold and the load conditions, or\n   propose them from comparable systems\
+    \ and mark them as assumptions.\n4. Write the result as a Volere snow card whose fit criterion states\
+    \ the\n   metric, the threshold and the conditions.\n&quot;
+</code></pre></div>
+
+
+<footer>DEFT 0.1.0 · GNU General Public License v3.0 · Reused third-party skills keep their original licences.</footer>
+</div></main>
+<aside class="toc"><h5>On this page</h5><nav id="toc-links"></nav></aside>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<script src="../static/app.js"></script>
+</body>
+</html>

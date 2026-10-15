@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Artifact types · DEFT</title>
+<meta name="description" content="DEFT: a metamodel and toolset to specialize, compose, check and generate agent skills.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="static/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231a1a1a'/%3E%3Ctext x='16' y='22' font-family='monospace' font-size='15' text-anchor='middle' fill='white'%3Edf%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<header class="topbar">
+  <button class="iconbtn menubtn" id="menu" aria-label="Menu">☰</button>
+  <a class="brand" href="index.html"><span class="brand-mark">df</span>DEFT</a>
+  <nav class="topnav"><a class="" href="index.html">Overview</a><a class="" href="guides/metamodel.html">Guides</a><a class="" href="catalogue.html">Catalogue</a><a class="" href="about.html">About</a></nav>
+  <span class="spacer"></span>
+  <a class="iconbtn" href="https://anonymous.4open.science/r/deft-F7FE/">Repository</a>
+  <button class="iconbtn" id="theme" aria-label="Toggle theme">◐</button>
+</header>
+<div class="layout">
+<nav class="sidebar"><h4>Get started</h4>
+<a class="" href="index.html">Overview</a>
+<a class="" href="quickstart.html">Quickstart</a>
+<h4>Guides</h4>
+<a class="" href="guides/metamodel.html">The metamodel</a>
+<a class="" href="guides/writing-models.html">Writing models</a>
+<a class="" href="guides/validating-models.html">Validating models</a>
+<a class="" href="guides/generating-skills.html">Generating skills</a>
+<a class="" href="guides/using-skills.html">Using generated skills</a>
+<a class="" href="guides/example.html">Example: deliver a feature</a>
+<a class="" href="guides/cli.html">Command line</a>
+<h4>Catalogue</h4>
+<a class="" href="catalogue.html">All skills</a>
+<a class="sub" href="catalogue.html#requirements">Requirements</a>
+<a class="sub" href="catalogue.html#planning">Planning</a>
+<a class="sub" href="catalogue.html#implementation">Implementation</a>
+<a class="sub" href="catalogue.html#verification">Verification</a>
+<a class="sub" href="catalogue.html#support">Support</a>
+<a class=" active" href="types.html">Artifact types</a>
+<h4>Workflows</h4>
+<a class="" href="workflows/deliver-feature.html">deliver-feature</a>
+<a class="" href="workflows/deliver-feature-iso.html">deliver-feature-iso</a>
+<h4>Project</h4>
+<a class="" href="about.html">About DEFT</a></nav>
+<main><div class="content">
+
+<div class="eyebrow">Catalogue</div>
+<h1>Artifact types</h1>
+<p class="lead">The artifacts that skills of the example library exchange. Parameters refer to these types, and data
+edges are checked against their hierarchy.</p>
+<h2 id="hierarchy">Hierarchy</h2>
+<div class="tree"><div style="padding-left:0px"><a class="" href="#t-Diagnosis">Diagnosis</a></div><div style="padding-left:0px"><a class="" href="#t-FeatureRequest">FeatureRequest</a></div><div style="padding-left:0px"><a class="" href="#t-ImplementationPlan">ImplementationPlan</a></div><div style="padding-left:0px"><a class="abs" href="#t-Requirement">Requirement</a> (abstract)</div><div style="padding-left:18px"><a class="abs" href="#t-FunctionalRequirement">FunctionalRequirement</a> (abstract)</div><div style="padding-left:36px"><a class="" href="#t-EARSRequirement">EARSRequirement</a></div><div style="padding-left:36px"><a class="" href="#t-UserStory">UserStory</a></div><div style="padding-left:18px"><a class="abs" href="#t-QualityRequirement">QualityRequirement</a> (abstract)</div><div style="padding-left:36px"><a class="" href="#t-ISO25010Requirement">ISO25010Requirement</a></div><div style="padding-left:36px"><a class="abs" href="#t-MeasurableQualityRequirement">MeasurableQualityRequirement</a> (abstract)</div><div style="padding-left:54px"><a class="" href="#t-VolereRequirement">VolereRequirement</a></div><div style="padding-left:0px"><a class="" href="#t-SourceCode">SourceCode</a></div><div style="padding-left:0px"><a class="" href="#t-TestReport">TestReport</a></div><div style="padding-left:0px"><a class="" href="#t-TestSuite">TestSuite</a></div></div>
+<h2 id="types">Types</h2>
+<h3 id="t-FeatureRequest">FeatureRequest </h3>
+<p>A change request stated by a stakeholder in natural language.</p>
+<table><tr><th>Property</th><th>Mult.</th><th>Notes</th></tr><tr><td><code>text</code></td><td>[1]</td><td></td></tr><tr><td><code>system</code></td><td>[0..1]</td><td>existing system and stack</td></tr></table>
+<p class="badges"><a class="badge" href="skills/deliver-feature.html">deliver-feature</a><a class="badge" href="skills/deliver-feature-iso.html">deliver-feature-iso</a><a class="badge" href="skills/specify-requirements.html">specify-requirements</a></p><h3 id="t-Requirement">Requirement <span class="badge abstract">abstract</span></h3>
+<p>A single, uniquely identified requirement.</p>
+<table><tr><th>Property</th><th>Mult.</th><th>Notes</th></tr><tr><td><code>id</code></td><td>[1]</td><td></td></tr><tr><td><code>text</code></td><td>[1]</td><td></td></tr><tr><td><code>source</code></td><td>[1]</td><td>stakeholder or document the requirement comes from</td></tr></table>
+<p class="badges"><a class="badge" href="skills/generate-tests.html">generate-tests</a><a class="badge" href="skills/plan-feature.html">plan-feature</a><a class="badge" href="skills/specify-requirements.html">specify-requirements</a></p><h3 id="t-FunctionalRequirement">FunctionalRequirement <span class="badge abstract">abstract</span></h3>
+<p> Specializes <a href="types.html#t-Requirement"><code>Requirement</code></a>.</p>
+
+<p class="badges"><a class="badge" href="skills/specify-functional.html">specify-functional</a></p><h3 id="t-UserStory">UserStory </h3>
+<p>Connextra user story with Given/When/Then acceptance criteria. Specializes <a href="types.html#t-FunctionalRequirement"><code>FunctionalRequirement</code></a>.</p>
+<table><tr><th>Property</th><th>Mult.</th><th>Notes</th></tr><tr><td><code>role</code></td><td>[1]</td><td></td></tr><tr><td><code>goal</code></td><td>[1]</td><td></td></tr><tr><td><code>benefit</code></td><td>[1]</td><td></td></tr><tr><td><code>acceptanceCriteria</code></td><td>[1..*]</td><td></td></tr></table>
+<p class="badges"><a class="badge" href="skills/acceptance-tests.html">acceptance-tests</a><a class="badge" href="skills/user-stories.html">user-stories</a></p><h3 id="t-EARSRequirement">EARSRequirement </h3>
+<p>Requirement written with one of the five EARS patterns. Specializes <a href="types.html#t-FunctionalRequirement"><code>FunctionalRequirement</code></a>.</p>
+<table><tr><th>Property</th><th>Mult.</th><th>Notes</th></tr><tr><td><code>pattern</code></td><td>[1]</td><td>ubiquitous, event-driven, state-driven, unwanted-behaviour, optional-feature</td></tr></table>
+<p class="badges"><a class="badge" href="skills/ears.html">ears</a></p><h3 id="t-QualityRequirement">QualityRequirement <span class="badge abstract">abstract</span></h3>
+<p> Specializes <a href="types.html#t-Requirement"><code>Requirement</code></a>.</p>
+<table><tr><th>Property</th><th>Mult.</th><th>Notes</th></tr><tr><td><code>characteristic</code></td><td>[1]</td><td>ISO/IEC 25010 product quality characteristic</td></tr></table>
+<p class="badges"><a class="badge" href="skills/specify-quality.html">specify-quality</a></p><h3 id="t-MeasurableQualityRequirement">MeasurableQualityRequirement <span class="badge abstract">abstract</span></h3>
+<p>Quality requirement with an objective fit criterion. Specializes <a href="types.html#t-QualityRequirement"><code>QualityRequirement</code></a>.</p>
+<table><tr><th>Property</th><th>Mult.</th><th>Notes</th></tr><tr><td><code>fitCriterion</code></td><td>[1]</td><td>measurable condition (metric, threshold and scale) that a test can check</td></tr></table>
+<p class="badges"><a class="badge" href="skills/performance-tests.html">performance-tests</a></p><h3 id="t-VolereRequirement">VolereRequirement </h3>
+<p>Volere snow card for a non-functional requirement. Specializes <a href="types.html#t-MeasurableQualityRequirement"><code>MeasurableQualityRequirement</code></a>.</p>
+<table><tr><th>Property</th><th>Mult.</th><th>Notes</th></tr><tr><td><code>rationale</code></td><td>[1]</td><td></td></tr><tr><td><code>type</code></td><td>[1]</td><td>Volere requirement type number and name</td></tr></table>
+<p class="badges"><a class="badge" href="skills/quantify-quality.html">quantify-quality</a><a class="badge" href="skills/volere.html">volere</a></p><h3 id="t-ISO25010Requirement">ISO25010Requirement </h3>
+<p>Quality requirement classified by ISO/IEC 25010, with an optional metric. Specializes <a href="types.html#t-QualityRequirement"><code>QualityRequirement</code></a>.</p>
+<table><tr><th>Property</th><th>Mult.</th><th>Notes</th></tr><tr><td><code>subCharacteristic</code></td><td>[1]</td><td></td></tr><tr><td><code>metric</code></td><td>[0..1]</td><td></td></tr></table>
+<p class="badges"><a class="badge" href="skills/iso25010.html">iso25010</a><a class="badge" href="skills/quantify-quality.html">quantify-quality</a></p><h3 id="t-ImplementationPlan">ImplementationPlan </h3>
+<p>Ordered, test-first tasks that implement a set of requirements.</p>
+<table><tr><th>Property</th><th>Mult.</th><th>Notes</th></tr><tr><td><code>fileStructure</code></td><td>[1]</td><td></td></tr><tr><td><code>tasks</code></td><td>[1..*]</td><td>each task names files, interfaces, tests and the requirement ids it covers</td></tr><tr><td><code>reviewFocus</code></td><td>[0..*]</td><td></td></tr></table>
+<p class="badges"><a class="badge" href="skills/execute-plan.html">execute-plan</a><a class="badge" href="skills/plan-feature.html">plan-feature</a><a class="badge" href="skills/test-driven-development.html">test-driven-development</a></p><h3 id="t-SourceCode">SourceCode </h3>
+<p>The changed code base, as a branch or a set of commits.</p>
+<table><tr><th>Property</th><th>Mult.</th><th>Notes</th></tr><tr><td><code>branch</code></td><td>[1]</td><td></td></tr><tr><td><code>commits</code></td><td>[1..*]</td><td></td></tr></table>
+<p class="badges"><a class="badge" href="skills/deliver-feature.html">deliver-feature</a><a class="badge" href="skills/deliver-feature-iso.html">deliver-feature-iso</a><a class="badge" href="skills/execute-plan.html">execute-plan</a><a class="badge" href="skills/generate-tests.html">generate-tests</a><a class="badge" href="skills/systematic-debugging.html">systematic-debugging</a><a class="badge" href="skills/test-driven-development.html">test-driven-development</a></p><h3 id="t-TestSuite">TestSuite </h3>
+<p>Executable tests, each traced to the requirement ids it checks.</p>
+<table><tr><th>Property</th><th>Mult.</th><th>Notes</th></tr><tr><td><code>tests</code></td><td>[1..*]</td><td></td></tr><tr><td><code>covers</code></td><td>[1..*]</td><td>requirement ids</td></tr></table>
+<p class="badges"><a class="badge" href="skills/generate-tests.html">generate-tests</a></p><h3 id="t-TestReport">TestReport </h3>
+<p>Result of running a test suite against the code.</p>
+<table><tr><th>Property</th><th>Mult.</th><th>Notes</th></tr><tr><td><code>verdict</code></td><td>[1]</td><td>pass, fail</td></tr><tr><td><code>failures</code></td><td>[0..*]</td><td></td></tr><tr><td><code>command</code></td><td>[1]</td><td>command that reproduces the run</td></tr></table>
+<p class="badges"><a class="badge" href="skills/deliver-feature.html">deliver-feature</a><a class="badge" href="skills/deliver-feature-iso.html">deliver-feature-iso</a><a class="badge" href="skills/generate-tests.html">generate-tests</a><a class="badge" href="skills/systematic-debugging.html">systematic-debugging</a></p><h3 id="t-Diagnosis">Diagnosis </h3>
+<p>Root cause of a failure and the change that fixes it.</p>
+<table><tr><th>Property</th><th>Mult.</th><th>Notes</th></tr><tr><td><code>rootCause</code></td><td>[1]</td><td></td></tr><tr><td><code>evidence</code></td><td>[1..*]</td><td></td></tr><tr><td><code>fix</code></td><td>[1]</td><td></td></tr></table>
+<p class="badges"><a class="badge" href="skills/execute-plan.html">execute-plan</a><a class="badge" href="skills/systematic-debugging.html">systematic-debugging</a></p>
+
+<footer>DEFT 0.1.0 · GNU General Public License v3.0 · Reused third-party skills keep their original licences.</footer>
+</div></main>
+<aside class="toc"><h5>On this page</h5><nav id="toc-links"></nav></aside>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<script src="static/app.js"></script>
+</body>
+</html>

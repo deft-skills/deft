@@ -1,0 +1,76 @@
+@startuml deft-specialization
+' DEFT metamodel, specialization package.
+!theme plain
+hide circle
+hide empty members
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+skinparam nodesep 70
+skinparam ranksep 60
+skinparam defaultFontName Helvetica
+skinparam defaultFontSize 13
+skinparam class {
+  BackgroundColor white
+  BorderColor #333333
+  HeaderBackgroundColor #EEEEEE
+  ArrowColor #333333
+}
+skinparam ArrowFontSize 12
+
+title DEFT — specialization
+
+abstract class Skill {
+  parent : Skill [0..1]
+  name
+  description
+  isAbstract
+  pre, post : String [*]
+  license, compatibility, allowedTools [0..1]
+}
+class AtomicSkill
+class CompositeSkill #F6F6F6 {
+  (composition package)
+}
+class Section {
+  name, title, content
+  kind : final | abstract | default
+}
+class Refinement {
+  kind : implements | overrides | extends
+  content
+  isFinal
+}
+class Parameter {
+  name
+  direction : in | out | inout
+  lower..upper
+}
+class ArtifactType {
+  parent : ArtifactType [0..1]
+  name
+  isAbstract
+}
+class Property {
+  name
+  lower..upper
+}
+class Resource {
+  path
+  kind : script | reference | asset
+}
+class Origin {
+  repo, path, commit, license
+  mode : adapted | imported
+}
+
+AtomicSkill -up-|> Skill
+CompositeSkill -up-|> Skill
+AtomicSkill *-down- "*" Section : sections
+AtomicSkill *-down- "*" Refinement : refinements
+Refinement -left-> "1" Section : target
+Skill *-right- "*" Parameter : parameters
+Parameter -right-> "1" ArtifactType : type
+ArtifactType *-down- "*" Property : properties
+Skill *-up- "*" Resource : resources
+Skill *-up- "*" Origin : origin
+@enduml

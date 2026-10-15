@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>generate-tests · DEFT</title>
+<meta name="description" content="DEFT: a metamodel and toolset to specialize, compose, check and generate agent skills.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../static/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231a1a1a'/%3E%3Ctext x='16' y='22' font-family='monospace' font-size='15' text-anchor='middle' fill='white'%3Edf%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<header class="topbar">
+  <button class="iconbtn menubtn" id="menu" aria-label="Menu">☰</button>
+  <a class="brand" href="../index.html"><span class="brand-mark">df</span>DEFT</a>
+  <nav class="topnav"><a class="" href="../index.html">Overview</a><a class="" href="../guides/metamodel.html">Guides</a><a class="" href="../catalogue.html">Catalogue</a><a class="" href="../about.html">About</a></nav>
+  <span class="spacer"></span>
+  <a class="iconbtn" href="https://anonymous.4open.science/r/deft-F7FE/">Repository</a>
+  <button class="iconbtn" id="theme" aria-label="Toggle theme">◐</button>
+</header>
+<div class="layout">
+<nav class="sidebar"><h4>Get started</h4>
+<a class="" href="../index.html">Overview</a>
+<a class="" href="../quickstart.html">Quickstart</a>
+<h4>Guides</h4>
+<a class="" href="../guides/metamodel.html">The metamodel</a>
+<a class="" href="../guides/writing-models.html">Writing models</a>
+<a class="" href="../guides/validating-models.html">Validating models</a>
+<a class="" href="../guides/generating-skills.html">Generating skills</a>
+<a class="" href="../guides/using-skills.html">Using generated skills</a>
+<a class="" href="../guides/example.html">Example: deliver a feature</a>
+<a class="" href="../guides/cli.html">Command line</a>
+<h4>Catalogue</h4>
+<a class="" href="../catalogue.html">All skills</a>
+<a class="sub" href="../catalogue.html#requirements">Requirements</a>
+<a class="sub" href="../catalogue.html#planning">Planning</a>
+<a class="sub" href="../catalogue.html#implementation">Implementation</a>
+<a class="sub" href="../catalogue.html#verification">Verification</a>
+<a class="sub" href="../catalogue.html#support">Support</a>
+<a class="" href="../types.html">Artifact types</a>
+<h4>Workflows</h4>
+<a class="" href="../workflows/deliver-feature.html">deliver-feature</a>
+<a class="" href="../workflows/deliver-feature-iso.html">deliver-feature-iso</a>
+<h4>Project</h4>
+<a class="" href="../about.html">About DEFT</a></nav>
+<main><div class="content">
+
+<div class="eyebrow">Verification</div>
+<h1>generate-tests</h1>
+<p class="lead">Use when requirements must be verified against an implementation with executable tests traced to requirement ids.</p>
+<div class="badges"><span class="badge abstract">abstract</span></div>
+<dl class="kv">
+<dt>Lineage</dt><dd><strong>generate-tests</strong></dd>
+<dt>Specializations</dt><dd><a href="../skills/acceptance-tests.html">acceptance-tests</a>, <a href="../skills/performance-tests.html">performance-tests</a></dd>
+<dt>Used in</dt><dd>no workflow</dd>
+</dl>
+<h2 id="signature">Signature</h2>
+<table><tr><th>Dir.</th><th>Parameter</th><th>Type</th><th>Declared by</th></tr><tr><td>in</td><td><code>requirements</code></td><td><a href="../types.html#t-Requirement"><code>Requirement</code></a> [1..*]</td><td>here</td></tr><tr><td>in</td><td><code>code</code></td><td><a href="../types.html#t-SourceCode"><code>SourceCode</code></a> [1]</td><td>here</td></tr><tr><td>out</td><td><code>suite</code></td><td><a href="../types.html#t-TestSuite"><code>TestSuite</code></a> [1]</td><td>here</td></tr><tr><td>out</td><td><code>report</code></td><td><a href="../types.html#t-TestReport"><code>TestReport</code></a> [1]</td><td>here</td></tr></table>
+<h3>Preconditions</h3><ul><li>The code builds and its existing tests pass.</li></ul><h3>Postconditions</h3><ul><li>Every input requirement is covered by at least one test.</li><li>The report states a verdict and the command that reproduces it.</li></ul>
+<h2 id="instructions">Instructions</h2>
+<div data-tabs><div class="tabs"><button class="tab active" data-panel="p-sections">Resolved sections</button><button class="tab" data-panel="p-model">Model</button></div></div><div class="tabpanel active" id="p-sections"><div class="section-block"><div class="section-head"><span class="badge abstract">abstract</span>
+<strong>Derive the oracle</strong><span class="prov">declared by <a href="../skills/generate-tests.html">generate-tests</a></span></div><div class="section-body empty">Implemented by each concrete descendant.</div></div><div class="section-block"><div class="section-head"><span class="badge abstract">abstract</span>
+<strong>Write the tests</strong><span class="prov">declared by <a href="../skills/generate-tests.html">generate-tests</a></span></div><div class="section-body empty">Implemented by each concrete descendant.</div></div><div class="section-block"><div class="section-head"><span class="badge final">final</span>
+<strong>Trace tests to requirements</strong><span class="prov">declared by <a href="../skills/generate-tests.html">generate-tests</a></span></div><div class="section-body"><script type="application/json" id="md-sec-trace">"Tag every test with the ids of the requirements it checks (for example\n`@US-1` or a `covers` marker). Build a table with one row per input\nrequirement and the tests that cover it. A requirement without a test is\nan error: write the missing test before you run the suite."</script><div class="md" data-md="md-sec-trace"><pre>Tag every test with the ids of the requirements it checks (for example
+`@US-1` or a `covers` marker). Build a table with one row per input
+requirement and the tests that cover it. A requirement without a test is
+an error: write the missing test before you run the suite.</pre></div></div></div><div class="section-block"><div class="section-head"><span class="badge final">final</span>
+<strong>Run and report</strong><span class="prov">declared by <a href="../skills/generate-tests.html">generate-tests</a></span></div><div class="section-body"><script type="application/json" id="md-sec-run">"Run the new tests together with the existing suite. Write the report:\nverdict `pass` only if every test passed; otherwise `fail` with one entry\nper failing test (test id, requirement ids, expected and actual result).\nInclude the exact command that reproduces the run. Do not change the code\nunder test to make a test pass: report the failure."</script><div class="md" data-md="md-sec-run"><pre>Run the new tests together with the existing suite. Write the report:
+verdict `pass` only if every test passed; otherwise `fail` with one entry
+per failing test (test id, requirement ids, expected and actual result).
+Include the exact command that reproduces the run. Do not change the code
+under test to make a test pass: report the failure.</pre></div></div></div></div><div class="tabpanel" id="p-model"><p>From <code>models/skills/verification.yaml</code>.</p><pre><code>name: generate-tests
+abstract: true
+description: Use when requirements must be verified against an implementation with executable tests traced
+  to requirement ids.
+metadata:
+  title: Generate tests
+parameters:
+- name: requirements
+  direction: in
+  type: Requirement
+  lower: 1
+  upper: &#x27;*&#x27;
+- name: code
+  direction: in
+  type: SourceCode
+- name: suite
+  direction: out
+  type: TestSuite
+- name: report
+  direction: out
+  type: TestReport
+pre:
+- The code builds and its existing tests pass.
+post:
+- Every input requirement is covered by at least one test.
+- The report states a verdict and the command that reproduces it.
+sections:
+- name: oracle
+  kind: abstract
+  title: Derive the oracle
+- name: write
+  kind: abstract
+  title: Write the tests
+- name: trace
+  kind: final
+  title: Trace tests to requirements
+  content: &#x27;Tag every test with the ids of the requirements it checks (for example
+
+    `@US-1` or a `covers` marker). Build a table with one row per input
+
+    requirement and the tests that cover it. A requirement without a test is
+
+    an error: write the missing test before you run the suite.
+
+    &#x27;
+- name: run
+  kind: final
+  title: Run and report
+  content: &#x27;Run the new tests together with the existing suite. Write the report:
+
+    verdict `pass` only if every test passed; otherwise `fail` with one entry
+
+    per failing test (test id, requirement ids, expected and actual result).
+
+    Include the exact command that reproduces the run. Do not change the code
+
+    under test to make a test pass: report the failure.
+
+    &#x27;
+</code></pre></div>
+
+
+<footer>DEFT 0.1.0 · GNU General Public License v3.0 · Reused third-party skills keep their original licences.</footer>
+</div></main>
+<aside class="toc"><h5>On this page</h5><nav id="toc-links"></nav></aside>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<script src="../static/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+{
+  "items": 16,
+  "reference_gaps": 3,
+  "reviewers": {
+    "anthropic (claude-opus-5-5)": {
+      "answered": 16,
+      "unsure_or_missing": 0,
+      "accuracy": 0.875,
+      "gaps_found": "3/3",
+      "false_alarms": "2/13",
+      "uncovered_match": "3/3",
+      "kappa_vs_reference": 0.673
+    },
+    "openai (gpt-6-astra)": {
+      "answered": 16,
+      "unsure_or_missing": 0,
+      "accuracy": 0.75,
+      "gaps_found": "3/3",
+      "false_alarms": "4/13",
+      "uncovered_match": "3/3",
+      "kappa_vs_reference": 0.458
+    },
+    "google (gemini-3.1-pro-preview)": {
+      "answered": 16,
+      "unsure_or_missing": 0,
+      "accuracy": 0.875,
+      "gaps_found": "3/3",
+      "false_alarms": "2/13",
+      "uncovered_match": "3/3",
+      "kappa_vs_reference": 0.673
+    },
+    "human R1": {
+      "answered": 16,
+      "unsure_or_missing": 0,
+      "accuracy": 0.812,
+      "gaps_found": "3/3",
+      "false_alarms": "3/13",
+      "uncovered_match": "3/3",
+      "kappa_vs_reference": 0.556
+    }
+  },
+  "pairwise_kappa": {
+    "anthropic (claude-opus-5-5) vs openai (gpt-6-astra)": 0.738,
+    "anthropic (claude-opus-5-5) vs google (gemini-3.1-pro-preview)": 1.0,
+    "anthropic (claude-opus-5-5) vs human R1": 0.862,
+    "openai (gpt-6-astra) vs google (gemini-3.1-pro-preview)": 0.738,
+    "openai (gpt-6-astra) vs human R1": 0.613,
+    "google (gemini-3.1-pro-preview) vs human R1": 0.862
+  }
+}

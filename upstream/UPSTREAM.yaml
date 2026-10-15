@@ -1,0 +1,21 @@
+# Pinned third-party skill libraries vendored for adaptation and analysis.
+# Each directory keeps the upstream licence file unchanged.
+sources:
+  spec-kit:
+    repo: https://github.com/github/spec-kit
+    commit: b9e08bf3e1a9d82b2a7358e278a6224d54d8783b
+    date: 2026-10-07
+    license: MIT
+    paths: [templates/commands/*.md]
+  superpowers:
+    repo: https://github.com/obra/superpowers
+    commit: 8ca22dba9a94f28898bbce59f2537ff4d87c747d
+    date: 2026-09-25
+    license: MIT
+    paths: [skills/*/SKILL.md]
+  anthropics-skills:
+    repo: https://github.com/anthropics/skills
+    commit: 683bc88e56f3e09ba94f7055977f3d3aa499f202
+    date: 2026-10-05
+    license: Apache-2.0
+    paths: [skills/webapp-testing/**]

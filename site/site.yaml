@@ -1,0 +1,13 @@
+# Site settings.
+# repo_url: the repository, shown in the top bar, the quickstart and About.
+# source_url: link to one file of the repository; {path} is its path from the root.
+#
+# During the double-blind review, both point to the anonymized mirror. At
+# camera-ready, use:
+#   repo_url: https://github.com/deft-skills/deft
+#   source_url: https://github.com/deft-skills/deft/blob/main/{path}
+# and rebuild with: python site/build.py
+title: DEFT
+tagline: Engineering agent skills as software
+repo_url: https://anonymous.4open.science/r/deft-F7FE/
+source_url: https://anonymous.4open.science/r/deft-F7FE/{path}

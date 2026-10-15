@@ -1,0 +1,32 @@
+flowchart TB
+  in((start))
+  functional["specify-functional<br/><b>user-stories</b>"]
+  quality["specify-quality<br/><b>iso25010</b>"]
+  quantify["quantify-quality"]
+  plan["plan-feature"]
+  implement["execute-plan<br/><b>execute-plan-subagents</b>"]
+  tdd["test-driven-development"]
+  acceptance["acceptance-tests<br/><b>acceptance-gherkin</b>"]
+  performance["performance-tests"]
+  verdict{verdict}
+  debug["systematic-debugging"]
+  done(((end)))
+  in -->|FeatureRequest| functional
+  in -->|FeatureRequest| quality
+  quality -->|ISO25010Requirement| quantify
+  functional -->|Requirement| plan
+  quantify -->|Requirement| plan
+  plan -->|ImplementationPlan| implement
+  functional -->|UserStory| acceptance
+  implement -->|SourceCode| acceptance
+  quantify -->|MeasurableQualityRequirement| performance
+  implement -->|SourceCode| performance
+  acceptance -->|TestReport| debug
+  performance -->|TestReport| debug
+  implement -->|SourceCode| debug
+  implement -.->|invokes| tdd
+  acceptance --> verdict
+  performance --> verdict
+  verdict -->|every report has verdict pass| done
+  verdict -->|some report has verdict fail| debug
+  debug -.->|repair ≤3| implement

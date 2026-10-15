@@ -1,0 +1,131 @@
+# Verification: test generation narrows its requirement input per test level.
+# acceptance-playwright adapts anthropics/skills webapp-testing.
+family: verification
+skills:
+  - name: generate-tests
+    abstract: true
+    description: >-
+      Use when requirements must be verified against an implementation with
+      executable tests traced to requirement ids.
+    metadata: {title: Generate tests}
+    parameters:
+      - {name: requirements, direction: in, type: Requirement, lower: 1, upper: "*"}
+      - {name: code, direction: in, type: SourceCode}
+      - {name: suite, direction: out, type: TestSuite}
+      - {name: report, direction: out, type: TestReport}
+    pre:
+      - The code builds and its existing tests pass.
+    post:
+      - Every input requirement is covered by at least one test.
+      - The report states a verdict and the command that reproduces it.
+    sections:
+      - name: oracle
+        kind: abstract
+        title: Derive the oracle
+      - name: write
+        kind: abstract
+        title: Write the tests
+      - name: trace
+        kind: final
+        title: Trace tests to requirements
+        content: |
+          Tag every test with the ids of the requirements it checks (for example
+          `@US-1` or a `covers` marker). Build a table with one row per input
+          requirement and the tests that cover it. A requirement without a test is
+          an error: write the missing test before you run the suite.
+      - name: run
+        kind: final
+        title: Run and report
+        content: |
+          Run the new tests together with the existing suite. Write the report:
+          verdict `pass` only if every test passed; otherwise `fail` with one entry
+          per failing test (test id, requirement ids, expected and actual result).
+          Include the exact command that reproduces the run. Do not change the code
+          under test to make a test pass: report the failure.
+
+  - name: acceptance-tests
+    parent: generate-tests
+    abstract: true
+    description: >-
+      Use when user stories must be verified end to end through their
+      acceptance criteria.
+    metadata: {title: Acceptance tests}
+    parameters:
+      - {name: requirements, direction: in, type: UserStory, lower: 1, upper: "*"}
+    refinements:
+      - kind: implements
+        target: oracle
+        content: |
+          Each acceptance criterion `Given <context>, when <event>, then <outcome>`
+          is one scenario. The context fixes the initial state, the event is the
+          single action under test, and the outcome is the oracle. Keep the exact
+          values of the criterion (durations, limits, messages).
+
+  - name: acceptance-gherkin
+    parent: acceptance-tests
+    description: >-
+      Use when acceptance criteria must become Gherkin feature files executed
+      with pytest-bdd.
+    metadata: {title: Acceptance tests with Gherkin}
+    refinements:
+      - kind: implements
+        target: write
+        content: |
+          Write one `.feature` file per user story under `tests/acceptance/`, with
+          the story as the feature description and one `Scenario` per acceptance
+          criterion, tagged with the story id. Implement the step definitions with
+          pytest-bdd against the public interface of the system (for example the
+          HTTP API through a test client), not against internal functions. Control
+          time and external services (clock, e-mail) through fixtures.
+
+  - name: acceptance-playwright
+    parent: acceptance-tests
+    description: >-
+      Use when acceptance criteria must be checked through the user interface
+      of a web application with Playwright.
+    metadata: {title: Acceptance tests with Playwright}
+    origin:
+      - {repo: anthropics/skills, path: skills/webapp-testing/SKILL.md, commit: 683bc88e56f3e09ba94f7055977f3d3aa499f202, license: Apache-2.0}
+    resources:
+      - {path: scripts/with_server.py, kind: script, source: ../upstream/anthropics-skills/skills/webapp-testing/scripts/with_server.py}
+    refinements:
+      - kind: implements
+        target: write
+        content: |
+          Write one Python Playwright script per user story under
+          `tests/acceptance/`, one test function per acceptance criterion.
+
+          - Start the servers with `scripts/with_server.py` (run it with `--help`
+            first and use it as a black box).
+          - Launch Chromium headless, open the page and wait for
+            `networkidle` before you inspect the DOM.
+          - Find selectors by reconnaissance: take a screenshot or read the
+            rendered content, then act with `text=`, `role=` or id selectors.
+          - Assert the outcome of the criterion on the rendered page, and close
+            the browser at the end.
+
+  - name: performance-tests
+    parent: generate-tests
+    description: >-
+      Use when measurable quality requirements (response time, throughput,
+      load) must be verified with load tests.
+    metadata: {title: Performance tests}
+    parameters:
+      - {name: requirements, direction: in, type: MeasurableQualityRequirement, lower: 1, upper: "*"}
+    pre:
+      - An environment that matches production in configuration is available.
+    refinements:
+      - kind: implements
+        target: oracle
+        content: |
+          The fit criterion is the oracle. Extract the metric (for example the 95th
+          percentile response time), the threshold, and the load conditions
+          (concurrent users, ramp-up, duration). If a fit criterion lacks any of
+          these, stop: the requirement is not measurable.
+      - kind: implements
+        target: write
+        content: |
+          Write one Locust scenario per requirement under `tests/performance/`,
+          reproducing the load conditions of its fit criterion. Run it headless with
+          a fixed duration, export the statistics, and assert the threshold on the
+          exported metric so that the test fails when the fit criterion is not met.

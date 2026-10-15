@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Using generated skills · DEFT</title>
+<meta name="description" content="DEFT: a metamodel and toolset to specialize, compose, check and generate agent skills.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../static/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231a1a1a'/%3E%3Ctext x='16' y='22' font-family='monospace' font-size='15' text-anchor='middle' fill='white'%3Edf%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<header class="topbar">
+  <button class="iconbtn menubtn" id="menu" aria-label="Menu">☰</button>
+  <a class="brand" href="../index.html"><span class="brand-mark">df</span>DEFT</a>
+  <nav class="topnav"><a class="" href="../index.html">Overview</a><a class="active" href="../guides/metamodel.html">Guides</a><a class="" href="../catalogue.html">Catalogue</a><a class="" href="../about.html">About</a></nav>
+  <span class="spacer"></span>
+  <a class="iconbtn" href="https://anonymous.4open.science/r/deft-F7FE/">Repository</a>
+  <button class="iconbtn" id="theme" aria-label="Toggle theme">◐</button>
+</header>
+<div class="layout">
+<nav class="sidebar"><h4>Get started</h4>
+<a class="" href="../index.html">Overview</a>
+<a class="" href="../quickstart.html">Quickstart</a>
+<h4>Guides</h4>
+<a class="" href="../guides/metamodel.html">The metamodel</a>
+<a class="" href="../guides/writing-models.html">Writing models</a>
+<a class="" href="../guides/validating-models.html">Validating models</a>
+<a class="" href="../guides/generating-skills.html">Generating skills</a>
+<a class=" active" href="../guides/using-skills.html">Using generated skills</a>
+<a class="" href="../guides/example.html">Example: deliver a feature</a>
+<a class="" href="../guides/cli.html">Command line</a>
+<h4>Catalogue</h4>
+<a class="" href="../catalogue.html">All skills</a>
+<a class="sub" href="../catalogue.html#requirements">Requirements</a>
+<a class="sub" href="../catalogue.html#planning">Planning</a>
+<a class="sub" href="../catalogue.html#implementation">Implementation</a>
+<a class="sub" href="../catalogue.html#verification">Verification</a>
+<a class="sub" href="../catalogue.html#support">Support</a>
+<a class="" href="../types.html">Artifact types</a>
+<h4>Workflows</h4>
+<a class="" href="../workflows/deliver-feature.html">deliver-feature</a>
+<a class="" href="../workflows/deliver-feature-iso.html">deliver-feature-iso</a>
+<h4>Project</h4>
+<a class="" href="../about.html">About DEFT</a></nav>
+<main><div class="content">
+<div class="eyebrow">Guides</div>
+<div class="guide"><script type="application/json" id="md-guide">"# Using generated skills\n\nThe skills DEFT generates are ordinary Agent Skills: one folder per skill with a\n`SKILL.md` and its bundled files. Any agent that supports the specification can use\nthem; the DEFT structure stays in the models.\n\n## 1. Generate\n\n```bash\ndeft check models                      # must report 0 violations\ndeft generate models --out skills      # one folder per concrete skill and executable workflow\n```\n\nGeneration refuses to run on a library with violations (use `--force` only to inspect\nthe output of a broken library).\n\n## 2. Install into your agent\n\nCopy the folders, or generate straight into the folder your agent reads. For a project\nwith Claude Code:\n\n```bash\ndeft generate models --out path/to/project/.claude/skills\n```\n\nOther agents read skills from other folders (for example `.agents/skills/` in the\nproject or a folder in your home directory); check the documentation of your agent and\nthe list of compatible clients at <https://agentskills.io/clients>.\n\nInstall a workflow together with every skill it lists in `metadata.deft-requires`;\ngenerating the whole library does that for you.\n\n## 3. Run a workflow\n\nAsk the agent to use the workflow skill by name and give it the inputs listed under\n\"Inputs and outputs\" of its `SKILL.md`, for example:\n\n> Use the skill `deliver-feature` for this feature request: users who forgot their\n> password can reset it through a link sent by e-mail...\n\nThe workflow skill tells the agent which skill to load at each step, which artifact\neach step receives and produces, which skills to invoke inside a step, how to decide\nafter verification, and how many repair attempts are allowed.\n\n## 4. Check what happened\n\nCompare the result with the workflow's \"Done when\" list and with the postconditions of\neach step. The example in [`examples/account-service`](https://anonymous.4open.science/r/deft-F7FE/examples/account-service)\nprovides a system, a feature request, a preparation script and a checker that reports\nthe produced artifacts, the traceability from requirements to tests, the commits and\nthe test verdict.\n\n## Updating skills\n\nChange the models, never the generated files: run `deft check` and `deft generate`\nagain. Imported upstream content (`mode: imported`) is refreshed by updating the pinned\ncopy under `upstream/` and regenerating; adapted content needs a review of the upstream\nchange.\n"</script><div class="md" data-md="md-guide"><pre># Using generated skills
+
+The skills DEFT generates are ordinary Agent Skills: one folder per skill with a
+`SKILL.md` and its bundled files. Any agent that supports the specification can use
+them; the DEFT structure stays in the models.
+
+## 1. Generate
+
+```bash
+deft check models                      # must report 0 violations
+deft generate models --out skills      # one folder per concrete skill and executable workflow
+```
+
+Generation refuses to run on a library with violations (use `--force` only to inspect
+the output of a broken library).
+
+## 2. Install into your agent
+
+Copy the folders, or generate straight into the folder your agent reads. For a project
+with Claude Code:
+
+```bash
+deft generate models --out path/to/project/.claude/skills
+```
+
+Other agents read skills from other folders (for example `.agents/skills/` in the
+project or a folder in your home directory); check the documentation of your agent and
+the list of compatible clients at &lt;https://agentskills.io/clients&gt;.
+
+Install a workflow together with every skill it lists in `metadata.deft-requires`;
+generating the whole library does that for you.
+
+## 3. Run a workflow
+
+Ask the agent to use the workflow skill by name and give it the inputs listed under
+&quot;Inputs and outputs&quot; of its `SKILL.md`, for example:
+
+&gt; Use the skill `deliver-feature` for this feature request: users who forgot their
+&gt; password can reset it through a link sent by e-mail...
+
+The workflow skill tells the agent which skill to load at each step, which artifact
+each step receives and produces, which skills to invoke inside a step, how to decide
+after verification, and how many repair attempts are allowed.
+
+## 4. Check what happened
+
+Compare the result with the workflow&#x27;s &quot;Done when&quot; list and with the postconditions of
+each step. The example in [`examples/account-service`](https://anonymous.4open.science/r/deft-F7FE/examples/account-service)
+provides a system, a feature request, a preparation script and a checker that reports
+the produced artifacts, the traceability from requirements to tests, the commits and
+the test verdict.
+
+## Updating skills
+
+Change the models, never the generated files: run `deft check` and `deft generate`
+again. Imported upstream content (`mode: imported`) is refreshed by updating the pinned
+copy under `upstream/` and regenerating; adapted content needs a review of the upstream
+change.
+</pre></div></div>
+<p style="margin-top:24px"><a class="iconbtn" href="https://anonymous.4open.science/r/deft-F7FE/guides/using-skills.md">View source of this page</a></p>
+<div class="cards"><a class="card" href="../guides/generating-skills.html"><p>Previous</p><h3>Generating skills</h3></a><a class="card" href="../guides/example.html"><p>Next</p><h3>Example: deliver a feature</h3></a></div>
+<footer>DEFT 0.1.0 · GNU General Public License v3.0 · Reused third-party skills keep their original licences.</footer>
+</div></main>
+<aside class="toc"><h5>On this page</h5><nav id="toc-links"></nav></aside>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<script src="../static/app.js"></script>
+</body>
+</html>

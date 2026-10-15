@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>deliver-feature · DEFT</title>
+<meta name="description" content="DEFT: a metamodel and toolset to specialize, compose, check and generate agent skills.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../static/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231a1a1a'/%3E%3Ctext x='16' y='22' font-family='monospace' font-size='15' text-anchor='middle' fill='white'%3Edf%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<header class="topbar">
+  <button class="iconbtn menubtn" id="menu" aria-label="Menu">☰</button>
+  <a class="brand" href="../index.html"><span class="brand-mark">df</span>DEFT</a>
+  <nav class="topnav"><a class="" href="../index.html">Overview</a><a class="" href="../guides/metamodel.html">Guides</a><a class="" href="../catalogue.html">Catalogue</a><a class="" href="../about.html">About</a></nav>
+  <span class="spacer"></span>
+  <a class="iconbtn" href="https://anonymous.4open.science/r/deft-F7FE/">Repository</a>
+  <button class="iconbtn" id="theme" aria-label="Toggle theme">◐</button>
+</header>
+<div class="layout">
+<nav class="sidebar"><h4>Get started</h4>
+<a class="" href="../index.html">Overview</a>
+<a class="" href="../quickstart.html">Quickstart</a>
+<h4>Guides</h4>
+<a class="" href="../guides/metamodel.html">The metamodel</a>
+<a class="" href="../guides/writing-models.html">Writing models</a>
+<a class="" href="../guides/validating-models.html">Validating models</a>
+<a class="" href="../guides/generating-skills.html">Generating skills</a>
+<a class="" href="../guides/using-skills.html">Using generated skills</a>
+<a class="" href="../guides/example.html">Example: deliver a feature</a>
+<a class="" href="../guides/cli.html">Command line</a>
+<h4>Catalogue</h4>
+<a class="" href="../catalogue.html">All skills</a>
+<a class="sub" href="../catalogue.html#requirements">Requirements</a>
+<a class="sub" href="../catalogue.html#planning">Planning</a>
+<a class="sub" href="../catalogue.html#implementation">Implementation</a>
+<a class="sub" href="../catalogue.html#verification">Verification</a>
+<a class="sub" href="../catalogue.html#support">Support</a>
+<a class="" href="../types.html">Artifact types</a>
+<h4>Workflows</h4>
+<a class=" active" href="../workflows/deliver-feature.html">deliver-feature</a>
+<a class="" href="../workflows/deliver-feature-iso.html">deliver-feature-iso</a>
+<h4>Project</h4>
+<a class="" href="../about.html">About DEFT</a></nav>
+<main><div class="content">
+
+<div class="eyebrow">Workflow</div>
+<h1>deliver-feature</h1>
+<p class="lead">Use when a feature request for an existing system must be specified, planned, implemented test-first and verified against its functional and quality requirements.</p>
+<div class="badges"><span class="badge ok">executable</span></div>
+<h2 id="graph">Graph</h2>
+<p>Solid edges carry artifacts, labelled with the type the receiving step requires; dashed edges invoke a skill or
+repair after a failure.</p>
+<pre class="mermaid">flowchart TB
+  in((start))
+  functional[&quot;specify-functional&lt;br/&gt;&lt;b&gt;user-stories&lt;/b&gt;&quot;]
+  quality[&quot;specify-quality&lt;br/&gt;&lt;b&gt;volere&lt;/b&gt;&quot;]
+  plan[&quot;plan-feature&quot;]
+  implement[&quot;execute-plan&lt;br/&gt;&lt;b&gt;execute-plan-inline&lt;/b&gt;&quot;]
+  tdd[&quot;test-driven-development&quot;]
+  acceptance[&quot;acceptance-tests&lt;br/&gt;&lt;b&gt;acceptance-gherkin&lt;/b&gt;&quot;]
+  performance[&quot;performance-tests&quot;]
+  verdict{verdict}
+  debug[&quot;systematic-debugging&quot;]
+  done(((end)))
+  in --&gt;|FeatureRequest| functional
+  in --&gt;|FeatureRequest| quality
+  functional --&gt;|Requirement| plan
+  quality --&gt;|Requirement| plan
+  plan --&gt;|ImplementationPlan| implement
+  functional --&gt;|UserStory| acceptance
+  implement --&gt;|SourceCode| acceptance
+  quality --&gt;|MeasurableQualityRequirement| performance
+  implement --&gt;|SourceCode| performance
+  acceptance --&gt;|TestReport| debug
+  performance --&gt;|TestReport| debug
+  implement --&gt;|SourceCode| debug
+  implement -.-&gt;|invokes| tdd
+  acceptance --&gt; verdict
+  performance --&gt; verdict
+  verdict --&gt;|every report has verdict pass| done
+  verdict --&gt;|some report has verdict fail| debug
+  debug -.-&gt;|repair ≤3| implement
+</pre>
+<h2 id="nodes">Steps and bindings</h2>
+<table><tr><th>Step</th><th>Role</th><th>Bound to</th></tr><tr><td><code>functional</code></td><td><a href="../skills/specify-functional.html">specify-functional</a></td><td><a href="../skills/user-stories.html">user-stories</a></td></tr><tr><td><code>quality</code></td><td><a href="../skills/specify-quality.html">specify-quality</a></td><td><a href="../skills/volere.html">volere</a></td></tr><tr><td><code>plan</code></td><td><a href="../skills/plan-feature.html">plan-feature</a></td><td>(role)</td></tr><tr><td><code>implement</code></td><td><a href="../skills/execute-plan.html">execute-plan</a></td><td><a href="../skills/execute-plan-inline.html">execute-plan-inline</a></td></tr><tr><td><code>tdd</code></td><td><a href="../skills/test-driven-development.html">test-driven-development</a></td><td>(role)</td></tr><tr><td><code>acceptance</code></td><td><a href="../skills/acceptance-tests.html">acceptance-tests</a></td><td><a href="../skills/acceptance-gherkin.html">acceptance-gherkin</a></td></tr><tr><td><code>performance</code></td><td><a href="../skills/performance-tests.html">performance-tests</a></td><td>(role)</td></tr><tr><td><code>debug</code></td><td><a href="../skills/systematic-debugging.html">systematic-debugging</a></td><td>(role)</td></tr></table>
+<h2 id="bindings">Alternative bindings</h2>
+<p>Steps whose role has several concrete specializations can be bound differently. The checker decides which
+combinations are valid: 4 of 16 here. Invalid ones wire a variant to a step that cannot accept what
+it produces.</p>
+<table><tr><th>functional</th><th>quality</th><th>implement</th><th>acceptance</th><th>Check</th></tr><tr><td><code>ears</code></td><td><code>iso25010</code></td><td><code>execute-plan-inline</code></td><td><code>acceptance-gherkin</code></td><td><span class="badge bad">C2</span><div style="font-size:.8rem;color:var(--fg-faint)">data edge functional.requirements -&gt; acceptance.requirements: EARSRequirement (from ears) does not conform to UserStory (required by acceptance-gherkin)</div></td></tr><tr><td><code>ears</code></td><td><code>iso25010</code></td><td><code>execute-plan-inline</code></td><td><code>acceptance-playwright</code></td><td><span class="badge bad">C2</span><div style="font-size:.8rem;color:var(--fg-faint)">data edge functional.requirements -&gt; acceptance.requirements: EARSRequirement (from ears) does not conform to UserStory (required by acceptance-playwright)</div></td></tr><tr><td><code>ears</code></td><td><code>iso25010</code></td><td><code>execute-plan-subagents</code></td><td><code>acceptance-gherkin</code></td><td><span class="badge bad">C2</span><div style="font-size:.8rem;color:var(--fg-faint)">data edge functional.requirements -&gt; acceptance.requirements: EARSRequirement (from ears) does not conform to UserStory (required by acceptance-gherkin)</div></td></tr><tr><td><code>ears</code></td><td><code>iso25010</code></td><td><code>execute-plan-subagents</code></td><td><code>acceptance-playwright</code></td><td><span class="badge bad">C2</span><div style="font-size:.8rem;color:var(--fg-faint)">data edge functional.requirements -&gt; acceptance.requirements: EARSRequirement (from ears) does not conform to UserStory (required by acceptance-playwright)</div></td></tr><tr><td><code>ears</code></td><td><code>volere</code></td><td><code>execute-plan-inline</code></td><td><code>acceptance-gherkin</code></td><td><span class="badge bad">C2</span><div style="font-size:.8rem;color:var(--fg-faint)">data edge functional.requirements -&gt; acceptance.requirements: EARSRequirement (from ears) does not conform to UserStory (required by acceptance-gherkin)</div></td></tr><tr><td><code>ears</code></td><td><code>volere</code></td><td><code>execute-plan-inline</code></td><td><code>acceptance-playwright</code></td><td><span class="badge bad">C2</span><div style="font-size:.8rem;color:var(--fg-faint)">data edge functional.requirements -&gt; acceptance.requirements: EARSRequirement (from ears) does not conform to UserStory (required by acceptance-playwright)</div></td></tr><tr><td><code>ears</code></td><td><code>volere</code></td><td><code>execute-plan-subagents</code></td><td><code>acceptance-gherkin</code></td><td><span class="badge bad">C2</span><div style="font-size:.8rem;color:var(--fg-faint)">data edge functional.requirements -&gt; acceptance.requirements: EARSRequirement (from ears) does not conform to UserStory (required by acceptance-gherkin)</div></td></tr><tr><td><code>ears</code></td><td><code>volere</code></td><td><code>execute-plan-subagents</code></td><td><code>acceptance-playwright</code></td><td><span class="badge bad">C2</span><div style="font-size:.8rem;color:var(--fg-faint)">data edge functional.requirements -&gt; acceptance.requirements: EARSRequirement (from ears) does not conform to UserStory (required by acceptance-playwright)</div></td></tr><tr><td><code>user-stories</code></td><td><code>iso25010</code></td><td><code>execute-plan-inline</code></td><td><code>acceptance-gherkin</code></td><td><span class="badge bad">C2</span><div style="font-size:.8rem;color:var(--fg-faint)">data edge quality.requirements -&gt; performance.requirements: ISO25010Requirement (from iso25010) does not conform to MeasurableQualityRequirement (required by performance-tests)</div></td></tr><tr><td><code>user-stories</code></td><td><code>iso25010</code></td><td><code>execute-plan-inline</code></td><td><code>acceptance-playwright</code></td><td><span class="badge bad">C2</span><div style="font-size:.8rem;color:var(--fg-faint)">data edge quality.requirements -&gt; performance.requirements: ISO25010Requirement (from iso25010) does not conform to MeasurableQualityRequirement (required by performance-tests)</div></td></tr><tr><td><code>user-stories</code></td><td><code>iso25010</code></td><td><code>execute-plan-subagents</code></td><td><code>acceptance-gherkin</code></td><td><span class="badge bad">C2</span><div style="font-size:.8rem;color:var(--fg-faint)">data edge quality.requirements -&gt; performance.requirements: ISO25010Requirement (from iso25010) does not conform to MeasurableQualityRequirement (required by performance-tests)</div></td></tr><tr><td><code>user-stories</code></td><td><code>iso25010</code></td><td><code>execute-plan-subagents</code></td><td><code>acceptance-playwright</code></td><td><span class="badge bad">C2</span><div style="font-size:.8rem;color:var(--fg-faint)">data edge quality.requirements -&gt; performance.requirements: ISO25010Requirement (from iso25010) does not conform to MeasurableQualityRequirement (required by performance-tests)</div></td></tr><tr><td><code>user-stories</code></td><td><code>volere</code></td><td><code>execute-plan-inline</code></td><td><code>acceptance-gherkin</code></td><td><span class="badge ok">valid</span></td></tr><tr><td><code>user-stories</code></td><td><code>volere</code></td><td><code>execute-plan-inline</code></td><td><code>acceptance-playwright</code></td><td><span class="badge ok">valid</span></td></tr><tr><td><code>user-stories</code></td><td><code>volere</code></td><td><code>execute-plan-subagents</code></td><td><code>acceptance-gherkin</code></td><td><span class="badge ok">valid</span></td></tr><tr><td><code>user-stories</code></td><td><code>volere</code></td><td><code>execute-plan-subagents</code></td><td><code>acceptance-playwright</code></td><td><span class="badge ok">valid</span></td></tr></table>
+<h2 id="contracts">Contracts to review</h2>
+<p>For every step, the postconditions of the steps before it, and the guards that lead to it, must guarantee its
+preconditions. These are natural-language conditions: review them (<code>deft obligations models --workflow
+deliver-feature</code>).</p>
+<table><tr><th>Step</th><th>After</th><th>Preconditions to guarantee</th></tr><tr><td><code>functional</code></td><td>self</td><td><ul><li>The feature request is not empty.</li></ul></td></tr><tr><td><code>quality</code></td><td>self</td><td><ul><li>The feature request is not empty.</li></ul></td></tr><tr><td><code>plan</code></td><td>functional, quality</td><td><ul><li>Every requirement has a unique id and is testable.</li></ul></td></tr><tr><td><code>implement</code></td><td>plan, debug</td><td><ul><li>The plan has at least one task and every task names its test.</li></ul></td></tr><tr><td><code>acceptance</code></td><td>functional, implement</td><td><ul><li>The code builds and its existing tests pass.</li></ul></td></tr><tr><td><code>performance</code></td><td>quality, implement</td><td><ul><li>The code builds and its existing tests pass.</li><li>An environment that matches production in configuration is available.</li></ul></td></tr><tr><td><code>debug</code></td><td>acceptance, performance, implement, verdict</td><td><ul><li>At least one report has verdict fail.</li></ul></td></tr><tr><td><code>self</code></td><td>implement, acceptance, performance, verdict</td><td><ul><li>Every requirement is covered by at least one passing test.</li><li>The code is committed on a feature branch.</li></ul></td></tr></table>
+<h2 id="generated">Generated SKILL.md</h2>
+<p><a class="iconbtn" href="../skills-dist/deliver-feature/SKILL.md" download>Download SKILL.md</a></p>
+<div class="section-body"><script type="application/json" id="md-wf">"# Deliver a feature\n\nThis skill coordinates other skills. Load each named skill when its step starts, and pass the artifacts exactly as listed. Each step is ready when all its inputs exist; steps with no dependency between them may run in any order.\n\n## Inputs and outputs\n\n- Input `request`: FeatureRequest (one)\n  A change request stated by a stakeholder in natural language.\n  - `text` (required)\n  - `system` (optional): existing system and stack\n- Output `code`: SourceCode (one)\n  The changed code base, as a branch or a set of commits.\n  - `branch` (required)\n  - `commits` (one or more)\n- Output `reports`: TestReport (one or more)\n  Result of running a test suite against the code.\n  - `verdict` (required; one of pass, fail)\n  - `failures` (any number)\n  - `command` (required): command that reproduces the run\n\n## Before you start\n\n- The feature request names the existing system and its stack.\n- An environment that matches production in configuration is available.\n\n## Workflow\n\n### Step 1: functional\n\nUse the skill `user-stories` (role: specify-functional).\n- Input `request`: the workflow input `request`.\n- Output `requirements`: UserStory.\n\n### Step 2: quality\n\nUse the skill `volere` (role: specify-quality).\n- Input `request`: the workflow input `request`.\n- Output `requirements`: VolereRequirement.\n\n### Step 3: plan\n\nUse the skill `plan-feature`.\n- Input `requirements`: the `requirements` of step 1 (functional).\n- Input `requirements`: the `requirements` of step 2 (quality).\n- Output `plan`: ImplementationPlan.\n\n### Step 4: implement\n\nUse the skill `execute-plan-inline` (role: execute-plan).\n- Input `plan`: the `plan` of step 3 (plan).\n- Output `code`: SourceCode.\n- While you perform this step, invoke the skill `test-driven-development` for each unit of work, and follow it completely.\n- When the workflow returns here after a failure with the `diagnosis` from debug, fix only what the diagnosis identifies.\n\n### Step 5: acceptance\n\nUse the skill `acceptance-gherkin` (role: acceptance-tests).\n- Input `requirements`: the `requirements` of step 1 (functional).\n- Input `code`: the `code` of step 4 (implement).\n- Output `suite`: TestSuite.\n- Output `report`: TestReport.\n\n### Step 6: performance\n\nUse the skill `performance-tests`.\n- Input `requirements`: the `requirements` of step 2 (quality).\n- Input `code`: the `code` of step 4 (implement).\n- Output `suite`: TestSuite.\n- Output `report`: TestReport.\n\n### Step 7: verdict (decision)\n\n- If every report has verdict pass: finish the workflow.\n- If some report has verdict fail: go to step 8 (debug).\n\n### Step 8: debug\n\nUse the skill `systematic-debugging`.\n- Input `reports`: the `report` of step 5 (acceptance).\n- Input `reports`: the `report` of step 6 (performance).\n- Input `code`: the `code` of step 4 (implement).\n- Output `diagnosis`: Diagnosis.\n\n### Repair loop\n\n- After step 8 (debug), return to step 4 (implement) and continue from there. Do this at most 3 times. If the limit is reached, stop and report the open failures instead of continuing.\n\n## Done when\n\n- Every requirement is covered by at least one passing test.\n- The code is committed on a feature branch.\n"</script><div class="md" data-md="md-wf"><pre># Deliver a feature
+
+This skill coordinates other skills. Load each named skill when its step starts, and pass the artifacts exactly as listed. Each step is ready when all its inputs exist; steps with no dependency between them may run in any order.
+
+## Inputs and outputs
+
+- Input `request`: FeatureRequest (one)
+  A change request stated by a stakeholder in natural language.
+  - `text` (required)
+  - `system` (optional): existing system and stack
+- Output `code`: SourceCode (one)
+  The changed code base, as a branch or a set of commits.
+  - `branch` (required)
+  - `commits` (one or more)
+- Output `reports`: TestReport (one or more)
+  Result of running a test suite against the code.
+  - `verdict` (required; one of pass, fail)
+  - `failures` (any number)
+  - `command` (required): command that reproduces the run
+
+## Before you start
+
+- The feature request names the existing system and its stack.
+- An environment that matches production in configuration is available.
+
+## Workflow
+
+### Step 1: functional
+
+Use the skill `user-stories` (role: specify-functional).
+- Input `request`: the workflow input `request`.
+- Output `requirements`: UserStory.
+
+### Step 2: quality
+
+Use the skill `volere` (role: specify-quality).
+- Input `request`: the workflow input `request`.
+- Output `requirements`: VolereRequirement.
+
+### Step 3: plan
+
+Use the skill `plan-feature`.
+- Input `requirements`: the `requirements` of step 1 (functional).
+- Input `requirements`: the `requirements` of step 2 (quality).
+- Output `plan`: ImplementationPlan.
+
+### Step 4: implement
+
+Use the skill `execute-plan-inline` (role: execute-plan).
+- Input `plan`: the `plan` of step 3 (plan).
+- Output `code`: SourceCode.
+- While you perform this step, invoke the skill `test-driven-development` for each unit of work, and follow it completely.
+- When the workflow returns here after a failure with the `diagnosis` from debug, fix only what the diagnosis identifies.
+
+### Step 5: acceptance
+
+Use the skill `acceptance-gherkin` (role: acceptance-tests).
+- Input `requirements`: the `requirements` of step 1 (functional).
+- Input `code`: the `code` of step 4 (implement).
+- Output `suite`: TestSuite.
+- Output `report`: TestReport.
+
+### Step 6: performance
+
+Use the skill `performance-tests`.
+- Input `requirements`: the `requirements` of step 2 (quality).
+- Input `code`: the `code` of step 4 (implement).
+- Output `suite`: TestSuite.
+- Output `report`: TestReport.
+
+### Step 7: verdict (decision)
+
+- If every report has verdict pass: finish the workflow.
+- If some report has verdict fail: go to step 8 (debug).
+
+### Step 8: debug
+
+Use the skill `systematic-debugging`.
+- Input `reports`: the `report` of step 5 (acceptance).
+- Input `reports`: the `report` of step 6 (performance).
+- Input `code`: the `code` of step 4 (implement).
+- Output `diagnosis`: Diagnosis.
+
+### Repair loop
+
+- After step 8 (debug), return to step 4 (implement) and continue from there. Do this at most 3 times. If the limit is reached, stop and report the open failures instead of continuing.
+
+## Done when
+
+- Every requirement is covered by at least one passing test.
+- The code is committed on a feature branch.
+</pre></div></div>
+
+<footer>DEFT 0.1.0 · GNU General Public License v3.0 · Reused third-party skills keep their original licences.</footer>
+</div></main>
+<aside class="toc"><h5>On this page</h5><nav id="toc-links"></nav></aside>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<script src="../static/app.js"></script>
+</body>
+</html>

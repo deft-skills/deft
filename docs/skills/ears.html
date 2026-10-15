@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ears · DEFT</title>
+<meta name="description" content="DEFT: a metamodel and toolset to specialize, compose, check and generate agent skills.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../static/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231a1a1a'/%3E%3Ctext x='16' y='22' font-family='monospace' font-size='15' text-anchor='middle' fill='white'%3Edf%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<header class="topbar">
+  <button class="iconbtn menubtn" id="menu" aria-label="Menu">☰</button>
+  <a class="brand" href="../index.html"><span class="brand-mark">df</span>DEFT</a>
+  <nav class="topnav"><a class="" href="../index.html">Overview</a><a class="" href="../guides/metamodel.html">Guides</a><a class="" href="../catalogue.html">Catalogue</a><a class="" href="../about.html">About</a></nav>
+  <span class="spacer"></span>
+  <a class="iconbtn" href="https://anonymous.4open.science/r/deft-F7FE/">Repository</a>
+  <button class="iconbtn" id="theme" aria-label="Toggle theme">◐</button>
+</header>
+<div class="layout">
+<nav class="sidebar"><h4>Get started</h4>
+<a class="" href="../index.html">Overview</a>
+<a class="" href="../quickstart.html">Quickstart</a>
+<h4>Guides</h4>
+<a class="" href="../guides/metamodel.html">The metamodel</a>
+<a class="" href="../guides/writing-models.html">Writing models</a>
+<a class="" href="../guides/validating-models.html">Validating models</a>
+<a class="" href="../guides/generating-skills.html">Generating skills</a>
+<a class="" href="../guides/using-skills.html">Using generated skills</a>
+<a class="" href="../guides/example.html">Example: deliver a feature</a>
+<a class="" href="../guides/cli.html">Command line</a>
+<h4>Catalogue</h4>
+<a class="" href="../catalogue.html">All skills</a>
+<a class="sub" href="../catalogue.html#requirements">Requirements</a>
+<a class="sub" href="../catalogue.html#planning">Planning</a>
+<a class="sub" href="../catalogue.html#implementation">Implementation</a>
+<a class="sub" href="../catalogue.html#verification">Verification</a>
+<a class="sub" href="../catalogue.html#support">Support</a>
+<a class="" href="../types.html">Artifact types</a>
+<h4>Workflows</h4>
+<a class="" href="../workflows/deliver-feature.html">deliver-feature</a>
+<a class="" href="../workflows/deliver-feature-iso.html">deliver-feature-iso</a>
+<h4>Project</h4>
+<a class="" href="../about.html">About DEFT</a></nav>
+<main><div class="content">
+
+<div class="eyebrow">Requirements</div>
+<h1>ears</h1>
+<p class="lead">Use when functional requirements must follow the EARS (Easy Approach to Requirements Syntax) patterns.</p>
+<div class="badges"><span class="badge ">concrete</span><span class="badge ">adapted from github/spec-kit</span></div>
+<dl class="kv">
+<dt>Lineage</dt><dd><a href="../skills/specify-requirements.html">specify-requirements</a> › <a href="../skills/specify-functional.html">specify-functional</a> › <strong>ears</strong></dd>
+<dt>Specializations</dt><dd>none</dd>
+<dt>Used in</dt><dd>no workflow</dd>
+</dl>
+<h2 id="signature">Signature</h2>
+<table><tr><th>Dir.</th><th>Parameter</th><th>Type</th><th>Declared by</th></tr><tr><td>in</td><td><code>request</code></td><td><a href="../types.html#t-FeatureRequest"><code>FeatureRequest</code></a> [1]</td><td><a href="../skills/specify-requirements.html">specify-requirements</a></td></tr><tr><td>out</td><td><code>requirements</code></td><td><a href="../types.html#t-EARSRequirement"><code>EARSRequirement</code></a> [1..*]</td><td>here</td></tr></table>
+<h3>Preconditions</h3><ul><li>The feature request is not empty.</li></ul><h3>Postconditions</h3><ul><li>Every requirement has a unique id and names its source.</li><li>Every requirement is testable and unambiguous.</li><li>No open clarification markers remain.</li><li>Every functional requirement describes observable behaviour of the system.</li></ul>
+<h2 id="instructions">Instructions</h2>
+<div data-tabs><div class="tabs"><button class="tab active" data-panel="p-sections">Resolved sections</button><button class="tab" data-panel="p-generated">Generated SKILL.md</button><button class="tab" data-panel="p-model">Model</button></div></div><div class="tabpanel active" id="p-sections"><div class="section-block"><div class="section-head"><span class="badge final">final</span>
+<strong>Identify sources and stakeholders</strong><span class="prov">declared by <a href="../skills/specify-requirements.html">specify-requirements</a></span></div><div class="section-body"><script type="application/json" id="md-sec-elicit">"1. Read the feature request and, if it exists, the project constitution or\n   equivalent principles document.\n2. List the stakeholders the request affects (users, operators, external\n   systems) and the sources you rely on for each statement.\n3. Extract the key concepts: actors, actions, data and constraints.\n4. Write down the assumptions you make where the request is silent. Use\n   reasonable industry defaults; do not ask about them."</script><div class="md" data-md="md-sec-elicit"><pre>1. Read the feature request and, if it exists, the project constitution or
+   equivalent principles document.
+2. List the stakeholders the request affects (users, operators, external
+   systems) and the sources you rely on for each statement.
+3. Extract the key concepts: actors, actions, data and constraints.
+4. Write down the assumptions you make where the request is silent. Use
+   reasonable industry defaults; do not ask about them.</pre></div></div></div><div class="section-block"><div class="section-head"><span class="badge final">final</span>
+<strong>Resolve ambiguities</strong><span class="prov">declared by <a href="../skills/specify-requirements.html">specify-requirements</a></span></div><div class="section-body"><script type="application/json" id="md-sec-clarify">"Mark an aspect `[NEEDS CLARIFICATION: <question>]` only when the choice\nchanges scope or user experience, has several reasonable interpretations,\nand has no reasonable default. Keep at most three markers, ordered by\nimpact: scope, then security and privacy, then user experience, then\ntechnical details.\n\nFor each marker, ask one question with two to four options and their\nimplications, wait for the answers, and replace the marker with the\ndecision. Record each decision under \"Clarifications\" with the date."</script><div class="md" data-md="md-sec-clarify"><pre>Mark an aspect `[NEEDS CLARIFICATION: &lt;question&gt;]` only when the choice
+changes scope or user experience, has several reasonable interpretations,
+and has no reasonable default. Keep at most three markers, ordered by
+impact: scope, then security and privacy, then user experience, then
+technical details.
+
+For each marker, ask one question with two to four options and their
+implications, wait for the answers, and replace the marker with the
+decision. Record each decision under &quot;Clarifications&quot; with the date.</pre></div></div></div><div class="section-block"><div class="section-head"><span class="badge default">default</span>
+<strong>Structure each requirement</strong><span class="prov">declared abstract by <a href="../skills/specify-requirements.html">specify-requirements</a>, implemented by <a href="../skills/ears.html">ears</a></span></div><div class="section-body"><script type="application/json" id="md-sec-structure">"Write each requirement with exactly one EARS pattern and record which:\n\n- Ubiquitous: `The <system> shall <response>.`\n- Event-driven: `When <trigger>, the <system> shall <response>.`\n- State-driven: `While <state>, the <system> shall <response>.`\n- Unwanted behaviour: `If <condition>, then the <system> shall <response>.`\n- Optional feature: `Where <feature is included>, the <system> shall <response>.`\n\nGive each requirement an id `FR-<n>`."</script><div class="md" data-md="md-sec-structure"><pre>Write each requirement with exactly one EARS pattern and record which:
+
+- Ubiquitous: `The &lt;system&gt; shall &lt;response&gt;.`
+- Event-driven: `When &lt;trigger&gt;, the &lt;system&gt; shall &lt;response&gt;.`
+- State-driven: `While &lt;state&gt;, the &lt;system&gt; shall &lt;response&gt;.`
+- Unwanted behaviour: `If &lt;condition&gt;, then the &lt;system&gt; shall &lt;response&gt;.`
+- Optional feature: `Where &lt;feature is included&gt;, the &lt;system&gt; shall &lt;response&gt;.`
+
+Give each requirement an id `FR-&lt;n&gt;`.</pre></div></div></div><div class="section-block"><div class="section-head"><span class="badge default">default</span>
+<strong>Validate the requirements</strong><span class="prov">declared by <a href="../skills/specify-requirements.html">specify-requirements</a>, overridden by <a href="../skills/ears.html">ears</a></span></div><div class="section-body"><script type="application/json" id="md-sec-validate">"Check every requirement against this list and fix it until all items\npass (at most three iterations):\n\n- It matches its declared EARS pattern exactly, with one `shall`.\n- The trigger, state or condition is observable.\n- The response is a single, testable behaviour of the named system.\n- No two requirements have the same trigger and contradictory responses."</script><div class="md" data-md="md-sec-validate"><pre>Check every requirement against this list and fix it until all items
+pass (at most three iterations):
+
+- It matches its declared EARS pattern exactly, with one `shall`.
+- The trigger, state or condition is observable.
+- The response is a single, testable behaviour of the named system.
+- No two requirements have the same trigger and contradictory responses.</pre></div></div></div><div class="section-block"><div class="section-head"><span class="badge final">final</span>
+<strong>Record the specification</strong><span class="prov">declared by <a href="../skills/specify-requirements.html">specify-requirements</a></span></div><div class="section-body"><script type="application/json" id="md-sec-record">"Write the requirements to `specs/<feature>/requirements.md`, one block per\nrequirement, with its id, source and the fields of its notation. Add the\nassumptions and the clarifications at the end. Report the file path and\nthe number of requirements per notation."</script><div class="md" data-md="md-sec-record"><pre>Write the requirements to `specs/&lt;feature&gt;/requirements.md`, one block per
+requirement, with its id, source and the fields of its notation. Add the
+assumptions and the clarifications at the end. Report the file path and
+the number of requirements per notation.</pre></div></div></div></div><div class="tabpanel" id="p-generated">
+<p><a class="iconbtn" href="../skills-dist/ears/SKILL.md" download>Download SKILL.md</a>
+<button class="iconbtn" data-copy="raw-ears">Copy</button></p>
+<pre><code>---
+name: ears
+description: Use when functional requirements must follow the EARS (Easy Approach to Requirements Syntax) patterns.
+license: GPL-3.0-only (includes third-party material; see LICENSE-*.txt)
+metadata:
+  deft-version: 0.1.0
+  deft-lineage: specify-requirements &gt; specify-functional &gt; ears
+  deft-inputs: &#x27;request: FeatureRequest [1]&#x27;
+  deft-outputs: &#x27;requirements: EARSRequirement [1..*]&#x27;
+  deft-origin: github/spec-kit@b9e08bf templates/commands/specify.md (MIT, adapted); github/spec-kit@b9e08bf templates/commands/clarify.md (MIT, adapted)
+---</code></pre><div class="section-body"><script type="application/json" id="md-gen">"# Specify EARS requirements\n\n## Inputs and outputs\n\n- Input `request`: FeatureRequest (one)\n  A change request stated by a stakeholder in natural language.\n  - `text` (required)\n  - `system` (optional): existing system and stack\n- Output `requirements`: EARSRequirement (one or more)\n  Requirement written with one of the five EARS patterns.\n  - `id` (required)\n  - `text` (required)\n  - `source` (required): stakeholder or document the requirement comes from\n  - `pattern` (required; one of ubiquitous, event-driven, state-driven, unwanted-behaviour, optional-feature)\n\n## Before you start\n\n- The feature request is not empty.\n\n## Identify sources and stakeholders\n\n1. Read the feature request and, if it exists, the project constitution or\n   equivalent principles document.\n2. List the stakeholders the request affects (users, operators, external\n   systems) and the sources you rely on for each statement.\n3. Extract the key concepts: actors, actions, data and constraints.\n4. Write down the assumptions you make where the request is silent. Use\n   reasonable industry defaults; do not ask about them.\n\n## Resolve ambiguities\n\nMark an aspect `[NEEDS CLARIFICATION: <question>]` only when the choice\nchanges scope or user experience, has several reasonable interpretations,\nand has no reasonable default. Keep at most three markers, ordered by\nimpact: scope, then security and privacy, then user experience, then\ntechnical details.\n\nFor each marker, ask one question with two to four options and their\nimplications, wait for the answers, and replace the marker with the\ndecision. Record each decision under \"Clarifications\" with the date.\n\n## Structure each requirement\n\nWrite each requirement with exactly one EARS pattern and record which:\n\n- Ubiquitous: `The <system> shall <response>.`\n- Event-driven: `When <trigger>, the <system> shall <response>.`\n- State-driven: `While <state>, the <system> shall <response>.`\n- Unwanted behaviour: `If <condition>, then the <system> shall <response>.`\n- Optional feature: `Where <feature is included>, the <system> shall <response>.`\n\nGive each requirement an id `FR-<n>`.\n\n## Validate the requirements\n\nCheck every requirement against this list and fix it until all items\npass (at most three iterations):\n\n- It matches its declared EARS pattern exactly, with one `shall`.\n- The trigger, state or condition is observable.\n- The response is a single, testable behaviour of the named system.\n- No two requirements have the same trigger and contradictory responses.\n\n## Record the specification\n\nWrite the requirements to `specs/<feature>/requirements.md`, one block per\nrequirement, with its id, source and the fields of its notation. Add the\nassumptions and the clarifications at the end. Report the file path and\nthe number of requirements per notation.\n\n## Done when\n\n- Every requirement has a unique id and names its source.\n- Every requirement is testable and unambiguous.\n- No open clarification markers remain.\n- Every functional requirement describes observable behaviour of the system.\n"</script><div class="md" data-md="md-gen"><pre># Specify EARS requirements
+
+## Inputs and outputs
+
+- Input `request`: FeatureRequest (one)
+  A change request stated by a stakeholder in natural language.
+  - `text` (required)
+  - `system` (optional): existing system and stack
+- Output `requirements`: EARSRequirement (one or more)
+  Requirement written with one of the five EARS patterns.
+  - `id` (required)
+  - `text` (required)
+  - `source` (required): stakeholder or document the requirement comes from
+  - `pattern` (required; one of ubiquitous, event-driven, state-driven, unwanted-behaviour, optional-feature)
+
+## Before you start
+
+- The feature request is not empty.
+
+## Identify sources and stakeholders
+
+1. Read the feature request and, if it exists, the project constitution or
+   equivalent principles document.
+2. List the stakeholders the request affects (users, operators, external
+   systems) and the sources you rely on for each statement.
+3. Extract the key concepts: actors, actions, data and constraints.
+4. Write down the assumptions you make where the request is silent. Use
+   reasonable industry defaults; do not ask about them.
+
+## Resolve ambiguities
+
+Mark an aspect `[NEEDS CLARIFICATION: &lt;question&gt;]` only when the choice
+changes scope or user experience, has several reasonable interpretations,
+and has no reasonable default. Keep at most three markers, ordered by
+impact: scope, then security and privacy, then user experience, then
+technical details.
+
+For each marker, ask one question with two to four options and their
+implications, wait for the answers, and replace the marker with the
+decision. Record each decision under &quot;Clarifications&quot; with the date.
+
+## Structure each requirement
+
+Write each requirement with exactly one EARS pattern and record which:
+
+- Ubiquitous: `The &lt;system&gt; shall &lt;response&gt;.`
+- Event-driven: `When &lt;trigger&gt;, the &lt;system&gt; shall &lt;response&gt;.`
+- State-driven: `While &lt;state&gt;, the &lt;system&gt; shall &lt;response&gt;.`
+- Unwanted behaviour: `If &lt;condition&gt;, then the &lt;system&gt; shall &lt;response&gt;.`
+- Optional feature: `Where &lt;feature is included&gt;, the &lt;system&gt; shall &lt;response&gt;.`
+
+Give each requirement an id `FR-&lt;n&gt;`.
+
+## Validate the requirements
+
+Check every requirement against this list and fix it until all items
+pass (at most three iterations):
+
+- It matches its declared EARS pattern exactly, with one `shall`.
+- The trigger, state or condition is observable.
+- The response is a single, testable behaviour of the named system.
+- No two requirements have the same trigger and contradictory responses.
+
+## Record the specification
+
+Write the requirements to `specs/&lt;feature&gt;/requirements.md`, one block per
+requirement, with its id, source and the fields of its notation. Add the
+assumptions and the clarifications at the end. Report the file path and
+the number of requirements per notation.
+
+## Done when
+
+- Every requirement has a unique id and names its source.
+- Every requirement is testable and unambiguous.
+- No open clarification markers remain.
+- Every functional requirement describes observable behaviour of the system.
+</pre></div></div>
+<pre id="raw-ears" hidden>---
+name: ears
+description: Use when functional requirements must follow the EARS (Easy Approach to Requirements Syntax) patterns.
+license: GPL-3.0-only (includes third-party material; see LICENSE-*.txt)
+metadata:
+  deft-version: 0.1.0
+  deft-lineage: specify-requirements &gt; specify-functional &gt; ears
+  deft-inputs: &#x27;request: FeatureRequest [1]&#x27;
+  deft-outputs: &#x27;requirements: EARSRequirement [1..*]&#x27;
+  deft-origin: github/spec-kit@b9e08bf templates/commands/specify.md (MIT, adapted); github/spec-kit@b9e08bf templates/commands/clarify.md (MIT, adapted)
+---
+
+# Specify EARS requirements
+
+## Inputs and outputs
+
+- Input `request`: FeatureRequest (one)
+  A change request stated by a stakeholder in natural language.
+  - `text` (required)
+  - `system` (optional): existing system and stack
+- Output `requirements`: EARSRequirement (one or more)
+  Requirement written with one of the five EARS patterns.
+  - `id` (required)
+  - `text` (required)
+  - `source` (required): stakeholder or document the requirement comes from
+  - `pattern` (required; one of ubiquitous, event-driven, state-driven, unwanted-behaviour, optional-feature)
+
+## Before you start
+
+- The feature request is not empty.
+
+## Identify sources and stakeholders
+
+1. Read the feature request and, if it exists, the project constitution or
+   equivalent principles document.
+2. List the stakeholders the request affects (users, operators, external
+   systems) and the sources you rely on for each statement.
+3. Extract the key concepts: actors, actions, data and constraints.
+4. Write down the assumptions you make where the request is silent. Use
+   reasonable industry defaults; do not ask about them.
+
+## Resolve ambiguities
+
+Mark an aspect `[NEEDS CLARIFICATION: &lt;question&gt;]` only when the choice
+changes scope or user experience, has several reasonable interpretations,
+and has no reasonable default. Keep at most three markers, ordered by
+impact: scope, then security and privacy, then user experience, then
+technical details.
+
+For each marker, ask one question with two to four options and their
+implications, wait for the answers, and replace the marker with the
+decision. Record each decision under &quot;Clarifications&quot; with the date.
+
+## Structure each requirement
+
+Write each requirement with exactly one EARS pattern and record which:
+
+- Ubiquitous: `The &lt;system&gt; shall &lt;response&gt;.`
+- Event-driven: `When &lt;trigger&gt;, the &lt;system&gt; shall &lt;response&gt;.`
+- State-driven: `While &lt;state&gt;, the &lt;system&gt; shall &lt;response&gt;.`
+- Unwanted behaviour: `If &lt;condition&gt;, then the &lt;system&gt; shall &lt;response&gt;.`
+- Optional feature: `Where &lt;feature is included&gt;, the &lt;system&gt; shall &lt;response&gt;.`
+
+Give each requirement an id `FR-&lt;n&gt;`.
+
+## Validate the requirements
+
+Check every requirement against this list and fix it until all items
+pass (at most three iterations):
+
+- It matches its declared EARS pattern exactly, with one `shall`.
+- The trigger, state or condition is observable.
+- The response is a single, testable behaviour of the named system.
+- No two requirements have the same trigger and contradictory responses.
+
+## Record the specification
+
+Write the requirements to `specs/&lt;feature&gt;/requirements.md`, one block per
+requirement, with its id, source and the fields of its notation. Add the
+assumptions and the clarifications at the end. Report the file path and
+the number of requirements per notation.
+
+## Done when
+
+- Every requirement has a unique id and names its source.
+- Every requirement is testable and unambiguous.
+- No open clarification markers remain.
+- Every functional requirement describes observable behaviour of the system.
+</pre></div><div class="tabpanel" id="p-model"><p>From <code>models/skills/requirements.yaml</code>.</p><pre><code>name: ears
+parent: specify-functional
+description: Use when functional requirements must follow the EARS (Easy Approach to Requirements Syntax)
+  patterns.
+metadata:
+  title: Specify EARS requirements
+parameters:
+- name: requirements
+  direction: out
+  type: EARSRequirement
+  lower: 1
+  upper: &#x27;*&#x27;
+refinements:
+- kind: implements
+  target: structure
+  content: &#x27;Write each requirement with exactly one EARS pattern and record which:
+
+
+    - Ubiquitous: `The &lt;system&gt; shall &lt;response&gt;.`
+
+    - Event-driven: `When &lt;trigger&gt;, the &lt;system&gt; shall &lt;response&gt;.`
+
+    - State-driven: `While &lt;state&gt;, the &lt;system&gt; shall &lt;response&gt;.`
+
+    - Unwanted behaviour: `If &lt;condition&gt;, then the &lt;system&gt; shall &lt;response&gt;.`
+
+    - Optional feature: `Where &lt;feature is included&gt;, the &lt;system&gt; shall &lt;response&gt;.`
+
+
+    Give each requirement an id `FR-&lt;n&gt;`.
+
+    &#x27;
+- kind: overrides
+  target: validate
+  content: &#x27;Check every requirement against this list and fix it until all items
+
+    pass (at most three iterations):
+
+
+    - It matches its declared EARS pattern exactly, with one `shall`.
+
+    - The trigger, state or condition is observable.
+
+    - The response is a single, testable behaviour of the named system.
+
+    - No two requirements have the same trigger and contradictory responses.
+
+    &#x27;
+</code></pre></div>
+<h2 id="origin">Origin</h2><table><tr><th>Repository</th><th>Path</th><th>Commit</th><th>Licence</th><th>Mode</th><th>Declared by</th></tr><tr><td>github/spec-kit</td><td><code>templates/commands/specify.md</code></td><td><code>b9e08bf</code></td><td>MIT</td><td>adapted</td><td><a href="../skills/specify-requirements.html">specify-requirements</a></td></tr><tr><td>github/spec-kit</td><td><code>templates/commands/clarify.md</code></td><td><code>b9e08bf</code></td><td>MIT</td><td>adapted</td><td><a href="../skills/specify-requirements.html">specify-requirements</a></td></tr></table>
+
+<footer>DEFT 0.1.0 · GNU General Public License v3.0 · Reused third-party skills keep their original licences.</footer>
+</div></main>
+<aside class="toc"><h5>On this page</h5><nav id="toc-links"></nav></aside>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<script src="../static/app.js"></script>
+</body>
+</html>

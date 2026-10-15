@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Example: deliver a feature · DEFT</title>
+<meta name="description" content="DEFT: a metamodel and toolset to specialize, compose, check and generate agent skills.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../static/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231a1a1a'/%3E%3Ctext x='16' y='22' font-family='monospace' font-size='15' text-anchor='middle' fill='white'%3Edf%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<header class="topbar">
+  <button class="iconbtn menubtn" id="menu" aria-label="Menu">☰</button>
+  <a class="brand" href="../index.html"><span class="brand-mark">df</span>DEFT</a>
+  <nav class="topnav"><a class="" href="../index.html">Overview</a><a class="active" href="../guides/metamodel.html">Guides</a><a class="" href="../catalogue.html">Catalogue</a><a class="" href="../about.html">About</a></nav>
+  <span class="spacer"></span>
+  <a class="iconbtn" href="https://anonymous.4open.science/r/deft-F7FE/">Repository</a>
+  <button class="iconbtn" id="theme" aria-label="Toggle theme">◐</button>
+</header>
+<div class="layout">
+<nav class="sidebar"><h4>Get started</h4>
+<a class="" href="../index.html">Overview</a>
+<a class="" href="../quickstart.html">Quickstart</a>
+<h4>Guides</h4>
+<a class="" href="../guides/metamodel.html">The metamodel</a>
+<a class="" href="../guides/writing-models.html">Writing models</a>
+<a class="" href="../guides/validating-models.html">Validating models</a>
+<a class="" href="../guides/generating-skills.html">Generating skills</a>
+<a class="" href="../guides/using-skills.html">Using generated skills</a>
+<a class=" active" href="../guides/example.html">Example: deliver a feature</a>
+<a class="" href="../guides/cli.html">Command line</a>
+<h4>Catalogue</h4>
+<a class="" href="../catalogue.html">All skills</a>
+<a class="sub" href="../catalogue.html#requirements">Requirements</a>
+<a class="sub" href="../catalogue.html#planning">Planning</a>
+<a class="sub" href="../catalogue.html#implementation">Implementation</a>
+<a class="sub" href="../catalogue.html#verification">Verification</a>
+<a class="sub" href="../catalogue.html#support">Support</a>
+<a class="" href="../types.html">Artifact types</a>
+<h4>Workflows</h4>
+<a class="" href="../workflows/deliver-feature.html">deliver-feature</a>
+<a class="" href="../workflows/deliver-feature-iso.html">deliver-feature-iso</a>
+<h4>Project</h4>
+<a class="" href="../about.html">About DEFT</a></nav>
+<main><div class="content">
+<div class="eyebrow">Guides</div>
+<div class="guide"><script type="application/json" id="md-guide">"# Example: deliver a feature with DEFT skills\n\nThis example runs the `deliver-feature` workflow of the DEFT example library\nwith a real coding agent, on a small existing system.\n\n**The system.** An account service (FastAPI, SQLite, pytest) where users can\nregister and log in: [app/main.py](https://anonymous.4open.science/r/deft-F7FE/examples/account-service/app/main.py), with three tests in\n[tests/test_auth.py](https://anonymous.4open.science/r/deft-F7FE/examples/account-service/tests/test_auth.py).\n\n**The feature request** ([FEATURE-REQUEST.md](https://anonymous.4open.science/r/deft-F7FE/examples/account-service/FEATURE-REQUEST.md)). Users who\nforgot their password can reset it through a link sent by e-mail; the link\nexpires after 15 minutes and can be used once; the reset request responds in\nunder 500 ms at the 95th percentile with 200 concurrent users.\n\n**What the agent should do**, following the generated workflow skill:\n\n1. specify the functional requirements as user stories and the quality requirement\n   as a Volere snow card (`specs/<feature>/requirements.md`);\n2. plan test-first tasks (`specs/<feature>/plan.md`);\n3. implement them on a feature branch, test-driven, keeping a ledger (`progress.md`);\n4. write acceptance tests (Gherkin, pytest-bdd) and a performance test (Locust);\n5. debug and repair, at most three times, if a test fails.\n\n## Steps\n\n### 1. Prepare a run folder\n\nFrom the root of the DEFT repository:\n\n```bash\npython examples/account-service/prepare.py --dest ../deft-run\n```\n\nThis checks the DEFT library, copies the system to `../deft-run`, generates the\n15 skills into `../deft-run/.claude/skills/`, and makes a first commit. For an\nagent that reads skills from another folder, pass `--skills-dir`, for instance\n`--skills-dir .agents/skills`; see the documentation of your agent and the list\nof compatible clients at <https://agentskills.io/clients>.\n\n### 2. Set up the system\n\n```bash\ncd ../deft-run\npython -m venv .venv\n.venv/bin/pip install -r requirements.txt          # Windows: .venv\\Scripts\\pip\n.venv/bin/python -m pytest                         # 3 passed\n```\n\n### 3. Run the agent\n\nStart your coding agent in `../deft-run` and give it the content of\n`FEATURE-REQUEST.md` as the prompt. It starts with: *Use the skill\n`deliver-feature` for this feature request.* With Claude Code:\n\n```bash\nclaude                                             # then paste FEATURE-REQUEST.md\n```\n\nAnswer the clarification questions the requirements skills may ask (at most\nthree). Let the agent run to the end; it decides small issues itself and records\nthem as rulings in its ledger.\n\n### 4. Check the result\n\nFrom the DEFT repository:\n\n```bash\npython examples/account-service/check_run.py ../deft-run --json ../deft-run-report.json\n```\n\nThe report lists the artifacts the workflow prescribes, the requirement ids and\nthe tests that cite them (traceability), the branch and the number of commits,\nand the verdict of the test suite. Compare it with what the workflow promises in\n`../deft-run/.claude/skills/deliver-feature/SKILL.md` (\"Done when\").\n\n## A recorded run\n\n[recorded-run/](https://anonymous.4open.science/r/deft-F7FE/examples/account-service/recorded-run) records one run of this example with Claude Code,\nwithout any human input after the prompt. The agent loaded the nine skills in the\norder of the workflow, produced every artifact the workflow prescribes, traced all\nseven requirements to tests, and used one of its three repairs after the first load\ntest failed. Its README lists the artifacts and the workflow step that produced each\none; `session-summary.json` lists the skills with their timestamps, and\n`diff-stat.txt` the files the agent changed.\n\n## What to look at\n\n- Did the agent load the skills in the order of the workflow, and the bound ones\n  (`user-stories`, `volere`, `execute-plan-inline`, `acceptance-gherkin`)?\n- Does every requirement id appear in at least one test?\n- Did a failure trigger `systematic-debugging` and a bounded repair?\n- Try the ISO/IEC 25010 variant: prompt with `deliver-feature-iso` instead.\n"</script><div class="md" data-md="md-guide"><pre># Example: deliver a feature with DEFT skills
+
+This example runs the `deliver-feature` workflow of the DEFT example library
+with a real coding agent, on a small existing system.
+
+**The system.** An account service (FastAPI, SQLite, pytest) where users can
+register and log in: [app/main.py](https://anonymous.4open.science/r/deft-F7FE/examples/account-service/app/main.py), with three tests in
+[tests/test_auth.py](https://anonymous.4open.science/r/deft-F7FE/examples/account-service/tests/test_auth.py).
+
+**The feature request** ([FEATURE-REQUEST.md](https://anonymous.4open.science/r/deft-F7FE/examples/account-service/FEATURE-REQUEST.md)). Users who
+forgot their password can reset it through a link sent by e-mail; the link
+expires after 15 minutes and can be used once; the reset request responds in
+under 500 ms at the 95th percentile with 200 concurrent users.
+
+**What the agent should do**, following the generated workflow skill:
+
+1. specify the functional requirements as user stories and the quality requirement
+   as a Volere snow card (`specs/&lt;feature&gt;/requirements.md`);
+2. plan test-first tasks (`specs/&lt;feature&gt;/plan.md`);
+3. implement them on a feature branch, test-driven, keeping a ledger (`progress.md`);
+4. write acceptance tests (Gherkin, pytest-bdd) and a performance test (Locust);
+5. debug and repair, at most three times, if a test fails.
+
+## Steps
+
+### 1. Prepare a run folder
+
+From the root of the DEFT repository:
+
+```bash
+python examples/account-service/prepare.py --dest ../deft-run
+```
+
+This checks the DEFT library, copies the system to `../deft-run`, generates the
+15 skills into `../deft-run/.claude/skills/`, and makes a first commit. For an
+agent that reads skills from another folder, pass `--skills-dir`, for instance
+`--skills-dir .agents/skills`; see the documentation of your agent and the list
+of compatible clients at &lt;https://agentskills.io/clients&gt;.
+
+### 2. Set up the system
+
+```bash
+cd ../deft-run
+python -m venv .venv
+.venv/bin/pip install -r requirements.txt          # Windows: .venv\Scripts\pip
+.venv/bin/python -m pytest                         # 3 passed
+```
+
+### 3. Run the agent
+
+Start your coding agent in `../deft-run` and give it the content of
+`FEATURE-REQUEST.md` as the prompt. It starts with: *Use the skill
+`deliver-feature` for this feature request.* With Claude Code:
+
+```bash
+claude                                             # then paste FEATURE-REQUEST.md
+```
+
+Answer the clarification questions the requirements skills may ask (at most
+three). Let the agent run to the end; it decides small issues itself and records
+them as rulings in its ledger.
+
+### 4. Check the result
+
+From the DEFT repository:
+
+```bash
+python examples/account-service/check_run.py ../deft-run --json ../deft-run-report.json
+```
+
+The report lists the artifacts the workflow prescribes, the requirement ids and
+the tests that cite them (traceability), the branch and the number of commits,
+and the verdict of the test suite. Compare it with what the workflow promises in
+`../deft-run/.claude/skills/deliver-feature/SKILL.md` (&quot;Done when&quot;).
+
+## A recorded run
+
+[recorded-run/](https://anonymous.4open.science/r/deft-F7FE/examples/account-service/recorded-run) records one run of this example with Claude Code,
+without any human input after the prompt. The agent loaded the nine skills in the
+order of the workflow, produced every artifact the workflow prescribes, traced all
+seven requirements to tests, and used one of its three repairs after the first load
+test failed. Its README lists the artifacts and the workflow step that produced each
+one; `session-summary.json` lists the skills with their timestamps, and
+`diff-stat.txt` the files the agent changed.
+
+## What to look at
+
+- Did the agent load the skills in the order of the workflow, and the bound ones
+  (`user-stories`, `volere`, `execute-plan-inline`, `acceptance-gherkin`)?
+- Does every requirement id appear in at least one test?
+- Did a failure trigger `systematic-debugging` and a bounded repair?
+- Try the ISO/IEC 25010 variant: prompt with `deliver-feature-iso` instead.
+</pre></div></div>
+<p style="margin-top:24px"><a class="iconbtn" href="https://anonymous.4open.science/r/deft-F7FE/examples/account-service/README.md">View source of this page</a></p>
+<div class="cards"><a class="card" href="../guides/using-skills.html"><p>Previous</p><h3>Using generated skills</h3></a><a class="card" href="../guides/cli.html"><p>Next</p><h3>Command line</h3></a></div>
+<footer>DEFT 0.1.0 · GNU General Public License v3.0 · Reused third-party skills keep their original licences.</footer>
+</div></main>
+<aside class="toc"><h5>On this page</h5><nav id="toc-links"></nav></aside>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<script src="../static/app.js"></script>
+</body>
+</html>

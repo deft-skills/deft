@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>acceptance-gherkin · DEFT</title>
+<meta name="description" content="DEFT: a metamodel and toolset to specialize, compose, check and generate agent skills.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../static/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231a1a1a'/%3E%3Ctext x='16' y='22' font-family='monospace' font-size='15' text-anchor='middle' fill='white'%3Edf%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<header class="topbar">
+  <button class="iconbtn menubtn" id="menu" aria-label="Menu">☰</button>
+  <a class="brand" href="../index.html"><span class="brand-mark">df</span>DEFT</a>
+  <nav class="topnav"><a class="" href="../index.html">Overview</a><a class="" href="../guides/metamodel.html">Guides</a><a class="" href="../catalogue.html">Catalogue</a><a class="" href="../about.html">About</a></nav>
+  <span class="spacer"></span>
+  <a class="iconbtn" href="https://anonymous.4open.science/r/deft-F7FE/">Repository</a>
+  <button class="iconbtn" id="theme" aria-label="Toggle theme">◐</button>
+</header>
+<div class="layout">
+<nav class="sidebar"><h4>Get started</h4>
+<a class="" href="../index.html">Overview</a>
+<a class="" href="../quickstart.html">Quickstart</a>
+<h4>Guides</h4>
+<a class="" href="../guides/metamodel.html">The metamodel</a>
+<a class="" href="../guides/writing-models.html">Writing models</a>
+<a class="" href="../guides/validating-models.html">Validating models</a>
+<a class="" href="../guides/generating-skills.html">Generating skills</a>
+<a class="" href="../guides/using-skills.html">Using generated skills</a>
+<a class="" href="../guides/example.html">Example: deliver a feature</a>
+<a class="" href="../guides/cli.html">Command line</a>
+<h4>Catalogue</h4>
+<a class="" href="../catalogue.html">All skills</a>
+<a class="sub" href="../catalogue.html#requirements">Requirements</a>
+<a class="sub" href="../catalogue.html#planning">Planning</a>
+<a class="sub" href="../catalogue.html#implementation">Implementation</a>
+<a class="sub" href="../catalogue.html#verification">Verification</a>
+<a class="sub" href="../catalogue.html#support">Support</a>
+<a class="" href="../types.html">Artifact types</a>
+<h4>Workflows</h4>
+<a class="" href="../workflows/deliver-feature.html">deliver-feature</a>
+<a class="" href="../workflows/deliver-feature-iso.html">deliver-feature-iso</a>
+<h4>Project</h4>
+<a class="" href="../about.html">About DEFT</a></nav>
+<main><div class="content">
+
+<div class="eyebrow">Verification</div>
+<h1>acceptance-gherkin</h1>
+<p class="lead">Use when acceptance criteria must become Gherkin feature files executed with pytest-bdd.</p>
+<div class="badges"><span class="badge ">concrete</span></div>
+<dl class="kv">
+<dt>Lineage</dt><dd><a href="../skills/generate-tests.html">generate-tests</a> › <a href="../skills/acceptance-tests.html">acceptance-tests</a> › <strong>acceptance-gherkin</strong></dd>
+<dt>Specializations</dt><dd>none</dd>
+<dt>Used in</dt><dd><a href="../workflows/deliver-feature.html">deliver-feature</a>, <a href="../workflows/deliver-feature-iso.html">deliver-feature-iso</a></dd>
+</dl>
+<h2 id="signature">Signature</h2>
+<table><tr><th>Dir.</th><th>Parameter</th><th>Type</th><th>Declared by</th></tr><tr><td>in</td><td><code>requirements</code></td><td><a href="../types.html#t-UserStory"><code>UserStory</code></a> [1..*]</td><td><a href="../skills/acceptance-tests.html">acceptance-tests</a></td></tr><tr><td>in</td><td><code>code</code></td><td><a href="../types.html#t-SourceCode"><code>SourceCode</code></a> [1]</td><td><a href="../skills/generate-tests.html">generate-tests</a></td></tr><tr><td>out</td><td><code>suite</code></td><td><a href="../types.html#t-TestSuite"><code>TestSuite</code></a> [1]</td><td><a href="../skills/generate-tests.html">generate-tests</a></td></tr><tr><td>out</td><td><code>report</code></td><td><a href="../types.html#t-TestReport"><code>TestReport</code></a> [1]</td><td><a href="../skills/generate-tests.html">generate-tests</a></td></tr></table>
+<h3>Preconditions</h3><ul><li>The code builds and its existing tests pass.</li></ul><h3>Postconditions</h3><ul><li>Every input requirement is covered by at least one test.</li><li>The report states a verdict and the command that reproduces it.</li></ul>
+<h2 id="instructions">Instructions</h2>
+<div data-tabs><div class="tabs"><button class="tab active" data-panel="p-sections">Resolved sections</button><button class="tab" data-panel="p-generated">Generated SKILL.md</button><button class="tab" data-panel="p-model">Model</button></div></div><div class="tabpanel active" id="p-sections"><div class="section-block"><div class="section-head"><span class="badge default">default</span>
+<strong>Derive the oracle</strong><span class="prov">declared abstract by <a href="../skills/generate-tests.html">generate-tests</a>, implemented by <a href="../skills/acceptance-tests.html">acceptance-tests</a></span></div><div class="section-body"><script type="application/json" id="md-sec-oracle">"Each acceptance criterion `Given <context>, when <event>, then <outcome>`\nis one scenario. The context fixes the initial state, the event is the\nsingle action under test, and the outcome is the oracle. Keep the exact\nvalues of the criterion (durations, limits, messages)."</script><div class="md" data-md="md-sec-oracle"><pre>Each acceptance criterion `Given &lt;context&gt;, when &lt;event&gt;, then &lt;outcome&gt;`
+is one scenario. The context fixes the initial state, the event is the
+single action under test, and the outcome is the oracle. Keep the exact
+values of the criterion (durations, limits, messages).</pre></div></div></div><div class="section-block"><div class="section-head"><span class="badge default">default</span>
+<strong>Write the tests</strong><span class="prov">declared abstract by <a href="../skills/generate-tests.html">generate-tests</a>, implemented by <a href="../skills/acceptance-gherkin.html">acceptance-gherkin</a></span></div><div class="section-body"><script type="application/json" id="md-sec-write">"Write one `.feature` file per user story under `tests/acceptance/`, with\nthe story as the feature description and one `Scenario` per acceptance\ncriterion, tagged with the story id. Implement the step definitions with\npytest-bdd against the public interface of the system (for example the\nHTTP API through a test client), not against internal functions. Control\ntime and external services (clock, e-mail) through fixtures."</script><div class="md" data-md="md-sec-write"><pre>Write one `.feature` file per user story under `tests/acceptance/`, with
+the story as the feature description and one `Scenario` per acceptance
+criterion, tagged with the story id. Implement the step definitions with
+pytest-bdd against the public interface of the system (for example the
+HTTP API through a test client), not against internal functions. Control
+time and external services (clock, e-mail) through fixtures.</pre></div></div></div><div class="section-block"><div class="section-head"><span class="badge final">final</span>
+<strong>Trace tests to requirements</strong><span class="prov">declared by <a href="../skills/generate-tests.html">generate-tests</a></span></div><div class="section-body"><script type="application/json" id="md-sec-trace">"Tag every test with the ids of the requirements it checks (for example\n`@US-1` or a `covers` marker). Build a table with one row per input\nrequirement and the tests that cover it. A requirement without a test is\nan error: write the missing test before you run the suite."</script><div class="md" data-md="md-sec-trace"><pre>Tag every test with the ids of the requirements it checks (for example
+`@US-1` or a `covers` marker). Build a table with one row per input
+requirement and the tests that cover it. A requirement without a test is
+an error: write the missing test before you run the suite.</pre></div></div></div><div class="section-block"><div class="section-head"><span class="badge final">final</span>
+<strong>Run and report</strong><span class="prov">declared by <a href="../skills/generate-tests.html">generate-tests</a></span></div><div class="section-body"><script type="application/json" id="md-sec-run">"Run the new tests together with the existing suite. Write the report:\nverdict `pass` only if every test passed; otherwise `fail` with one entry\nper failing test (test id, requirement ids, expected and actual result).\nInclude the exact command that reproduces the run. Do not change the code\nunder test to make a test pass: report the failure."</script><div class="md" data-md="md-sec-run"><pre>Run the new tests together with the existing suite. Write the report:
+verdict `pass` only if every test passed; otherwise `fail` with one entry
+per failing test (test id, requirement ids, expected and actual result).
+Include the exact command that reproduces the run. Do not change the code
+under test to make a test pass: report the failure.</pre></div></div></div></div><div class="tabpanel" id="p-generated">
+<p><a class="iconbtn" href="../skills-dist/acceptance-gherkin/SKILL.md" download>Download SKILL.md</a>
+<button class="iconbtn" data-copy="raw-acceptance-gherkin">Copy</button></p>
+<pre><code>---
+name: acceptance-gherkin
+description: Use when acceptance criteria must become Gherkin feature files executed with pytest-bdd.
+license: GPL-3.0-only
+metadata:
+  deft-version: 0.1.0
+  deft-lineage: generate-tests &gt; acceptance-tests &gt; acceptance-gherkin
+  deft-inputs: &#x27;requirements: UserStory [1..*]; code: SourceCode [1]&#x27;
+  deft-outputs: &#x27;suite: TestSuite [1]; report: TestReport [1]&#x27;
+---</code></pre><div class="section-body"><script type="application/json" id="md-gen">"# Acceptance tests with Gherkin\n\n## Inputs and outputs\n\n- Input `requirements`: UserStory (one or more)\n  Connextra user story with Given/When/Then acceptance criteria.\n  - `id` (required)\n  - `text` (required)\n  - `source` (required): stakeholder or document the requirement comes from\n  - `role` (required)\n  - `goal` (required)\n  - `benefit` (required)\n  - `acceptanceCriteria` (one or more)\n- Input `code`: SourceCode (one)\n  The changed code base, as a branch or a set of commits.\n  - `branch` (required)\n  - `commits` (one or more)\n- Output `suite`: TestSuite (one)\n  Executable tests, each traced to the requirement ids it checks.\n  - `tests` (one or more)\n  - `covers` (one or more): requirement ids\n- Output `report`: TestReport (one)\n  Result of running a test suite against the code.\n  - `verdict` (required; one of pass, fail)\n  - `failures` (any number)\n  - `command` (required): command that reproduces the run\n\n## Before you start\n\n- The code builds and its existing tests pass.\n\n## Derive the oracle\n\nEach acceptance criterion `Given <context>, when <event>, then <outcome>`\nis one scenario. The context fixes the initial state, the event is the\nsingle action under test, and the outcome is the oracle. Keep the exact\nvalues of the criterion (durations, limits, messages).\n\n## Write the tests\n\nWrite one `.feature` file per user story under `tests/acceptance/`, with\nthe story as the feature description and one `Scenario` per acceptance\ncriterion, tagged with the story id. Implement the step definitions with\npytest-bdd against the public interface of the system (for example the\nHTTP API through a test client), not against internal functions. Control\ntime and external services (clock, e-mail) through fixtures.\n\n## Trace tests to requirements\n\nTag every test with the ids of the requirements it checks (for example\n`@US-1` or a `covers` marker). Build a table with one row per input\nrequirement and the tests that cover it. A requirement without a test is\nan error: write the missing test before you run the suite.\n\n## Run and report\n\nRun the new tests together with the existing suite. Write the report:\nverdict `pass` only if every test passed; otherwise `fail` with one entry\nper failing test (test id, requirement ids, expected and actual result).\nInclude the exact command that reproduces the run. Do not change the code\nunder test to make a test pass: report the failure.\n\n## Done when\n\n- Every input requirement is covered by at least one test.\n- The report states a verdict and the command that reproduces it.\n"</script><div class="md" data-md="md-gen"><pre># Acceptance tests with Gherkin
+
+## Inputs and outputs
+
+- Input `requirements`: UserStory (one or more)
+  Connextra user story with Given/When/Then acceptance criteria.
+  - `id` (required)
+  - `text` (required)
+  - `source` (required): stakeholder or document the requirement comes from
+  - `role` (required)
+  - `goal` (required)
+  - `benefit` (required)
+  - `acceptanceCriteria` (one or more)
+- Input `code`: SourceCode (one)
+  The changed code base, as a branch or a set of commits.
+  - `branch` (required)
+  - `commits` (one or more)
+- Output `suite`: TestSuite (one)
+  Executable tests, each traced to the requirement ids it checks.
+  - `tests` (one or more)
+  - `covers` (one or more): requirement ids
+- Output `report`: TestReport (one)
+  Result of running a test suite against the code.
+  - `verdict` (required; one of pass, fail)
+  - `failures` (any number)
+  - `command` (required): command that reproduces the run
+
+## Before you start
+
+- The code builds and its existing tests pass.
+
+## Derive the oracle
+
+Each acceptance criterion `Given &lt;context&gt;, when &lt;event&gt;, then &lt;outcome&gt;`
+is one scenario. The context fixes the initial state, the event is the
+single action under test, and the outcome is the oracle. Keep the exact
+values of the criterion (durations, limits, messages).
+
+## Write the tests
+
+Write one `.feature` file per user story under `tests/acceptance/`, with
+the story as the feature description and one `Scenario` per acceptance
+criterion, tagged with the story id. Implement the step definitions with
+pytest-bdd against the public interface of the system (for example the
+HTTP API through a test client), not against internal functions. Control
+time and external services (clock, e-mail) through fixtures.
+
+## Trace tests to requirements
+
+Tag every test with the ids of the requirements it checks (for example
+`@US-1` or a `covers` marker). Build a table with one row per input
+requirement and the tests that cover it. A requirement without a test is
+an error: write the missing test before you run the suite.
+
+## Run and report
+
+Run the new tests together with the existing suite. Write the report:
+verdict `pass` only if every test passed; otherwise `fail` with one entry
+per failing test (test id, requirement ids, expected and actual result).
+Include the exact command that reproduces the run. Do not change the code
+under test to make a test pass: report the failure.
+
+## Done when
+
+- Every input requirement is covered by at least one test.
+- The report states a verdict and the command that reproduces it.
+</pre></div></div>
+<pre id="raw-acceptance-gherkin" hidden>---
+name: acceptance-gherkin
+description: Use when acceptance criteria must become Gherkin feature files executed with pytest-bdd.
+license: GPL-3.0-only
+metadata:
+  deft-version: 0.1.0
+  deft-lineage: generate-tests &gt; acceptance-tests &gt; acceptance-gherkin
+  deft-inputs: &#x27;requirements: UserStory [1..*]; code: SourceCode [1]&#x27;
+  deft-outputs: &#x27;suite: TestSuite [1]; report: TestReport [1]&#x27;
+---
+
+# Acceptance tests with Gherkin
+
+## Inputs and outputs
+
+- Input `requirements`: UserStory (one or more)
+  Connextra user story with Given/When/Then acceptance criteria.
+  - `id` (required)
+  - `text` (required)
+  - `source` (required): stakeholder or document the requirement comes from
+  - `role` (required)
+  - `goal` (required)
+  - `benefit` (required)
+  - `acceptanceCriteria` (one or more)
+- Input `code`: SourceCode (one)
+  The changed code base, as a branch or a set of commits.
+  - `branch` (required)
+  - `commits` (one or more)
+- Output `suite`: TestSuite (one)
+  Executable tests, each traced to the requirement ids it checks.
+  - `tests` (one or more)
+  - `covers` (one or more): requirement ids
+- Output `report`: TestReport (one)
+  Result of running a test suite against the code.
+  - `verdict` (required; one of pass, fail)
+  - `failures` (any number)
+  - `command` (required): command that reproduces the run
+
+## Before you start
+
+- The code builds and its existing tests pass.
+
+## Derive the oracle
+
+Each acceptance criterion `Given &lt;context&gt;, when &lt;event&gt;, then &lt;outcome&gt;`
+is one scenario. The context fixes the initial state, the event is the
+single action under test, and the outcome is the oracle. Keep the exact
+values of the criterion (durations, limits, messages).
+
+## Write the tests
+
+Write one `.feature` file per user story under `tests/acceptance/`, with
+the story as the feature description and one `Scenario` per acceptance
+criterion, tagged with the story id. Implement the step definitions with
+pytest-bdd against the public interface of the system (for example the
+HTTP API through a test client), not against internal functions. Control
+time and external services (clock, e-mail) through fixtures.
+
+## Trace tests to requirements
+
+Tag every test with the ids of the requirements it checks (for example
+`@US-1` or a `covers` marker). Build a table with one row per input
+requirement and the tests that cover it. A requirement without a test is
+an error: write the missing test before you run the suite.
+
+## Run and report
+
+Run the new tests together with the existing suite. Write the report:
+verdict `pass` only if every test passed; otherwise `fail` with one entry
+per failing test (test id, requirement ids, expected and actual result).
+Include the exact command that reproduces the run. Do not change the code
+under test to make a test pass: report the failure.
+
+## Done when
+
+- Every input requirement is covered by at least one test.
+- The report states a verdict and the command that reproduces it.
+</pre></div><div class="tabpanel" id="p-model"><p>From <code>models/skills/verification.yaml</code>.</p><pre><code>name: acceptance-gherkin
+parent: acceptance-tests
+description: Use when acceptance criteria must become Gherkin feature files executed with pytest-bdd.
+metadata:
+  title: Acceptance tests with Gherkin
+refinements:
+- kind: implements
+  target: write
+  content: &#x27;Write one `.feature` file per user story under `tests/acceptance/`, with
+
+    the story as the feature description and one `Scenario` per acceptance
+
+    criterion, tagged with the story id. Implement the step definitions with
+
+    pytest-bdd against the public interface of the system (for example the
+
+    HTTP API through a test client), not against internal functions. Control
+
+    time and external services (clock, e-mail) through fixtures.
+
+    &#x27;
+</code></pre></div>
+
+
+<footer>DEFT 0.1.0 · GNU General Public License v3.0 · Reused third-party skills keep their original licences.</footer>
+</div></main>
+<aside class="toc"><h5>On this page</h5><nav id="toc-links"></nav></aside>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<script src="../static/app.js"></script>
+</body>
+</html>

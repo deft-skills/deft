@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>plan-feature · DEFT</title>
+<meta name="description" content="DEFT: a metamodel and toolset to specialize, compose, check and generate agent skills.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../static/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231a1a1a'/%3E%3Ctext x='16' y='22' font-family='monospace' font-size='15' text-anchor='middle' fill='white'%3Edf%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<header class="topbar">
+  <button class="iconbtn menubtn" id="menu" aria-label="Menu">☰</button>
+  <a class="brand" href="../index.html"><span class="brand-mark">df</span>DEFT</a>
+  <nav class="topnav"><a class="" href="../index.html">Overview</a><a class="" href="../guides/metamodel.html">Guides</a><a class="" href="../catalogue.html">Catalogue</a><a class="" href="../about.html">About</a></nav>
+  <span class="spacer"></span>
+  <a class="iconbtn" href="https://anonymous.4open.science/r/deft-F7FE/">Repository</a>
+  <button class="iconbtn" id="theme" aria-label="Toggle theme">◐</button>
+</header>
+<div class="layout">
+<nav class="sidebar"><h4>Get started</h4>
+<a class="" href="../index.html">Overview</a>
+<a class="" href="../quickstart.html">Quickstart</a>
+<h4>Guides</h4>
+<a class="" href="../guides/metamodel.html">The metamodel</a>
+<a class="" href="../guides/writing-models.html">Writing models</a>
+<a class="" href="../guides/validating-models.html">Validating models</a>
+<a class="" href="../guides/generating-skills.html">Generating skills</a>
+<a class="" href="../guides/using-skills.html">Using generated skills</a>
+<a class="" href="../guides/example.html">Example: deliver a feature</a>
+<a class="" href="../guides/cli.html">Command line</a>
+<h4>Catalogue</h4>
+<a class="" href="../catalogue.html">All skills</a>
+<a class="sub" href="../catalogue.html#requirements">Requirements</a>
+<a class="sub" href="../catalogue.html#planning">Planning</a>
+<a class="sub" href="../catalogue.html#implementation">Implementation</a>
+<a class="sub" href="../catalogue.html#verification">Verification</a>
+<a class="sub" href="../catalogue.html#support">Support</a>
+<a class="" href="../types.html">Artifact types</a>
+<h4>Workflows</h4>
+<a class="" href="../workflows/deliver-feature.html">deliver-feature</a>
+<a class="" href="../workflows/deliver-feature-iso.html">deliver-feature-iso</a>
+<h4>Project</h4>
+<a class="" href="../about.html">About DEFT</a></nav>
+<main><div class="content">
+
+<div class="eyebrow">Planning</div>
+<h1>plan-feature</h1>
+<p class="lead">Use when validated requirements must become an implementation plan of small, test-first tasks before any code is written.</p>
+<div class="badges"><span class="badge ">concrete</span><span class="badge ">adapted from github/spec-kit</span><span class="badge ">adapted from obra/superpowers</span></div>
+<dl class="kv">
+<dt>Lineage</dt><dd><strong>plan-feature</strong></dd>
+<dt>Specializations</dt><dd>none</dd>
+<dt>Used in</dt><dd><a href="../workflows/deliver-feature.html">deliver-feature</a>, <a href="../workflows/deliver-feature-iso.html">deliver-feature-iso</a></dd>
+</dl>
+<h2 id="signature">Signature</h2>
+<table><tr><th>Dir.</th><th>Parameter</th><th>Type</th><th>Declared by</th></tr><tr><td>in</td><td><code>requirements</code></td><td><a href="../types.html#t-Requirement"><code>Requirement</code></a> [1..*]</td><td>here</td></tr><tr><td>out</td><td><code>plan</code></td><td><a href="../types.html#t-ImplementationPlan"><code>ImplementationPlan</code></a> [1]</td><td>here</td></tr></table>
+<h3>Preconditions</h3><ul><li>Every requirement has a unique id and is testable.</li></ul><h3>Postconditions</h3><ul><li>The plan has at least one task.</li><li>Every requirement id is covered by at least one task.</li><li>Every task names its files, its interfaces and the test that proves it.</li></ul>
+<h2 id="instructions">Instructions</h2>
+<div data-tabs><div class="tabs"><button class="tab active" data-panel="p-sections">Resolved sections</button><button class="tab" data-panel="p-generated">Generated SKILL.md</button><button class="tab" data-panel="p-model">Model</button></div></div><div class="tabpanel active" id="p-sections"><div class="section-block"><div class="section-head"><span class="badge final">final</span>
+<strong>Read the context</strong><span class="prov">declared by <a href="../skills/plan-feature.html">plan-feature</a></span></div><div class="section-body"><script type="application/json" id="md-sec-context">"Read all requirements and the project constitution, if any. Inspect the\nexisting code base: language, framework, test tools, and the modules the\nfeature touches. Record unknowns as research questions and answer each\nwith a decision, a rationale and the alternatives you rejected."</script><div class="md" data-md="md-sec-context"><pre>Read all requirements and the project constitution, if any. Inspect the
+existing code base: language, framework, test tools, and the modules the
+feature touches. Record unknowns as research questions and answer each
+with a decision, a rationale and the alternatives you rejected.</pre></div></div></div><div class="section-block"><div class="section-head"><span class="badge final">final</span>
+<strong>Design the change</strong><span class="prov">declared by <a href="../skills/plan-feature.html">plan-feature</a></span></div><div class="section-body"><script type="application/json" id="md-sec-design">"1. Extract the entities the requirements involve, with fields, validation\n   rules and state transitions, and compare them with the existing model.\n2. Define the interface contracts the feature exposes (for example HTTP\n   endpoints with request and response schemas).\n3. Map the files to create or change and give each one responsibility.\n   Follow the patterns the code base already uses."</script><div class="md" data-md="md-sec-design"><pre>1. Extract the entities the requirements involve, with fields, validation
+   rules and state transitions, and compare them with the existing model.
+2. Define the interface contracts the feature exposes (for example HTTP
+   endpoints with request and response schemas).
+3. Map the files to create or change and give each one responsibility.
+   Follow the patterns the code base already uses.</pre></div></div></div><div class="section-block"><div class="section-head"><span class="badge final">final</span>
+<strong>Write the tasks</strong><span class="prov">declared by <a href="../skills/plan-feature.html">plan-feature</a></span></div><div class="section-body"><script type="application/json" id="md-sec-tasks">"Write one task per independently testable increment, ordered by\ndependency. Each task contains:\n\n- **Files**: the exact paths to create, modify and test.\n- **Interfaces**: what the task consumes from earlier tasks and what it\n  produces for later ones, with exact names and types.\n- **Covers**: the requirement ids the task implements.\n- **Steps**, each one action with a checkable result: write the failing\n  test (name and assertions with the exact values from the\n  requirements), run it and see it fail, write the minimal code, run it\n  and see it pass, commit.\n\nA step is done when the implementer can write exactly one reasonable\nthing from it. Do not write function bodies that the signature and the\ntests already determine."</script><div class="md" data-md="md-sec-tasks"><pre>Write one task per independently testable increment, ordered by
+dependency. Each task contains:
+
+- **Files**: the exact paths to create, modify and test.
+- **Interfaces**: what the task consumes from earlier tasks and what it
+  produces for later ones, with exact names and types.
+- **Covers**: the requirement ids the task implements.
+- **Steps**, each one action with a checkable result: write the failing
+  test (name and assertions with the exact values from the
+  requirements), run it and see it fail, write the minimal code, run it
+  and see it pass, commit.
+
+A step is done when the implementer can write exactly one reasonable
+thing from it. Do not write function bodies that the signature and the
+tests already determine.</pre></div></div></div><div class="section-block"><div class="section-head"><span class="badge default">default</span>
+<strong>Review the plan</strong><span class="prov">declared by <a href="../skills/plan-feature.html">plan-feature</a></span></div><div class="section-body"><script type="application/json" id="md-sec-review">"Check the plan before you hand it over:\n\n1. Coverage: every requirement id appears in the Covers line of a task.\n2. Consistency: names and types match between the tasks that produce and\n   consume them.\n3. Review focus: list the input classes or failure modes that no task\n   tests, and add a test for each one that matters.\n4. Proportion: the plan is shorter than the code it describes.\n\nSave the plan to `specs/<feature>/plan.md`."</script><div class="md" data-md="md-sec-review"><pre>Check the plan before you hand it over:
+
+1. Coverage: every requirement id appears in the Covers line of a task.
+2. Consistency: names and types match between the tasks that produce and
+   consume them.
+3. Review focus: list the input classes or failure modes that no task
+   tests, and add a test for each one that matters.
+4. Proportion: the plan is shorter than the code it describes.
+
+Save the plan to `specs/&lt;feature&gt;/plan.md`.</pre></div></div></div></div><div class="tabpanel" id="p-generated">
+<p><a class="iconbtn" href="../skills-dist/plan-feature/SKILL.md" download>Download SKILL.md</a>
+<button class="iconbtn" data-copy="raw-plan-feature">Copy</button></p>
+<pre><code>---
+name: plan-feature
+description: Use when validated requirements must become an implementation plan of small, test-first tasks before any code is written.
+license: GPL-3.0-only (includes third-party material; see LICENSE-*.txt)
+metadata:
+  deft-version: 0.1.0
+  deft-lineage: plan-feature
+  deft-inputs: &#x27;requirements: Requirement [1..*]&#x27;
+  deft-outputs: &#x27;plan: ImplementationPlan [1]&#x27;
+  deft-origin: github/spec-kit@b9e08bf templates/commands/plan.md (MIT, adapted); github/spec-kit@b9e08bf templates/commands/tasks.md (MIT, adapted); obra/superpowers@8ca22db skills/writing-plans/SKILL.md (MIT, adapted)
+---</code></pre><div class="section-body"><script type="application/json" id="md-gen">"# Plan the feature\n\n## Inputs and outputs\n\n- Input `requirements`: Requirement (one or more)\n  A single, uniquely identified requirement.\n  - `id` (required)\n  - `text` (required)\n  - `source` (required): stakeholder or document the requirement comes from\n- Output `plan`: ImplementationPlan (one)\n  Ordered, test-first tasks that implement a set of requirements.\n  - `fileStructure` (required)\n  - `tasks` (one or more): each task names files, interfaces, tests and the requirement ids it covers\n  - `reviewFocus` (any number)\n\n## Before you start\n\n- Every requirement has a unique id and is testable.\n\n## Read the context\n\nRead all requirements and the project constitution, if any. Inspect the\nexisting code base: language, framework, test tools, and the modules the\nfeature touches. Record unknowns as research questions and answer each\nwith a decision, a rationale and the alternatives you rejected.\n\n## Design the change\n\n1. Extract the entities the requirements involve, with fields, validation\n   rules and state transitions, and compare them with the existing model.\n2. Define the interface contracts the feature exposes (for example HTTP\n   endpoints with request and response schemas).\n3. Map the files to create or change and give each one responsibility.\n   Follow the patterns the code base already uses.\n\n## Write the tasks\n\nWrite one task per independently testable increment, ordered by\ndependency. Each task contains:\n\n- **Files**: the exact paths to create, modify and test.\n- **Interfaces**: what the task consumes from earlier tasks and what it\n  produces for later ones, with exact names and types.\n- **Covers**: the requirement ids the task implements.\n- **Steps**, each one action with a checkable result: write the failing\n  test (name and assertions with the exact values from the\n  requirements), run it and see it fail, write the minimal code, run it\n  and see it pass, commit.\n\nA step is done when the implementer can write exactly one reasonable\nthing from it. Do not write function bodies that the signature and the\ntests already determine.\n\n## Review the plan\n\nCheck the plan before you hand it over:\n\n1. Coverage: every requirement id appears in the Covers line of a task.\n2. Consistency: names and types match between the tasks that produce and\n   consume them.\n3. Review focus: list the input classes or failure modes that no task\n   tests, and add a test for each one that matters.\n4. Proportion: the plan is shorter than the code it describes.\n\nSave the plan to `specs/<feature>/plan.md`.\n\n## Done when\n\n- The plan has at least one task.\n- Every requirement id is covered by at least one task.\n- Every task names its files, its interfaces and the test that proves it.\n"</script><div class="md" data-md="md-gen"><pre># Plan the feature
+
+## Inputs and outputs
+
+- Input `requirements`: Requirement (one or more)
+  A single, uniquely identified requirement.
+  - `id` (required)
+  - `text` (required)
+  - `source` (required): stakeholder or document the requirement comes from
+- Output `plan`: ImplementationPlan (one)
+  Ordered, test-first tasks that implement a set of requirements.
+  - `fileStructure` (required)
+  - `tasks` (one or more): each task names files, interfaces, tests and the requirement ids it covers
+  - `reviewFocus` (any number)
+
+## Before you start
+
+- Every requirement has a unique id and is testable.
+
+## Read the context
+
+Read all requirements and the project constitution, if any. Inspect the
+existing code base: language, framework, test tools, and the modules the
+feature touches. Record unknowns as research questions and answer each
+with a decision, a rationale and the alternatives you rejected.
+
+## Design the change
+
+1. Extract the entities the requirements involve, with fields, validation
+   rules and state transitions, and compare them with the existing model.
+2. Define the interface contracts the feature exposes (for example HTTP
+   endpoints with request and response schemas).
+3. Map the files to create or change and give each one responsibility.
+   Follow the patterns the code base already uses.
+
+## Write the tasks
+
+Write one task per independently testable increment, ordered by
+dependency. Each task contains:
+
+- **Files**: the exact paths to create, modify and test.
+- **Interfaces**: what the task consumes from earlier tasks and what it
+  produces for later ones, with exact names and types.
+- **Covers**: the requirement ids the task implements.
+- **Steps**, each one action with a checkable result: write the failing
+  test (name and assertions with the exact values from the
+  requirements), run it and see it fail, write the minimal code, run it
+  and see it pass, commit.
+
+A step is done when the implementer can write exactly one reasonable
+thing from it. Do not write function bodies that the signature and the
+tests already determine.
+
+## Review the plan
+
+Check the plan before you hand it over:
+
+1. Coverage: every requirement id appears in the Covers line of a task.
+2. Consistency: names and types match between the tasks that produce and
+   consume them.
+3. Review focus: list the input classes or failure modes that no task
+   tests, and add a test for each one that matters.
+4. Proportion: the plan is shorter than the code it describes.
+
+Save the plan to `specs/&lt;feature&gt;/plan.md`.
+
+## Done when
+
+- The plan has at least one task.
+- Every requirement id is covered by at least one task.
+- Every task names its files, its interfaces and the test that proves it.
+</pre></div></div>
+<pre id="raw-plan-feature" hidden>---
+name: plan-feature
+description: Use when validated requirements must become an implementation plan of small, test-first tasks before any code is written.
+license: GPL-3.0-only (includes third-party material; see LICENSE-*.txt)
+metadata:
+  deft-version: 0.1.0
+  deft-lineage: plan-feature
+  deft-inputs: &#x27;requirements: Requirement [1..*]&#x27;
+  deft-outputs: &#x27;plan: ImplementationPlan [1]&#x27;
+  deft-origin: github/spec-kit@b9e08bf templates/commands/plan.md (MIT, adapted); github/spec-kit@b9e08bf templates/commands/tasks.md (MIT, adapted); obra/superpowers@8ca22db skills/writing-plans/SKILL.md (MIT, adapted)
+---
+
+# Plan the feature
+
+## Inputs and outputs
+
+- Input `requirements`: Requirement (one or more)
+  A single, uniquely identified requirement.
+  - `id` (required)
+  - `text` (required)
+  - `source` (required): stakeholder or document the requirement comes from
+- Output `plan`: ImplementationPlan (one)
+  Ordered, test-first tasks that implement a set of requirements.
+  - `fileStructure` (required)
+  - `tasks` (one or more): each task names files, interfaces, tests and the requirement ids it covers
+  - `reviewFocus` (any number)
+
+## Before you start
+
+- Every requirement has a unique id and is testable.
+
+## Read the context
+
+Read all requirements and the project constitution, if any. Inspect the
+existing code base: language, framework, test tools, and the modules the
+feature touches. Record unknowns as research questions and answer each
+with a decision, a rationale and the alternatives you rejected.
+
+## Design the change
+
+1. Extract the entities the requirements involve, with fields, validation
+   rules and state transitions, and compare them with the existing model.
+2. Define the interface contracts the feature exposes (for example HTTP
+   endpoints with request and response schemas).
+3. Map the files to create or change and give each one responsibility.
+   Follow the patterns the code base already uses.
+
+## Write the tasks
+
+Write one task per independently testable increment, ordered by
+dependency. Each task contains:
+
+- **Files**: the exact paths to create, modify and test.
+- **Interfaces**: what the task consumes from earlier tasks and what it
+  produces for later ones, with exact names and types.
+- **Covers**: the requirement ids the task implements.
+- **Steps**, each one action with a checkable result: write the failing
+  test (name and assertions with the exact values from the
+  requirements), run it and see it fail, write the minimal code, run it
+  and see it pass, commit.
+
+A step is done when the implementer can write exactly one reasonable
+thing from it. Do not write function bodies that the signature and the
+tests already determine.
+
+## Review the plan
+
+Check the plan before you hand it over:
+
+1. Coverage: every requirement id appears in the Covers line of a task.
+2. Consistency: names and types match between the tasks that produce and
+   consume them.
+3. Review focus: list the input classes or failure modes that no task
+   tests, and add a test for each one that matters.
+4. Proportion: the plan is shorter than the code it describes.
+
+Save the plan to `specs/&lt;feature&gt;/plan.md`.
+
+## Done when
+
+- The plan has at least one task.
+- Every requirement id is covered by at least one task.
+- Every task names its files, its interfaces and the test that proves it.
+</pre></div><div class="tabpanel" id="p-model"><p>From <code>models/skills/planning.yaml</code>.</p><pre><code>name: plan-feature
+description: Use when validated requirements must become an implementation plan of small, test-first tasks
+  before any code is written.
+metadata:
+  title: Plan the feature
+origin:
+- repo: github/spec-kit
+  path: templates/commands/plan.md
+  commit: b9e08bf3e1a9d82b2a7358e278a6224d54d8783b
+  license: MIT
+- repo: github/spec-kit
+  path: templates/commands/tasks.md
+  commit: b9e08bf3e1a9d82b2a7358e278a6224d54d8783b
+  license: MIT
+- repo: obra/superpowers
+  path: skills/writing-plans/SKILL.md
+  commit: 8ca22dba9a94f28898bbce59f2537ff4d87c747d
+  license: MIT
+parameters:
+- name: requirements
+  direction: in
+  type: Requirement
+  lower: 1
+  upper: &#x27;*&#x27;
+- name: plan
+  direction: out
+  type: ImplementationPlan
+pre:
+- Every requirement has a unique id and is testable.
+post:
+- The plan has at least one task.
+- Every requirement id is covered by at least one task.
+- Every task names its files, its interfaces and the test that proves it.
+sections:
+- name: context
+  kind: final
+  title: Read the context
+  content: &#x27;Read all requirements and the project constitution, if any. Inspect the
+
+    existing code base: language, framework, test tools, and the modules the
+
+    feature touches. Record unknowns as research questions and answer each
+
+    with a decision, a rationale and the alternatives you rejected.
+
+    &#x27;
+- name: design
+  kind: final
+  title: Design the change
+  content: &quot;1. Extract the entities the requirements involve, with fields, validation\n   rules and state\
+    \ transitions, and compare them with the existing model.\n2. Define the interface contracts the feature\
+    \ exposes (for example HTTP\n   endpoints with request and response schemas).\n3. Map the files to\
+    \ create or change and give each one responsibility.\n   Follow the patterns the code base already\
+    \ uses.\n&quot;
+- name: tasks
+  kind: final
+  title: Write the tasks
+  content: &quot;Write one task per independently testable increment, ordered by\ndependency. Each task contains:\n\
+    \n- **Files**: the exact paths to create, modify and test.\n- **Interfaces**: what the task consumes\
+    \ from earlier tasks and what it\n  produces for later ones, with exact names and types.\n- **Covers**:\
+    \ the requirement ids the task implements.\n- **Steps**, each one action with a checkable result:\
+    \ write the failing\n  test (name and assertions with the exact values from the\n  requirements),\
+    \ run it and see it fail, write the minimal code, run it\n  and see it pass, commit.\n\nA step is\
+    \ done when the implementer can write exactly one reasonable\nthing from it. Do not write function\
+    \ bodies that the signature and the\ntests already determine.\n&quot;
+- name: review
+  kind: default
+  title: Review the plan
+  content: &quot;Check the plan before you hand it over:\n\n1. Coverage: every requirement id appears in the\
+    \ Covers line of a task.\n2. Consistency: names and types match between the tasks that produce and\n\
+    \   consume them.\n3. Review focus: list the input classes or failure modes that no task\n   tests,\
+    \ and add a test for each one that matters.\n4. Proportion: the plan is shorter than the code it describes.\n\
+    \nSave the plan to `specs/&lt;feature&gt;/plan.md`.\n&quot;
+</code></pre></div>
+<h2 id="origin">Origin</h2><table><tr><th>Repository</th><th>Path</th><th>Commit</th><th>Licence</th><th>Mode</th><th>Declared by</th></tr><tr><td>github/spec-kit</td><td><code>templates/commands/plan.md</code></td><td><code>b9e08bf</code></td><td>MIT</td><td>adapted</td><td>here</td></tr><tr><td>github/spec-kit</td><td><code>templates/commands/tasks.md</code></td><td><code>b9e08bf</code></td><td>MIT</td><td>adapted</td><td>here</td></tr><tr><td>obra/superpowers</td><td><code>skills/writing-plans/SKILL.md</code></td><td><code>8ca22db</code></td><td>MIT</td><td>adapted</td><td>here</td></tr></table>
+
+<footer>DEFT 0.1.0 · GNU General Public License v3.0 · Reused third-party skills keep their original licences.</footer>
+</div></main>
+<aside class="toc"><h5>On this page</h5><nav id="toc-links"></nav></aside>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<script src="../static/app.js"></script>
+</body>
+</html>

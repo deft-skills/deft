@@ -1,0 +1,38 @@
+{
+  "skills_in_models": 21,
+  "abstract_skills": 6,
+  "generated_skills": 15,
+  "authored": {
+    "instruction_lines": 198,
+    "imported_lines": 457,
+    "conditions": 33,
+    "instruction_tokens": 2732,
+    "imported_tokens": 4456
+  },
+  "generated_nonblank_lines": 1246,
+  "tokenizer": "o200k_base",
+  "generated_tokens": 13858,
+  "lines_per_generated_skill": {
+    "acceptance-gherkin": 52,
+    "acceptance-playwright": 56,
+    "deliver-feature": 65,
+    "deliver-feature-iso": 69,
+    "ears": 56,
+    "execute-plan-inline": 65,
+    "execute-plan-subagents": 71,
+    "iso25010": 58,
+    "performance-tests": 49,
+    "plan-feature": 53,
+    "quantify-quality": 32,
+    "systematic-debugging": 227,
+    "test-driven-development": 265,
+    "user-stories": 65,
+    "volere": 63
+  },
+  "distinct_repeated_lines": 135,
+  "repeated_line_copies": 283,
+  "repeated_copy_tokens": 3583,
+  "skills_ref_checked": true,
+  "skills_ref_errors": {},
+  "skills_ref_pass": 15
+}

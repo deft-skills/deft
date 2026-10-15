@@ -1,0 +1,55 @@
+@startuml deft-composition
+' DEFT metamodel, composition package. Skill and Parameter come from the
+' specialization package; references to them are shown as typed attributes.
+!theme plain
+hide circle
+hide empty members
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+skinparam nodesep 60
+skinparam ranksep 55
+skinparam defaultFontName Helvetica
+skinparam defaultFontSize 13
+skinparam class {
+  BackgroundColor white
+  BorderColor #333333
+  HeaderBackgroundColor #EEEEEE
+  ArrowColor #333333
+}
+skinparam ArrowFontSize 12
+
+title DEFT — composition
+
+class Skill #F6F6F6 {
+  (specialization package)
+}
+class CompositeSkill
+abstract class Node {
+  name
+}
+class SkillNode {
+  role : Skill
+  bind : Skill [0..1]
+}
+class ControlNode {
+  kind : decision | final
+}
+class DataEdge {
+  from : node.parameter
+  to : node.parameter
+}
+class ControlEdge {
+  source, target : Node
+  kind : sequence | invokes | repair
+  guard [0..1]
+  bound [0..1]
+}
+
+Skill <|-- CompositeSkill
+CompositeSkill *-- "1..*" Node : nodes
+CompositeSkill *-- "*" DataEdge : data
+CompositeSkill *-- "*" ControlEdge : control
+Node <|-- SkillNode
+Node <|-- ControlNode
+ControlEdge *-right- "0..1" DataEdge : carries
+@enduml

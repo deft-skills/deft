@@ -1,0 +1,74 @@
+# Planning: a single concrete skill that merges spec-kit's plan and tasks
+# commands with superpowers' writing-plans task format.
+family: planning
+skills:
+  - name: plan-feature
+    description: >-
+      Use when validated requirements must become an implementation plan of
+      small, test-first tasks before any code is written.
+    metadata: {title: Plan the feature}
+    origin:
+      - {repo: github/spec-kit, path: templates/commands/plan.md, commit: b9e08bf3e1a9d82b2a7358e278a6224d54d8783b, license: MIT}
+      - {repo: github/spec-kit, path: templates/commands/tasks.md, commit: b9e08bf3e1a9d82b2a7358e278a6224d54d8783b, license: MIT}
+      - {repo: obra/superpowers, path: skills/writing-plans/SKILL.md, commit: 8ca22dba9a94f28898bbce59f2537ff4d87c747d, license: MIT}
+    parameters:
+      - {name: requirements, direction: in, type: Requirement, lower: 1, upper: "*"}
+      - {name: plan, direction: out, type: ImplementationPlan}
+    pre:
+      - Every requirement has a unique id and is testable.
+    post:
+      - The plan has at least one task.
+      - Every requirement id is covered by at least one task.
+      - Every task names its files, its interfaces and the test that proves it.
+    sections:
+      - name: context
+        kind: final
+        title: Read the context
+        content: |
+          Read all requirements and the project constitution, if any. Inspect the
+          existing code base: language, framework, test tools, and the modules the
+          feature touches. Record unknowns as research questions and answer each
+          with a decision, a rationale and the alternatives you rejected.
+      - name: design
+        kind: final
+        title: Design the change
+        content: |
+          1. Extract the entities the requirements involve, with fields, validation
+             rules and state transitions, and compare them with the existing model.
+          2. Define the interface contracts the feature exposes (for example HTTP
+             endpoints with request and response schemas).
+          3. Map the files to create or change and give each one responsibility.
+             Follow the patterns the code base already uses.
+      - name: tasks
+        kind: final
+        title: Write the tasks
+        content: |
+          Write one task per independently testable increment, ordered by
+          dependency. Each task contains:
+
+          - **Files**: the exact paths to create, modify and test.
+          - **Interfaces**: what the task consumes from earlier tasks and what it
+            produces for later ones, with exact names and types.
+          - **Covers**: the requirement ids the task implements.
+          - **Steps**, each one action with a checkable result: write the failing
+            test (name and assertions with the exact values from the
+            requirements), run it and see it fail, write the minimal code, run it
+            and see it pass, commit.
+
+          A step is done when the implementer can write exactly one reasonable
+          thing from it. Do not write function bodies that the signature and the
+          tests already determine.
+      - name: review
+        kind: default
+        title: Review the plan
+        content: |
+          Check the plan before you hand it over:
+
+          1. Coverage: every requirement id appears in the Covers line of a task.
+          2. Consistency: names and types match between the tasks that produce and
+             consume them.
+          3. Review focus: list the input classes or failure modes that no task
+             tests, and add a test for each one that matters.
+          4. Proportion: the plan is shorter than the code it describes.
+
+          Save the plan to `specs/<feature>/plan.md`.

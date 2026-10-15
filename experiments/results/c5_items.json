@@ -1,0 +1,731 @@
+[
+  {
+    "version": "before",
+    "target": "functional",
+    "step": "specify the functional requirements as user stories",
+    "number": 1,
+    "guarantees": [
+      "The feature request names the existing system and its stack."
+    ],
+    "guarantee_sources": [
+      {
+        "from": "Assumed by the whole workflow",
+        "conditions": [
+          "The feature request names the existing system and its stack."
+        ]
+      }
+    ],
+    "requires": [
+      "The feature request is not empty."
+    ],
+    "reference": "entailed",
+    "reference_uncovered": [],
+    "round": 1,
+    "id": "O01"
+  },
+  {
+    "version": "before",
+    "target": "quality",
+    "step": "specify the quality requirements as Volere snow cards",
+    "number": 2,
+    "guarantees": [
+      "The feature request names the existing system and its stack."
+    ],
+    "guarantee_sources": [
+      {
+        "from": "Assumed by the whole workflow",
+        "conditions": [
+          "The feature request names the existing system and its stack."
+        ]
+      }
+    ],
+    "requires": [
+      "The feature request is not empty."
+    ],
+    "reference": "entailed",
+    "reference_uncovered": [],
+    "round": 1,
+    "id": "O02"
+  },
+  {
+    "version": "before",
+    "target": "plan",
+    "step": "plan the implementation as test-first tasks",
+    "number": 3,
+    "guarantees": [
+      "The feature request names the existing system and its stack.",
+      "Every requirement has a unique id and names its source.",
+      "Every requirement is testable and unambiguous.",
+      "No open clarification markers remain.",
+      "Every functional requirement describes observable behaviour of the system.",
+      "Every user story has at least one acceptance criterion in Given/When/Then form.",
+      "Every quality requirement names one ISO/IEC 25010 characteristic.",
+      "Every Volere requirement has a fit criterion with a metric, a threshold and a scale."
+    ],
+    "guarantee_sources": [
+      {
+        "from": "Guaranteed by step 1, specify the functional requirements as user stories",
+        "conditions": [
+          "Every requirement has a unique id and names its source.",
+          "Every requirement is testable and unambiguous.",
+          "No open clarification markers remain.",
+          "Every functional requirement describes observable behaviour of the system.",
+          "Every user story has at least one acceptance criterion in Given/When/Then form."
+        ]
+      },
+      {
+        "from": "Guaranteed by step 2, specify the quality requirements as Volere snow cards",
+        "conditions": [
+          "Every requirement has a unique id and names its source.",
+          "Every requirement is testable and unambiguous.",
+          "No open clarification markers remain.",
+          "Every quality requirement names one ISO/IEC 25010 characteristic.",
+          "Every Volere requirement has a fit criterion with a metric, a threshold and a scale."
+        ]
+      },
+      {
+        "from": "Assumed by the whole workflow",
+        "conditions": [
+          "The feature request names the existing system and its stack."
+        ]
+      }
+    ],
+    "requires": [
+      "Every requirement has a unique id and is testable."
+    ],
+    "reference": "entailed",
+    "reference_uncovered": [],
+    "round": 1,
+    "id": "O03"
+  },
+  {
+    "version": "after",
+    "target": "implement",
+    "step": "implement the plan task by task, test-first",
+    "number": 4,
+    "guarantees": [
+      "The feature request names the existing system and its stack.",
+      "An environment that matches production in configuration is available.",
+      "Every requirement id is covered by at least one task.",
+      "Every task names its files, its interfaces and the test that proves it.",
+      "The diagnosis names a root cause supported by evidence, not a symptom."
+    ],
+    "guarantee_sources": [
+      {
+        "from": "Guaranteed by step 3, plan the implementation as test-first tasks",
+        "conditions": [
+          "Every requirement id is covered by at least one task.",
+          "Every task names its files, its interfaces and the test that proves it."
+        ]
+      },
+      {
+        "from": "Guaranteed by step 7, diagnose the failing tests (when the workflow comes back here after a failure)",
+        "conditions": [
+          "The diagnosis names a root cause supported by evidence, not a symptom."
+        ]
+      },
+      {
+        "from": "Assumed by the whole workflow",
+        "conditions": [
+          "The feature request names the existing system and its stack.",
+          "An environment that matches production in configuration is available."
+        ]
+      }
+    ],
+    "requires": [
+      "The plan has at least one task and every task names its test."
+    ],
+    "reference": "entailed",
+    "reference_uncovered": [],
+    "round": 1,
+    "id": "O04"
+  },
+  {
+    "version": "after",
+    "target": "acceptance",
+    "step": "write and run acceptance tests for the user stories",
+    "number": 5,
+    "guarantees": [
+      "The feature request names the existing system and its stack.",
+      "An environment that matches production in configuration is available.",
+      "Every requirement has a unique id and names its source.",
+      "Every requirement is testable and unambiguous.",
+      "No open clarification markers remain.",
+      "Every functional requirement describes observable behaviour of the system.",
+      "Every user story has at least one acceptance criterion in Given/When/Then form.",
+      "Every task is committed on the dedicated branch.",
+      "The full test suite passes, including the tests that existed before.",
+      "Every deviation from the plan is recorded as a ruling."
+    ],
+    "guarantee_sources": [
+      {
+        "from": "Guaranteed by step 1, specify the functional requirements as user stories",
+        "conditions": [
+          "Every requirement has a unique id and names its source.",
+          "Every requirement is testable and unambiguous.",
+          "No open clarification markers remain.",
+          "Every functional requirement describes observable behaviour of the system.",
+          "Every user story has at least one acceptance criterion in Given/When/Then form."
+        ]
+      },
+      {
+        "from": "Guaranteed by step 4, implement the plan task by task, test-first",
+        "conditions": [
+          "Every task is committed on the dedicated branch.",
+          "The full test suite passes, including the tests that existed before.",
+          "Every deviation from the plan is recorded as a ruling."
+        ]
+      },
+      {
+        "from": "Assumed by the whole workflow",
+        "conditions": [
+          "The feature request names the existing system and its stack.",
+          "An environment that matches production in configuration is available."
+        ]
+      }
+    ],
+    "requires": [
+      "The code builds and its existing tests pass."
+    ],
+    "reference": "entailed",
+    "reference_uncovered": [],
+    "round": 1,
+    "id": "O05"
+  },
+  {
+    "version": "before",
+    "target": "performance",
+    "step": "write and run load tests for the quality requirements",
+    "number": 6,
+    "guarantees": [
+      "The feature request names the existing system and its stack.",
+      "Every requirement has a unique id and names its source.",
+      "Every requirement is testable and unambiguous.",
+      "No open clarification markers remain.",
+      "Every quality requirement names one ISO/IEC 25010 characteristic.",
+      "Every Volere requirement has a fit criterion with a metric, a threshold and a scale.",
+      "Every task is committed and its tests pass.",
+      "Every deviation from the plan is recorded as a ruling."
+    ],
+    "guarantee_sources": [
+      {
+        "from": "Guaranteed by step 2, specify the quality requirements as Volere snow cards",
+        "conditions": [
+          "Every requirement has a unique id and names its source.",
+          "Every requirement is testable and unambiguous.",
+          "No open clarification markers remain.",
+          "Every quality requirement names one ISO/IEC 25010 characteristic.",
+          "Every Volere requirement has a fit criterion with a metric, a threshold and a scale."
+        ]
+      },
+      {
+        "from": "Guaranteed by step 4, implement the plan task by task, test-first",
+        "conditions": [
+          "Every task is committed and its tests pass.",
+          "Every deviation from the plan is recorded as a ruling."
+        ]
+      },
+      {
+        "from": "Assumed by the whole workflow",
+        "conditions": [
+          "The feature request names the existing system and its stack."
+        ]
+      }
+    ],
+    "requires": [
+      "The code builds and its existing tests pass.",
+      "A deployment of the system that matches production in configuration is available."
+    ],
+    "reference": "not-entailed",
+    "reference_uncovered": [
+      "The code builds and its existing tests pass.",
+      "A deployment of the system that matches production in configuration is available."
+    ],
+    "round": 1,
+    "id": "O06"
+  },
+  {
+    "version": "after",
+    "target": "debug",
+    "step": "diagnose the failing tests",
+    "number": 7,
+    "guarantees": [
+      "The feature request names the existing system and its stack.",
+      "An environment that matches production in configuration is available.",
+      "Every input requirement is covered by at least one test.",
+      "The report states a verdict and the command that reproduces it.",
+      "Every task is committed on the dedicated branch.",
+      "The full test suite passes, including the tests that existed before.",
+      "Every deviation from the plan is recorded as a ruling.",
+      "some report has verdict fail"
+    ],
+    "guarantee_sources": [
+      {
+        "from": "Guaranteed by step 5, write and run acceptance tests for the user stories",
+        "conditions": [
+          "Every input requirement is covered by at least one test.",
+          "The report states a verdict and the command that reproduces it."
+        ]
+      },
+      {
+        "from": "Guaranteed by step 6, write and run load tests for the quality requirements",
+        "conditions": [
+          "Every input requirement is covered by at least one test.",
+          "The report states a verdict and the command that reproduces it."
+        ]
+      },
+      {
+        "from": "Guaranteed by step 4, implement the plan task by task, test-first",
+        "conditions": [
+          "Every task is committed on the dedicated branch.",
+          "The full test suite passes, including the tests that existed before.",
+          "Every deviation from the plan is recorded as a ruling."
+        ]
+      },
+      {
+        "from": "Condition under which the workflow reaches this point",
+        "conditions": [
+          "some report has verdict fail"
+        ]
+      },
+      {
+        "from": "Assumed by the whole workflow",
+        "conditions": [
+          "The feature request names the existing system and its stack.",
+          "An environment that matches production in configuration is available."
+        ]
+      }
+    ],
+    "requires": [
+      "At least one report has verdict fail."
+    ],
+    "reference": "entailed",
+    "reference_uncovered": [],
+    "round": 1,
+    "id": "O07"
+  },
+  {
+    "version": "after",
+    "target": "self",
+    "step": "end of the workflow: what it promises to whoever started it",
+    "number": null,
+    "guarantees": [
+      "The feature request names the existing system and its stack.",
+      "An environment that matches production in configuration is available.",
+      "Every task is committed on the dedicated branch.",
+      "The full test suite passes, including the tests that existed before.",
+      "Every deviation from the plan is recorded as a ruling.",
+      "Every input requirement is covered by at least one test.",
+      "The report states a verdict and the command that reproduces it.",
+      "every report has verdict pass"
+    ],
+    "guarantee_sources": [
+      {
+        "from": "Guaranteed by step 4, implement the plan task by task, test-first",
+        "conditions": [
+          "Every task is committed on the dedicated branch.",
+          "The full test suite passes, including the tests that existed before.",
+          "Every deviation from the plan is recorded as a ruling."
+        ]
+      },
+      {
+        "from": "Guaranteed by step 5, write and run acceptance tests for the user stories",
+        "conditions": [
+          "Every input requirement is covered by at least one test.",
+          "The report states a verdict and the command that reproduces it."
+        ]
+      },
+      {
+        "from": "Guaranteed by step 6, write and run load tests for the quality requirements",
+        "conditions": [
+          "Every input requirement is covered by at least one test.",
+          "The report states a verdict and the command that reproduces it."
+        ]
+      },
+      {
+        "from": "Condition under which the workflow reaches this point",
+        "conditions": [
+          "every report has verdict pass"
+        ]
+      },
+      {
+        "from": "Assumed by the whole workflow",
+        "conditions": [
+          "The feature request names the existing system and its stack.",
+          "An environment that matches production in configuration is available."
+        ]
+      }
+    ],
+    "requires": [
+      "Every requirement is covered by at least one passing test.",
+      "The code is committed on a feature branch."
+    ],
+    "reference": "entailed",
+    "reference_uncovered": [],
+    "round": 1,
+    "id": "O08"
+  },
+  {
+    "version": "after",
+    "target": "functional",
+    "step": "specify the functional requirements as user stories",
+    "number": 1,
+    "guarantees": [
+      "The feature request names the existing system and its stack.",
+      "An environment that matches production in configuration is available."
+    ],
+    "guarantee_sources": [
+      {
+        "from": "Assumed by the whole workflow",
+        "conditions": [
+          "The feature request names the existing system and its stack.",
+          "An environment that matches production in configuration is available."
+        ]
+      }
+    ],
+    "requires": [
+      "The feature request is not empty."
+    ],
+    "reference": "entailed",
+    "reference_uncovered": [],
+    "round": 2,
+    "id": "O09"
+  },
+  {
+    "version": "after",
+    "target": "quality",
+    "step": "specify the quality requirements as Volere snow cards",
+    "number": 2,
+    "guarantees": [
+      "The feature request names the existing system and its stack.",
+      "An environment that matches production in configuration is available."
+    ],
+    "guarantee_sources": [
+      {
+        "from": "Assumed by the whole workflow",
+        "conditions": [
+          "The feature request names the existing system and its stack.",
+          "An environment that matches production in configuration is available."
+        ]
+      }
+    ],
+    "requires": [
+      "The feature request is not empty."
+    ],
+    "reference": "entailed",
+    "reference_uncovered": [],
+    "round": 2,
+    "id": "O10"
+  },
+  {
+    "version": "after",
+    "target": "plan",
+    "step": "plan the implementation as test-first tasks",
+    "number": 3,
+    "guarantees": [
+      "The feature request names the existing system and its stack.",
+      "An environment that matches production in configuration is available.",
+      "Every requirement has a unique id and names its source.",
+      "Every requirement is testable and unambiguous.",
+      "No open clarification markers remain.",
+      "Every functional requirement describes observable behaviour of the system.",
+      "Every user story has at least one acceptance criterion in Given/When/Then form.",
+      "Every quality requirement names one ISO/IEC 25010 characteristic.",
+      "Every Volere requirement has a fit criterion with a metric, a threshold and a scale."
+    ],
+    "guarantee_sources": [
+      {
+        "from": "Guaranteed by step 1, specify the functional requirements as user stories",
+        "conditions": [
+          "Every requirement has a unique id and names its source.",
+          "Every requirement is testable and unambiguous.",
+          "No open clarification markers remain.",
+          "Every functional requirement describes observable behaviour of the system.",
+          "Every user story has at least one acceptance criterion in Given/When/Then form."
+        ]
+      },
+      {
+        "from": "Guaranteed by step 2, specify the quality requirements as Volere snow cards",
+        "conditions": [
+          "Every requirement has a unique id and names its source.",
+          "Every requirement is testable and unambiguous.",
+          "No open clarification markers remain.",
+          "Every quality requirement names one ISO/IEC 25010 characteristic.",
+          "Every Volere requirement has a fit criterion with a metric, a threshold and a scale."
+        ]
+      },
+      {
+        "from": "Assumed by the whole workflow",
+        "conditions": [
+          "The feature request names the existing system and its stack.",
+          "An environment that matches production in configuration is available."
+        ]
+      }
+    ],
+    "requires": [
+      "Every requirement has a unique id and is testable."
+    ],
+    "reference": "entailed",
+    "reference_uncovered": [],
+    "round": 2,
+    "id": "O11"
+  },
+  {
+    "version": "before",
+    "target": "implement",
+    "step": "implement the plan task by task, test-first",
+    "number": 4,
+    "guarantees": [
+      "The feature request names the existing system and its stack.",
+      "Every requirement id is covered by at least one task.",
+      "Every task names its files, its interfaces and the test that proves it.",
+      "The diagnosis names a root cause supported by evidence, not a symptom."
+    ],
+    "guarantee_sources": [
+      {
+        "from": "Guaranteed by step 3, plan the implementation as test-first tasks",
+        "conditions": [
+          "Every requirement id is covered by at least one task.",
+          "Every task names its files, its interfaces and the test that proves it."
+        ]
+      },
+      {
+        "from": "Guaranteed by step 7, diagnose the failing tests (when the workflow comes back here after a failure)",
+        "conditions": [
+          "The diagnosis names a root cause supported by evidence, not a symptom."
+        ]
+      },
+      {
+        "from": "Assumed by the whole workflow",
+        "conditions": [
+          "The feature request names the existing system and its stack."
+        ]
+      }
+    ],
+    "requires": [
+      "The plan has at least one task and every task names its test."
+    ],
+    "reference": "entailed",
+    "reference_uncovered": [],
+    "round": 2,
+    "id": "O12"
+  },
+  {
+    "version": "before",
+    "target": "acceptance",
+    "step": "write and run acceptance tests for the user stories",
+    "number": 5,
+    "guarantees": [
+      "The feature request names the existing system and its stack.",
+      "Every requirement has a unique id and names its source.",
+      "Every requirement is testable and unambiguous.",
+      "No open clarification markers remain.",
+      "Every functional requirement describes observable behaviour of the system.",
+      "Every user story has at least one acceptance criterion in Given/When/Then form.",
+      "Every task is committed and its tests pass.",
+      "Every deviation from the plan is recorded as a ruling."
+    ],
+    "guarantee_sources": [
+      {
+        "from": "Guaranteed by step 1, specify the functional requirements as user stories",
+        "conditions": [
+          "Every requirement has a unique id and names its source.",
+          "Every requirement is testable and unambiguous.",
+          "No open clarification markers remain.",
+          "Every functional requirement describes observable behaviour of the system.",
+          "Every user story has at least one acceptance criterion in Given/When/Then form."
+        ]
+      },
+      {
+        "from": "Guaranteed by step 4, implement the plan task by task, test-first",
+        "conditions": [
+          "Every task is committed and its tests pass.",
+          "Every deviation from the plan is recorded as a ruling."
+        ]
+      },
+      {
+        "from": "Assumed by the whole workflow",
+        "conditions": [
+          "The feature request names the existing system and its stack."
+        ]
+      }
+    ],
+    "requires": [
+      "The code builds and its existing tests pass."
+    ],
+    "reference": "not-entailed",
+    "reference_uncovered": [
+      "The code builds and its existing tests pass."
+    ],
+    "round": 2,
+    "id": "O13"
+  },
+  {
+    "version": "after",
+    "target": "performance",
+    "step": "write and run load tests for the quality requirements",
+    "number": 6,
+    "guarantees": [
+      "The feature request names the existing system and its stack.",
+      "An environment that matches production in configuration is available.",
+      "Every requirement has a unique id and names its source.",
+      "Every requirement is testable and unambiguous.",
+      "No open clarification markers remain.",
+      "Every quality requirement names one ISO/IEC 25010 characteristic.",
+      "Every Volere requirement has a fit criterion with a metric, a threshold and a scale.",
+      "Every task is committed on the dedicated branch.",
+      "The full test suite passes, including the tests that existed before.",
+      "Every deviation from the plan is recorded as a ruling."
+    ],
+    "guarantee_sources": [
+      {
+        "from": "Guaranteed by step 2, specify the quality requirements as Volere snow cards",
+        "conditions": [
+          "Every requirement has a unique id and names its source.",
+          "Every requirement is testable and unambiguous.",
+          "No open clarification markers remain.",
+          "Every quality requirement names one ISO/IEC 25010 characteristic.",
+          "Every Volere requirement has a fit criterion with a metric, a threshold and a scale."
+        ]
+      },
+      {
+        "from": "Guaranteed by step 4, implement the plan task by task, test-first",
+        "conditions": [
+          "Every task is committed on the dedicated branch.",
+          "The full test suite passes, including the tests that existed before.",
+          "Every deviation from the plan is recorded as a ruling."
+        ]
+      },
+      {
+        "from": "Assumed by the whole workflow",
+        "conditions": [
+          "The feature request names the existing system and its stack.",
+          "An environment that matches production in configuration is available."
+        ]
+      }
+    ],
+    "requires": [
+      "The code builds and its existing tests pass.",
+      "An environment that matches production in configuration is available."
+    ],
+    "reference": "entailed",
+    "reference_uncovered": [],
+    "round": 2,
+    "id": "O14"
+  },
+  {
+    "version": "before",
+    "target": "debug",
+    "step": "diagnose the failing tests",
+    "number": 7,
+    "guarantees": [
+      "The feature request names the existing system and its stack.",
+      "Every input requirement is covered by at least one test.",
+      "The report states a verdict and the command that reproduces it.",
+      "Every task is committed and its tests pass.",
+      "Every deviation from the plan is recorded as a ruling.",
+      "some report has verdict fail"
+    ],
+    "guarantee_sources": [
+      {
+        "from": "Guaranteed by step 5, write and run acceptance tests for the user stories",
+        "conditions": [
+          "Every input requirement is covered by at least one test.",
+          "The report states a verdict and the command that reproduces it."
+        ]
+      },
+      {
+        "from": "Guaranteed by step 6, write and run load tests for the quality requirements",
+        "conditions": [
+          "Every input requirement is covered by at least one test.",
+          "The report states a verdict and the command that reproduces it."
+        ]
+      },
+      {
+        "from": "Guaranteed by step 4, implement the plan task by task, test-first",
+        "conditions": [
+          "Every task is committed and its tests pass.",
+          "Every deviation from the plan is recorded as a ruling."
+        ]
+      },
+      {
+        "from": "Condition under which the workflow reaches this point",
+        "conditions": [
+          "some report has verdict fail"
+        ]
+      },
+      {
+        "from": "Assumed by the whole workflow",
+        "conditions": [
+          "The feature request names the existing system and its stack."
+        ]
+      }
+    ],
+    "requires": [
+      "At least one report has verdict fail."
+    ],
+    "reference": "entailed",
+    "reference_uncovered": [],
+    "round": 2,
+    "id": "O15"
+  },
+  {
+    "version": "before",
+    "target": "self",
+    "step": "end of the workflow: what it promises to whoever started it",
+    "number": null,
+    "guarantees": [
+      "The feature request names the existing system and its stack.",
+      "Every task is committed and its tests pass.",
+      "Every deviation from the plan is recorded as a ruling.",
+      "Every input requirement is covered by at least one test.",
+      "The report states a verdict and the command that reproduces it.",
+      "every report has verdict pass"
+    ],
+    "guarantee_sources": [
+      {
+        "from": "Guaranteed by step 4, implement the plan task by task, test-first",
+        "conditions": [
+          "Every task is committed and its tests pass.",
+          "Every deviation from the plan is recorded as a ruling."
+        ]
+      },
+      {
+        "from": "Guaranteed by step 5, write and run acceptance tests for the user stories",
+        "conditions": [
+          "Every input requirement is covered by at least one test.",
+          "The report states a verdict and the command that reproduces it."
+        ]
+      },
+      {
+        "from": "Guaranteed by step 6, write and run load tests for the quality requirements",
+        "conditions": [
+          "Every input requirement is covered by at least one test.",
+          "The report states a verdict and the command that reproduces it."
+        ]
+      },
+      {
+        "from": "Condition under which the workflow reaches this point",
+        "conditions": [
+          "every report has verdict pass"
+        ]
+      },
+      {
+        "from": "Assumed by the whole workflow",
+        "conditions": [
+          "The feature request names the existing system and its stack."
+        ]
+      }
+    ],
+    "requires": [
+      "Every requirement is covered by at least one passing test.",
+      "The code is committed on a feature branch."
+    ],
+    "reference": "not-entailed",
+    "reference_uncovered": [
+      "The code is committed on a feature branch."
+    ],
+    "round": 2,
+    "id": "O16"
+  }
+]

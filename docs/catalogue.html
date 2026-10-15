@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Catalogue · DEFT</title>
+<meta name="description" content="DEFT: a metamodel and toolset to specialize, compose, check and generate agent skills.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="static/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231a1a1a'/%3E%3Ctext x='16' y='22' font-family='monospace' font-size='15' text-anchor='middle' fill='white'%3Edf%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<header class="topbar">
+  <button class="iconbtn menubtn" id="menu" aria-label="Menu">☰</button>
+  <a class="brand" href="index.html"><span class="brand-mark">df</span>DEFT</a>
+  <nav class="topnav"><a class="" href="index.html">Overview</a><a class="" href="guides/metamodel.html">Guides</a><a class="active" href="catalogue.html">Catalogue</a><a class="" href="about.html">About</a></nav>
+  <span class="spacer"></span>
+  <a class="iconbtn" href="https://anonymous.4open.science/r/deft-F7FE/">Repository</a>
+  <button class="iconbtn" id="theme" aria-label="Toggle theme">◐</button>
+</header>
+<div class="layout">
+<nav class="sidebar"><h4>Get started</h4>
+<a class="" href="index.html">Overview</a>
+<a class="" href="quickstart.html">Quickstart</a>
+<h4>Guides</h4>
+<a class="" href="guides/metamodel.html">The metamodel</a>
+<a class="" href="guides/writing-models.html">Writing models</a>
+<a class="" href="guides/validating-models.html">Validating models</a>
+<a class="" href="guides/generating-skills.html">Generating skills</a>
+<a class="" href="guides/using-skills.html">Using generated skills</a>
+<a class="" href="guides/example.html">Example: deliver a feature</a>
+<a class="" href="guides/cli.html">Command line</a>
+<h4>Catalogue</h4>
+<a class=" active" href="catalogue.html">All skills</a>
+<a class="sub" href="catalogue.html#requirements">Requirements</a>
+<a class="sub" href="catalogue.html#planning">Planning</a>
+<a class="sub" href="catalogue.html#implementation">Implementation</a>
+<a class="sub" href="catalogue.html#verification">Verification</a>
+<a class="sub" href="catalogue.html#support">Support</a>
+<a class="" href="types.html">Artifact types</a>
+<h4>Workflows</h4>
+<a class="" href="workflows/deliver-feature.html">deliver-feature</a>
+<a class="" href="workflows/deliver-feature-iso.html">deliver-feature-iso</a>
+<h4>Project</h4>
+<a class="" href="about.html">About DEFT</a></nav>
+<main><div class="content">
+
+<div class="eyebrow">Catalogue</div>
+<h1>Skills</h1>
+<p class="lead">The example library: 21 skills in 6 families. Concrete skills and
+workflows are generated as <code>SKILL.md</code> folders; abstract skills exist only in the models and reach agents
+through their specializations.</p>
+<input class="search" id="search" type="search" placeholder="Filter skills" aria-label="Filter skills">
+<div class="filters">
+  <button class="chip active" data-kind="all">All</button>
+  <button class="chip" data-kind="concrete">Concrete</button>
+  <button class="chip" data-kind="abstract">Abstract</button>
+  <button class="chip" data-kind="workflow">Workflows</button>
+</div>
+<h2 id="requirements">Requirements</h2><div class="cards"><a class="card" href="skills/specify-requirements.html" data-skill="specify-requirements use when a feature request must become a set of uniquely identified, testable requirements before planning or implementation starts." data-kind="abstract">
+<h3>specify-requirements</h3><p>Use when a feature request must become a set of uniquely identified, testable requirements before planning or implementation starts.</p>
+<div class="badges"><span class="badge abstract">abstract</span><span class="badge ">adapted from github/spec-kit</span></div>
+</a><a class="card" href="skills/specify-functional.html" data-skill="specify-functional use when the behaviour a feature must provide has to be specified as functional requirements." data-kind="abstract">
+<h3>specify-functional</h3><p>Use when the behaviour a feature must provide has to be specified as functional requirements.</p>
+<div class="badges"><span class="badge abstract">abstract</span><span class="badge ">adapted from github/spec-kit</span></div>
+<p style="margin-top:8px;font-size:.8rem;color:var(--fg-faint)">specify-requirements › specify-functional</p></a><a class="card" href="skills/specify-quality.html" data-skill="specify-quality use when the qualities a feature must have (performance, security, usability and similar) have to be specified as quality requirements." data-kind="abstract">
+<h3>specify-quality</h3><p>Use when the qualities a feature must have (performance, security, usability and similar) have to be specified as quality requirements.</p>
+<div class="badges"><span class="badge abstract">abstract</span><span class="badge ">adapted from github/spec-kit</span></div>
+<p style="margin-top:8px;font-size:.8rem;color:var(--fg-faint)">specify-requirements › specify-quality</p></a><a class="card" href="skills/user-stories.html" data-skill="user-stories use when functional requirements must be written as user stories with given/when/then acceptance criteria." data-kind="concrete">
+<h3>user-stories</h3><p>Use when functional requirements must be written as user stories with Given/When/Then acceptance criteria.</p>
+<div class="badges"><span class="badge ">concrete</span><span class="badge ">adapted from github/spec-kit</span></div>
+<p style="margin-top:8px;font-size:.8rem;color:var(--fg-faint)">specify-requirements › specify-functional › user-stories</p></a><a class="card" href="skills/ears.html" data-skill="ears use when functional requirements must follow the ears (easy approach to requirements syntax) patterns." data-kind="concrete">
+<h3>ears</h3><p>Use when functional requirements must follow the EARS (Easy Approach to Requirements Syntax) patterns.</p>
+<div class="badges"><span class="badge ">concrete</span><span class="badge ">adapted from github/spec-kit</span></div>
+<p style="margin-top:8px;font-size:.8rem;color:var(--fg-faint)">specify-requirements › specify-functional › ears</p></a><a class="card" href="skills/volere.html" data-skill="volere use when quality requirements must be written as volere snow cards with a measurable fit criterion." data-kind="concrete">
+<h3>volere</h3><p>Use when quality requirements must be written as Volere snow cards with a measurable fit criterion.</p>
+<div class="badges"><span class="badge ">concrete</span><span class="badge ">adapted from github/spec-kit</span></div>
+<p style="margin-top:8px;font-size:.8rem;color:var(--fg-faint)">specify-requirements › specify-quality › volere</p></a><a class="card" href="skills/iso25010.html" data-skill="iso25010 use when quality requirements must be classified by iso/iec 25010 characteristics and sub-characteristics." data-kind="concrete">
+<h3>iso25010</h3><p>Use when quality requirements must be classified by ISO/IEC 25010 characteristics and sub-characteristics.</p>
+<div class="badges"><span class="badge ">concrete</span><span class="badge ">adapted from github/spec-kit</span></div>
+<p style="margin-top:8px;font-size:.8rem;color:var(--fg-faint)">specify-requirements › specify-quality › iso25010</p></a></div><h2 id="planning">Planning</h2><div class="cards"><a class="card" href="skills/plan-feature.html" data-skill="plan-feature use when validated requirements must become an implementation plan of small, test-first tasks before any code is written." data-kind="concrete">
+<h3>plan-feature</h3><p>Use when validated requirements must become an implementation plan of small, test-first tasks before any code is written.</p>
+<div class="badges"><span class="badge ">concrete</span><span class="badge ">adapted from github/spec-kit</span><span class="badge ">adapted from obra/superpowers</span></div>
+</a></div><h2 id="implementation">Implementation</h2><div class="cards"><a class="card" href="skills/execute-plan.html" data-skill="execute-plan use when an implementation plan exists and its tasks must be implemented and committed one by one." data-kind="abstract">
+<h3>execute-plan</h3><p>Use when an implementation plan exists and its tasks must be implemented and committed one by one.</p>
+<div class="badges"><span class="badge abstract">abstract</span><span class="badge ">adapted from obra/superpowers</span></div>
+</a><a class="card" href="skills/execute-plan-inline.html" data-skill="execute-plan-inline use when the plan must be executed task by task in the current session, or when no subagent tool is available." data-kind="concrete">
+<h3>execute-plan-inline</h3><p>Use when the plan must be executed task by task in the current session, or when no subagent tool is available.</p>
+<div class="badges"><span class="badge ">concrete</span><span class="badge ">adapted from obra/superpowers</span></div>
+<p style="margin-top:8px;font-size:.8rem;color:var(--fg-faint)">execute-plan › execute-plan-inline</p></a><a class="card" href="skills/execute-plan-subagents.html" data-skill="execute-plan-subagents use when the plan must be executed by a fresh implementer subagent per task, each followed by a task review." data-kind="concrete">
+<h3>execute-plan-subagents</h3><p>Use when the plan must be executed by a fresh implementer subagent per task, each followed by a task review.</p>
+<div class="badges"><span class="badge ">concrete</span><span class="badge ">adapted from obra/superpowers</span></div>
+<p style="margin-top:8px;font-size:.8rem;color:var(--fg-faint)">execute-plan › execute-plan-subagents</p></a><a class="card" href="skills/test-driven-development.html" data-skill="test-driven-development use when implementing any feature or bugfix, before writing implementation code." data-kind="concrete">
+<h3>test-driven-development</h3><p>Use when implementing any feature or bugfix, before writing implementation code.</p>
+<div class="badges"><span class="badge ">concrete</span><span class="badge ">imported from obra/superpowers</span></div>
+</a></div><h2 id="verification">Verification</h2><div class="cards"><a class="card" href="skills/generate-tests.html" data-skill="generate-tests use when requirements must be verified against an implementation with executable tests traced to requirement ids." data-kind="abstract">
+<h3>generate-tests</h3><p>Use when requirements must be verified against an implementation with executable tests traced to requirement ids.</p>
+<div class="badges"><span class="badge abstract">abstract</span></div>
+</a><a class="card" href="skills/acceptance-tests.html" data-skill="acceptance-tests use when user stories must be verified end to end through their acceptance criteria." data-kind="abstract">
+<h3>acceptance-tests</h3><p>Use when user stories must be verified end to end through their acceptance criteria.</p>
+<div class="badges"><span class="badge abstract">abstract</span></div>
+<p style="margin-top:8px;font-size:.8rem;color:var(--fg-faint)">generate-tests › acceptance-tests</p></a><a class="card" href="skills/acceptance-gherkin.html" data-skill="acceptance-gherkin use when acceptance criteria must become gherkin feature files executed with pytest-bdd." data-kind="concrete">
+<h3>acceptance-gherkin</h3><p>Use when acceptance criteria must become Gherkin feature files executed with pytest-bdd.</p>
+<div class="badges"><span class="badge ">concrete</span></div>
+<p style="margin-top:8px;font-size:.8rem;color:var(--fg-faint)">generate-tests › acceptance-tests › acceptance-gherkin</p></a><a class="card" href="skills/acceptance-playwright.html" data-skill="acceptance-playwright use when acceptance criteria must be checked through the user interface of a web application with playwright." data-kind="concrete">
+<h3>acceptance-playwright</h3><p>Use when acceptance criteria must be checked through the user interface of a web application with Playwright.</p>
+<div class="badges"><span class="badge ">concrete</span><span class="badge ">adapted from anthropics/skills</span></div>
+<p style="margin-top:8px;font-size:.8rem;color:var(--fg-faint)">generate-tests › acceptance-tests › acceptance-playwright</p></a><a class="card" href="skills/performance-tests.html" data-skill="performance-tests use when measurable quality requirements (response time, throughput, load) must be verified with load tests." data-kind="concrete">
+<h3>performance-tests</h3><p>Use when measurable quality requirements (response time, throughput, load) must be verified with load tests.</p>
+<div class="badges"><span class="badge ">concrete</span></div>
+<p style="margin-top:8px;font-size:.8rem;color:var(--fg-faint)">generate-tests › performance-tests</p></a></div><h2 id="support">Support</h2><div class="cards"><a class="card" href="skills/systematic-debugging.html" data-skill="systematic-debugging use when encountering any bug, test failure, or unexpected behavior, before proposing fixes." data-kind="concrete">
+<h3>systematic-debugging</h3><p>Use when encountering any bug, test failure, or unexpected behavior, before proposing fixes.</p>
+<div class="badges"><span class="badge ">concrete</span><span class="badge ">imported from obra/superpowers</span></div>
+</a><a class="card" href="skills/quantify-quality.html" data-skill="quantify-quality use when quality requirements without an objective metric must be made measurable before they can be tested." data-kind="concrete">
+<h3>quantify-quality</h3><p>Use when quality requirements without an objective metric must be made measurable before they can be tested.</p>
+<div class="badges"><span class="badge ">concrete</span></div>
+</a></div><h2 id="workflows">Workflows</h2><div class="cards"><a class="card" href="workflows/deliver-feature-iso.html" data-skill="deliver-feature-iso use when a feature request must be delivered and the organization specifies quality requirements with iso/iec 25010 characteristics." data-kind="workflow">
+<h3>deliver-feature-iso</h3><p>Use when a feature request must be delivered and the organization specifies quality requirements with ISO/IEC 25010 characteristics.</p>
+<div class="badges"><span class="badge ">workflow</span></div>
+</a><a class="card" href="workflows/deliver-feature.html" data-skill="deliver-feature use when a feature request for an existing system must be specified, planned, implemented test-first and verified against its functional and quality requirements." data-kind="workflow">
+<h3>deliver-feature</h3><p>Use when a feature request for an existing system must be specified, planned, implemented test-first and verified against its functional and quality requirements.</p>
+<div class="badges"><span class="badge ">workflow</span></div>
+</a></div>
+
+<footer>DEFT 0.1.0 · GNU General Public License v3.0 · Reused third-party skills keep their original licences.</footer>
+</div></main>
+<aside class="toc"><h5>On this page</h5><nav id="toc-links"></nav></aside>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<script src="static/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quickstart · DEFT</title>
+<meta name="description" content="DEFT: a metamodel and toolset to specialize, compose, check and generate agent skills.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="static/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231a1a1a'/%3E%3Ctext x='16' y='22' font-family='monospace' font-size='15' text-anchor='middle' fill='white'%3Edf%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<header class="topbar">
+  <button class="iconbtn menubtn" id="menu" aria-label="Menu">☰</button>
+  <a class="brand" href="index.html"><span class="brand-mark">df</span>DEFT</a>
+  <nav class="topnav"><a class="" href="index.html">Overview</a><a class="" href="guides/metamodel.html">Guides</a><a class="" href="catalogue.html">Catalogue</a><a class="" href="about.html">About</a></nav>
+  <span class="spacer"></span>
+  <a class="iconbtn" href="https://anonymous.4open.science/r/deft-F7FE/">Repository</a>
+  <button class="iconbtn" id="theme" aria-label="Toggle theme">◐</button>
+</header>
+<div class="layout">
+<nav class="sidebar"><h4>Get started</h4>
+<a class="" href="index.html">Overview</a>
+<a class=" active" href="quickstart.html">Quickstart</a>
+<h4>Guides</h4>
+<a class="" href="guides/metamodel.html">The metamodel</a>
+<a class="" href="guides/writing-models.html">Writing models</a>
+<a class="" href="guides/validating-models.html">Validating models</a>
+<a class="" href="guides/generating-skills.html">Generating skills</a>
+<a class="" href="guides/using-skills.html">Using generated skills</a>
+<a class="" href="guides/example.html">Example: deliver a feature</a>
+<a class="" href="guides/cli.html">Command line</a>
+<h4>Catalogue</h4>
+<a class="" href="catalogue.html">All skills</a>
+<a class="sub" href="catalogue.html#requirements">Requirements</a>
+<a class="sub" href="catalogue.html#planning">Planning</a>
+<a class="sub" href="catalogue.html#implementation">Implementation</a>
+<a class="sub" href="catalogue.html#verification">Verification</a>
+<a class="sub" href="catalogue.html#support">Support</a>
+<a class="" href="types.html">Artifact types</a>
+<h4>Workflows</h4>
+<a class="" href="workflows/deliver-feature.html">deliver-feature</a>
+<a class="" href="workflows/deliver-feature-iso.html">deliver-feature-iso</a>
+<h4>Project</h4>
+<a class="" href="about.html">About DEFT</a></nav>
+<main><div class="content">
+
+<div class="eyebrow">Get started</div>
+<h1>Quickstart</h1>
+<p class="lead">Install DEFT, check the example library, and generate its skills.</p>
+<h2 id="install">Install</h2>
+<p>Requires Python 3.11 or later.</p>
+<p>Get the repository from <a href="https://anonymous.4open.science/r/deft-F7FE/">https://anonymous.4open.science/r/deft-F7FE/</a>, then:</p>
+<pre><code>cd deft
+python -m venv .venv
+source .venv/bin/activate        # Windows: .venv\Scripts\activate
+pip install -e ".[test]"</code></pre>
+<h2 id="check">Check the example library</h2>
+<pre><code>deft check models
+# 14 types, 21 skills: 0 violation(s)</code></pre>
+<p>Bind an incompatible variant in <code>models/workflows/deliver-feature.yaml</code>, for instance
+<code>bind: ears</code> for the <code>functional</code> node, and check again:</p>
+<pre><code>[C2] workflow deliver-feature: data edge functional.requirements -> acceptance.requirements:
+     EARSRequirement (from ears) does not conform to UserStory (required by acceptance-gherkin)</code></pre>
+<h2 id="generate">Generate and inspect skills</h2>
+<pre><code>deft resolve models volere           # the SKILL.md an agent receives for 'volere'
+deft generate models --out skills    # one folder per concrete skill and workflow
+deft obligations models              # contracts to review in the workflows</code></pre>
+<h2 id="next">Next</h2>
+<div class="cards">
+  <a class="card" href="guides/metamodel.html"><h3>The metamodel</h3><p>Specialization, composition, and why they are checked together.</p></a>
+  <a class="card" href="guides/writing-models.html"><h3>Writing models</h3><p>Types, families, workflows, and reuse of third-party skills.</p></a>
+  <a class="card" href="guides/example.html"><h3>Run the example</h3><p>Deliver a feature request with a coding agent and the generated skills.</p></a>
+  <a class="card" href="catalogue.html"><h3>Browse the catalogue</h3><p>Every skill of the example library, resolved and generated.</p></a>
+</div>
+
+<footer>DEFT 0.1.0 · GNU General Public License v3.0 · Reused third-party skills keep their original licences.</footer>
+</div></main>
+<aside class="toc"><h5>On this page</h5><nav id="toc-links"></nav></aside>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<script src="static/app.js"></script>
+</body>
+</html>

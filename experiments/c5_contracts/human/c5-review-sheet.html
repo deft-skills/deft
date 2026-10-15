@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DEFT contract review</title>
+<style>
+:root { --fg:#1a1a1a; --soft:#555; --line:#e2e2e2; --bg:#fff; --card:#fafafa; --acc:#1a1a1a; --bad:#b91c1c; }
+* { box-sizing: border-box; }
+body { margin:0; font: 16px/1.6 system-ui, -apple-system, "Segoe UI", sans-serif; color:var(--fg); background:var(--bg); }
+main { max-width: 800px; margin: 0 auto; padding: 32px 16px 120px; }
+h1 { font-size: 1.7rem; margin: 0 0 4px; } h2 { font-size: 1.2rem; margin: 36px 0 8px; }
+.lead { color: var(--soft); margin-top: 0; }
+.box { border:1px solid var(--line); border-radius:12px; padding:14px 18px; background:var(--card); margin:14px 0; }
+dl { margin:0; } dt { font-weight:650; margin-top:8px; } dd { margin:0 0 4px; }
+.card { border:1px solid var(--line); border-radius:12px; padding:16px 18px; margin:18px 0; }
+.card.done { border-color:#aaa; }
+.tag { font: 600 .75rem/1 system-ui; color:var(--soft); letter-spacing:.04em; text-transform:uppercase; }
+.step { font-weight:650; font-size:1.05rem; margin:6px 0 10px; }
+.cols { display:grid; grid-template-columns: 1.3fr 1fr; gap:16px; }
+.cols h3 { font-size:.8rem; text-transform:uppercase; letter-spacing:.04em; color:var(--soft); margin:0 0 4px; }
+.src { font-size:.85rem; color:var(--soft); margin:8px 0 2px; font-style: italic; }
+ul { margin:0; padding-left: 18px; } li { margin: 3px 0; }
+.choices { display:flex; gap:8px; flex-wrap:wrap; margin-top:14px; }
+.choices label { border:1px solid var(--line); border-radius:999px; padding:6px 14px; cursor:pointer; user-select:none; }
+.choices input { display:none; }
+.choices label:has(input:checked) { border-color: var(--acc); background:#f1f1f1; font-weight:650; }
+.which { margin-top:10px; display:none; } .which.show { display:block; }
+.which label { display:block; margin:4px 0; }
+textarea { width:100%; min-height:44px; margin-top:10px; border:1px solid var(--line); border-radius:8px; padding:8px; font:inherit; }
+input[type=text] { border:1px solid var(--line); border-radius:8px; padding:8px 10px; font:inherit; width: 260px; max-width:100%; }
+.bar { position:fixed; left:0; right:0; bottom:0; background:#fff; border-top:1px solid var(--line); padding:10px 16px; }
+.bar .in { max-width:800px; margin:0 auto; display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
+button { font:inherit; border:1px solid var(--acc); background:var(--acc); color:#fff; border-radius:8px; padding:8px 14px; cursor:pointer; }
+button.ghost { background:#fff; color:var(--acc); }
+.ex .verdict { color: var(--bad); font-weight:650; }
+pre.ov { white-space: pre-wrap; font: inherit; margin: 8px 0 0; color: var(--soft); }
+@media (max-width: 680px) { .cols { grid-template-columns: 1fr; } }
+</style></head>
+<body><main>
+<h1>Contract review</h1>
+<p class="lead">About 15 to 20 minutes: 16 short cards, in two rounds. Your answers are saved in this browser
+as you go; at the end, press <b>Download my answers</b> and send the file back.</p>
+
+<h2>1. The workflow</h2>
+<p>A coding agent delivers a feature request in an existing system by following a workflow of steps. Each step is
+carried out with one <i>skill</i>, a document of instructions for the agent.</p>
+<div class="box"><svg viewBox="0 0 790 280" role="img" aria-label="Workflow diagram" style="width:100%;height:auto">
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+<path d="M0,0 L10,5 L0,10 z" fill="#333"/></marker></defs>
+<style>.b{fill:#fff;stroke:#333;stroke-width:1.2}.t{font:600 12px system-ui,sans-serif;fill:#1a1a1a}
+.s{font:11px system-ui,sans-serif;fill:#555}.e{stroke:#333;stroke-width:1.2;fill:none;marker-end:url(#a)}
+.d{stroke-dasharray:5 4}.l{font:11px system-ui,sans-serif;fill:#555}</style>
+<circle cx="18" cy="118" r="8" class="b"/><text x="4" y="146" class="l">request</text>
+<rect x="50" y="40" width="140" height="46" rx="8" class="b"/><text x="60" y="59" class="t">1 Specify functional</text><text x="60" y="76" class="s">user stories</text>
+<rect x="50" y="150" width="140" height="46" rx="8" class="b"/><text x="60" y="169" class="t">2 Specify quality</text><text x="60" y="186" class="s">Volere snow cards</text>
+<rect x="225" y="95" width="110" height="46" rx="8" class="b"/><text x="236" y="114" class="t">3 Plan</text><text x="236" y="131" class="s">test-first tasks</text>
+<rect x="370" y="95" width="125" height="46" rx="8" class="b"/><text x="381" y="114" class="t">4 Implement</text><text x="381" y="131" class="s">test-first, per task</text>
+<rect x="530" y="40" width="130" height="46" rx="8" class="b"/><text x="541" y="59" class="t">5 Acceptance tests</text><text x="541" y="76" class="s">user stories</text>
+<rect x="530" y="150" width="130" height="46" rx="8" class="b"/><text x="541" y="169" class="t">6 Load tests</text><text x="541" y="186" class="s">quality requirements</text>
+<path d="M705,104 L719,118 L705,132 L691,118 z" class="b"/><text x="676" y="96" class="l">all pass?</text>
+<circle cx="770" cy="118" r="9" class="b"/><circle cx="770" cy="118" r="5" fill="#333"/><text x="756" y="146" class="l">end</text>
+<rect x="530" y="225" width="130" height="42" rx="8" class="b"/><text x="541" y="244" class="t">7 Diagnose</text><text x="541" y="259" class="s">failing tests</text>
+<path class="e" d="M25,113 L50,66"/><path class="e" d="M25,123 L50,170"/>
+<path class="e" d="M190,63 L225,110"/><path class="e" d="M190,173 L225,126"/>
+<path class="e" d="M335,118 L370,118"/>
+<path class="e" d="M495,110 L530,66"/><path class="e" d="M495,126 L530,170"/>
+<path class="e" d="M660,63 L695,111"/><path class="e" d="M660,173 L695,125"/>
+<path class="e" d="M719,118 L760,118"/><text x="726" y="111" class="l">yes</text>
+<path class="e" d="M705,132 L705,246 L660,246"/><text x="711" y="200" class="l">no</text>
+<path class="e d" d="M530,246 L432,246 L432,141"/><text x="440" y="238" class="l">repair (≤ 3)</text>
+</svg><pre class="ov">1. specify the functional requirements as user stories, and
+2. specify the quality requirements as Volere snow cards (both start from the feature request);
+3. plan the implementation as test-first tasks (from the requirements of steps 1 and 2);
+4. implement the plan task by task, test-first (from the plan);
+5. write and run acceptance tests for the user stories, and
+6. write and run load tests for the quality requirements (both on the code of step 4);
+then a decision: if every test report passes, the workflow ends; if some report fails,
+7. diagnose the failing tests, and go back to step 4 with the diagnosis (at most three times).</pre></div>
+
+<h2>2. What you decide</h2>
+<p>Each skill states what it <b>requires</b> before it can start, and what it <b>guarantees</b> when it finishes.
+For every card, decide: <b>do the guarantees listed on the card ensure every requirement of the step?</b></p>
+<div class="box"><dl><dt>Requirement of a step</dt><dd>A condition that the skill performing the step declares it needs before it starts (its precondition). For the last card, the requirements are what the whole workflow promises when it ends (its postconditions).</dd><dt>Guarantee</dt><dd>A condition known to hold when the step starts. It comes from one of three sources: a step that finished before it promised it (that step&#x27;s postcondition); the workflow reached the step only under that condition (the outcome of a decision); or the whole workflow assumes it from the start (the workflow&#x27;s precondition).</dd><dt>Ensured</dt><dd>Every requirement of the step follows from its guarantees, read with common sense. Do not assume anything about the system or the agent that the guarantees do not say.</dd><dt>Not ensured</dt><dd>At least one requirement does not follow from the guarantees. Name every such requirement.</dd></dl></div>
+<div class="box ex">
+<div class="tag">Example</div>
+<div class="step">Step: deploy the service</div>
+<div class="cols"><div><h3>Guarantees</h3><div class="src">Guaranteed by the testing step:</div><ul><li>All tests pass.</li>
+<li>The code is committed on a branch.</li></ul></div>
+<div><h3>Requirements of the step</h3><ul><li>The code is committed on a branch.</li><li>A server with credentials is available.</li></ul></div></div>
+<p>Answer: <span class="verdict">Not ensured</span>. Nothing guarantees a server with credentials, so you would tick
+that requirement. If every requirement followed from the guarantees, you would answer <b>Ensured</b>. Use <b>Unsure</b>
+when you cannot decide. There are no answers to look up: judge from the card and common sense only.</p>
+</div>
+<p>Your initials (only to tell reviewers apart): <input type="text" id="rater" placeholder="e.g. AB"></p>
+
+<h2>3. Round 1 of 2</h2>
+<p>One card per step, in workflow order.</p>
+<section class="card" id="O01">
+<div class="tag">Card 1 of 16</div>
+<div class="step">Step 1 of 7: specify the functional requirements as user stories</div>
+<div class="cols"><div><h3>Guarantees</h3><div class="src">Assumed by the whole workflow:</div><ul><li>The feature request names the existing system and its stack.</li></ul></div>
+<div><h3>Requirements of the step</h3><ul><li>The feature request is not empty.</li></ul></div></div>
+<div class="choices">
+<label><input type="radio" name="v-O01" value="entailed"><span>Ensured</span></label>
+<label><input type="radio" name="v-O01" value="not-entailed"><span>Not ensured</span></label>
+<label><input type="radio" name="v-O01" value="unsure"><span>Unsure</span></label>
+</div>
+<div class="which"><div class="tag" style="margin-top:6px">Which requirements are not ensured?</div><label><input type="checkbox" value="The feature request is not empty."> The feature request is not empty.</label></div>
+<textarea placeholder="Optional comment"></textarea>
+</section>
+<section class="card" id="O02">
+<div class="tag">Card 2 of 16</div>
+<div class="step">Step 2 of 7: specify the quality requirements as Volere snow cards</div>
+<div class="cols"><div><h3>Guarantees</h3><div class="src">Assumed by the whole workflow:</div><ul><li>The feature request names the existing system and its stack.</li></ul></div>
+<div><h3>Requirements of the step</h3><ul><li>The feature request is not empty.</li></ul></div></div>
+<div class="choices">
+<label><input type="radio" name="v-O02" value="entailed"><span>Ensured</span></label>
+<label><input type="radio" name="v-O02" value="not-entailed"><span>Not ensured</span></label>
+<label><input type="radio" name="v-O02" value="unsure"><span>Unsure</span></label>
+</div>
+<div class="which"><div class="tag" style="margin-top:6px">Which requirements are not ensured?</div><label><input type="checkbox" value="The feature request is not empty."> The feature request is not empty.</label></div>
+<textarea placeholder="Optional comment"></textarea>
+</section>
+<section class="card" id="O03">
+<div class="tag">Card 3 of 16</div>
+<div class="step">Step 3 of 7: plan the implementation as test-first tasks</div>
+<div class="cols"><div><h3>Guarantees</h3><div class="src">Guaranteed by step 1, specify the functional requirements as user stories:</div><ul><li>Every requirement has a unique id and names its source.</li><li>Every requirement is testable and unambiguous.</li><li>No open clarification markers remain.</li><li>Every functional requirement describes observable behaviour of the system.</li><li>Every user story has at least one acceptance criterion in Given/When/Then form.</li></ul><div class="src">Guaranteed by step 2, specify the quality requirements as Volere snow cards:</div><ul><li>Every requirement has a unique id and names its source.</li><li>Every requirement is testable and unambiguous.</li><li>No open clarification markers remain.</li><li>Every quality requirement names one ISO/IEC 25010 characteristic.</li><li>Every Volere requirement has a fit criterion with a metric, a threshold and a scale.</li></ul><div class="src">Assumed by the whole workflow:</div><ul><li>The feature request names the existing system and its stack.</li></ul></div>
+<div><h3>Requirements of the step</h3><ul><li>Every requirement has a unique id and is testable.</li></ul></div></div>
+<div class="choices">
+<label><input type="radio" name="v-O03" value="entailed"><span>Ensured</span></label>
+<label><input type="radio" name="v-O03" value="not-entailed"><span>Not ensured</span></label>
+<label><input type="radio" name="v-O03" value="unsure"><span>Unsure</span></label>
+</div>
+<div class="which"><div class="tag" style="margin-top:6px">Which requirements are not ensured?</div><label><input type="checkbox" value="Every requirement has a unique id and is testable."> Every requirement has a unique id and is testable.</label></div>
+<textarea placeholder="Optional comment"></textarea>
+</section>
+<section class="card" id="O04">
+<div class="tag">Card 4 of 16</div>
+<div class="step">Step 4 of 7: implement the plan task by task, test-first</div>
+<div class="cols"><div><h3>Guarantees</h3><div class="src">Guaranteed by step 3, plan the implementation as test-first tasks:</div><ul><li>Every requirement id is covered by at least one task.</li><li>Every task names its files, its interfaces and the test that proves it.</li></ul><div class="src">Guaranteed by step 7, diagnose the failing tests (when the workflow comes back here after a failure):</div><ul><li>The diagnosis names a root cause supported by evidence, not a symptom.</li></ul><div class="src">Assumed by the whole workflow:</div><ul><li>The feature request names the existing system and its stack.</li><li>An environment that matches production in configuration is available.</li></ul></div>
+<div><h3>Requirements of the step</h3><ul><li>The plan has at least one task and every task names its test.</li></ul></div></div>
+<div class="choices">
+<label><input type="radio" name="v-O04" value="entailed"><span>Ensured</span></label>
+<label><input type="radio" name="v-O04" value="not-entailed"><span>Not ensured</span></label>
+<label><input type="radio" name="v-O04" value="unsure"><span>Unsure</span></label>
+</div>
+<div class="which"><div class="tag" style="margin-top:6px">Which requirements are not ensured?</div><label><input type="checkbox" value="The plan has at least one task and every task names its test."> The plan has at least one task and every task names its test.</label></div>
+<textarea placeholder="Optional comment"></textarea>
+</section>
+<section class="card" id="O05">
+<div class="tag">Card 5 of 16</div>
+<div class="step">Step 5 of 7: write and run acceptance tests for the user stories</div>
+<div class="cols"><div><h3>Guarantees</h3><div class="src">Guaranteed by step 1, specify the functional requirements as user stories:</div><ul><li>Every requirement has a unique id and names its source.</li><li>Every requirement is testable and unambiguous.</li><li>No open clarification markers remain.</li><li>Every functional requirement describes observable behaviour of the system.</li><li>Every user story has at least one acceptance criterion in Given/When/Then form.</li></ul><div class="src">Guaranteed by step 4, implement the plan task by task, test-first:</div><ul><li>Every task is committed on the dedicated branch.</li><li>The full test suite passes, including the tests that existed before.</li><li>Every deviation from the plan is recorded as a ruling.</li></ul><div class="src">Assumed by the whole workflow:</div><ul><li>The feature request names the existing system and its stack.</li><li>An environment that matches production in configuration is available.</li></ul></div>
+<div><h3>Requirements of the step</h3><ul><li>The code builds and its existing tests pass.</li></ul></div></div>
+<div class="choices">
+<label><input type="radio" name="v-O05" value="entailed"><span>Ensured</span></label>
+<label><input type="radio" name="v-O05" value="not-entailed"><span>Not ensured</span></label>
+<label><input type="radio" name="v-O05" value="unsure"><span>Unsure</span></label>
+</div>
+<div class="which"><div class="tag" style="margin-top:6px">Which requirements are not ensured?</div><label><input type="checkbox" value="The code builds and its existing tests pass."> The code builds and its existing tests pass.</label></div>
+<textarea placeholder="Optional comment"></textarea>
+</section>
+<section class="card" id="O06">
+<div class="tag">Card 6 of 16</div>
+<div class="step">Step 6 of 7: write and run load tests for the quality requirements</div>
+<div class="cols"><div><h3>Guarantees</h3><div class="src">Guaranteed by step 2, specify the quality requirements as Volere snow cards:</div><ul><li>Every requirement has a unique id and names its source.</li><li>Every requirement is testable and unambiguous.</li><li>No open clarification markers remain.</li><li>Every quality requirement names one ISO/IEC 25010 characteristic.</li><li>Every Volere requirement has a fit criterion with a metric, a threshold and a scale.</li></ul><div class="src">Guaranteed by step 4, implement the plan task by task, test-first:</div><ul><li>Every task is committed and its tests pass.</li><li>Every deviation from the plan is recorded as a ruling.</li></ul><div class="src">Assumed by the whole workflow:</div><ul><li>The feature request names the existing system and its stack.</li></ul></div>
+<div><h3>Requirements of the step</h3><ul><li>The code builds and its existing tests pass.</li><li>A deployment of the system that matches production in configuration is available.</li></ul></div></div>
+<div class="choices">
+<label><input type="radio" name="v-O06" value="entailed"><span>Ensured</span></label>
+<label><input type="radio" name="v-O06" value="not-entailed"><span>Not ensured</span></label>
+<label><input type="radio" name="v-O06" value="unsure"><span>Unsure</span></label>
+</div>
+<div class="which"><div class="tag" style="margin-top:6px">Which requirements are not ensured?</div><label><input type="checkbox" value="The code builds and its existing tests pass."> The code builds and its existing tests pass.</label><label><input type="checkbox" value="A deployment of the system that matches production in configuration is available."> A deployment of the system that matches production in configuration is available.</label></div>
+<textarea placeholder="Optional comment"></textarea>
+</section>
+<section class="card" id="O07">
+<div class="tag">Card 7 of 16</div>
+<div class="step">Step 7 of 7: diagnose the failing tests</div>
+<div class="cols"><div><h3>Guarantees</h3><div class="src">Guaranteed by step 5, write and run acceptance tests for the user stories:</div><ul><li>Every input requirement is covered by at least one test.</li><li>The report states a verdict and the command that reproduces it.</li></ul><div class="src">Guaranteed by step 6, write and run load tests for the quality requirements:</div><ul><li>Every input requirement is covered by at least one test.</li><li>The report states a verdict and the command that reproduces it.</li></ul><div class="src">Guaranteed by step 4, implement the plan task by task, test-first:</div><ul><li>Every task is committed on the dedicated branch.</li><li>The full test suite passes, including the tests that existed before.</li><li>Every deviation from the plan is recorded as a ruling.</li></ul><div class="src">Condition under which the workflow reaches this point:</div><ul><li>some report has verdict fail</li></ul><div class="src">Assumed by the whole workflow:</div><ul><li>The feature request names the existing system and its stack.</li><li>An environment that matches production in configuration is available.</li></ul></div>
+<div><h3>Requirements of the step</h3><ul><li>At least one report has verdict fail.</li></ul></div></div>
+<div class="choices">
+<label><input type="radio" name="v-O07" value="entailed"><span>Ensured</span></label>
+<label><input type="radio" name="v-O07" value="not-entailed"><span>Not ensured</span></label>
+<label><input type="radio" name="v-O07" value="unsure"><span>Unsure</span></label>
+</div>
+<div class="which"><div class="tag" style="margin-top:6px">Which requirements are not ensured?</div><label><input type="checkbox" value="At least one report has verdict fail."> At least one report has verdict fail.</label></div>
+<textarea placeholder="Optional comment"></textarea>
+</section>
+<section class="card" id="O08">
+<div class="tag">Card 8 of 16</div>
+<div class="step">End of the workflow: what it promises to whoever started it</div>
+<div class="cols"><div><h3>Guarantees</h3><div class="src">Guaranteed by step 4, implement the plan task by task, test-first:</div><ul><li>Every task is committed on the dedicated branch.</li><li>The full test suite passes, including the tests that existed before.</li><li>Every deviation from the plan is recorded as a ruling.</li></ul><div class="src">Guaranteed by step 5, write and run acceptance tests for the user stories:</div><ul><li>Every input requirement is covered by at least one test.</li><li>The report states a verdict and the command that reproduces it.</li></ul><div class="src">Guaranteed by step 6, write and run load tests for the quality requirements:</div><ul><li>Every input requirement is covered by at least one test.</li><li>The report states a verdict and the command that reproduces it.</li></ul><div class="src">Condition under which the workflow reaches this point:</div><ul><li>every report has verdict pass</li></ul><div class="src">Assumed by the whole workflow:</div><ul><li>The feature request names the existing system and its stack.</li><li>An environment that matches production in configuration is available.</li></ul></div>
+<div><h3>Requirements of the step</h3><ul><li>Every requirement is covered by at least one passing test.</li><li>The code is committed on a feature branch.</li></ul></div></div>
+<div class="choices">
+<label><input type="radio" name="v-O08" value="entailed"><span>Ensured</span></label>
+<label><input type="radio" name="v-O08" value="not-entailed"><span>Not ensured</span></label>
+<label><input type="radio" name="v-O08" value="unsure"><span>Unsure</span></label>
+</div>
+<div class="which"><div class="tag" style="margin-top:6px">Which requirements are not ensured?</div><label><input type="checkbox" value="Every requirement is covered by at least one passing test."> Every requirement is covered by at least one passing test.</label><label><input type="checkbox" value="The code is committed on a feature branch."> The code is committed on a feature branch.</label></div>
+<textarea placeholder="Optional comment"></textarea>
+</section>
+<h2>3. Round 2 of 2</h2>
+<p>The same steps again, in workflow order, with somewhat different guarantees or requirements. Judge each card on its own.</p>
+<section class="card" id="O09">
+<div class="tag">Card 9 of 16</div>
+<div class="step">Step 1 of 7: specify the functional requirements as user stories</div>
+<div class="cols"><div><h3>Guarantees</h3><div class="src">Assumed by the whole workflow:</div><ul><li>The feature request names the existing system and its stack.</li><li>An environment that matches production in configuration is available.</li></ul></div>
+<div><h3>Requirements of the step</h3><ul><li>The feature request is not empty.</li></ul></div></div>
+<div class="choices">
+<label><input type="radio" name="v-O09" value="entailed"><span>Ensured</span></label>
+<label><input type="radio" name="v-O09" value="not-entailed"><span>Not ensured</span></label>
+<label><input type="radio" name="v-O09" value="unsure"><span>Unsure</span></label>
+</div>
+<div class="which"><div class="tag" style="margin-top:6px">Which requirements are not ensured?</div><label><input type="checkbox" value="The feature request is not empty."> The feature request is not empty.</label></div>
+<textarea placeholder="Optional comment"></textarea>
+</section>
+<section class="card" id="O10">
+<div class="tag">Card 10 of 16</div>
+<div class="step">Step 2 of 7: specify the quality requirements as Volere snow cards</div>
+<div class="cols"><div><h3>Guarantees</h3><div class="src">Assumed by the whole workflow:</div><ul><li>The feature request names the existing system and its stack.</li><li>An environment that matches production in configuration is available.</li></ul></div>
+<div><h3>Requirements of the step</h3><ul><li>The feature request is not empty.</li></ul></div></div>
+<div class="choices">
+<label><input type="radio" name="v-O10" value="entailed"><span>Ensured</span></label>
+<label><input type="radio" name="v-O10" value="not-entailed"><span>Not ensured</span></label>
+<label><input type="radio" name="v-O10" value="unsure"><span>Unsure</span></label>
+</div>
+<div class="which"><div class="tag" style="margin-top:6px">Which requirements are not ensured?</div><label><input type="checkbox" value="The feature request is not empty."> The feature request is not empty.</label></div>
+<textarea placeholder="Optional comment"></textarea>
+</section>
+<section class="card" id="O11">
+<div class="tag">Card 11 of 16</div>
+<div class="step">Step 3 of 7: plan the implementation as test-first tasks</div>
+<div class="cols"><div><h3>Guarantees</h3><div class="src">Guaranteed by step 1, specify the functional requirements as user stories:</div><ul><li>Every requirement has a unique id and names its source.</li><li>Every requirement is testable and unambiguous.</li><li>No open clarification markers remain.</li><li>Every functional requirement describes observable behaviour of the system.</li><li>Every user story has at least one acceptance criterion in Given/When/Then form.</li></ul><div class="src">Guaranteed by step 2, specify the quality requirements as Volere snow cards:</div><ul><li>Every requirement has a unique id and names its source.</li><li>Every requirement is testable and unambiguous.</li><li>No open clarification markers remain.</li><li>Every quality requirement names one ISO/IEC 25010 characteristic.</li><li>Every Volere requirement has a fit criterion with a metric, a threshold and a scale.</li></ul><div class="src">Assumed by the whole workflow:</div><ul><li>The feature request names the existing system and its stack.</li><li>An environment that matches production in configuration is available.</li></ul></div>
+<div><h3>Requirements of the step</h3><ul><li>Every requirement has a unique id and is testable.</li></ul></div></div>
+<div class="choices">
+<label><input type="radio" name="v-O11" value="entailed"><span>Ensured</span></label>
+<label><input type="radio" name="v-O11" value="not-entailed"><span>Not ensured</span></label>
+<label><input type="radio" name="v-O11" value="unsure"><span>Unsure</span></label>
+</div>
+<div class="which"><div class="tag" style="margin-top:6px">Which requirements are not ensured?</div><label><input type="checkbox" value="Every requirement has a unique id and is testable."> Every requirement has a unique id and is testable.</label></div>
+<textarea placeholder="Optional comment"></textarea>
+</section>
+<section class="card" id="O12">
+<div class="tag">Card 12 of 16</div>
+<div class="step">Step 4 of 7: implement the plan task by task, test-first</div>
+<div class="cols"><div><h3>Guarantees</h3><div class="src">Guaranteed by step 3, plan the implementation as test-first tasks:</div><ul><li>Every requirement id is covered by at least one task.</li><li>Every task names its files, its interfaces and the test that proves it.</li></ul><div class="src">Guaranteed by step 7, diagnose the failing tests (when the workflow comes back here after a failure):</div><ul><li>The diagnosis names a root cause supported by evidence, not a symptom.</li></ul><div class="src">Assumed by the whole workflow:</div><ul><li>The feature request names the existing system and its stack.</li></ul></div>
+<div><h3>Requirements of the step</h3><ul><li>The plan has at least one task and every task names its test.</li></ul></div></div>
+<div class="choices">
+<label><input type="radio" name="v-O12" value="entailed"><span>Ensured</span></label>
+<label><input type="radio" name="v-O12" value="not-entailed"><span>Not ensured</span></label>
+<label><input type="radio" name="v-O12" value="unsure"><span>Unsure</span></label>
+</div>
+<div class="which"><div class="tag" style="margin-top:6px">Which requirements are not ensured?</div><label><input type="checkbox" value="The plan has at least one task and every task names its test."> The plan has at least one task and every task names its test.</label></div>
+<textarea placeholder="Optional comment"></textarea>
+</section>
+<section class="card" id="O13">
+<div class="tag">Card 13 of 16</div>
+<div class="step">Step 5 of 7: write and run acceptance tests for the user stories</div>
+<div class="cols"><div><h3>Guarantees</h3><div class="src">Guaranteed by step 1, specify the functional requirements as user stories:</div><ul><li>Every requirement has a unique id and names its source.</li><li>Every requirement is testable and unambiguous.</li><li>No open clarification markers remain.</li><li>Every functional requirement describes observable behaviour of the system.</li><li>Every user story has at least one acceptance criterion in Given/When/Then form.</li></ul><div class="src">Guaranteed by step 4, implement the plan task by task, test-first:</div><ul><li>Every task is committed and its tests pass.</li><li>Every deviation from the plan is recorded as a ruling.</li></ul><div class="src">Assumed by the whole workflow:</div><ul><li>The feature request names the existing system and its stack.</li></ul></div>
+<div><h3>Requirements of the step</h3><ul><li>The code builds and its existing tests pass.</li></ul></div></div>
+<div class="choices">
+<label><input type="radio" name="v-O13" value="entailed"><span>Ensured</span></label>
+<label><input type="radio" name="v-O13" value="not-entailed"><span>Not ensured</span></label>
+<label><input type="radio" name="v-O13" value="unsure"><span>Unsure</span></label>
+</div>
+<div class="which"><div class="tag" style="margin-top:6px">Which requirements are not ensured?</div><label><input type="checkbox" value="The code builds and its existing tests pass."> The code builds and its existing tests pass.</label></div>
+<textarea placeholder="Optional comment"></textarea>
+</section>
+<section class="card" id="O14">
+<div class="tag">Card 14 of 16</div>
+<div class="step">Step 6 of 7: write and run load tests for the quality requirements</div>
+<div class="cols"><div><h3>Guarantees</h3><div class="src">Guaranteed by step 2, specify the quality requirements as Volere snow cards:</div><ul><li>Every requirement has a unique id and names its source.</li><li>Every requirement is testable and unambiguous.</li><li>No open clarification markers remain.</li><li>Every quality requirement names one ISO/IEC 25010 characteristic.</li><li>Every Volere requirement has a fit criterion with a metric, a threshold and a scale.</li></ul><div class="src">Guaranteed by step 4, implement the plan task by task, test-first:</div><ul><li>Every task is committed on the dedicated branch.</li><li>The full test suite passes, including the tests that existed before.</li><li>Every deviation from the plan is recorded as a ruling.</li></ul><div class="src">Assumed by the whole workflow:</div><ul><li>The feature request names the existing system and its stack.</li><li>An environment that matches production in configuration is available.</li></ul></div>
+<div><h3>Requirements of the step</h3><ul><li>The code builds and its existing tests pass.</li><li>An environment that matches production in configuration is available.</li></ul></div></div>
+<div class="choices">
+<label><input type="radio" name="v-O14" value="entailed"><span>Ensured</span></label>
+<label><input type="radio" name="v-O14" value="not-entailed"><span>Not ensured</span></label>
+<label><input type="radio" name="v-O14" value="unsure"><span>Unsure</span></label>
+</div>
+<div class="which"><div class="tag" style="margin-top:6px">Which requirements are not ensured?</div><label><input type="checkbox" value="The code builds and its existing tests pass."> The code builds and its existing tests pass.</label><label><input type="checkbox" value="An environment that matches production in configuration is available."> An environment that matches production in configuration is available.</label></div>
+<textarea placeholder="Optional comment"></textarea>
+</section>
+<section class="card" id="O15">
+<div class="tag">Card 15 of 16</div>
+<div class="step">Step 7 of 7: diagnose the failing tests</div>
+<div class="cols"><div><h3>Guarantees</h3><div class="src">Guaranteed by step 5, write and run acceptance tests for the user stories:</div><ul><li>Every input requirement is covered by at least one test.</li><li>The report states a verdict and the command that reproduces it.</li></ul><div class="src">Guaranteed by step 6, write and run load tests for the quality requirements:</div><ul><li>Every input requirement is covered by at least one test.</li><li>The report states a verdict and the command that reproduces it.</li></ul><div class="src">Guaranteed by step 4, implement the plan task by task, test-first:</div><ul><li>Every task is committed and its tests pass.</li><li>Every deviation from the plan is recorded as a ruling.</li></ul><div class="src">Condition under which the workflow reaches this point:</div><ul><li>some report has verdict fail</li></ul><div class="src">Assumed by the whole workflow:</div><ul><li>The feature request names the existing system and its stack.</li></ul></div>
+<div><h3>Requirements of the step</h3><ul><li>At least one report has verdict fail.</li></ul></div></div>
+<div class="choices">
+<label><input type="radio" name="v-O15" value="entailed"><span>Ensured</span></label>
+<label><input type="radio" name="v-O15" value="not-entailed"><span>Not ensured</span></label>
+<label><input type="radio" name="v-O15" value="unsure"><span>Unsure</span></label>
+</div>
+<div class="which"><div class="tag" style="margin-top:6px">Which requirements are not ensured?</div><label><input type="checkbox" value="At least one report has verdict fail."> At least one report has verdict fail.</label></div>
+<textarea placeholder="Optional comment"></textarea>
+</section>
+<section class="card" id="O16">
+<div class="tag">Card 16 of 16</div>
+<div class="step">End of the workflow: what it promises to whoever started it</div>
+<div class="cols"><div><h3>Guarantees</h3><div class="src">Guaranteed by step 4, implement the plan task by task, test-first:</div><ul><li>Every task is committed and its tests pass.</li><li>Every deviation from the plan is recorded as a ruling.</li></ul><div class="src">Guaranteed by step 5, write and run acceptance tests for the user stories:</div><ul><li>Every input requirement is covered by at least one test.</li><li>The report states a verdict and the command that reproduces it.</li></ul><div class="src">Guaranteed by step 6, write and run load tests for the quality requirements:</div><ul><li>Every input requirement is covered by at least one test.</li><li>The report states a verdict and the command that reproduces it.</li></ul><div class="src">Condition under which the workflow reaches this point:</div><ul><li>every report has verdict pass</li></ul><div class="src">Assumed by the whole workflow:</div><ul><li>The feature request names the existing system and its stack.</li></ul></div>
+<div><h3>Requirements of the step</h3><ul><li>Every requirement is covered by at least one passing test.</li><li>The code is committed on a feature branch.</li></ul></div></div>
+<div class="choices">
+<label><input type="radio" name="v-O16" value="entailed"><span>Ensured</span></label>
+<label><input type="radio" name="v-O16" value="not-entailed"><span>Not ensured</span></label>
+<label><input type="radio" name="v-O16" value="unsure"><span>Unsure</span></label>
+</div>
+<div class="which"><div class="tag" style="margin-top:6px">Which requirements are not ensured?</div><label><input type="checkbox" value="Every requirement is covered by at least one passing test."> Every requirement is covered by at least one passing test.</label><label><input type="checkbox" value="The code is committed on a feature branch."> The code is committed on a feature branch.</label></div>
+<textarea placeholder="Optional comment"></textarea>
+</section>
+</main>
+<div class="bar"><div class="in"><span id="progress"></span><span style="flex:1"></span>
+<button class="ghost" id="clear">Clear answers</button><button id="download">Download my answers</button></div></div>
+<script>
+const KEY = "deft-c5-review-v2";
+const ITEMS = ["O01", "O02", "O03", "O04", "O05", "O06", "O07", "O08", "O09", "O10", "O11", "O12", "O13", "O14", "O15", "O16"];
+function load() { try { return JSON.parse(localStorage.getItem(KEY) || "{}"); } catch (e) { return {}; } }
+function store(s) { try { localStorage.setItem(KEY, JSON.stringify(s)); } catch (e) { /* storage unavailable */ } }
+let state = load();
+function collect() {
+  const out = { rater: document.getElementById("rater").value.trim(), answers: {} };
+  for (const id of ITEMS) {
+    const card = document.getElementById(id);
+    const v = card.querySelector("input[name=v-" + id + "]:checked");
+    const unc = [...card.querySelectorAll(".which input:checked")].map(x => x.value);
+    out.answers[id] = { verdict: v ? v.value : null, uncovered: unc, comment: card.querySelector("textarea").value.trim() };
+  }
+  return out;
+}
+function refresh() {
+  let done = 0;
+  for (const id of ITEMS) {
+    const card = document.getElementById(id);
+    const v = card.querySelector("input[name=v-" + id + "]:checked");
+    card.classList.toggle("done", !!v);
+    card.querySelector(".which").classList.toggle("show", !!v && v.value === "not-entailed");
+    if (v) done++;
+  }
+  document.getElementById("progress").textContent = done + " of " + ITEMS.length + " answered";
+}
+function save() { state = collect(); store(state); refresh(); }
+function restore() {
+  document.getElementById("rater").value = state.rater || "";
+  for (const [id, a] of Object.entries(state.answers || {})) {
+    const card = document.getElementById(id); if (!card) continue;
+    if (a.verdict) { const r = card.querySelector("input[name=v-" + id + "][value=" + a.verdict + "]"); if (r) r.checked = true; }
+    for (const x of card.querySelectorAll(".which input")) x.checked = (a.uncovered || []).includes(x.value);
+    card.querySelector("textarea").value = a.comment || "";
+  }
+}
+document.addEventListener("input", save); document.addEventListener("change", save);
+document.getElementById("download").addEventListener("click", () => {
+  const data = collect(); data.downloaded = new Date().toISOString();
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+  const a = document.createElement("a"); a.href = URL.createObjectURL(blob);
+  a.download = "c5-answers-" + (data.rater || "reviewer") + ".json"; a.click();
+});
+document.getElementById("clear").addEventListener("click", () => {
+  if (!confirm("Clear all answers in this browser?")) return;
+  store({}); state = {}; for (const i of document.querySelectorAll("input")) { if (i.type === "text") i.value = ""; else i.checked = false; }
+  for (const t of document.querySelectorAll("textarea")) t.value = ""; refresh();
+});
+restore(); refresh();
+</script>
+</body></html>

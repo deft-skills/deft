@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Overview · DEFT</title>
+<meta name="description" content="DEFT: a metamodel and toolset to specialize, compose, check and generate agent skills.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="static/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231a1a1a'/%3E%3Ctext x='16' y='22' font-family='monospace' font-size='15' text-anchor='middle' fill='white'%3Edf%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<header class="topbar">
+  <button class="iconbtn menubtn" id="menu" aria-label="Menu">☰</button>
+  <a class="brand" href="index.html"><span class="brand-mark">df</span>DEFT</a>
+  <nav class="topnav"><a class="active" href="index.html">Overview</a><a class="" href="guides/metamodel.html">Guides</a><a class="" href="catalogue.html">Catalogue</a><a class="" href="about.html">About</a></nav>
+  <span class="spacer"></span>
+  <a class="iconbtn" href="https://anonymous.4open.science/r/deft-F7FE/">Repository</a>
+  <button class="iconbtn" id="theme" aria-label="Toggle theme">◐</button>
+</header>
+<div class="layout">
+<nav class="sidebar"><h4>Get started</h4>
+<a class=" active" href="index.html">Overview</a>
+<a class="" href="quickstart.html">Quickstart</a>
+<h4>Guides</h4>
+<a class="" href="guides/metamodel.html">The metamodel</a>
+<a class="" href="guides/writing-models.html">Writing models</a>
+<a class="" href="guides/validating-models.html">Validating models</a>
+<a class="" href="guides/generating-skills.html">Generating skills</a>
+<a class="" href="guides/using-skills.html">Using generated skills</a>
+<a class="" href="guides/example.html">Example: deliver a feature</a>
+<a class="" href="guides/cli.html">Command line</a>
+<h4>Catalogue</h4>
+<a class="" href="catalogue.html">All skills</a>
+<a class="sub" href="catalogue.html#requirements">Requirements</a>
+<a class="sub" href="catalogue.html#planning">Planning</a>
+<a class="sub" href="catalogue.html#implementation">Implementation</a>
+<a class="sub" href="catalogue.html#verification">Verification</a>
+<a class="sub" href="catalogue.html#support">Support</a>
+<a class="" href="types.html">Artifact types</a>
+<h4>Workflows</h4>
+<a class="" href="workflows/deliver-feature.html">deliver-feature</a>
+<a class="" href="workflows/deliver-feature-iso.html">deliver-feature-iso</a>
+<h4>Project</h4>
+<a class="" href="about.html">About DEFT</a></nav>
+<main><div class="content">
+
+<section class="hero">
+  <div class="eyebrow">Metamodel · Checks · Generator · Catalogue</div>
+  <h1>DEFT</h1>
+  <p class="lead">Engineer agent skills as software. DEFT lets you specialize skills into families, compose them
+  into typed workflows, check both before any agent runs, and generate plain <code>SKILL.md</code> files that
+  follow the <a href="https://agentskills.io/specification">Agent Skills specification</a>.</p>
+  <p><a class="iconbtn" href="quickstart.html">Quickstart</a> <a class="iconbtn" href="guides/metamodel.html">Read the guides</a>
+  <a class="iconbtn" href="catalogue.html">Browse the catalogue</a></p>
+</section>
+
+<h2 id="why">Why</h2>
+<p>Agent skills are folders of instructions that coding agents load on demand. The specification fixes a few
+metadata fields and leaves skills unrelated, so libraries grow by copying: a shared procedure is pasted into every
+variant, and pipelines are described in prose ("then use skill X"). Copies drift, and a pipeline that wires two
+incompatible skills fails only while an agent runs it.</p>
+
+<div class="cards">
+  <a class="card" href="guides/metamodel.html#specialization"><div class="icon">⊑</div><h3>Specialization</h3>
+    <p>Skill families. A parent holds the procedure every variant shares; variants fill its variation points or
+    change its defaults, and DEFT records where every instruction comes from.</p></a>
+  <a class="card" href="guides/metamodel.html#composition"><div class="icon">→</div><h3>Composition</h3>
+    <p>Workflows whose steps exchange typed artifacts, invoke other skills, repair failures a bounded number of
+    times, and declare pre- and postconditions.</p></a>
+  <a class="card" href="guides/validating-models.html"><div class="icon">✓</div><h3>Checks</h3>
+    <p>Hierarchies, bindings and data flow are validated before execution. A variant that accepts a narrower
+    input is fine in its family and rejected where it is wired to an incompatible step.</p></a>
+  <a class="card" href="guides/generating-skills.html"><div class="icon">▤</div><h3>Plain skills out</h3>
+    <p>Every model generates standard skill folders, with inputs, outputs, conditions, provenance and the licences
+    of reused material. Agents need nothing new.</p></a>
+</div>
+
+<h2 id="how">How it works</h2>
+<ol class="steps">
+  <li><h3>Model</h3><p>Describe artifact types, skill families and workflows in YAML.
+  <a href="guides/writing-models.html">Writing models</a>.</p></li>
+  <li><h3>Check</h3><p><code>deft check models</code> validates both hierarchies, every refinement, binding and edge.
+  <a href="guides/validating-models.html">Validating models</a>.</p></li>
+  <li><h3>Generate</h3><p><code>deft generate models --out skills</code> writes one folder per concrete skill and
+  workflow. <a href="guides/generating-skills.html">Generating skills</a>.</p></li>
+  <li><h3>Run</h3><p>Install the folders in any compatible agent and ask it to use a workflow.
+  <a href="guides/using-skills.html">Using generated skills</a>.</p></li>
+</ol>
+
+<h2 id="library">The example library</h2>
+<p>DEFT ships with a library that delivers a feature request with a spec-driven process, built on public skills
+from Spec Kit, Superpowers and anthropics/skills: requirements in several notations, planning, test-driven
+implementation, acceptance and performance tests, and bounded repair. Its main workflow,
+<a href="workflows/deliver-feature.html"><code>deliver-feature</code></a>:</p>
+<pre class="mermaid">flowchart TB
+  in((start))
+  functional[&quot;specify-functional&lt;br/&gt;&lt;b&gt;user-stories&lt;/b&gt;&quot;]
+  quality[&quot;specify-quality&lt;br/&gt;&lt;b&gt;volere&lt;/b&gt;&quot;]
+  plan[&quot;plan-feature&quot;]
+  implement[&quot;execute-plan&lt;br/&gt;&lt;b&gt;execute-plan-inline&lt;/b&gt;&quot;]
+  tdd[&quot;test-driven-development&quot;]
+  acceptance[&quot;acceptance-tests&lt;br/&gt;&lt;b&gt;acceptance-gherkin&lt;/b&gt;&quot;]
+  performance[&quot;performance-tests&quot;]
+  verdict{verdict}
+  debug[&quot;systematic-debugging&quot;]
+  done(((end)))
+  in --&gt;|FeatureRequest| functional
+  in --&gt;|FeatureRequest| quality
+  functional --&gt;|Requirement| plan
+  quality --&gt;|Requirement| plan
+  plan --&gt;|ImplementationPlan| implement
+  functional --&gt;|UserStory| acceptance
+  implement --&gt;|SourceCode| acceptance
+  quality --&gt;|MeasurableQualityRequirement| performance
+  implement --&gt;|SourceCode| performance
+  acceptance --&gt;|TestReport| debug
+  performance --&gt;|TestReport| debug
+  implement --&gt;|SourceCode| debug
+  implement -.-&gt;|invokes| tdd
+  acceptance --&gt; verdict
+  performance --&gt; verdict
+  verdict --&gt;|every report has verdict pass| done
+  verdict --&gt;|some report has verdict fail| debug
+  debug -.-&gt;|repair ≤3| implement
+</pre>
+<p>Try it with a coding agent in the <a href="guides/example.html">example</a>.</p>
+
+<footer>DEFT 0.1.0 · GNU General Public License v3.0 · Reused third-party skills keep their original licences.</footer>
+</div></main>
+<aside class="toc"><h5>On this page</h5><nav id="toc-links"></nav></aside>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<script src="static/app.js"></script>
+</body>
+</html>

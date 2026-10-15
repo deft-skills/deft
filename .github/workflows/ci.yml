@@ -1,0 +1,30 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: ["3.11", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - run: pip install -e ".[test]"
+      - run: python -m pytest
+      - run: deft check models
+      - name: Generated skills are up to date
+        run: |
+          deft generate models --out skills
+          git diff --exit-code -- skills
+      - name: Website in docs/ is up to date
+        run: |
+          python site/build.py --out docs
+          git status --porcelain -- docs
+          test -z "$(git status --porcelain -- docs)"
+      - run: python experiments/run_all.py
