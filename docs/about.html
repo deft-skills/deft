@@ -16,7 +16,7 @@
   <a class="brand" href="index.html"><span class="brand-mark">df</span>DEFT</a>
   <nav class="topnav"><a class="" href="index.html">Overview</a><a class="" href="guides/metamodel.html">Guides</a><a class="" href="catalogue.html">Catalogue</a><a class="active" href="about.html">About</a></nav>
   <span class="spacer"></span>
-  <a class="iconbtn" href="https://anonymous.4open.science/r/deft-F7FE/">Repository</a>
+  <a class="iconbtn" href="https://anonymous.4open.science/r/deft-A5CA/">Repository</a>
   <button class="iconbtn" id="theme" aria-label="Toggle theme">◐</button>
 </header>
 <div class="layout">
@@ -64,7 +64,7 @@ on public skills.</p>
 <tr><td><code>experiments/</code></td><td>Scripts of the research evaluation of DEFT.</td></tr>
 </table>
 <h2 id="contribute">Contributing</h2>
-<script type="application/json" id="md-contrib">"DEFT is open source, and contributions are welcome. You can help in several ways:\n\n- **Report a problem or propose an idea.** Open an issue. For a bug in the checker or the\n  generator, include the smallest model that reproduces it and the output of\n  `deft check`.\n- **Add skills.** New skill families, workflows and artifact types go in `models/` as YAML\n  (see [Writing models](guides/writing-models.html)). To reuse a third-party skill, pin it\n  in `upstream/` with its licence, reference it through `origin` and `source` rather than\n  copying it, and list it in [NOTICE](https://anonymous.4open.science/r/deft-F7FE/NOTICE).\n- **Improve the tool.** The loader, checks, resolution and generator live in `deft/`. A\n  new or changed constraint also needs a test in `tests/`, its OCL invariant in\n  [`metamodel/deft.ocl`](https://anonymous.4open.science/r/deft-F7FE/metamodel/deft.ocl), and an update to\n  [Validating models](guides/validating-models.html).\n- **Improve the documentation.** The guides are in `guides/`; the website is generated\n  from them.\n\n### Set up\n\n```bash\ngit clone https://github.com/deft-skills/deft.git && cd deft\npython -m venv .venv\nsource .venv/bin/activate            # Windows: .venv\\Scripts\\activate\npip install -e \".[test]\"\n```\n\n### Before you open a pull request\n\nRun the same checks as the continuous integration:\n\n```bash\npython -m pytest                     # tests of every check and of the generator\ndeft check models                    # the example library has no violation\ndeft generate models --out skills    # regenerate the skills, commit the changes\npython site/build.py --out docs      # regenerate the website, commit the changes\npython experiments/run_all.py        # rerun the evaluation, commit changed results\n```\n\nEdit the models and the guides, never the generated files: `skills/` and `docs/` are\noverwritten on every build, and the continuous integration fails if they are out of date.\nIf your change alters the results in `experiments/results/`, say so in the pull request.\n\nContributions are accepted under the GNU General Public License v3.0, and third-party\nmaterial must have a compatible licence. You may use AI assistants, provided you review\nthe result and say so in the pull request, as we do in this repository (see below)."</script><div class="md" data-md="md-contrib"><pre>DEFT is open source, and contributions are welcome. You can help in several ways:
+<script type="application/json" id="md-contrib">"DEFT is open source, and contributions are welcome. You can help in several ways:\n\n- **Report a problem or propose an idea.** Open an issue. For a bug in the checker or the\n  generator, include the smallest model that reproduces it and the output of\n  `deft check`.\n- **Add skills.** New skill families, workflows and artifact types go in `models/` as YAML\n  (see [Writing models](guides/writing-models.html)). To reuse a third-party skill, pin it\n  in `upstream/` with its licence, reference it through `origin` and `source` rather than\n  copying it, and list it in [NOTICE](https://anonymous.4open.science/r/deft-A5CA/NOTICE).\n- **Improve the tool.** The loader, checks, resolution and generator live in `deft/`. A\n  new or changed constraint also needs a test in `tests/`, its OCL invariant in\n  [`metamodel/deft.ocl`](https://anonymous.4open.science/r/deft-A5CA/metamodel/deft.ocl), and an update to\n  [Validating models](guides/validating-models.html).\n- **Improve the documentation.** The guides are in `guides/`; the website is generated\n  from them.\n\n### Set up\n\n```bash\ngit clone https://github.com/deft-skills/deft.git && cd deft\npython -m venv .venv\nsource .venv/bin/activate            # Windows: .venv\\Scripts\\activate\npip install -e \".[test]\"\n```\n\n### Before you open a pull request\n\nRun the same checks as the continuous integration:\n\n```bash\npython -m pytest                     # tests of every check and of the generator\ndeft check models                    # the example library has no violation\ndeft generate models --out skills    # regenerate the skills, commit the changes\npython site/build.py --out docs      # regenerate the website, commit the changes\npython experiments/run_all.py        # rerun the evaluation, commit changed results\n```\n\nEdit the models and the guides, never the generated files: `skills/` and `docs/` are\noverwritten on every build, and the continuous integration fails if they are out of date.\nIf your change alters the results in `experiments/results/`, say so in the pull request.\n\nContributions are accepted under the GNU General Public License v3.0, and third-party\nmaterial must have a compatible licence. You may use AI assistants, provided you review\nthe result and say so in the pull request, as we do in this repository (see below)."</script><div class="md" data-md="md-contrib"><pre>DEFT is open source, and contributions are welcome. You can help in several ways:
 
 - **Report a problem or propose an idea.** Open an issue. For a bug in the checker or the
   generator, include the smallest model that reproduces it and the output of
@@ -72,10 +72,10 @@ on public skills.</p>
 - **Add skills.** New skill families, workflows and artifact types go in `models/` as YAML
   (see [Writing models](guides/writing-models.html)). To reuse a third-party skill, pin it
   in `upstream/` with its licence, reference it through `origin` and `source` rather than
-  copying it, and list it in [NOTICE](https://anonymous.4open.science/r/deft-F7FE/NOTICE).
+  copying it, and list it in [NOTICE](https://anonymous.4open.science/r/deft-A5CA/NOTICE).
 - **Improve the tool.** The loader, checks, resolution and generator live in `deft/`. A
   new or changed constraint also needs a test in `tests/`, its OCL invariant in
-  [`metamodel/deft.ocl`](https://anonymous.4open.science/r/deft-F7FE/metamodel/deft.ocl), and an update to
+  [`metamodel/deft.ocl`](https://anonymous.4open.science/r/deft-A5CA/metamodel/deft.ocl), and an update to
   [Validating models](guides/validating-models.html).
 - **Improve the documentation.** The guides are in `guides/`; the website is generated
   from them.
@@ -109,16 +109,16 @@ Contributions are accepted under the GNU General Public License v3.0, and third-
 material must have a compatible licence. You may use AI assistants, provided you review
 the result and say so in the pull request, as we do in this repository (see below).</pre></div>
 <h2 id="ai">Use of generative AI</h2>
-<script type="application/json" id="md-ai">"We designed the DEFT metamodel, its constraints and the research. We then built DEFT\nwith an LLM-based coding agent, using spec-driven development with\n[Spec Kit](https://github.com/github/spec-kit). For each feature, we wrote what it had to\ndo, and the agent turned it into a specification, a plan and tasks, which we reviewed and\nedited. The agent then implemented the tasks. We followed its work, and checked and\nedited everything it produced before accepting it.\n\nYou can audit the process. [`specs/`](https://anonymous.4open.science/r/deft-F7FE/specs) holds the specification, plan and tasks of\neach of the ten features, in the order we built them, and\n[`.specify/memory/constitution.md`](https://anonymous.4open.science/r/deft-F7FE/.specify/memory/constitution.md) holds the rules that\nevery feature had to follow.\n\nThe example skills illustrate DEFT. DEFT does not claim or evaluate how good they are as\nskills."</script><div class="md" data-md="md-ai"><pre>We designed the DEFT metamodel, its constraints and the research. We then built DEFT
+<script type="application/json" id="md-ai">"We designed the DEFT metamodel, its constraints and the research. We then built DEFT\nwith an LLM-based coding agent, using spec-driven development with\n[Spec Kit](https://github.com/github/spec-kit). For each feature, we wrote what it had to\ndo, and the agent turned it into a specification, a plan and tasks, which we reviewed and\nedited. The agent then implemented the tasks. We followed its work, and checked and\nedited everything it produced before accepting it.\n\nYou can audit the process. [`specs/`](https://anonymous.4open.science/r/deft-A5CA/specs) holds the specification, plan and tasks of\neach of the ten features, in the order we built them, and\n[`.specify/memory/constitution.md`](https://anonymous.4open.science/r/deft-A5CA/.specify/memory/constitution.md) holds the rules that\nevery feature had to follow.\n\nThe example skills illustrate DEFT. DEFT does not claim or evaluate how good they are as\nskills."</script><div class="md" data-md="md-ai"><pre>We designed the DEFT metamodel, its constraints and the research. We then built DEFT
 with an LLM-based coding agent, using spec-driven development with
 [Spec Kit](https://github.com/github/spec-kit). For each feature, we wrote what it had to
 do, and the agent turned it into a specification, a plan and tasks, which we reviewed and
 edited. The agent then implemented the tasks. We followed its work, and checked and
 edited everything it produced before accepting it.
 
-You can audit the process. [`specs/`](https://anonymous.4open.science/r/deft-F7FE/specs) holds the specification, plan and tasks of
+You can audit the process. [`specs/`](https://anonymous.4open.science/r/deft-A5CA/specs) holds the specification, plan and tasks of
 each of the ten features, in the order we built them, and
-[`.specify/memory/constitution.md`](https://anonymous.4open.science/r/deft-F7FE/.specify/memory/constitution.md) holds the rules that
+[`.specify/memory/constitution.md`](https://anonymous.4open.science/r/deft-A5CA/.specify/memory/constitution.md) holds the rules that
 every feature had to follow.
 
 The example skills illustrate DEFT. DEFT does not claim or evaluate how good they are as
@@ -127,7 +127,7 @@ skills.</pre></div>
 <p>DEFT is released under the GNU General Public License v3.0. Third-party material under <code>upstream/</code>
 keeps its MIT or Apache-2.0 licence; generated skills that reuse it ship the original licence text next to their
 <code>SKILL.md</code>.</p>
-<p>Repository: <a href="https://anonymous.4open.science/r/deft-F7FE/">https://anonymous.4open.science/r/deft-F7FE/</a></p>
+<p>Repository: <a href="https://anonymous.4open.science/r/deft-A5CA/">https://anonymous.4open.science/r/deft-A5CA/</a></p>
 
 <footer>DEFT 0.1.0 · GNU General Public License v3.0 · Reused third-party skills keep their original licences.</footer>
 </div></main>
