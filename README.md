@@ -25,10 +25,10 @@ generated skills.
 
 ## Get started
 
-Requires Python 3.11 or later.
+Requires Python 3.11 or later. Download the repository from
+https://anonymous.4open.science/r/deft-A5CA/, unzip it, and run from its folder:
 
 ```bash
-git clone https://github.com/deft-skills/deft.git && cd deft
 python -m venv .venv
 source .venv/bin/activate            # Windows: .venv\Scripts\activate
 pip install -e ".[test]"
@@ -198,8 +198,10 @@ DEFT is open source, and contributions are welcome. You can help in several ways
 
 ### Set up
 
+Download the repository from https://anonymous.4open.science/r/deft-A5CA/, unzip it,
+and run from its folder:
+
 ```bash
-git clone https://github.com/deft-skills/deft.git && cd deft
 python -m venv .venv
 source .venv/bin/activate            # Windows: .venv\Scripts\activate
 pip install -e ".[test]"
